@@ -1,0 +1,8 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "jquery": "latest",
+    "lodash": "latest",
+    "knockoutjs": "3.2.0-beta"
+  }
+}
