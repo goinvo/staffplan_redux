@@ -11,7 +11,7 @@
 //= require_self
 
 function hashParam(key) {
-  _.reduce(window.location.hash.slice(1).split('&'), function(params, keyValue) {
+  return _.reduce(window.location.hash.slice(1).split('&'), function(params, keyValue) {
     params[keyValue.split('=')[0]] = keyValue.split('=')[1];
     return params;
   }, {})[key]
