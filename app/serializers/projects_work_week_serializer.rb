@@ -5,14 +5,6 @@ class ProjectsWorkWeekSerializer < ActiveModel::Serializer
     object.beginning_of_week
   end
   
-  def y
-    object.year
-  end
-  
-  def cw
-    object.cweek
-  end
-  
   def ah
     object.actual_hours
   end

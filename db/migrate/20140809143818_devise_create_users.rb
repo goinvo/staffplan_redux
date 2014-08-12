@@ -1,5 +1,5 @@
 class DeviseCreateUsers < ActiveRecord::Migration
-  def change
+  def up
     
     # robnote: we're extending the existing database to support devise.
     # I changed this to add columns rather than wipe/recreate the users table.
@@ -60,5 +60,9 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token,   unique: true
+  end
+  
+  def down
+    # TODO: make this reversible
   end
 end

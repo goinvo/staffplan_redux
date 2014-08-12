@@ -2,7 +2,10 @@
   "name": "dsl-generated dependencies",
   "dependencies": {
     "jquery": "latest",
+    "jquery-ujs": "latest",
     "lodash": "latest",
-    "knockoutjs": "3.2.0-beta"
+    "knockoutjs": "3.2.0-beta",
+    "moment": "latest",
+    "moment-isocalendar": "latest"
   }
 }

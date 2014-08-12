@@ -1,0 +1,29 @@
+ul#staffplan-index li {
+  @include display(flex);
+  @include align-items(stretch);
+}
+
+.user-info {
+  min-width: em(180);
+  @include flex(1);
+  
+  a {
+    line-height: em(80);
+  }
+}
+
+.work-weeks {
+  @include fill-parent;
+  @include flex(20);
+}
+
+.assignment-totals {
+  min-width: em(100);
+  @include flex(1);
+}
+
+.gravatar {
+  width: 32px;
+  border-radius: 3px;
+  vertical-align: middle;
+}

@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_url and return
     end
   end
+  
+  def current_company
+    current_user.try(:current_company)
+  end
 end
