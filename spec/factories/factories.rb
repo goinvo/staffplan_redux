@@ -6,4 +6,8 @@ FactoryGirl.define do
     sequence(:first_name)       { |n| "First#{n}" }
     sequence(:last_name)        { |n| "Last#{n}" }
   end
+
+  factory :confirmed_user, :parent => :user do
+    after(:create) { |user| user.confirm! }
+  end
 end

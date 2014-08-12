@@ -1,16 +1,14 @@
 require 'rails_helper'
 
 feature "user sessions: " do
-  before(:each) do
-    user = FactoryGirl.create(:user)
-  end
+  let(:user) { FactoryGirl.create(:confirmed_user) }
 
   scenario "signs in successfully" do
     visit root_path
 
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
-    click_button "Sign In"
+    click_button "Sign in"
 
     expect(page).to have_content("signed in")
     expect(page).to have_content(user.first_name)
@@ -22,10 +20,10 @@ feature "user sessions: " do
 
     fill_in "Email", with: "doesnotexist@example.com"
     fill_in "Password", with: user.password
-    click_button "Sign In"
+    click_button "Sign in"
 
     expect(page).to_not have_content("signed in")
-    expect(page).to have_content("Wrong email or password")
+    expect(page).to have_content("Invalid email or password")
   end
 
   scenario "signs in with invalid password" do
@@ -33,19 +31,19 @@ feature "user sessions: " do
 
     fill_in "Email", with: user.email
     fill_in "Password", with: "wrongpassword"
-    click_button "Sign In"
+    click_button "Sign in"
 
     expect(page).to_not have_content("signed in")
-    expect(page).to have_content("Wrong email or password")
+    expect(page).to have_content("Invalid email or password")
   end
 
   scenario "signs in with blank fields" do
     visit root_path
 
-    click_button "Sign In"
+    click_button "Sign in"
 
     expect(page).to_not have_content("signed in")
-    expect(page).to have_content("can't be blank")
+    expect(page).to have_content("Invalid email or password")
   end
 
   scenario "signs out successfully" do

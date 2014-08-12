@@ -5,7 +5,7 @@ module Helpers
 
       fill_in "Email", with: user.email
       fill_in "Password", with: user.password
-      click_link "Sign In"
+      click_button "Sign in"
     end
   end
 end
