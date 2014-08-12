@@ -4,6 +4,14 @@
       ko.applyBindings(new StaffPlanIndex())
     });
 
+.list-header
+  .list-controls
+    %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
+  .date-range
+    the range
+  .assignment-totals
+    %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
+  
 %ul#staffplan-index{data: {bind: "foreach: users"}}
   %staffplans-list-item{params: "user: $data, weekRange: $parent.weekRange"}
 

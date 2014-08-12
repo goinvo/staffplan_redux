@@ -1,9 +1,9 @@
-ul#staffplan-index li {
+ul#staffplan-index li, .list-header {
   @include display(flex);
   @include align-items(stretch);
 }
 
-.user-info {
+.user-info, .list-controls {
   min-width: em(180);
   @include flex(1);
   
@@ -12,9 +12,10 @@ ul#staffplan-index li {
   }
 }
 
-.work-weeks {
+.work-weeks, .date-range {
   @include fill-parent;
   @include flex(20);
+  overflow: hidden;
 }
 
 .assignment-totals {
