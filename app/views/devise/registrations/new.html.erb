@@ -9,13 +9,6 @@
   <div><%= f.label :last_name %><br />
   <%= f.text_field :last_name %></div>
 
-  <div>
-    <%= fields_for @company do |c| %>
-      <%= c.label :name, "Your Company" %><br />
-      <%= c.text_field :name %>
-    <% end %>
-  </div>
-
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 

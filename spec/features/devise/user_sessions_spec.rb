@@ -39,11 +39,21 @@ feature "user sessions: " do
 
   scenario "signs in with blank fields" do
     visit root_path
-
     click_button "Sign in"
 
     expect(page).to_not have_content("signed in")
     expect(page).to have_content("Invalid email or password")
+  end
+
+  scenario "signs in with unconfirmed account" do
+    unconfirmed_user = FactoryGirl.create(:user)
+
+    visit root_path
+    fill_in "Email", with: unconfirmed_user.email
+    fill_in "Password", with: unconfirmed_user.password
+    click_button "Sign in"
+
+    expect(page).to have_content("You have to confirm your account before continuing.")
   end
 
   scenario "signs out successfully" do
