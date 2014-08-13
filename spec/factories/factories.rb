@@ -1,4 +1,5 @@
 FactoryGirl.define do
+
   factory :user do
     sequence(:email)            { |n| "test-#{n}@example.com" }
     password                    "password123"
@@ -8,6 +9,17 @@ FactoryGirl.define do
   end
 
   factory :confirmed_user, :parent => :user do
-    after(:create) { |user| user.confirm! }
+    after(:create) { |user|
+    user.confirm!
+    if !user.company
+      company = FactoryGirl.create(:company)
+      company.users << user
+    end
+  }
   end
+
+  factory :company do
+    sequence(:name) { |n| "company#{n}"}
+  end
+
 end

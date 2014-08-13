@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature "user signs up" do
   let(:user) { FactoryGirl.build(:user) }
+  let(:company) { FactoryGirl.build(:company) }
 
   scenario "with valid information" do
     visit root_path
@@ -9,6 +10,7 @@ feature "user signs up" do
 
     fill_in "First name", with: user.first_name
     fill_in "Last name", with: user.last_name
+    fill_in "Your Company", with: company.name
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
     fill_in "Password confirmation", with: user.password
@@ -22,6 +24,7 @@ feature "user signs up" do
 
     fill_in "First name", with: user.first_name
     fill_in "Last name", with: user.last_name
+    fill_in "Your Company", with: company.name
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
     fill_in "Password confirmation", with: "differentpassword"
@@ -38,6 +41,7 @@ feature "user signs up" do
 
     fill_in "First name", with: user.first_name
     fill_in "Last name", with: user.last_name
+    fill_in "Your Company", with: company.name
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
     fill_in "Password confirmation", with: user.password
