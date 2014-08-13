@@ -1,9 +1,9 @@
 require 'rails_helper'
-let(:user) { FactoryGirl.create(:confirmed_user) }
-
-before { clear_emails }
 
 feature "user requests password reset instructions" do
+  let(:user) { FactoryGirl.create(:confirmed_user) }
+  before { clear_emails }
+
   scenario "successfully, with valid email" do
     visit root_path
     click_link "Forgot your password?"

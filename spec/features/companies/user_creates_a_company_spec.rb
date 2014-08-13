@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-let(:user) { FactoryGirl.create(:confirmed_user) }
-let(:company) { FactoryGirl.build(:company) }
-
-before(:each) do
-  sign_in_as(user)
-end
-
 feature "user creates a company" do
+  let(:user) { FactoryGirl.create(:confirmed_user) }
+  let(:company) { FactoryGirl.build(:company) }
+
+  before(:each) do
+    sign_in_as(user)
+  end
+
   scenario "with valid information" do
     visit root_path
     click_link "Create a Company"
 
     fill_in "Company Name", with: company.name
-    click_button "Create Company"
+    click_button "Create company"
 
     expect(Company.count).to eq(1)
     expect(page).to have_content("Your company was successfully created.")
@@ -24,7 +24,7 @@ feature "user creates a company" do
     visit new_company_path
 
     fill_in "Company Name", with: existing_company.name
-    click_button "Create Company"
+    click_button "Create company"
 
     expect(Company.count).to eq(0)
     expect(page).to_not have_content("Your company was successfully created.")
@@ -34,7 +34,7 @@ feature "user creates a company" do
   scenario "with blank fields" do
     visit new_company_path
 
-    click_button "Create Company"
+    click_button "Create company"
 
     expect(Company.count).to eq(0)
     expect(page).to_not have_content("Your company was successfully created.")

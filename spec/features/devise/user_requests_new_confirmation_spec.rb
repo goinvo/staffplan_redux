@@ -12,7 +12,7 @@ feature "user requests new confirmation instructions" do
     click_button "Resend confirmation instructions"
 
     expect(email_count).to eq(1)
-    expect(page).to have_content("A message with a confirmation link has been sent to your email address.")
+    expect(page).to have_content("You will receive an email with instructions about how to confirm your account in a few minutes.")
   end
 
   scenario "with email that is already confirmed" do

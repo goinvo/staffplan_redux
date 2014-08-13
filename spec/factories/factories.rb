@@ -27,4 +27,10 @@ FactoryGirl.define do
     description               "A really great client to have."
   end
 
+  factory :project do
+    client
+    company
+    name                      { |n| "project#{n}" }
+  end
+
 end

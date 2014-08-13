@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-before(:each) do
-  user = FactoryGirl.create(:confirmed_user)
-  sign_in_as(user)
-end
-
 feature "user edits: " do
+  before(:each) do
+    user = FactoryGirl.create(:confirmed_user)
+    sign_in_as(user)
+  end
+
   scenario "account information successfully" do
     user2 = FactoryGirl.build(:confirmed_user)
 
