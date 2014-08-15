@@ -7,8 +7,10 @@
 .list-header
   .list-controls
     %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
-  .date-range
-    the range
+    
+  .date-range-columns{data: {bind: "foreach: weekRange"}}
+    %date-range-column-header{params: "week: $data"}
+    
   .assignment-totals
     %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
   

@@ -12,7 +12,7 @@ ul#staffplan-index li, .list-header {
   }
 }
 
-.work-weeks, .date-range {
+.work-weeks, .date-range-columns {
   @include fill-parent;
   @include flex(20);
   overflow: hidden;
@@ -27,4 +27,35 @@ ul#staffplan-index li, .list-header {
   width: 32px;
   border-radius: 3px;
   vertical-align: middle;
+}
+
+staffplans-list-work-week, date-range-column-header {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+}
+
+.work-week-list-item {
+  min-height: 100px;
+  vertical-align: baseline;
+  position: relative;
+  
+  .column-total {
+    text-align: center;
+  }
+  
+  .work-week {
+    width: 40px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    
+    &.proposed {
+      background-color: #7eba8d;
+    }
+    
+    &.planned {
+      background-color: #5e9b69;
+    }
+  }
 }

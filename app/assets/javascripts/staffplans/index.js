@@ -61,7 +61,7 @@ window.StaffPlanIndex = (function(window, document, $) {
     },
     getColumnCount: function() {
       var documentWidth = $(document.body).width()
-        , inputWidth = 120;
+        , inputWidth = 44;
       return Math.floor((documentWidth - 280) / inputWidth);;
     }
   });
