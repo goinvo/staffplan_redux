@@ -17,7 +17,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
-      flash[:notice] = "Your company was created successfully"
+      flash[:notice] = "Your company was successfully created"
       redirect_to companies_path
     else
       flash.now[:notice] = "Couldn't create your company"
@@ -33,7 +33,7 @@ class CompaniesController < ApplicationController
     @company = current_user.companies.find(params[:id])
 
     if @company.update(company_params)
-      flash[:notice] = "Your company was updated successfully"
+      flash[:notice] = "Your company was successfully updated"
       redirect_to company_path(@company)
     else
       flash.now[:notice] = "Couldn't update your company"
