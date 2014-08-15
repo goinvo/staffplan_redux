@@ -19,7 +19,8 @@ class StaffplanListSerializer < ActiveModel::Serializer
         estimated: values.inject(0) {|sum, value| sum += (value.estimated_total || 0)},
         actual: values.inject(0) {|sum, value| sum += (value.actual_total || 0)}
       )
-    end
+    # TODO: use a SortedSet here?
+    end.sort { |x,y| x[:beginning_of_week] <=> y[:beginning_of_week] }
   end
   
   def estimated_total
