@@ -6,8 +6,20 @@ function ListItemViewModel(data) {
 
 _.extend(ListItemViewModel.prototype, {
   computeVisibleWorkWeeks: function() {
-    return _.select(this.data.user.work_weeks, function(workWeek) {
-      return _.contains(this.data.weekRange(), workWeek.beginning_of_week);
+    return _.map(this.data.weekRange(), function(beginningOfWeek) {
+      var workWeek = _.find(this.data.user.work_weeks, function(workWeek) {
+        return workWeek.beginning_of_week == beginningOfWeek;
+      }, this);
+      
+      if(_.isUndefined(workWeek)) {
+        workWeek = {
+            beginning_of_week: beginningOfWeek
+          , actual: 0
+          , estimated: 0
+        }
+      }
+      
+      return workWeek;
     }, this);
   }
 });
