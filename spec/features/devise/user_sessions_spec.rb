@@ -10,9 +10,7 @@ feature "user sessions: " do
     fill_in "Password", with: user.password
     click_button "Sign in"
 
-    expect(page).to have_content("signed in")
-    expect(page).to have_content(user.first_name)
-    expect(page).to have_content(user.last_name)
+    expect(page).to have_content("Signed in successfully")
   end
 
   scenario "signs in with invalid email" do
@@ -22,7 +20,7 @@ feature "user sessions: " do
     fill_in "Password", with: user.password
     click_button "Sign in"
 
-    expect(page).to_not have_content("signed in")
+    expect(page).to_not have_content("Signed in successfully")
     expect(page).to have_content("Invalid email or password")
   end
 
@@ -33,7 +31,7 @@ feature "user sessions: " do
     fill_in "Password", with: "wrongpassword"
     click_button "Sign in"
 
-    expect(page).to_not have_content("signed in")
+    expect(page).to_not have_content("Signed in successfully")
     expect(page).to have_content("Invalid email or password")
   end
 
@@ -41,7 +39,7 @@ feature "user sessions: " do
     visit root_path
     click_button "Sign in"
 
-    expect(page).to_not have_content("signed in")
+    expect(page).to_not have_content("Signed in successfully")
     expect(page).to have_content("Invalid email or password")
   end
 
@@ -61,9 +59,7 @@ feature "user sessions: " do
 
     click_link "Sign Out"
 
-    expect(page).to have_content("signed out")
-    expect(page).to_not have_content(user.first_name)
-    expect(page).to_not have_content(user.last_name)
+    expect(page).to have_content("Signed out successfully")
   end
 
 end

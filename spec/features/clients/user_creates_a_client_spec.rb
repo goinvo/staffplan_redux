@@ -24,7 +24,7 @@ feature "user creates a new client" do
   end
 
   scenario "with a client name that already exists" do
-    existing_client = FactoryGirl.create(client)
+    existing_client = FactoryGirl.create(:client)
 
     visit new_client_path
     fill_in "Name", with: existing_client.name

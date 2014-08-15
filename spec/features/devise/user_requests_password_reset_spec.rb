@@ -8,19 +8,20 @@ feature "user requests password reset instructions" do
     visit root_path
     click_link "Forgot your password?"
     fill_in "Email", with: user.email
+    clear_emails
     click_button "Send me reset password instruction"
 
     expect(email_count).to eq(1)
     expect(page).to have_content("You will receive an email with instructions on how to reset your password in a few minutes.")
 
-    open_email(last_email)
+    open_email(user.email)
     current_email.click_link("Change my password")
   end
 
   scenario "and supplies invalid password reset token" do
     visit "/users/password/edit?reset_password_token=thisisnotatoken"
     fill_in "New password", with: "password123"
-    fill_in "New password confirmation", with: "password123"
+    fill_in "Confirm new password", with: "password123"
     click_button "Change my password"
 
     expect(page).to have_content("Reset password token is invalid")

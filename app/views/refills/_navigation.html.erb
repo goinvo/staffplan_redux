@@ -8,6 +8,26 @@
       <ul id="navigation-menu">
         <li class="nav-link"><a href="#">My StaffPlan</a></li>
         <li class="nav-link"><a href="javascript:void(0)">All StaffPlans</a></li>
+        <li class="nav-link more manage">
+          <a href="javascript:void(0)">Manage </a>
+          <ul class="submenu">
+            <li>
+              <%= link_to "Account", edit_user_registration_path %>
+            </li>
+            <li>
+              <a href="javascript:void(0)">Companies</a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">Clients</a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">Projects</a>
+            </li>
+            <li>
+              <a href="javascript:void(0)">Assignments</a>
+            </li>
+          </ul>
+        </li>
         <li class="nav-link"><a href="javascript:void(0)">Clients</a></li>
         <li class="nav-link"><a href="javascript:void(0)">Projects</a></li>
         <li class="nav-link"><a href="mailto:staffplan-feedback@goinvo.com?subject=StaffPlan%20Feedback">Feedback</a></li>
