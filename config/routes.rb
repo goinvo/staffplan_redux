@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   
   resources :staffplans
   
+  resources :companies
+  
   root 'staffplans#index'
 
   # Example of regular route:
