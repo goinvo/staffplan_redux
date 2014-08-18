@@ -7,6 +7,7 @@ window.StaffPlanIndex = (function(window, document, $) {
     var initialStartHash = this.getStartHash();
     
     this.weekRange = ko.observableArray(this.calculateWorkWeekRange());
+    this.weekRange.extend({ rateLimit: 25 });
     this.users = ko.observableArray(usersData);
     
     this.nextPreviousWeeks = ko.computed(function() {
