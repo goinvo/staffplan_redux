@@ -6,6 +6,7 @@ FactoryGirl.define do
     password_confirmation     "password123"
     sequence(:first_name)     { |n| "First#{n}" }
     sequence(:last_name)      { |n| "Last#{n}" }
+    current_company_id nil
   end
 
   factory :confirmed_user, :parent => :user do

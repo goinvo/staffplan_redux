@@ -7,16 +7,20 @@ feature "user creates a new client" do
 
   before(:each) do
     FactoryGirl.create(:membership, user: user, company: company)
+    #how do I do this??
+    user.current_company = company
+    user.save
     sign_in_as(user)
   end
 
   scenario "with valid information" do
-    visit root_path
-    click_link "Add a Client"
+    visit company_path(company)
+
+    click_link "Add a client"
 
     fill_in "Name", with: client.name
     fill_in "Description", with: client.description
-    click_button "Create client"
+    click_button "Create Client"
 
     expect(Client.count).to eq(1)
     #Test that company_id is set?
@@ -29,7 +33,7 @@ feature "user creates a new client" do
     visit new_client_path
     fill_in "Name", with: existing_client.name
     fill_in "Description", with: existing_client.description
-    click_button "Create client"
+    click_button "Create Client"
 
     expect(Client.count).to eq(0)
     expect(page).to have_content("Name has already been taken")
@@ -37,7 +41,7 @@ feature "user creates a new client" do
 
   scenario "with blank fields" do
     visit new_client_path
-    click_button "Create client"
+    click_button "Create Client"
 
     expect(Client.count).to eq(0)
     expect(page).to have_content("Name can't be blank")
