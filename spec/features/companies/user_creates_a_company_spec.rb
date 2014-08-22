@@ -20,6 +20,12 @@ feature "user creates a company" do
 
     expect(Company.count).to eq(1)
     expect(page).to have_content("Your company was successfully created")
+    expect(page).to have_content(company.name)
+    expect(Membership.count).to eq(1)
+    users_membership = Membership.last
+    company = Company.last
+    expect(users_membership.user).to eq(user)
+    expect(users_membership.company).to eq(company)
   end
 
   scenario "with a company name that already exists" do

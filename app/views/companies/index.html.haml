@@ -4,4 +4,8 @@
 
 %ul
   - @companies.each do |company|
-    %li - company.name
+    %li
+      = link_to company.name, company_path(company)
+      %ul
+        %li
+          =link_to "Edit", edit_company_path(company)

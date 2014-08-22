@@ -17,6 +17,7 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
 
     if @company.save
+      @company.create_membership_for(current_user)
       flash[:notice] = "Your company was successfully created"
       redirect_to companies_path
     else

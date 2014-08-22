@@ -1,14 +1,14 @@
 class Company < ActiveRecord::Base
   has_paper_trail
-  
+
   has_many :users, :through => :memberships
   has_many :active_users, -> { where(archived: false) }, through: :memberships
   has_many :memberships, :dependent => :destroy
-  
+
   has_many :projects, dependent: :destroy
   has_many :assignments, through: :projects
   has_many :clients, dependent: :destroy
-  
+
   validates_presence_of :name
   validates_uniqueness_of :name
 
@@ -58,6 +58,10 @@ class Company < ActiveRecord::Base
 
   def inactive_users
     User.where(id: memberships.select { |m| m.archived? or m.disabled? }.map(&:user_id))
+  end
+
+  def create_membership_for(current_user)
+    Membership.create(user: current_user, company: self)
   end
 
 end
