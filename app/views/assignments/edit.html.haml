@@ -1,0 +1,9 @@
+%h1= "Edit " + @assignment.project.name + " Assignment for " + @assignment.user.full_name
+
+= form_for @assignment do |f|
+  - if @assignment.errors.any?
+    - @ass.errors.full_messages.each do |msg|
+      = msg
+  = f.submit
+
+= link_to "Delete Assignment", assignment_path(@assignment), method: :delete, data: {confirm: "Are you sure?" }

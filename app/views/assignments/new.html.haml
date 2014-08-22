@@ -1,0 +1,9 @@
+%h1 Add an Assignment
+
+= form_for [@project, @assignment] do |f|
+  - if @assignment.errors.any?
+    - @ass.errors.full_messages.each do |msg|
+      = msg
+  = f.label "Employee"
+  = f.select :user_id, @employees.collect {|e| [e.full_name, e.id]}
+  = f.submit

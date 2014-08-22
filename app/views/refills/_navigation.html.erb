@@ -18,18 +18,13 @@
               <%= link_to "Companies", companies_path %>
             </li>
             <li>
-              <a href="javascript:void(0)">Clients</a>
+              <%= link_to "Clients", clients_path %>
             </li>
             <li>
-              <a href="javascript:void(0)">Projects</a>
-            </li>
-            <li>
-              <a href="javascript:void(0)">Assignments</a>
+              <%= link_to "Projects", projects_path %>
             </li>
           </ul>
         </li>
-        <li class="nav-link"><a href="javascript:void(0)">Clients</a></li>
-        <li class="nav-link"><a href="javascript:void(0)">Projects</a></li>
         <li class="nav-link"><a href="mailto:staffplan-feedback@goinvo.com?subject=StaffPlan%20Feedback">Feedback</a></li>
         <% if !current_user.current_company.blank? %>
           <li class="nav-link more company-select">

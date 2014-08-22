@@ -1,0 +1,15 @@
+%h1 Add a Project
+
+= form_for [@client, @project] do |f|
+  - if @project.errors.any?
+    - @project.errors.full_messages.each do |msg|
+      = msg
+  = f.label :project_name
+  = f.text_field :name
+  = f.label :proposed, "Proposed?"
+  = f.check_box :proposed
+  = f.label :cost
+  = f.text_field :cost
+  = f.label :payment_frequency
+  = f.select :payment_frequency, ["Total", "Monthly", "Bi-Weekly", "Weekly"]
+  = f.submit

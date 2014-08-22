@@ -1,0 +1,11 @@
+%h1= @client.name
+
+= link_to "Add a project", new_client_project_path(@client)
+= link_to "Edit", edit_client_path(@client)
+
+%p= @client.description
+
+%h4 Projects for this client:
+%ul
+  - @client.projects.each do |project|
+    %li= link_to project.name, project_path(project)

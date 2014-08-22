@@ -13,6 +13,7 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
+    @client.company = current_user.current_company
 
     if @client.save
       flash[:notice] = "Your client was created successfully"

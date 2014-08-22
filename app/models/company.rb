@@ -59,9 +59,4 @@ class Company < ActiveRecord::Base
   def inactive_users
     User.where(id: memberships.select { |m| m.archived? or m.disabled? }.map(&:user_id))
   end
-
-  def create_membership_for(current_user)
-    Membership.create(user: current_user, company: self)
-  end
-
 end

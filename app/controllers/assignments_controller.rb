@@ -8,15 +8,19 @@ class AssignmentsController < ApplicationController
   end
 
   def new
+    @employees = current_user.current_company.active_users
+    @projects = current_user.current_company.projects
+    @project = @projects.find(params[:project_id])
     @assignment = Assignment.new
   end
 
   def create
     @assignment = Assignment.new(assignment_params)
+    @assignment.project = current_user.current_company.projects.find(params[:project_id])
 
     if @assignment.save
       flash[:notice] = "The assignment was created successfully"
-      redirect_to assignment_path(@assignment)
+      redirect_to project_path(@assignment.project)
     else
       flash.now[:notice] = "Couldn't create the assignment"
       render :new

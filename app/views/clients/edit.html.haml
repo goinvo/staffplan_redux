@@ -1,0 +1,13 @@
+%h1= "Edit " + @client.name
+
+= form_for @client do |f|
+  - if @client.errors.any?
+    - @client.errors.full_messages.each do |msg|
+      = msg
+  = f.label :client_name
+  = f.text_field :name
+  = f.label :client_description
+  = f.text_field :description
+  = f.submit
+
+= link_to "Delete Client", client_path(@client), method: :delete, data: {confirm: "Are you sure?" }

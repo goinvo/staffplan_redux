@@ -8,11 +8,14 @@ class ProjectsController < ApplicationController
   end
 
   def new
+    @client = current_user.current_company.clients.find(params[:client_id])
     @project = Project.new
   end
 
   def create
     @project = Project.new(project_params)
+    @project.company = current_user.current_company
+    @project.client = current_user.current_company.clients.find(params[:client_id])
 
     if @project.save
       flash[:notice] = "The project was created successfully"
@@ -51,4 +54,5 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:client_id, :name, :proposed, :cost, :payment_frequency)
+  end
 end
