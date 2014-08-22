@@ -18,6 +18,9 @@ class CompaniesController < ApplicationController
 
     if @company.save
       @company.create_membership_for(current_user)
+      if current_user.current_company.blank?
+        current_user.current_company = @company
+      end
       flash[:notice] = "Your company was successfully created"
       redirect_to companies_path
     else
@@ -44,6 +47,7 @@ class CompaniesController < ApplicationController
 
   def destroy
     @company = current_user.companies.find(params[:id])
+
     @company.destroy
     flash[:notice] = "Your company was deleted"
     redirect_to companies_path

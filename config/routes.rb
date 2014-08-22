@@ -2,9 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :staffplans
-
-  resources :companies
+  resources :staffplans, :companies, :clients, :projects, :assignments
 
   root 'staffplans#index'
 
