@@ -25,7 +25,9 @@
     
     
   %body
-    %p.flash-notice= notice
-    %p.flash-alert= alert
+    - if notice.present?
+      %p.flash-notice= notice
+    - if alert.present?
+      %p.flash-alert= alert
     
     = yield
