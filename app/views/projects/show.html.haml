@@ -1,0 +1,16 @@
+%h1= @project.name
+= link_to "Add an assignment", new_project_assignment_path(@project)
+= link_to "Edit", edit_project_path(@project)
+
+- if @project.proposed == true
+  %h4 Proposed
+
+%p
+  = "Cost: " + @project.cost.to_s
+  %br
+  = "Payment Frequency: " + @project.payment_frequency
+
+%h4 Assigned to this project:
+%ul
+  - @project.assignments.each do |assignment|
+    %li= assignment.user.full_name

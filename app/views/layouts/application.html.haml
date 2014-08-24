@@ -25,7 +25,8 @@
     
     
   %body
-    = render(partial: 'refills/navigation')
+    - if current_user.present?
+      = render(partial: 'refills/navigation')
     %p.flash-notice= notice
     %p.flash-alert= alert
     

@@ -1,21 +1,52 @@
 <header class="navigation">
   <div class="menu-wrapper">
-    <a href="javascript:void(0)" class="logo">
+    <!-- <a href="javascript:void(0)" class="logo">
       SP logo
-    </a>
+    </a> -->
     <p class="navigation-menu-button" id="js-mobile-menu">MENU</p>
     <div class="nav">
       <ul id="navigation-menu">
-        <li class="nav-link"><a href="javascript:void(0)">Products</a></li>
-        <li class="nav-link"><a href="javascript:void(0)">About Us</a></li>
-        <li class="nav-link"><a href="javascript:void(0)">Contact</a></li>
-        <li class="nav-link more"><a href="javascript:void(0)">More</a>
+        <li class="nav-link"><a href="#">My StaffPlan</a></li>
+        <li class="nav-link"><a href="javascript:void(0)">All StaffPlans</a></li>
+        <li class="nav-link more manage">
+          <a href="javascript:void(0)">Manage </a>
+          <ul class="submenu">
+            <li>
+              <%= link_to "Account", edit_user_registration_path %>
+            </li>
+            <li>
+              <%= link_to "Companies", companies_path %>
+            </li>
+            <li>
+              <%= link_to "Clients", clients_path %>
+            </li>
+            <li>
+              <%= link_to "Projects", projects_path %>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-link"><a href="mailto:staffplan-feedback@goinvo.com?subject=StaffPlan%20Feedback">Feedback</a></li>
+        <% if !current_user.current_company.blank? %>
+          <li class="nav-link more company-select">
+            <a href="javascript:void(0)"><%= current_user.current_company.name %></a>
+            <ul class="submenu">
+              <% current_user.companies.each do |company| %>
+                <% if !(company == current_user.current_company) %>
+                  <li>
+                    <a href="javascript:void(0)"><%= company.name %></a>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+        <li class="nav-link"><%= link_to("Sign Out", destroy_user_session_path, data: {method: :delete})%></li>
+        <!-- <li class="nav-link more"><a href="javascript:void(0)">More</a>
           <ul class="submenu">
             <li><a href="javascript:void(0)">Submenu Item</a></li>
             <li><a href="javascript:void(0)">Another Item</a></li>
           </ul>
-        </li>
-        
+        </li> -->
       </ul>
     </div>
     <div class="navigation-tools">

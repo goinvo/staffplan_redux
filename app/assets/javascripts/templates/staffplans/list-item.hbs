@@ -1,0 +1,12 @@
+<li class="user">
+  <div class="user-info">
+    <a data-bind="attr: { href: staffPlanURL }">
+      <img data-bind="attr: { alt: data.user.full_name, src: data.user.gravatar_url }" class="gravatar" />
+    </a>
+    <a data-bind="attr: { href: staffPlanURL }, text: data.user.full_name"></a>
+  </div>
+  <div class="work-weeks" data-bind="foreach: visibleWorkWeeks">
+    <staffplans-list-work-week params="work_week: $data"></staffplans-list-work-week>
+  </div>
+  <div class="assignment-totals">assignment totals</div>
+</li>

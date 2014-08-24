@@ -3,7 +3,7 @@ header.navigation {
   $navigation-background: $dark-gray;
   $navigation-color: transparentize(white, 0.3);
   $navigation-color-hover: white;
-  $navigation-height: 60px;
+  $navigation-height: 40px;
   $navigation-nav-button-background: $base-accent-color;
   $navigation-nav-button-background-hover: lighten($navigation-background, 10);
   $navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20);
@@ -23,8 +23,10 @@ header.navigation {
   .menu-wrapper {
     @include outer-container;
     @include clearfix;
+    max-width: 100%;
     position: relative;
     z-index: 9999;
+    padding-left: 10px;
   }
 
   .logo {
@@ -77,7 +79,7 @@ header.navigation {
     padding: 0;
     width: 100%;
     z-index: 9999;
-
+    
     @include media ($horizontal-bar-mode) {
       display: inline;
       margin: 0;
@@ -198,7 +200,7 @@ header.navigation {
     $search-bar-border: 1px solid $search-bar-border-color;
     $search-bar-background: lighten($search-bar-border-color, 10);
 
-    padding: 13px 5px;
+    padding: 3px 5px;
     float: left;
     display: none;
     

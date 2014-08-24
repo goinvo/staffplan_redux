@@ -1,0 +1,9 @@
+%h1 Create a Company
+
+= form_for @company do |f|
+  - if @company.errors.any?
+    - @company.errors.full_messages.each do |msg|
+      = msg
+  = f.label :company_name
+  = f.text_field :name
+  = f.submit

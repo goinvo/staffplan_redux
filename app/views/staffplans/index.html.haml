@@ -1,2 +1,19 @@
-%h1 Staffplans#index
-%p Find me in app/views/staffplans/index.html.haml
+- content_for(:javascript) do
+  :javascript
+    $(function() {
+      ko.applyBindings(new StaffPlanIndex())
+    });
+
+.list-header
+  .list-controls
+    %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
+  .date-range
+    the range
+  .assignment-totals
+    %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
+  
+%ul#staffplan-index{data: {bind: "foreach: users"}}
+  %staffplans-list-item{params: "user: $data, weekRange: $parent.weekRange"}
+
+%script{type: "application/json", id: "users"}
+  = ActiveModel::ArraySerializer.new(@users, each_serializer: StaffplanListSerializer).to_json.html_safe

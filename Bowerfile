@@ -1,3 +1,6 @@
 asset 'jquery'
+asset 'jquery-ujs'
 asset 'lodash'
 asset 'knockoutjs', "3.2.0-beta"
+asset 'moment'
+asset 'moment-isocalendar'
