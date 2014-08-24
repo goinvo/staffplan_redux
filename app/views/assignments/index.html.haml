@@ -1,0 +1,6 @@
+%h1 Assignments
+
+%ul
+  - @assignments.each do |assignment|
+    %li
+      = link_to (assignment.user.full_name + " is working on " + assignment.project.name), assignment_path(assignment)

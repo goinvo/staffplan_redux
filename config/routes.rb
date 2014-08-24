@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  
-  resources :staffplans
-  
-  resources :companies
-  
+
+  resources :staffplans, :companies
+
+  resources :clients do
+    resources :projects, only: [:new, :create]
+  end
+
+  resources :projects, except: [:new, :create] do
+    resources :assignments, only: [:new, :create]
+  end
+
   root 'staffplans#index'
 
   # Example of regular route:

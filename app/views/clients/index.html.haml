@@ -1,0 +1,6 @@
+%h1 Clients
+
+%ul
+  - @clients.each do |client|
+    %li
+      = link_to client.name, client_path(client)
