@@ -25,9 +25,7 @@
     
     
   %body
-    - if current_user.present?
-      = render(partial: 'refills/navigation')
-    %p.flash-notice= notice
-    %p.flash-alert= alert
+    = render(partial: 'refills/navigation')  
+    = render(partial: "shared/flashes")
     
     = yield

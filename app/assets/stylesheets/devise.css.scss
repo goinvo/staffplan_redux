@@ -103,14 +103,6 @@ body > section {
   }
 }
 
-.flash-error {
-  @include flash($error-color);
-}
-
-.flash-alert {
-  @include flash($alert-color);
-}
-
 .logo {
   float: right;
 }

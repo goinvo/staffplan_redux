@@ -7,7 +7,7 @@
 //= require_tree ./templates
 //= require_tree ./staffplans
 //= require_tree ./components
-
+//= require shared/flashes
 //= require_self
 
 function hashParam(key) {
