@@ -14,12 +14,7 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    @company = Company.new(company_params)
-
-    if @current_user.memberships.create(company: Company.new(company_params))
-      if current_user.current_company.blank?
-        current_user.current_company = @company
-      end
+    if Company.create_with_implicit_membership(current_user, company_params)
       flash[:notice] = "Your company was successfully created"
       redirect_to companies_path
     else
