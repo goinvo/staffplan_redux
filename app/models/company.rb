@@ -59,14 +59,4 @@ class Company < ActiveRecord::Base
   def inactive_users
     User.where(id: memberships.select { |m| m.archived? or m.disabled? }.map(&:user_id))
   end
-
-  def self.create_with_implicit_membership(current_user, company_params)
-    Company.transaction do
-      @company = Company.create(company_params)
-      current_user.memberships.create(company: @company)
-    end
-    if current_user.current_company.blank?
-      current_user.current_company = @company
-    end
-  end
 end

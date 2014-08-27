@@ -14,9 +14,12 @@ class CompaniesController < ApplicationController
   end
 
   def create
-    if Company.create_with_implicit_membership(current_user, company_params)
+    @company = Company.new(company_params)
+    @company.memberships.build(company: @company, user: current_user, permissions: [:admin])
+
+    if @company.save
       flash[:notice] = "Your company was successfully created"
-      redirect_to companies_path
+      redirect_to company_path(@company)
     else
       flash.now[:notice] = "Couldn't create your company"
       render :new

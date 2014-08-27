@@ -6,10 +6,10 @@ class Membership < ActiveRecord::Base
     :admin => :administrates!,
     :financials => :handles_financials_of!
   }
-  
+
   bitmask :roles, :as => [:admin, :employee, :contractor, :financials], :null => false
   bitmask :permissions, :as => [:admin, :financials], :null => false
-  
+
   def permissions=(perms)
     unless perms.nil?
       perms.each do |perm|

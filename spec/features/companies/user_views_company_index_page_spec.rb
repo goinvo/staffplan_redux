@@ -31,6 +31,6 @@ feature "user views company index page" do
       expect(page).to_not have_content(company.name)
     end
 
-    expect(page).to have_content("Create a Company")
+    expect(page).to have_content("Create a company")
   end
 end
