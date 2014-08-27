@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :assignments, only: [:new, :create]
   end
 
+  resources :current_companies, only: :update
+
   root 'staffplans#index'
 
   # Example of regular route:
