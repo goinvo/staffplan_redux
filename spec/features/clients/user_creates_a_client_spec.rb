@@ -23,7 +23,7 @@ feature "user creates a new client" do
     click_button "Create Client"
 
     expect(Client.count).to eq(1)
-    #Test that company_id is set?
+    expect(Client.first.company).to eq(company)
     expect(page).to have_content("Created new client successfully")
   end
 

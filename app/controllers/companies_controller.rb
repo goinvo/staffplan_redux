@@ -18,6 +18,9 @@ class CompaniesController < ApplicationController
     @company.memberships.build(company: @company, user: current_user, permissions: [:admin])
 
     if @company.save
+      if current_user.current_company.blank?
+        current_user.current_company = @company
+      end
       flash[:notice] = "Your company was successfully created"
       redirect_to company_path(@company)
     else

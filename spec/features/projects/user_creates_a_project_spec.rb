@@ -5,7 +5,7 @@ feature "user creates a new project" do
   let(:company) { FactoryGirl.create(:company) }
 
   before(:each) do
-    let(:client) { FactoryGirl.create(:client, company: company) }
+    client = FactoryGirl.create(:client, company: company)
     FactoryGirl.create(:membership, user: user, company: company)
     sign_in_as(user)
   end
