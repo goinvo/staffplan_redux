@@ -3,6 +3,7 @@ ko.components.register('date-range-column-header', {
     this.data = ko.pureComputed(function() {
       return moment(data.week.beginning_of_week());
     }, this);
+    this.data.extend({rateLimit: 25});
     
     this.formattedMonthAndDay = function() {
       return this.data().format("M/D")

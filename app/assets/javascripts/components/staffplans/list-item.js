@@ -41,6 +41,7 @@ function ListItemViewModel(data) {
       return this.observedWorkWeeks()[index];
     }, this);
   }, this);
+  this.visibleWorkWeeks.extend({rateLimit: 25});
   // this.computeVisibleWorkWeeks();
 }
 
