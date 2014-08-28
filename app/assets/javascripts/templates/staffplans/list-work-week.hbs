@@ -1,7 +1,4 @@
-<div class='work-week-list-item'>
-  <div data-bind="text: data.work_week.estimated" class="column-total"></div>
-  <!-- proposed -->
-  <div data-bind="attr: {style: proposedHeight()}" class="proposed work-week"></div>
-  <!-- planned -->
-  <div data-bind="attr: {style: plannedHeight()}" class="planned work-week"></div>
+<div class='work-week-list-item' data-bind="attr: {cweek: data.work_week.cweek, year: data.work_week.year}">
+  <div data-bind="text: actualHours()" class="column-total"></div>
+  <div data-bind="text: estimatedHours()" class="actual work-week"></div>
 </div>
