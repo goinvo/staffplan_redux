@@ -6,9 +6,12 @@ window.StaffPlanIndex = (function(window, document, $) {
     this.startHash = ko.observable(initialStartHash);
     var initialStartHash = this.getStartHash();
     
-    this.weekRange = ko.observableArray(this.calculateWorkWeekRange());
-    this.weekRange.extend({ rateLimit: 25 });
+    this.weekRange = ko.observableArray();
+    this.weekRange.extend({rateLimit: 25});
+    this.calculateWorkWeekRange();
+    
     this.users = ko.observableArray(usersData);
+    this.users.extend({rateLimit: 25});
     
     this.nextPreviousWeeks = ko.computed(function() {
       var columnCount = self.getColumnCount()
@@ -18,12 +21,12 @@ window.StaffPlanIndex = (function(window, document, $) {
         next: "#start=" + moment(startParam).add(columnCount, 'weeks').unix() * 1000,
         previous: "#start=" + moment(startParam).subtract(columnCount, 'weeks').unix() * 1000
       }
-    })
+    });
     
-    $(window).on('hashchange', _.bind(this.changeWorkWeeks, this));
+    $(window).on('hashchange', _.bind(this.calculateWorkWeekRange, this));
     
     // debounce for window.resize
-    var debouncedWeekRangeChange = _.debounce(_.bind(this.changeWorkWeeks, this), 200);
+    var debouncedWeekRangeChange = _.debounce(_.bind(this.calculateWorkWeekRange, this), 200);
     $(window).on('resize', debouncedWeekRangeChange);
   }
 
@@ -31,9 +34,29 @@ window.StaffPlanIndex = (function(window, document, $) {
     // calculates the range of beginning_of_weeks we should be show
     calculateWorkWeekRange: function(startParam, count) {
       var count = this.getColumnCount()
-        , startParam = this.getStartHash();
+        , startParam = this.getStartHash()
+        , timestampRange = _.range(startParam, (startParam + (count * 604800000)), 604800000);
       
-      return _.range(startParam, (startParam + (count * 604800000)), 604800000)
+      _.each(timestampRange, function(timestamp, index) {
+        var momentTimestamp = moment(timestamp);
+        
+        if(_.isUndefined(this.weekRange()[index])) {
+          // add
+          this.weekRange()[index] = {
+              cweek: ko.observable(momentTimestamp.isoWeek())
+            , year: ko.observable(momentTimestamp.year())
+            , beginning_of_week: ko.observable(timestamp)
+          }
+        } else {
+          // update
+          this.weekRange()[index].cweek(momentTimestamp.isoWeek())
+          this.weekRange()[index].year(momentTimestamp.year())
+          this.weekRange()[index].beginning_of_week(timestamp)
+        }
+      }, this);
+      
+      // lastly, prune any unnecessary indices from weekRange
+      this.weekRange().splice(timestampRange.length, this.weekRange().length);
     },
     // helper for getting/setting the initial beginning_of_day
     getStartHash: function() {
@@ -42,23 +65,12 @@ window.StaffPlanIndex = (function(window, document, $) {
       if(startParam == null) {
         m = moment()
         // default to last week
-        startParam = m.utc().startOf('day').subtract('days', m.day() - 1).subtract('weeks', 1).unix() * 1000
+        startParam = m.utc().startOf('day').subtract(m.day() - 1, 'days').subtract(1, 'week').unix() * 1000
         window.location.hash = "start=" + startParam;
       }
       
       this.startHash(parseInt(startParam, 10))
       return this.startHash();
-    },
-    // called whenever we should be recalculating/rendering the workWeek range
-    changeWorkWeeks: function() {
-      var newWeekRange = this.calculateWorkWeekRange();
-      this.weekRange.removeAll();
-      
-      _.each(newWeekRange, function(week) {
-        this.weekRange.push(week);
-      }, this);
-      
-      return true;
     },
     getColumnCount: function() {
       var documentWidth = $(document.body).width()

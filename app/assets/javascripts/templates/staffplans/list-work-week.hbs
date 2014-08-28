@@ -1,7 +1,4 @@
-<div class='work-week-list-item' data-bind="attr: {foo: data.work_week.beginning_of_week}">
+<div class='work-week-list-item' data-bind="attr: {cweek: data.work_week.cweek, year: data.work_week.year}">
   <div data-bind="text: actualHours()" class="column-total"></div>
-  <!-- proposed -->
   <div data-bind="text: estimatedHours()" class="actual work-week"></div>
-  <!-- planned -->
-  <div data-bind="text: totalHours()" class="estimated work-week"></div>
 </div>

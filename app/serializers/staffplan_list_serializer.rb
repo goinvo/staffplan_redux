@@ -14,8 +14,9 @@ class StaffplanListSerializer < ActiveModel::Serializer
   end
   
   def work_weeks
-    object.staffplans_list_views.group_by {|slv| {beginning_of_week: slv.beginning_of_week}}.map do |key, values|
+    object.staffplans_list_views.group_by {|slv| {cweek: slv.cweek, year: slv.year}}.map do |key, values|
       key.merge(
+        beginning_of_week: values.first.beginning_of_week,
         estimated: values.inject(0) {|sum, value| sum += (value.estimated_total || 0)},
         actual: values.inject(0) {|sum, value| sum += (value.actual_total || 0)}
       )
