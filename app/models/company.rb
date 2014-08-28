@@ -8,6 +8,7 @@ class Company < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   has_many :assignments, through: :projects
   has_many :clients, dependent: :destroy
+  has_many :invites, dependent: :destroy
 
   validates_presence_of :name
   validates_uniqueness_of :name

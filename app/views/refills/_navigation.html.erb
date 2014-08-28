@@ -23,6 +23,9 @@
             <li>
               <%= link_to "Projects", projects_path %>
             </li>
+            <li>
+              <%= link_to "Invitations", company_invites_path(current_user.current_company) %>
+            </li>
           </ul>
         </li>
         <li class="nav-link"><a href="mailto:staffplan-feedback@goinvo.com?subject=StaffPlan%20Feedback">Feedback</a></li>

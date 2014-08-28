@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :staffplans, :companies
+  resources :staffplans
+
+  resources :companies do
+    resources :invites, except: [:show, :edit, :update]
+  end
 
   resources :clients do
     resources :projects, only: [:new, :create]
