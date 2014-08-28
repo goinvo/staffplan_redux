@@ -18,7 +18,8 @@ class StaffplanListSerializer < ActiveModel::Serializer
       key.merge(
         beginning_of_week: values.first.beginning_of_week,
         estimated: values.inject(0) {|sum, value| sum += (value.estimated_total || 0)},
-        actual: values.inject(0) {|sum, value| sum += (value.actual_total || 0)}
+        actual: values.inject(0) {|sum, value| sum += (value.actual_total || 0)},
+        proposed: values.map(&:proposed).uniq.first
       )
     # TODO: use a SortedSet here?
     end.sort { |x,y| x[:beginning_of_week] <=> y[:beginning_of_week] }

@@ -5,6 +5,7 @@ class CreateStaffplanListView < ActiveRecord::Migration
         SELECT
           users.id AS user_id,
           assignments.id AS assignment_id,
+          assignments.proposed AS proposed,
           work_weeks.beginning_of_week AS beginning_of_week,
           work_weeks.cweek AS cweek,
           work_weeks.year AS year,
