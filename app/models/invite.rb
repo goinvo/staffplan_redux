@@ -37,4 +37,12 @@ class Invite < ActiveRecord::Base
   def response_email(state)
     #TODO: send an email to the sender, letting them know the invitation was responded to
   end
+
+  def email_invitation(current_user)
+    if User.exists?(email: email)
+      InviteEmails.existing_user_invite((email, current_user).deliver
+    else
+      InviteEmails.new_user_invite(email, current_user).deliver
+    end
+  end
 end
