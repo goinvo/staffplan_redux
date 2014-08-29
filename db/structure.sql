@@ -178,6 +178,40 @@ ALTER SEQUENCE companies_id_seq OWNED BY companies.id;
 
 
 --
+-- Name: invites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE invites (
+    id integer NOT NULL,
+    sender_id integer NOT NULL,
+    company_id integer NOT NULL,
+    email character varying(255) NOT NULL,
+    aasm_state character varying(255) NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: invites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE invites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE invites_id_seq OWNED BY invites.id;
+
+
+--
 -- Name: memberships; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -461,6 +495,13 @@ ALTER TABLE ONLY companies ALTER COLUMN id SET DEFAULT nextval('companies_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY invites ALTER COLUMN id SET DEFAULT nextval('invites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY memberships ALTER COLUMN id SET DEFAULT nextval('memberships_id_seq'::regclass);
 
 
@@ -521,6 +562,14 @@ ALTER TABLE ONLY clients
 
 ALTER TABLE ONLY companies
     ADD CONSTRAINT companies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY invites
+    ADD CONSTRAINT invites_pkey PRIMARY KEY (id);
 
 
 --
@@ -732,4 +781,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140809143639');
 INSERT INTO schema_migrations (version) VALUES ('20140809143726');
 
 INSERT INTO schema_migrations (version) VALUES ('20140809143818');
+
+INSERT INTO schema_migrations (version) VALUES ('20140828171709');
 
