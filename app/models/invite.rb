@@ -9,11 +9,11 @@ class Invite < ActiveRecord::Base
     state :accepted
     state :declined
 
-    event :accept, after: Proc.new { response_email('accepted') } do
+    event :accept do
       transitions from: :new, to: :accepted
     end
 
-    event :decline, after: Proc.new { response_email('declined') } do
+    event :decline do
       transitions from: :new, to: :declined
     end
   end
@@ -30,8 +30,8 @@ class Invite < ActiveRecord::Base
     end
   end
 
-  def response_email(state)
-    #TODO: send an email to the sender, letting them know the invitation was responded to
+  def send_response_email(current_user)
+    InviteEmails.response_email(current_user, self).deliver
   end
 
   def email_invitation(current_user)

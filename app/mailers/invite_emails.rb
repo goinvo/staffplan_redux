@@ -10,13 +10,21 @@ class InviteEmails < ActionMailer::Base
     @sender = sender
 
     mail to: email,
-         subject: "Invitation from #{sender.full_name} to join a company on StaffPlan"
+      subject: "Invitation from #{sender.full_name} to join a company on StaffPlan"
   end
 
   def new_user_invite(email, sender)
     @sender = sender
 
     mail to: email,
-         subject: "Invitation from #{sender.full_name} to join a company on StaffPlan"
+      subject: "Invitation from #{sender.full_name} to join a company on StaffPlan"
+  end
+
+  def response_email(user, invite)
+    @user = user
+    @invite = invite
+
+    mail to: invite.sender.email,
+      subject: "Invite was responded to"
   end
 end

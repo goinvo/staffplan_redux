@@ -14,6 +14,7 @@ class UserInvitesController < ApplicationController
       if current_user.current_company.blank?
         current_user.current_company = @invite.company
       end
+      @invite.send_response_email(current_user)
       flash[:notice] = "Accepted invitation"
       redirect_to user_invites_path
     else
@@ -26,6 +27,7 @@ class UserInvitesController < ApplicationController
     @invite = Invite.find(params[:id]) if Invite.find(params[:id]).email == current_user.email
     @invite.decline
     if @invite.save
+      @invite.send_response_email(current_user)
       flash[:notice] = "Declined invitation"
       redirect_to user_invites_path
     else
