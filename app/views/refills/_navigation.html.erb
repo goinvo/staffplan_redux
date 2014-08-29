@@ -24,8 +24,13 @@
               <%= link_to "Projects", projects_path %>
             </li>
             <li>
-              <%= link_to "Invitations", company_invites_path(current_user.current_company) %>
-            </li>
+                <%= link_to "Invitations", user_invites_path(current_user) %>
+              </li>
+            <% if !current_user.current_company.blank? && current_user.admin_of?(current_user.current_company) %>
+              <li>
+                <%= link_to "Company Invitations", company_invites_path(current_user.current_company) %>
+              </li>
+            <% end %>
           </ul>
         </li>
         <li class="nav-link"><a href="mailto:staffplan-feedback@goinvo.com?subject=StaffPlan%20Feedback">Feedback</a></li>

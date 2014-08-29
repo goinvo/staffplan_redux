@@ -1,4 +1,4 @@
-%h1 Invitations
+%h1= "Invitations for " + current_user.current_company.name
 
 = link_to "Send an invitation", new_company_invite_path(current_user.current_company)
 

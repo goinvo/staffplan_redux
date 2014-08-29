@@ -1,0 +1,13 @@
+%h1 Invitations
+
+%table
+  %tr
+    %th Company
+    %th Respond
+
+  - @invites.each do |invite|
+    - if invite.aasm.current_state == :new
+      %tr
+        %td= invite.company.name
+        %td= link_to "Accept", user_invite_path(current_user, invite), method: :patch
+        %td= link_to "Decline", user_invite_path(current_user, invite), method: :delete, data: {confirm: "Are you sure?" }

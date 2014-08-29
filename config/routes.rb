@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  resources :users, only: [] do
+    resources :invites, only: [:index, :update, :destroy], controller: 'user_invites'
+  end
+
   resources :staffplans
 
   resources :companies do

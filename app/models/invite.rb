@@ -22,10 +22,6 @@ class Invite < ActiveRecord::Base
   validates :email, uniqueness: { scope: "company_id", message: "This invite already exists." }
   validate :employee_doesnt_exist_already, if: Proc.new { |i| i.company.present? }
 
-  def status
-    self.aasm.states
-  end
-
   def employee_doesnt_exist_already
     company.memberships.each do |membership|
       if membership.user.email == email
@@ -40,7 +36,7 @@ class Invite < ActiveRecord::Base
 
   def email_invitation(current_user)
     if User.exists?(email: email)
-      InviteEmails.existing_user_invite((email, current_user).deliver
+      InviteEmails.existing_user_invite(email, current_user).deliver
     else
       InviteEmails.new_user_invite(email, current_user).deliver
     end
