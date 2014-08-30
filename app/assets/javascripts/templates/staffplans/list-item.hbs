@@ -8,5 +8,8 @@
   <div class="work-weeks" data-bind="foreach: visibleWorkWeeks">
     <staffplans-list-work-week params="work_week: $data"></staffplans-list-work-week>
   </div>
-  <div class="assignment-totals">assignment totals</div>
+  <div class="assignment-totals">
+    <div data-bind="text: totalEstimatedHours()"></div>
+    <div data-bind="text: totalActualHours()"></div>
+  </div>
 </li>
