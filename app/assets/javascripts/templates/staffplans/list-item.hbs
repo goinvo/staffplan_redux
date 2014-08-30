@@ -9,7 +9,7 @@
     <staffplans-list-work-week params="work_week: $data"></staffplans-list-work-week>
   </div>
   <div class="assignment-totals">
-    <div data-bind="text: totalEstimatedHours()"></div>
-    <div data-bind="text: totalActualHours()"></div>
+    <div data-bind="text: data.user.estimated_total"></div>
+    <div data-bind="text: data.user.actual_total"></div>
   </div>
 </li>

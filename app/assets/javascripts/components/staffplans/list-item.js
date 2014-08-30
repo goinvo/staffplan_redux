@@ -51,16 +51,7 @@ function ListItemViewModel(data) {
 }
 
 _.extend(ListItemViewModel.prototype, {
-  totalEstimatedHours: function() {
-    return _.reduce(this.data.user.work_weeks, function(sum, workWeek) {
-      return sum += (workWeek.estimated || 0);
-    }, 0);
-  },
-  totalActualHours: function() {
-    return _.reduce(this.data.user.work_weeks, function(sum, workWeek) {
-      return sum += (workWeek.actual || 0);
-    }, 0);
-  }
+  
 });
 
 ko.components.register("staffplans-list-item", {
