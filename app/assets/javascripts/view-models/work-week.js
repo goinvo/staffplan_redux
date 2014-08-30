@@ -1,20 +1,53 @@
 (function($, window, document) {
   var WorkWeek = window.WorkWeek = function(data) {
     this.data = data;
-    
-    this.totalHours = ko.pureComputed(function() {
-      var total = (this.data.work_week.estimated() || 0) + (this.data.work_week.actual() || 0)
-      return "t: " + total;
-    }, this);
-    
-    this.actualHours = ko.pureComputed(function() {
-      return "a: " + this.data.work_week.actual();
-    }, this);
-    
-    this.estimatedHours = ko.pureComputed(function() {
-      /* (max height in pixels times estimate's percentage of 40 hours * 100) + 20 for the numbers on top */
-      return "e: " + this.data.work_week.estimated();
-    }, this)
   }
-  
+
+  _.extend(WorkWeek.prototype, {
+    columnTotal: function() {
+      if(this.isBeforeWithActuals()) {
+        // for current and past dates prefer the actual hours
+        return this.data.work_week.actual();
+      } else {
+        // for future dates always use the estimated
+        return this.data.work_week.estimated();
+      }
+    },
+    isBeforeWithActuals: function() {
+      // have to double check that this still works with the current week
+      return (moment().isAfter(this.data.work_week.beginning_of_week()) && this.data.work_week.actual() !== 0);
+    },
+    titleText: function() {
+      var title = "Proposed: " + this.data.work_week.estimated_proposed();
+      title +=    "\nPlanned: " + this.data.work_week.estimated_planned();
+
+      if(this.isBeforeWithActuals()) {
+        title +=    "\nActual: " + this.data.work_week.actual();
+      }
+
+      return title;
+    },
+    wrapperStyle: function() {
+      return "height: " + parseInt(this.columnTotal() + 20, 10) + "px;";
+    },
+    barGraphStyle: function() {
+      // prior week with actuals. gray.
+      if(this.isBeforeWithActuals()) {
+        return "background-color: gray; height: " + this.columnTotal() + "px;";
+      } else {
+        if(this.data.work_week.estimated_planned() == this.data.work_week.estimated()) {
+          // all planned. dark green.
+          return "background-color: #5e9b69; height: " + this.columnTotal() + "px;";
+        } else {
+          // some planned, some proposed. split. planned on bottom, proposed on top.
+          var style = "background-image: linear-gradient(0deg, #5e9b69, #7eba8d 40%);";
+          style +=    "height: " + this.columnTotal() + "px;";
+          return style;
+        }
+      }
+
+      return "background-color: " + bgColor + "; height: " + this.columnTotal() + "px;";
+    }
+  })
+
 })(jQuery, window, window.document);

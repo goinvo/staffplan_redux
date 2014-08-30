@@ -1,4 +1,5 @@
-<div class='work-week-list-item' data-bind="attr: {cweek: data.work_week.cweek, year: data.work_week.year}">
-  <div data-bind="text: actualHours()" class="column-total"></div>
-  <div data-bind="text: estimatedHours()" class="actual work-week"></div>
+<div class='work-week-list-item' data-bind="attr: {style: wrapperStyle(), cweek: data.work_week.cweek, year: data.work_week.year}">
+  <div data-bind="attr: {style: barGraphStyle(), title: titleText()}" class="actual work-week">
+    <div data-bind="text: columnTotal()" class="column-total"></div>
+  </div>
 </div>
