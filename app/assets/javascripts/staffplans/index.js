@@ -1,7 +1,8 @@
 window.StaffPlanIndex = (function(window, document, $) {
   var StaffPlanIndex = function() {
     var self = this;
-    var usersData = JSON.parse($('#users').remove().text())
+    var usersData = JSON.parse($('#users').remove().text());
+    usersData = _.sortBy(usersData, function(user) { return user.upcoming_estimated_hours; });
 
     this.startHash = ko.observable(initialStartHash);
     var initialStartHash = this.getStartHash();
