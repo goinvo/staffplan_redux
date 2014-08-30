@@ -1,8 +1,11 @@
 window.StaffPlanIndex = (function(window, document, $) {
   var StaffPlanIndex = function() {
     var self = this;
-    var usersData = JSON.parse($('#users').remove().text());
-    usersData = _.sortBy(usersData, function(user) { return user.upcoming_estimated_hours; });
+
+    self.sortOrder = "asc";
+    self.sortField = "workload";
+    self.usersData = JSON.parse($('#users').remove().text());
+    self.usersData = _.sortBy(self.usersData, function(user) { return user.upcoming_estimated_hours; });
 
     this.startHash = ko.observable(initialStartHash);
     var initialStartHash = this.getStartHash();
@@ -11,7 +14,7 @@ window.StaffPlanIndex = (function(window, document, $) {
     this.weekRange.extend({rateLimit: 25});
     this.calculateWorkWeekRange();
 
-    this.users = ko.observableArray(usersData);
+    this.users = ko.observableArray(self.usersData);
     this.users.extend({rateLimit: 25});
 
     this.nextPreviousWeeks = ko.computed(function() {
@@ -32,6 +35,35 @@ window.StaffPlanIndex = (function(window, document, $) {
   }
 
   _.extend(StaffPlanIndex.prototype, {
+    sortByWorkload: function() {
+      if(this.sortField == "workload") {
+        this.sortOrder = (this.sortOrder == "asc" ? "desc" : "asc");
+      }
+      this.sortField = "workload";
+
+      this.users.sort(_.bind(function(left, right) {
+        console.log('left: ' + left.full_name);
+        console.log('left.upcoming_estimated_hours: ' + left.upcoming_estimated_hours);
+        console.log('right: ' + right.full_name);
+        console.log('right.upcoming_estimated_hours: ' + right.upcoming_estimated_hours);
+
+        return this.sortOrder == "asc" ?
+          (parseInt(left.upcoming_estimated_hours, 10) > parseInt(right.upcoming_estimated_hours, 10)) ? 1 : -1 :
+          (parseInt(right.upcoming_estimated_hours, 10) < parseInt(left.upcoming_estimated_hours, 10)) ? -1 : 1
+      }, this));
+    },
+    sortByName: function() {
+      if(this.sortField == "name") {
+        this.sortOrder = (this.sortOrder == "asc" ? "desc" : "asc");
+      }
+      this.sortField = "name";
+
+      this.users.sort(_.bind(function(left, right) {
+        return this.sortOrder == "asc" ?
+          (left.full_name.localeCompare(right.full_name)) :
+          (right.full_name.localeCompare(left.full_name))
+      }, this));
+    },
     // calculates the range of beginning_of_weeks we should be show
     calculateWorkWeekRange: function(startParam, count) {
       var count = this.getColumnCount()

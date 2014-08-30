@@ -19,8 +19,6 @@ class StaffplanListSerializer < ActiveModel::Serializer
       # values in the future from today.
       if value.year.to_i > today.year.to_i || (today.year.to_i == value.year.to_i && value.cweek.to_i >= today.cweek.to_i)
         sum += (value.estimated_total || 0)
-      else
-        puts "value: #{value.inspect}"
       end
 
       sum

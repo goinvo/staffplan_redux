@@ -50,10 +50,6 @@ function ListItemViewModel(data) {
   this.visibleWorkWeeks.extend({rateLimit: 25});
 }
 
-_.extend(ListItemViewModel.prototype, {
-  
-});
-
 ko.components.register("staffplans-list-item", {
   viewModel: ListItemViewModel,
   template: HandlebarsTemplates["staffplans/list-item"]()

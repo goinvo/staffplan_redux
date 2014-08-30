@@ -3,7 +3,7 @@ ul#staffplan-index li, .list-header {
   @include align-items(stretch);
 }
 
-.user-info, .list-controls {
+.user-info {
   min-width: em(180);
   @include flex(1);
 
