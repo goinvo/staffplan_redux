@@ -1,0 +1,30 @@
+- content_for(:javascript) do
+  :javascript
+    $(function() {
+      ko.applyBindings(new StaffPlanShow())
+    });
+
+- content_for(:fixed_header_section) do
+  .user-and-graph
+    .name-and-gravatar
+      %img.gravatar{src: "https://secure.gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email.downcase)}"}
+      %a= @user.full_name
+      %span{data: {bind: "text: assignmentData.length"}}
+    .graph
+    .empty
+
+  .list-header
+    .list-controls
+      %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
+
+    .date-range-columns{data: {bind: "foreach: weekRange"}}
+      %date-range-column-header{params: "week: $data"}
+
+    .assignment-totals
+      %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
+
+%ul#staffplan-show{data: {bind: "foreach: assignments"}}
+  %assignments-list-item{params: "assignment: $data, weekRange: $parent.weekRange"}
+
+%script{type: "application/json", id: "user"}
+  = ActiveModel::ArraySerializer.new(@user_projects, each_serializer: UserProjectsViewSerializer).to_json.html_safe

@@ -1,0 +1,7 @@
+<div class='assignments-list-work-week'>
+  <input class="planned" type="number" data-bind="attr: {value: work_week.estimated()}" />
+  <span data-bind="ifnot: isFutureWorkWeek()">
+    <input class="actual" type="number" data-bind="attr: {value: work_week.actual()}" />
+  </span>
+  <span data-bind="if: isFutureWorkWeek()">&nbsp;</span>
+</div>

@@ -1,0 +1,52 @@
+ul#staffplan-show li, ul#staffplan-index li, .list-header, .user-and-graph {
+  @include display(flex);
+  @include align-items(stretch);
+}
+
+.user-info, .name-and-gravatar, .list-controls, .assignment-info {
+  min-width: em(180);
+  @include flex(1);
+
+  a {
+    line-height: em(80);
+  }
+}
+
+.work-weeks, .date-range-columns, .graph {
+  @include fill-parent;
+  @include flex(20);
+  overflow: hidden;
+}
+
+.assignment-totals {
+  min-width: em(100);
+  @include flex(1);
+}
+
+staffplans-list-work-week, date-range-column-header, assignments-list-work-week {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+}
+
+.work-week-list-item {
+  // min-height: 100px;
+  vertical-align: baseline;
+  position: relative;
+
+  .column-total {
+    font-size: rem(11px);
+    position: absolute;
+    left: 36%; /* this is gross */
+    top: -20px;
+  }
+
+  .work-week {
+    width: 40px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px;
+    @include transition (background-color 0.3s ease-in 0s, height 0.3s ease-in 0s);
+  }
+}
