@@ -9,15 +9,13 @@ class InvitesController < ApplicationController
   end
 
   def create
-    @company = current_company
-    @invite = Invite.new(invite_params)
+    @invite = current_company.invites.build(invite_params)
     @invite.sender = current_user
-    @invite.company = @company
 
     if @invite.save
       @invite.email_invitation(current_user)
       flash[:notice] = "Your invitation was successfully sent"
-      redirect_to company_invites_path(@company)
+      redirect_to company_invites_path(@invite.company)
     else
       flash.now[:notice] = "Couldn't send your invitation"
       render :new

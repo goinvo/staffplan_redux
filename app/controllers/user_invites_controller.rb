@@ -5,12 +5,14 @@ class UserInvitesController < ApplicationController
     @invites = Invite.where(email: current_user.email)
   end
 
-  def update
-    @invite = Invite.find(params[:id]) if Invite.find(params[:id]).email == current_user.email
+  def accept
+    @invite = Invite.find(params[:invite_id]) if Invite.find(params[:invite_id]).email == current_user.email
+    @invite.company.memberships.build(user: current_user, permissions: [])
+    # why is the membership being persisted on a failed save?
+    # save is failing because membership already exists?
     @invite.accept
 
     if @invite.save
-      @invite.company.memberships.build(company: @invite.company, user: current_user, permissions: [])
       if current_user.current_company.blank?
         current_user.current_company = @invite.company
       end
@@ -23,8 +25,8 @@ class UserInvitesController < ApplicationController
     end
   end
 
-  def destroy
-    @invite = Invite.find(params[:id]) if Invite.find(params[:id]).email == current_user.email
+  def decline
+    @invite = Invite.find(params[:invite_id]) if Invite.find(params[:invite_id]).email == current_user.email
     @invite.decline
     if @invite.save
       @invite.send_response_email(current_user)

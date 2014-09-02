@@ -24,6 +24,7 @@ class Invite < ActiveRecord::Base
 
   def employee_doesnt_exist_already
     company.memberships.each do |membership|
+      next if membership.new_record?
       if membership.user.email == email
         errors.add(:email, "Employee with this email already exists for this company.")
       end

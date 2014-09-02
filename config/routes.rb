@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: [] do
-    resources :invites, only: [:index, :update, :destroy], controller: 'user_invites'
+    resources :invites, only: :index, controller: 'user_invites' do
+      post 'accept'
+      post 'decline'
+    end
   end
 
   resources :staffplans
