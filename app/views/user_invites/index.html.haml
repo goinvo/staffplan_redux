@@ -9,5 +9,5 @@
     - if invite.aasm.current_state == :new
       %tr
         %td= invite.company.name
-        %td= link_to "Accept", user_invite_accept_path(current_user, invite), method: :accept
-        %td= link_to "Decline", user_invite_decline_path(current_user, invite), method: :decline, data: {confirm: "Are you sure?" }
+        %td= link_to "Accept", accept_invite_path(invite), method: :put
+        %td= link_to "Decline", decline_invite_path(invite), method: :put, data: {confirm: "Are you sure?" }

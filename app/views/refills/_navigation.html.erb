@@ -24,7 +24,7 @@
               <%= link_to "Projects", projects_path %>
             </li>
             <li>
-                <%= link_to "Invitations", user_invites_path(current_user) %>
+                <%= link_to "Invitations", invites_path %>
               </li>
             <% if !current_user.current_company.blank? && current_user.admin_of?(current_user.current_company) %>
               <li>
