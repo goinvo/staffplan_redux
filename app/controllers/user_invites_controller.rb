@@ -10,7 +10,7 @@ class UserInvitesController < ApplicationController
     @membership = @invite.company.memberships.build(user: current_user)
     @invite.accept
 
-    Company.transaction do
+    Invite.transaction do
       begin
         @invite.save
         @membership.save

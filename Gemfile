@@ -62,4 +62,5 @@ group :test do
   gem 'email_spec'
   gem 'capybara-webkit'
   gem 'database_cleaner'
+  gem 'launchy'
 end

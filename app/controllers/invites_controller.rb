@@ -1,10 +1,12 @@
 class InvitesController < ApplicationController
+  before_filter :set_company
+  before_filter :authorized_for_admin_tools
+
   def index
     @invites = current_company.invites
   end
 
   def new
-    @company = current_company
     @invite = Invite.new
   end
 
@@ -38,5 +40,9 @@ class InvitesController < ApplicationController
 
   def current_company
     current_user.current_company
+  end
+
+  def set_company
+    @company = current_company
   end
 end

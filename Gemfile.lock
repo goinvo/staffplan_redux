@@ -287,6 +287,7 @@ DEPENDENCIES
   figaro
   haml-rails
   handlebars_assets
+  launchy
   neat
   paper_trail
   pg

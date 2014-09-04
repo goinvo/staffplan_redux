@@ -7,7 +7,6 @@ feature "user creates a new client" do
 
   before(:each) do
     FactoryGirl.create(:membership, user: user, company: company)
-    #how do I do this??
     user.current_company = company
     user.save
     sign_in_as(user)

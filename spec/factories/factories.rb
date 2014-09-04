@@ -6,7 +6,7 @@ FactoryGirl.define do
     password_confirmation     "password123"
     sequence(:first_name)     { |n| "First#{n}" }
     sequence(:last_name)      { |n| "Last#{n}" }
-    current_company_id nil
+    current_company nil
   end
 
   factory :confirmed_user, :parent => :user do
@@ -20,6 +20,7 @@ FactoryGirl.define do
   factory :membership do
     user
     company
+    permissions []
   end
 
   factory :client do
@@ -32,6 +33,10 @@ FactoryGirl.define do
     client
     company
     name                      { |n| "project#{n}" }
+  end
+
+  factory :invite do
+    sequence(:email)          { |n| "testinvite-#{n}@example.com" }
   end
 
 end
