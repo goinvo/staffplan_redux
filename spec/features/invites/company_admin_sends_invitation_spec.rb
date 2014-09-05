@@ -63,7 +63,6 @@ feature "company admin sends invitation" do
   end
 
   scenario "with blank fields" do
-    fill_in "Email", with: ""
     click_button "Send Invitation"
 
     expect(Invite.count).to eq(0)
