@@ -6,7 +6,7 @@ feature "user creates a new client" do
   let(:client) { FactoryGirl.build(:client) }
 
   before(:each) do
-    FactoryGirl.create(:membership, user: user, company: company)
+    FactoryGirl.create(:membership, user: user, company: company, permissions: [:admin])
     user.current_company = company
     user.save
     sign_in_as(user)
@@ -23,18 +23,18 @@ feature "user creates a new client" do
 
     expect(Client.count).to eq(1)
     expect(Client.first.company).to eq(company)
-    expect(page).to have_content("Created new client successfully")
+    expect(page).to have_content("Your client was created successfully")
   end
 
   scenario "with a client name that already exists" do
-    existing_client = FactoryGirl.create(:client)
+    existing_client = FactoryGirl.create(:client, company: company)
 
     visit new_client_path
     fill_in "Name", with: existing_client.name
     fill_in "Description", with: existing_client.description
     click_button "Create Client"
 
-    expect(Client.count).to eq(0)
+    expect(Client.count).to eq(1)
     expect(page).to have_content("Name has already been taken")
   end
 

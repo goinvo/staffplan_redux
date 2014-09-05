@@ -16,10 +16,10 @@ Rails.application.routes.draw do
   end
 
   resources :clients do
-    resources :projects, only: [:new, :create]
+    resources :projects, only: [:show, :new, :create]
   end
 
-  resources :projects, except: [:new, :create] do
+  resources :projects, except: [:show, :new, :create] do
     resources :assignments, only: [:new, :create]
   end
 
