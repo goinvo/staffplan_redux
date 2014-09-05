@@ -42,20 +42,15 @@ staffplans-list-work-week, date-range-column-header {
   
   .column-total {
     text-align: center;
+    font-size: rem(11px);
   }
   
   .work-week {
     width: 40px;
-    // position: absolute;
-    // bottom: 0;
-    // left: 0;
-    
-    &.proposed {
-      background-color: #7eba8d;
-    }
-    
-    &.planned {
-      background-color: #5e9b69;
-    }
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 2px;
+    @include transition (background-color 0.3s ease-in 0s, height 0.3s ease-in 0s);
   }
 }
