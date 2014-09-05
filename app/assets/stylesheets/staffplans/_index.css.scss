@@ -3,10 +3,10 @@ ul#staffplan-index li, .list-header {
   @include align-items(stretch);
 }
 
-.user-info, .list-controls {
+.user-info {
   min-width: em(180);
   @include flex(1);
-  
+
   a {
     line-height: em(80);
   }
@@ -36,15 +36,17 @@ staffplans-list-work-week, date-range-column-header {
 }
 
 .work-week-list-item {
-  min-height: 100px;
+  // min-height: 100px;
   vertical-align: baseline;
   position: relative;
-  
+
   .column-total {
-    text-align: center;
     font-size: rem(11px);
+    position: absolute;
+    left: 36%; /* this is gross */
+    top: -20px;
   }
-  
+
   .work-week {
     width: 40px;
     position: absolute;
