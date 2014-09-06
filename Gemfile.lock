@@ -9,6 +9,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (3.3.3)
     actionmailer (4.1.4)
       actionpack (= 4.1.4)
       actionview (= 4.1.4)
@@ -261,6 +262,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   active_model_serializers
   awesome_print
   bcrypt (~> 3.1.7)
@@ -285,6 +287,7 @@ DEPENDENCIES
   figaro
   haml-rails
   handlebars_assets
+  launchy
   neat
   paper_trail
   pg

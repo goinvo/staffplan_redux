@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :companies, :through => :memberships
   has_many :staffplans_list_views, class_name: "StaffplansListView"
   has_many :user_projects, class_name: "UserProjectsView"
+  has_many :invites, as: :sender
 
   after_update do |user|
     terminator = user.versions.last.try(:terminator)
@@ -51,5 +52,9 @@ class User < ActiveRecord::Base
 
   def selectable_companies
     Company.where(id: memberships.where(disabled: false).select("memberships.company_id").pluck(:id))
+  end
+
+  def admin_of?(company)
+    self.memberships.where(company: company).first.permissions?(:admin)
   end
 end

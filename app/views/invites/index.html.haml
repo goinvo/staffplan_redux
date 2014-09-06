@@ -1,0 +1,19 @@
+%h1= "Invitations for " + current_user.current_company.name
+
+= link_to "Send an invitation", new_company_invite_path(current_user.current_company)
+
+%table
+  %tr
+    %th Email
+    %th Status
+    - if current_user.admin_of?(current_user.current_company)
+      %th Delete
+
+  - @invites.each do |invite|
+    %tr
+      %td= invite.email
+      %td= invite.aasm.current_state.to_s
+      - if current_user.admin_of?(current_user.current_company)
+        %td= link_to "Delete", company_invite_path(current_user.current_company, invite), method: :delete, data: {confirm: "Are you sure?" }
+
+
