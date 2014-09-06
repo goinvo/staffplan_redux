@@ -1,4 +1,4 @@
-[ ![Codeship Status for rescuedcode/staffplan_redux](https://codeship.io/projects/2f63d830-020b-0132-196f-6a159f2f8cde/status)](https://codeship.io/projects/30256)
+[ ![Codeship Status for rescuedcode/staffplan_redux](https://www.codeship.io/projects/fcd4e140-17a1-0132-f658-3ee2987e0903/status)](https://www.codeship.io/projects/34137)
 
       _________ __          _____  _______________.__
      /   _____//  |______ _/ ____\/ ____\______   \  | _____    ____  
