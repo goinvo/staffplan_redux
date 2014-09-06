@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @client = current_user.current_company.clients.find(params[:client_id])
     @project = current_user.current_company.projects.find(params[:id])
   end
 
@@ -19,7 +20,7 @@ class ProjectsController < ApplicationController
 
     if @project.save
       flash[:notice] = "The project was created successfully"
-      redirect_to project_path(@project)
+      redirect_to client_project_path(@project.client, @project)
     else
       flash.now[:notice] = "Couldn't create the project"
       render :new
@@ -35,7 +36,7 @@ class ProjectsController < ApplicationController
 
     if @project.update(project_params)
       flash[:notice] = "The project was updated successfully"
-      redirect_to project_path(@project)
+      redirect_to client_project_path(@project.client, @project)
     else
       flash.now[:notice] = "Couldn't update the project"
       render :edit

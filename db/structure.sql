@@ -71,7 +71,7 @@ CREATE VIEW assignment_totals_view AS
     sum(work_weeks.actual_hours) AS actual_total,
     (sum(work_weeks.actual_hours) - sum(work_weeks.estimated_hours)) AS diff
    FROM (assignments
-     JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)))
+   JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)))
   GROUP BY assignments.id, work_weeks.assignment_id;
 
 
@@ -90,7 +90,7 @@ CREATE VIEW assignment_work_weeks_view AS
     work_weeks.year,
     work_weeks.beginning_of_week
    FROM (assignments
-     JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)));
+   JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)));
 
 
 --
@@ -175,6 +175,40 @@ CREATE SEQUENCE companies_id_seq
 --
 
 ALTER SEQUENCE companies_id_seq OWNED BY companies.id;
+
+
+--
+-- Name: invites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE invites (
+    id integer NOT NULL,
+    sender_id integer NOT NULL,
+    company_id integer NOT NULL,
+    email character varying(255) NOT NULL,
+    aasm_state character varying(255) NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: invites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE invites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: invites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE invites_id_seq OWNED BY invites.id;
 
 
 --
@@ -263,20 +297,52 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: staffplan_list_view; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE staffplan_list_view (
-    user_id integer,
-    assignment_id integer,
-    proposed boolean,
-    beginning_of_week numeric(15,0),
-    cweek smallint,
-    year smallint,
-    estimated_total bigint,
-    actual_total bigint,
-    diff bigint
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying(255) DEFAULT ''::character varying NOT NULL,
+    password_digest character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    current_company_id integer,
+    registration_token character varying(255),
+    first_name character varying(255),
+    last_name character varying(255),
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying(255),
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip character varying(255),
+    last_sign_in_ip character varying(255),
+    confirmation_token character varying(255),
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    unconfirmed_email character varying(255)
 );
+
+
+--
+-- Name: staffplan_list_view; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW staffplan_list_view AS
+ SELECT users.id AS user_id,
+    assignments.id AS assignment_id,
+    work_weeks.beginning_of_week,
+    work_weeks.cweek,
+    work_weeks.year,
+    sum(work_weeks.estimated_hours) AS estimated_total,
+    sum(work_weeks.actual_hours) AS actual_total,
+    (sum(work_weeks.actual_hours) - sum(work_weeks.estimated_hours)) AS diff
+   FROM ((users
+   JOIN assignments ON ((assignments.user_id = users.id)))
+   JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)))
+  GROUP BY users.id, assignments.id, work_weeks.beginning_of_week, work_weeks.cweek, work_weeks.year;
 
 
 --
@@ -313,36 +379,6 @@ ALTER SEQUENCE user_preferences_id_seq OWNED BY user_preferences.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE users (
-    id integer NOT NULL,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    password_digest character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    current_company_id integer,
-    registration_token character varying(255),
-    first_name character varying(255),
-    last_name character varying(255),
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying(255),
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255),
-    confirmation_token character varying(255),
-    confirmed_at timestamp without time zone,
-    confirmation_sent_at timestamp without time zone,
-    unconfirmed_email character varying(255)
-);
-
-
---
 -- Name: user_projects_view; Type: VIEW; Schema: public; Owner: -
 --
 
@@ -358,9 +394,9 @@ CREATE VIEW user_projects_view AS
     projects.name AS project_name,
     projects.active AS is_active
    FROM (((users
-     JOIN assignments ON ((assignments.user_id = users.id)))
-     JOIN projects ON ((assignments.project_id = projects.id)))
-     JOIN clients ON ((projects.client_id = clients.id)))
+   JOIN assignments ON ((assignments.user_id = users.id)))
+   JOIN projects ON ((assignments.project_id = projects.id)))
+   JOIN clients ON ((projects.client_id = clients.id)))
   ORDER BY users.id, clients.name DESC;
 
 
@@ -461,6 +497,13 @@ ALTER TABLE ONLY companies ALTER COLUMN id SET DEFAULT nextval('companies_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY invites ALTER COLUMN id SET DEFAULT nextval('invites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY memberships ALTER COLUMN id SET DEFAULT nextval('memberships_id_seq'::regclass);
 
 
@@ -521,6 +564,14 @@ ALTER TABLE ONLY clients
 
 ALTER TABLE ONLY companies
     ADD CONSTRAINT companies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: invites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY invites
+    ADD CONSTRAINT invites_pkey PRIMARY KEY (id);
 
 
 --
@@ -628,26 +679,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: _RETURN; Type: RULE; Schema: public; Owner: -
---
-
-CREATE RULE "_RETURN" AS
-    ON SELECT TO staffplan_list_view DO INSTEAD  SELECT users.id AS user_id,
-    assignments.id AS assignment_id,
-    assignments.proposed,
-    work_weeks.beginning_of_week,
-    work_weeks.cweek,
-    work_weeks.year,
-    sum(work_weeks.estimated_hours) AS estimated_total,
-    sum(work_weeks.actual_hours) AS actual_total,
-    (sum(work_weeks.actual_hours) - sum(work_weeks.estimated_hours)) AS diff
-   FROM ((users
-     JOIN assignments ON ((assignments.user_id = users.id)))
-     JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)))
-  GROUP BY users.id, assignments.id, work_weeks.beginning_of_week, work_weeks.cweek, work_weeks.year;
-
-
---
 -- PostgreSQL database dump complete
 --
 
@@ -732,4 +763,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140809143639');
 INSERT INTO schema_migrations (version) VALUES ('20140809143726');
 
 INSERT INTO schema_migrations (version) VALUES ('20140809143818');
+
+INSERT INTO schema_migrations (version) VALUES ('20140828171709');
 

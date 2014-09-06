@@ -15,13 +15,14 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
+    @company.memberships.build(company: @company, user: current_user, permissions: [:admin])
 
-    if @current_user.memberships.create(company: Company.new(company_params))
+    if @company.save
       if current_user.current_company.blank?
         current_user.current_company = @company
       end
       flash[:notice] = "Your company was successfully created"
-      redirect_to companies_path
+      redirect_to company_path(@company)
     else
       flash.now[:notice] = "Couldn't create your company"
       render :new

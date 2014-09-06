@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,# :lockable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
-  
+
   has_paper_trail
-  
+
   has_many :assignments, :dependent => :destroy do
     def for_company(company)
       self.select do |a|
@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :companies, :through => :memberships
   has_many :staffplans_list_views, class_name: "StaffplansListView"
+  has_many :invites, as: :sender
 
   after_update do |user|
     terminator = user.versions.last.try(:terminator)
@@ -23,21 +24,21 @@ class User < ActiveRecord::Base
       User.where(:id => terminator.to_i).first.try(&:update_timestamp!)
     end
   end
-  
+
   validates_presence_of :email, :first_name, :last_name
   validates_uniqueness_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/
-  
+
   before_validation :initialize_user_preferences
-  
+
   def initialize_user_preferences
     self.build_user_preferences if self.user_preferences.nil?
   end
-  
+
   def full_name
     [first_name, last_name].join(" ")
   end
-  
+
   def current_company
     companies.where(id: current_company_id).first
   end
@@ -50,5 +51,9 @@ class User < ActiveRecord::Base
 
   def selectable_companies
     Company.where(id: memberships.where(disabled: false).select("memberships.company_id").pluck(:id))
+  end
+
+  def admin_of?(company)
+    self.memberships.where(company: company).first.permissions?(:admin)
   end
 end

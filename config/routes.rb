@@ -2,15 +2,28 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :staffplans, :companies
+  resources :invites, only: :index, controller: 'user_invites' do
+    member do
+      put :accept
+      put :decline
+    end
+  end
+
+  resources :staffplans
+
+  resources :companies do
+    resources :invites, except: [:show, :edit, :update]
+  end
 
   resources :clients do
-    resources :projects, only: [:new, :create]
+    resources :projects, only: [:show, :new, :create]
   end
 
-  resources :projects, except: [:new, :create] do
+  resources :projects, except: [:show, :new, :create] do
     resources :assignments, only: [:new, :create]
   end
+
+  resources :current_companies, only: :update
 
   root 'staffplans#index'
 

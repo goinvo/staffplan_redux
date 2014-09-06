@@ -13,7 +13,7 @@ feature "user creates a company" do
   end
 
   scenario "with valid information" do
-    click_link "Create a Company"
+    click_link "Create a company"
 
     fill_in :company_name, with: company.name
     click_button "Create Company"

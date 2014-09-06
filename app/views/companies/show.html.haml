@@ -1,3 +1,5 @@
 %h1= @company.name
 
-= link_to "Add a client", new_client_path
+- if current_user.admin_of?(@company)
+  = link_to "Add a client", new_client_path
+  = link_to "Edit", edit_company_path(@company)

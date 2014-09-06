@@ -7,12 +7,14 @@ feature "user edits a company" do
   let(:company3) { FactoryGirl.create(:company) }
 
   before(:each) do
-    FactoryGirl.create(:membership, user: user, company: company)
+    FactoryGirl.create(:membership, user: user, company: company, permissions: [:admin])
     sign_in_as(user)
 
     within(".manage") do
       click_link "Companies"
     end
+
+    click_link company.name
 
     click_link "Edit"
   end
