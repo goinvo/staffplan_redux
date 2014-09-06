@@ -1,6 +1,10 @@
-ul#staffplan-show li, ul#staffplan-index li, .list-header, .user-and-graph {
+@mixin flexible-list {
   @include display(flex);
   @include align-items(stretch);
+}
+
+.list-header {
+  @include flexible-list;
 }
 
 .user-info, .name-and-gravatar, .list-controls, .assignment-info {
@@ -23,13 +27,17 @@ ul#staffplan-show li, ul#staffplan-index li, .list-header, .user-and-graph {
   @include flex(1);
 }
 
-staffplans-list-work-week, date-range-column-header, assignments-list-work-week {
+@mixin aligned-list-item {
   display: inline-block;
   width: 40px;
   text-align: center;
 }
 
-.work-week-list-item {
+date-range-column-header {
+  @include aligned-list-item;
+}
+
+.bar-graph-element {
   // min-height: 100px;
   vertical-align: baseline;
   position: relative;

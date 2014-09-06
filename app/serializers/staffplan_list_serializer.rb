@@ -1,4 +1,5 @@
 class StaffplanListSerializer < ActiveModel::Serializer
+  self.root = false
   attributes :id, :gravatar_url, :staffplan_url, :full_name, :email, :work_weeks, :estimated_total, :actual_total, :diff, :upcoming_estimated_hours
 
   def full_name

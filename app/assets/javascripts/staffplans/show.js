@@ -2,7 +2,8 @@ window.StaffPlanShow = (function(window, document, $) {
   var StaffPlanShow = function() {
     var self = this;
 
-    this.assignmentData = JSON.parse($('#user').remove().text());
+    this.userData = JSON.parse($('#user').remove().text());
+    this.assignmentData = JSON.parse($('#assignments').remove().text());
 
     this.startHash = ko.observable(initialStartHash);
     var initialStartHash = this.getStartHash();

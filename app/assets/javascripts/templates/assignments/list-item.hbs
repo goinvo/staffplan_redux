@@ -1,6 +1,8 @@
 <li class="assignment">
   <div class="assignment-info">
-    <a class="client-name" data-bind="text: assignment.client_name, attr: { href: clientURL, name: assignment.client_name }"></a>
+    <!-- ko if: $index() == 0 -->
+      <a class="client-name" data-bind="text: assignment.client_name, attr: { href: clientURL, name: assignment.client_name }"></a>
+    <!-- /ko -->
     <a class="project-name" data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
   </div>
   <div class="work-weeks" data-bind="foreach: visibleWorkWeeks">

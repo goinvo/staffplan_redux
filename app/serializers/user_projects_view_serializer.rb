@@ -1,10 +1,11 @@
 class UserProjectsViewSerializer < ActiveModel::Serializer
-  attributes :project_id, :company_id, :assignment_id, :is_proposed, :is_archived,
+
+  attributes :id, :project_id, :company_id, :assignment_id, :is_proposed, :is_archived,
              :client_id, :client_name, :project_name, :is_active, :work_weeks,
              :estimated_total, :actual_total, :diff
 
   has_many :work_weeks, serializer: AssignmentWorkWeekSerializer
-  
+
   def estimated_total
     object.assignment_totals.estimated_total rescue 0
   end

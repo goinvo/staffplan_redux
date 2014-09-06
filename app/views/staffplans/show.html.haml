@@ -5,13 +5,8 @@
     });
 
 - content_for(:fixed_header_section) do
-  .user-and-graph
-    .name-and-gravatar
-      %img.gravatar{src: "https://secure.gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email.downcase)}"}
-      %a= @user.full_name
-      %span{data: {bind: "text: assignmentData.length"}}
-    .graph
-    .empty
+  %ul#staffplan-bar-graph
+    %staffplans-list-item{params: "user: userData, weekRange: weekRange"}
 
   .list-header
     .list-controls
@@ -26,5 +21,8 @@
 %ul#staffplan-show{data: {bind: "foreach: assignments"}}
   %assignments-list-item{params: "assignment: $data, weekRange: $parent.weekRange"}
 
-%script{type: "application/json", id: "user"}
+%script{type: "application/json", id: "assignments"}
   = ActiveModel::ArraySerializer.new(@user_projects, each_serializer: UserProjectsViewSerializer).to_json.html_safe
+
+%script{type: "application/json", id: "user"}
+  = StaffplanListSerializer.new(@user).to_json.html_safe

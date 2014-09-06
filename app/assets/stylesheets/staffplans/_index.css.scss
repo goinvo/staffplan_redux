@@ -5,3 +5,11 @@
     vertical-align: middle;
   }
 }
+
+ul#staffplan-index li {
+  @include flexible-list;
+}
+
+staffplans-list-work-week {
+  @include aligned-list-item;
+}
