@@ -27,4 +27,6 @@ body {
   padding: em(0);
 }
 
+@import 'staffplans/shared';
 @import 'staffplans/index';
+@import 'staffplans/show';

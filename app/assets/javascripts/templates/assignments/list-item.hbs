@@ -1,0 +1,15 @@
+<li class="assignment">
+  <div class="assignment-info">
+    <!-- ko if: $index() == 0 -->
+      <a class="client-name" data-bind="text: assignment.client_name, attr: { href: clientURL, name: assignment.client_name }"></a>
+    <!-- /ko -->
+    <a class="project-name" data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
+  </div>
+  <div class="work-weeks" data-bind="foreach: visibleWorkWeeks">
+    <assignments-list-work-week params="work_week: $data"></assignments-list-work-week>
+  </div>
+  <div class="assignment-totals">
+    <div data-bind="text: assignment.estimated_total"></div>
+    <div data-bind="text: assignment.actual_total"></div>
+  </div>
+</li>

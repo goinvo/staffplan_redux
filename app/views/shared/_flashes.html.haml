@@ -3,19 +3,19 @@
   - if defined?(notice) && notice.present?
     %p.flash-notice.flash
       = notice
-      %a.close{href: 'document:void(0)'} close
-      
+      %a.close{href: 'javascript:void(0)'} close
+
   - if defined?(alert) && alert.present?
     %p.flash-alert.flash
       = alert
-      %a.close{href: 'document:void(0)'} close
+      %a.close{href: 'javascript:void(0)'} close
 
   - if defined?(success) && success.present?
     %p.flash-success.flash
       = success
-      %a.close{href: 'document:void(0)'} close
-      
+      %a.close{href: 'javascript:void(0)'} close
+
   - if defined?(error) && error.present?
     %p.flash-error.flash
       = error
-      %a.close{href: 'document:void(0)'} close
+      %a.close{href: 'javascript:void(0)'} close

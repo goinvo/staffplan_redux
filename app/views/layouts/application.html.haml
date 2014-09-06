@@ -24,7 +24,7 @@
     = yield(:javascript)
 
 
-  %body
+  %body{id: controller_name, class: action_name}
     .fixed-header
       = render(partial: 'refills/navigation')
       = render(partial: "shared/flashes")
