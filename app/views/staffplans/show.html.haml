@@ -5,20 +5,20 @@
     });
 
 - content_for(:fixed_header_section) do
-  %ul#staffplan-bar-graph
+  %ul.flexible-list
     %user-aggregate-chart{params: "user: userData, weekRange: weekRange"}
 
   .list-header
-    .list-controls
+    .single-flexible-column
       %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
 
-    .date-range-columns{data: {bind: "foreach: weekRange"}}
+    .date-range-columns.width-filling-container{data: {bind: "foreach: weekRange"}}
       %date-range-column-header{params: "week: $data"}
 
     .assignment-totals
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
-%ul#staffplan-show{data: {bind: "foreach: assignments"}}
+%ul.flexible-list{data: {bind: "foreach: assignments"}}
   %assignments-list-item{params: "assignment: $data, weekRange: $parent.weekRange"}
 
 %script{type: "application/json", id: "assignments"}

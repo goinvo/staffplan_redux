@@ -1,0 +1,50 @@
+@import "staffplans/mixins";
+
+.list-header {
+  @include flexible-list;
+}
+
+.single-flexible-column {
+  min-width: em(180);
+  @include flex(1);
+
+  a {
+    line-height: em(80);
+  }
+}
+
+ul.flexible-list li {
+  @include flexible-list;
+}
+
+aggregate-work-week {
+  @include aligned-list-item;
+}
+
+.width-filling-container {
+  @include fill-parent;
+  @include flex(20);
+  overflow: hidden;
+}
+
+date-range-column-header {
+  @include aligned-list-item;
+}
+
+.aggregate-work-week {
+  @include fancy-aggregate-work-week;
+}
+
+assignment-work-week {
+  @include aligned-list-item;
+
+  height: 100px;
+  vertical-align: top;
+
+  input {
+    width: 35px;
+    text-align: center;
+    height: 25px;
+    font-size: em(14px);
+  }
+}

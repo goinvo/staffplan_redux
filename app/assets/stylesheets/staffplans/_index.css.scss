@@ -1,15 +1,14 @@
+@import "staffplans/mixins";
+
 #staffplans.index {
   .gravatar {
     width: 32px;
     border-radius: 3px;
     vertical-align: middle;
   }
-}
 
-ul#staffplan-index li {
-  @include flexible-list;
-}
-
-aggregate-work-week {
-  @include aligned-list-item;
+  .assignment-totals {
+    min-width: em(100);
+    @include flex(1);
+  }
 }

@@ -27,6 +27,7 @@ body {
   padding: em(0);
 }
 
-@import 'staffplans/shared';
+@import 'mixins';
+@import 'staffplans/layout';
 @import 'staffplans/index';
 @import 'staffplans/show';
