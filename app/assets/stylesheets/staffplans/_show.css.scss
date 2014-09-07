@@ -1,25 +1,9 @@
+@import "staffplans/mixins";
+
 #staffplans.show {
   .gravatar {
     width: 40px;
     border-radius: 3px;
     vertical-align: middle;
-  }
-
-  assignments-list-work-week {
-    @include aligned-list-item;
-
-    height: 100px;
-    vertical-align: top;
-
-    input {
-      width: 35px;
-      text-align: center;
-      height: 25px;
-      font-size: em(14px);
-    }
-  }
-
-  ul#staffplan-show li, ul#staffplan-bar-graph li {
-    @include flexible-list;
   }
 }

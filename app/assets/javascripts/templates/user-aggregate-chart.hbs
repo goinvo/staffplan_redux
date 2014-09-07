@@ -1,0 +1,15 @@
+<li class="user">
+  <div class="user-info single-flexible-column">
+    <a data-bind="attr: { href: staffPlanURL }">
+      <img data-bind="attr: { alt: user.full_name, src: user.gravatar_url }" class="gravatar" />
+    </a>
+    <a data-bind="attr: { href: staffPlanURL }, text: user.full_name"></a>
+  </div>
+  <div class="work-weeks width-filling-container" data-bind="foreach: visibleWorkWeeks">
+    <aggregate-work-week params="workWeek: $data"></aggregate-work-week>
+  </div>
+  <div class="assignment-totals">
+    <div data-bind="text: user.estimated_total"></div>
+    <div data-bind="text: user.actual_total"></div>
+  </div>
+</li>

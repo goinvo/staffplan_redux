@@ -1,0 +1,10 @@
+@mixin flexible-list {
+  @include display(flex);
+  @include align-items(stretch);
+}
+
+@mixin aligned-list-item {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+}

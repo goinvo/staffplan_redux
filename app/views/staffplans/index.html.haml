@@ -6,19 +6,19 @@
 
 - content_for(:fixed_header_section) do
   .list-header
-    .list-controls
+    .single-flexible-column
       %a{data: {bind: "click: sortByName"}} Name
       %a{data: {bind: "click: sortByWorkload"}} Workload
       %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
 
-    .date-range-columns{data: {bind: "foreach: weekRange"}}
+    .date-range-columns.width-filling-container{data: {bind: "foreach: weekRange"}}
       %date-range-column-header{params: "week: $data"}
 
     .assignment-totals
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
-%ul#staffplan-index{data: {bind: "foreach: users"}}
-  %staffplans-list-item{params: "user: $data, weekRange: $parent.weekRange"}
+%ul.flexible-list{data: {bind: "foreach: users"}}
+  %user-aggregate-chart{params: "user: $data, weekRange: $parent.weekRange"}
 
 %script{type: "application/json", id: "users"}
   = ActiveModel::ArraySerializer.new(@users, each_serializer: StaffplanListSerializer).to_json.html_safe
