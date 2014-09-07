@@ -2,6 +2,9 @@
 
 .list-header {
   @include flexible-list;
+  background-color: #f7f7f7;
+  border: 1px solid #e0e0e0;
+  font-size: em(14);
 }
 
 .single-flexible-column {
@@ -15,6 +18,11 @@
 
 ul.flexible-list li {
   @include flexible-list;
+  font-size: em(14);
+
+  * > {
+    display: inline-block;
+  }
 }
 
 aggregate-work-week {

@@ -11,4 +11,12 @@
     min-width: em(100);
     @include flex(1);
   }
+
+  .fixed-header {
+    @include fixed-header;
+  }
+
+  .user-list {
+    padding-top: em(210);
+  }
 }

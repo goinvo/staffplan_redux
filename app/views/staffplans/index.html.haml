@@ -17,7 +17,7 @@
     .assignment-totals
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
-%ul.flexible-list{data: {bind: "foreach: users"}}
+%ul.user-list.flexible-list{data: {bind: "foreach: users"}}
   %user-aggregate-chart{params: "user: $data, weekRange: $parent.weekRange"}
 
 %script{type: "application/json", id: "users"}

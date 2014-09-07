@@ -9,7 +9,9 @@
     <aggregate-work-week params="workWeek: $data"></aggregate-work-week>
   </div>
   <div class="assignment-totals">
+    <!-- ko if: showAssignmentTotals -->
     <div data-bind="text: user.estimated_total"></div>
     <div data-bind="text: user.actual_total"></div>
+    <!-- /ko -->
   </div>
 </li>

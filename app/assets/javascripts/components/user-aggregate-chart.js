@@ -1,8 +1,9 @@
 function UserAggregateChart(params) {
   this.user = params.user;
   this.weekRange = params.weekRange;
+  this.showAssignmentTotals = typeof params.showAssignmentTotals === "undefined" ? true : params.showAssignmentTotals;
   this.staffPlanURL = "/staffplans/" + this.user.id;
-  
+
   this.observedWorkWeeks = ko.observableArray();
   this.observedWorkWeeks.extend({rateLimit: 25});
 
