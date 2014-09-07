@@ -1,6 +1,6 @@
-function AssignmentsListItem(data) {
-  this.assignment = data.assignment;
-  this.weekRange = data.weekRange;
+function AssignmentsListItem(params) {
+  this.assignment = params.assignment;
+  this.weekRange = params.weekRange;
 
   this.projectURL = "/projects/" + this.assignment.project_id;
   this.clientURL = "/clients/" + this.assignment.client_id;
@@ -48,7 +48,7 @@ function AssignmentsListItem(data) {
   this.visibleWorkWeeks.extend({rateLimit: 25});
 }
 
-ko.components.register("assignments-list-item", {
+ko.components.register("assignment-list-item", {
   viewModel: AssignmentsListItem,
   template: HandlebarsTemplates["assignment-list-item"]()
 });

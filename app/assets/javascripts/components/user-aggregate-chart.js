@@ -1,15 +1,17 @@
-function UserAggregateChart(data) {
-  this.data = data
-  this.staffPlanURL = "/staffplans/" + this.data.user.id
+function UserAggregateChart(params) {
+  this.user = params.user;
+  this.weekRange = params.weekRange;
+  this.staffPlanURL = "/staffplans/" + this.user.id;
+  
   this.observedWorkWeeks = ko.observableArray();
   this.observedWorkWeeks.extend({rateLimit: 25});
 
   this.visibleWorkWeeks = ko.computed(function() {
-    return _.map(this.data.weekRange(), function(weekData, index) {
+    return _.map(this.weekRange(), function(weekData, index) {
 
-      var userWorkWeek = _.find(this.data.user.work_weeks, function(workWeek) {
-          return workWeek.cweek == weekData.cweek() && workWeek.year == weekData.year();
-        }, this);
+      var userWorkWeek = _.find(this.user.work_weeks, function(workWeek) {
+        return workWeek.cweek == weekData.cweek() && workWeek.year == weekData.year();
+      }, this);
 
       if(_.isUndefined(this.observedWorkWeeks()[index])) {
         // add to the set
