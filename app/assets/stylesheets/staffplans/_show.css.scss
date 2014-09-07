@@ -2,8 +2,29 @@
 
 #staffplans.show {
   .gravatar {
-    width: 40px;
+    width: 75px;
     border-radius: 3px;
     vertical-align: middle;
+    margin-right: 5px;
+  }
+
+  /* fixed header styles are page specific. every page is a little different */
+  .fixed-header {
+    @include fixed-header;
+  }
+
+  .assignment-list {
+    padding-top: em(250);
+  }
+
+  .aggregate-chart {
+    background-color: #28292a;
+    color: #98989b;
+    min-height: 90px;
+  }
+
+  .user-info {
+    line-height: 90px;
+    width: 180px;
   }
 }

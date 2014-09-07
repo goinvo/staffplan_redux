@@ -1,6 +1,6 @@
 header.navigation {
   $navigation-padding: 1em;
-  $navigation-background: $dark-gray;
+  $navigation-background: #343435;
   $navigation-color: transparentize(white, 0.3);
   $navigation-color-hover: white;
   $navigation-height: 40px;
@@ -19,6 +19,7 @@ header.navigation {
   height: $navigation-height;
   width: 100%;
   z-index: 999;
+  font-size: em(13);
 
   .menu-wrapper {
     @include outer-container;
@@ -79,7 +80,7 @@ header.navigation {
     padding: 0;
     width: 100%;
     z-index: 9999;
-    
+
     @include media ($horizontal-bar-mode) {
       display: inline;
       margin: 0;
@@ -203,7 +204,7 @@ header.navigation {
     padding: 3px 5px;
     float: left;
     display: none;
-    
+
     .search-and-submit {
       position: relative;
 

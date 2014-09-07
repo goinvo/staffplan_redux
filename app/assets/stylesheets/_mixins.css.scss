@@ -19,3 +19,9 @@
     @include transition (background-color 0.3s ease-in 0s, height 0.3s ease-in 0s);
   }
 }
+
+@mixin fixed-header {
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}

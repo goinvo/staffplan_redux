@@ -5,8 +5,8 @@
     });
 
 - content_for(:fixed_header_section) do
-  %ul.flexible-list
-    %user-aggregate-chart{params: "user: userData, weekRange: weekRange"}
+  %ul.flexible-list.aggregate-chart
+    %user-aggregate-chart{params: "user: userData, weekRange: weekRange, showAssignmentTotals: false"}
 
   .list-header
     .single-flexible-column
@@ -18,7 +18,7 @@
     .assignment-totals
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
-%ul.flexible-list{data: {bind: "foreach: assignments"}}
+%ul.assignment-list.flexible-list{data: {bind: "foreach: assignments"}}
   %assignment-list-item{params: "assignment: $data, weekRange: $parent.weekRange"}
 
 %script{type: "application/json", id: "assignments"}
