@@ -50,5 +50,5 @@ function AssignmentsListItem(data) {
 
 ko.components.register("assignments-list-item", {
   viewModel: AssignmentsListItem,
-  template: HandlebarsTemplates["assignments/list-item"]()
+  template: HandlebarsTemplates["assignment-list-item"]()
 });

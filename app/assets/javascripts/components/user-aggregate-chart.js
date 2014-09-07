@@ -1,4 +1,4 @@
-function ListItemViewModel(data) {
+function UserAggregateChart(data) {
   this.data = data
   this.staffPlanURL = "/staffplans/" + this.data.user.id
   this.observedWorkWeeks = ko.observableArray();
@@ -50,7 +50,7 @@ function ListItemViewModel(data) {
   this.visibleWorkWeeks.extend({rateLimit: 25});
 }
 
-ko.components.register("staffplans-list-item", {
-  viewModel: ListItemViewModel,
-  template: HandlebarsTemplates["staffplans/list-item"]()
+ko.components.register("user-aggregate-chart", {
+  viewModel: UserAggregateChart,
+  template: HandlebarsTemplates["user-aggregate-chart"]()
 });

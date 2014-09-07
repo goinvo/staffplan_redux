@@ -1,9 +1,9 @@
 (function($, window, document) {
-  var WorkWeek = window.WorkWeek = function(data) {
+  var AggregateWorkWeek = window.AggregateWorkWeek = function(data) {
     this.data = data;
   }
 
-  _.extend(WorkWeek.prototype, {
+  _.extend(AggregateWorkWeek.prototype, {
     columnTotal: function() {
       if(this.isBeforeWithActuals()) {
         // for current and past dates prefer the actual hours

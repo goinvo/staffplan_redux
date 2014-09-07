@@ -6,7 +6,7 @@
 
 - content_for(:fixed_header_section) do
   %ul#staffplan-bar-graph
-    %staffplans-list-item{params: "user: userData, weekRange: weekRange"}
+    %user-aggregate-chart{params: "user: userData, weekRange: weekRange"}
 
   .list-header
     .list-controls

@@ -6,7 +6,7 @@
     <a class="project-name" data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
   </div>
   <div class="work-weeks" data-bind="foreach: visibleWorkWeeks">
-    <assignments-list-work-week params="work_week: $data"></assignments-list-work-week>
+    <assignment-work-week params="work_week: $data"></assignment-work-week>
   </div>
   <div class="assignment-totals">
     <div data-bind="text: assignment.estimated_total"></div>

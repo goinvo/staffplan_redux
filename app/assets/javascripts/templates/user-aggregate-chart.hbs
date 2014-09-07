@@ -6,7 +6,7 @@
     <a data-bind="attr: { href: staffPlanURL }, text: data.user.full_name"></a>
   </div>
   <div class="work-weeks" data-bind="foreach: visibleWorkWeeks">
-    <staffplans-list-work-week params="work_week: $data"></staffplans-list-work-week>
+    <aggregate-work-week params="work_week: $data"></aggregate-work-week>
   </div>
   <div class="assignment-totals">
     <div data-bind="text: data.user.estimated_total"></div>
