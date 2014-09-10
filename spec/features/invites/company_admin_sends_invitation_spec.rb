@@ -24,7 +24,7 @@ feature "company admin sends invitation" do
 
     expect(Invite.count).to eq(1)
     expect(email_count).to eq(1)
-    expect(open_email(invite.email)).to have_content("Register to accept this invitation.")
+    expect(open_email(invite.email)).to have_content("You can sign up to accept this invitation.")
     expect(page).to have_content("Your invitation was successfully sent")
   end
 
