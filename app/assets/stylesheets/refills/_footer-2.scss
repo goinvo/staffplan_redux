@@ -4,9 +4,13 @@
   $footer-link-color: transparentize($footer-color, .6);
   $footer-disclaimer-color: transparentize($footer-color, .6);
 
-  background: $footer-background;
-  padding: $base-line-height;
+  background: #111;
+  padding: .3em;
   width: 100%;
+
+  .clear {
+    clear: both;
+  }
 
   .footer-logo {
     margin-right: 1em;
@@ -20,12 +24,17 @@
 
   .footer-logo img {
     height: 1.6em;
-  } 
+  }
+
+  .float-right {
+    float: right;
+  }
 
   ul {
     margin-bottom: 1em;
     @include media($large-screen) {
       float: left;
+      width: 93%;
       margin-left: 1em;
       margin-bottom: 0;
     }
