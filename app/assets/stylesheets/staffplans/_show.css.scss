@@ -14,7 +14,7 @@
   }
 
   .assignment-list {
-    padding-top: em(250);
+    padding-top: em(190);
   }
 
   .aggregate-chart {
@@ -23,8 +23,18 @@
     min-height: 90px;
   }
 
+  .list-header {
+    background-color: #f7f7f7;
+  }
+
   .user-info {
-    line-height: 90px;
     width: 180px;
+    line-height: 90px;
+    height: 90px;
+  }
+
+  .project-name, .client-name {
+    width: em(140);
+    display: inline-block;
   }
 }

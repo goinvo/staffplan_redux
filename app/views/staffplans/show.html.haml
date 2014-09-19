@@ -6,10 +6,10 @@
 
 - content_for(:fixed_header_section) do
   %ul.flexible-list.aggregate-chart
-    %user-aggregate-chart{params: "user: userData, weekRange: weekRange, showAssignmentTotals: false"}
+    %li.user{data: {bind: 'component: {name: "user-aggregate-chart", params: {user: userData, weekRange: weekRange, showAssignmentTotals: false, wide: true}}'}}}
 
   .list-header
-    .single-flexible-column
+    .single-flexible-column.wide
       %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
 
     .date-range-columns.width-filling-container{data: {bind: "foreach: weekRange"}}

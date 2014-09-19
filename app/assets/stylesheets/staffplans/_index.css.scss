@@ -17,6 +17,17 @@
   }
 
   .user-list {
-    padding-top: em(210);
+    padding-top: em(100);
+  }
+
+  .list-header {
+    background-color: #f7f7f7;
+  }
+
+  .user-info {
+
+    a {
+      line-height: em(80);
+    }
   }
 }

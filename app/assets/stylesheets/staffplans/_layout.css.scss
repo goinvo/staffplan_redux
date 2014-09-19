@@ -2,7 +2,6 @@
 
 .list-header {
   @include flexible-list;
-  background-color: #f7f7f7;
   border: 1px solid #e0e0e0;
   font-size: em(14);
 }
@@ -11,8 +10,9 @@
   min-width: em(180);
   @include flex(1);
 
-  a {
-    line-height: em(80);
+  &.wide {
+    min-width: em(300);
+    // @include flex(3);
   }
 }
 
