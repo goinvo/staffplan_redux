@@ -19,7 +19,7 @@
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
 %ul.assignment-list.flexible-list{data: {bind: "foreach: assignments"}}
-  %assignment-list-item{params: "assignment: $data, weekRange: $parent.weekRange"}
+  %li.assignment{data: {bind: 'component: {name: "assignment-list-item", params: {assignment: $data, weekRange: $parent.weekRange}}'}}
 
 %script{type: "application/json", id: "assignments"}
   = ActiveModel::ArraySerializer.new(@user_projects, each_serializer: UserProjectsViewSerializer).to_json.html_safe

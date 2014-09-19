@@ -1,17 +1,15 @@
-<li class="assignment">
-  <div class="assignment-info single-flexible-column wide">
-    <div class="client-name">
-      <a data-bind="text: assignment.client_name, attr: { href: clientURL, name: assignment.client_name }"></a>
-    </div>
-    <div class="project-name">
-      <a data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
-    </div>
+<div class="assignment-info single-flexible-column wide">
+  <div class="client-name">
+    <a data-bind="text: assignment.client_name, attr: { href: clientURL, name: assignment.client_name }"></a>
   </div>
-  <div class="work-weeks width-filling-container" data-bind="foreach: visibleWorkWeeks">
-    <assignment-work-week params="work_week: $data"></assignment-work-week>
+  <div class="project-name">
+    <a data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
   </div>
-  <div class="assignment-totals">
-    <div data-bind="text: assignment.estimated_total"></div>
-    <div data-bind="text: assignment.actual_total"></div>
-  </div>
-</li>
+</div>
+<div class="work-weeks width-filling-container" data-bind="foreach: visibleWorkWeeks">
+  <assignment-work-week params="work_week: $data"></assignment-work-week>
+</div>
+<div class="assignment-totals">
+  <div data-bind="text: assignment.estimated_total"></div>
+  <div data-bind="text: assignment.actual_total"></div>
+</div>
