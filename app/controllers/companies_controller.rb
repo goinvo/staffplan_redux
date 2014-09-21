@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   skip_before_filter :check_current_company
 
   def index
-    @companies = current_user.companies
+    @companies = current_user.companies.order('name asc')
   end
 
   def show

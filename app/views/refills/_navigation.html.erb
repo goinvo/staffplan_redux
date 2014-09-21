@@ -38,7 +38,7 @@
           <li class="nav-link more company-select">
             <a href="javascript:void(0)"><%= current_user.current_company.name %></a>
             <ul class="submenu">
-              <% current_user.companies.each do |company| %>
+              <% current_user.companies.order('name asc').each do |company| %>
                 <% if !(company == current_user.current_company) %>
                   <li>
                     <%= link_to company.name, current_company_path(company), data: { method: :patch } %>

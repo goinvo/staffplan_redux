@@ -8,4 +8,4 @@
 %h4 Projects for this client:
 %ul
   - @client.projects.each do |project|
-    %li= link_to project.name, project_path(project)
+    %li= link_to project.name, client_project_path(@client, project)
