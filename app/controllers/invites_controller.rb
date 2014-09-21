@@ -15,7 +15,7 @@ class InvitesController < ApplicationController
     @invite.sender = current_user
 
     if @invite.save
-      @invite.email_invitation(current_user)
+      @invite.email_invitation
       flash[:notice] = "Your invitation was successfully sent"
       redirect_to company_invites_path(@invite.company)
     else
