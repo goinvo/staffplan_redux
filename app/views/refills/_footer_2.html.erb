@@ -1,12 +1,20 @@
 <footer class="footer-2">
-  <div class="footer-logo">
-    <%= image_tag "logos/invo-logo.png" %>
-  </div>
-    <ul>
-      <li><%= link_to "Open Source", "https://github.com/rescuedcode/staffplan_redux" %></li>
-      <li><%= link_to "Issue Tracker", "https://github.com/rescuedcode/staffplan_redux/issues/" %></li>
-      <li class="float-right"><%= link_to "by Involution Studios", "http://goinvo.com/" %></li>
-    </ul>
+  <ul>
+    <li>
+      <%= link_to "Open Source", "https://github.com/rescuedcode/staffplan_redux" %>
+    </li>
+    <li>
+      <%= link_to "Issue Tracker", "https://github.com/rescuedcode/staffplan_redux/issues/" %>
+    </li>
+    <li>
+      <div class="footer-invo-logo">
+        <%= link_to (image_tag "logos/invo-logo.png").html_safe, "http://goinvo.com/" %>
+      </div>
+    </li>
+    <li class="float-right">
+      <%= link_to "by Involution Studios", "http://goinvo.com/" %>
+    </li>
+  </ul>
 
 <!--     <div class="footer-secondary-links">
       <ul>

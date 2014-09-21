@@ -26,6 +26,16 @@
 body {
   margin: em(0);
   padding: em(0);
+  height: 100%;
+}
+
+.wrapper {
+  min-height:100%;
+  position:relative;
+}
+
+.content {
+  padding-bottom: 2.7em;
 }
 
 @import 'mixins';

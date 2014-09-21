@@ -7,23 +7,36 @@
   background: #111;
   padding: .3em;
   width: 100%;
+  line-height: 31px;
+  height: 2.7em;
+  position: absolute;
+  bottom: 0;
 
   .clear {
     clear: both;
   }
 
-  .footer-logo {
-    margin-right: 1em;
+  .footer-logo, .footer-invo-logo {
     margin-bottom: 1em;
+    padding-top: .1em;
 
     @include media($large-screen) {
-      float: left;
       margin-bottom: 0;
     }
   }
 
-  .footer-logo img {
+  .footer-invo-logo img {
     height: 1.6em;
+  }
+
+  .footer-logo {
+    margin-right: 1em;
+    float: left;
+  }
+
+  .footer-invo-logo {
+    margin-right: .5em;
+    float: right;
   }
 
   .float-right {
@@ -37,6 +50,7 @@
       width: 93%;
       margin-left: 1em;
       margin-bottom: 0;
+      padding-left: 2.5em;
     }
   }
 

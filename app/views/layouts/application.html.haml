@@ -25,11 +25,13 @@
 
 
   %body{id: controller_name, class: action_name}
-    .fixed-header
-      = render(partial: 'refills/navigation')
-      = yield(:fixed_header_section)
-      = render(partial: "shared/flashes")
+    .wrapper
+      .fixed-header
+        = render(partial: 'refills/navigation')
+        = yield(:fixed_header_section)
+        = render(partial: "shared/flashes")
 
-    = yield
+      .content
+        = yield
 
-    = render(partial: 'refills/footer_2')
+      = render(partial: 'refills/footer_2')

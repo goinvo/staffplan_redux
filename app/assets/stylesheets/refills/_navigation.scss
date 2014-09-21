@@ -139,7 +139,8 @@ header.navigation {
   }
 
   li.more > a {
-    padding-bottom: 2em;
+    padding-bottom: .9em;
+    // background-color: red;
   }
 
   li.more a {
@@ -182,7 +183,7 @@ header.navigation {
 
         @include media($horizontal-bar-mode) {
           width: 12em;
-          background-color: $navigation-background;
+          background-color: #111;
           text-align: left;
           padding-left: $navigation-submenu-padding;
         }
