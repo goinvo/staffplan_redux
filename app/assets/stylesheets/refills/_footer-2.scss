@@ -4,11 +4,12 @@
   $footer-link-color: transparentize($footer-color, .6);
   $footer-disclaimer-color: transparentize($footer-color, .6);
 
+  font-family: $sans-serif;
   background: #111;
   padding: .3em;
   width: 100%;
   line-height: 31px;
-  height: 2.7em;
+  height: 2.6em;
   position: fixed;
   bottom: 0;
 
@@ -72,7 +73,8 @@
 
   ul li {
     padding-right: 1em;
-    font-weight: 800;
+    font-family: $sans-serif;
+    font-size: em(13);
 
     @include media($large-screen) {
       display: inline;
