@@ -10,6 +10,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def after_sign_in_path_for(resource)
+    if resource.is_a?(User) && resource.companies.empty? && resource.has_pending_invites?
+        invites_path
+    else
+      super
+    end
+  end
+
   def authorized_for_admin_tools
     if @company.memberships.where(user: current_user).empty?
       not_found
@@ -31,6 +39,7 @@ class ApplicationController < ActionController::Base
 
   def check_current_user
     if current_user.blank?
+      # Flash message to let them know they need a company?
       redirect_to new_user_session_url and return
     end
   end

@@ -8,13 +8,11 @@ feature "user responds to an invite:" do
   before(:each) do
     @invite = FactoryGirl.create(:invite, email: user.email, company: company, sender: user2)
     sign_in_as(user)
-    within(".manage") do
-      click_link "Invitations"
-    end
     clear_emails
   end
 
   scenario "accepts successfully" do
+    expect(page).to have_content("Invitations")
     click_link "Accept"
 
     @invite.reload

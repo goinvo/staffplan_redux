@@ -57,4 +57,11 @@ class User < ActiveRecord::Base
   def admin_of?(company)
     self.memberships.where(company: company).first.permissions?(:admin)
   end
+
+  def has_pending_invites?
+    if Invite.where(email: email, aasm_state: :new).any?
+      return true
+    end
+    return false
+  end
 end
