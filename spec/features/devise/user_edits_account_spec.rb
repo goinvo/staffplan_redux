@@ -7,7 +7,7 @@ feature "user edits: " do
     sign_in_as(user)
 
     within(".manage") do
-      click_link "Account"
+      click_link "Profile"
     end
   end
 
