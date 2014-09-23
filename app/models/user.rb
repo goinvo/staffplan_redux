@@ -62,6 +62,5 @@ class User < ActiveRecord::Base
     if Invite.where(email: email, aasm_state: :new).any?
       return true
     end
-    return false
   end
 end
