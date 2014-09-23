@@ -39,13 +39,13 @@ class ApplicationController < ActionController::Base
 
   def check_current_user
     if current_user.blank?
-      # Flash message to let them know they need a company?
       redirect_to new_user_session_url and return
     end
   end
 
   def check_current_company
     if current_company.blank?
+       # Flash message to let them know they need a company?
       redirect_to companies_url and return
     end
   end
