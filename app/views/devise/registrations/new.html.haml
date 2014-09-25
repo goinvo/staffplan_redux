@@ -17,6 +17,9 @@
     %field
       = f.label :password_confirmation
       = f.password_field :password_confirmation, autocomplete: "off"
-      
+    %field
+      = f.label :avatar
+      = f.file_field :avatar
+
     %div= f.submit "Sign up"
   = render "devise/shared/links"

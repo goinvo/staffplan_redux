@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  mount_uploader :avatar, UserAvatarUploader
+
   devise :database_authenticatable, :registerable, :confirmable,# :lockable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 

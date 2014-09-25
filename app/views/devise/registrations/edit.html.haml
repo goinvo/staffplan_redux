@@ -23,10 +23,13 @@
       = f.label :password_confirmation
       = f.password_field :password_confirmation, autocomplete: "off"
     %field
+      = f.label :avatar
+      = f.file_field :avatar
+    %field
       = f.label :current_password
       %i (we need your current password to confirm your changes)
       = f.password_field :current_password, autocomplete: "off"
-      
+
     %div= f.submit "Update"
   %h3 Cancel my account
   %p
