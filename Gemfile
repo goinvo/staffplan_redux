@@ -20,6 +20,7 @@ gem 'figaro'
 gem 'devise'
 gem 'aasm'
 gem 'carrierwave'
+gem 'fog'
 
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',      group: :development
@@ -47,6 +48,7 @@ group :development do
   gem 'quiet_assets'
   gem 'binding_of_caller'
   gem 'better_errors'
+  gem 'dotenv-rails'
 end
 
 group :production do
