@@ -1,6 +1,6 @@
 class StaffplanListSerializer < ActiveModel::Serializer
   self.root = false
-  attributes :id, :gravatar_url, :staffplan_url, :full_name, :email, :work_weeks, :estimated_total, :actual_total, :diff, :upcoming_estimated_hours
+  attributes :id, :avatar_url, :staffplan_url, :full_name, :email, :work_weeks, :estimated_total, :actual_total, :diff, :upcoming_estimated_hours
 
   def full_name
     "#{object.first_name} #{object.last_name}"
@@ -10,8 +10,16 @@ class StaffplanListSerializer < ActiveModel::Serializer
     staffplans_path(object)
   end
 
+  def avatar_url
+    if !object.avatar.blank?
+      "#{object.avatar}"
+    else
+      gravatar_url
+    end
+  end
+
   def gravatar_url
-    "https://secure.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}"
+    "//secure.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}"
   end
 
   def upcoming_estimated_hours
