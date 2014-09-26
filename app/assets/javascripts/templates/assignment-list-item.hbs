@@ -1,6 +1,9 @@
 <div class="assignment-info single-flexible-column wide">
   <div class="client-name">
-    <a data-bind="text: assignment.client_name, attr: { href: clientURL, name: assignment.client_name }"></a>
+    <span data-bind="if: firstClientInSection($parent.assignments)">
+      <a data-bind="text: assignment.client_name, attr: { href: clientURL, name: assignment.client_name }"></a>
+      <a href="#" data-bind="click: addClientProject">add</a>
+    </span>
   </div>
   <div class="project-name">
     <a data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>

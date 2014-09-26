@@ -11,6 +11,11 @@
   .list-header
     .single-flexible-column.wide
       %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
+      %div
+        .client-name
+          Client
+          %a{href: "#", data: {bind: "click: addClientSection"}} add
+        .project-name Project
 
     .date-range-columns.width-filling-container{data: {bind: "foreach: weekRange"}}
       %date-range-column-header{params: "week: $data"}
@@ -19,7 +24,7 @@
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
 %ul.assignment-list.flexible-list{data: {bind: "foreach: assignments"}}
-  %li.assignment{data: {bind: 'component: {name: "assignment-list-item", params: {assignment: $data, weekRange: $parent.weekRange}}'}}
+  %li.assignment{data: {bind: 'component: {name: "assignment-list-item", params: {assignment: $data, weekRange: $parent.weekRange, assignmentIndex: $parent.assignmentIndex($data)}}'}}
 
 %script{type: "application/json", id: "assignments"}
   = ActiveModel::ArraySerializer.new(@user_projects, each_serializer: UserProjectsViewSerializer).to_json.html_safe

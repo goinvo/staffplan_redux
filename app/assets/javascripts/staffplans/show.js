@@ -33,6 +33,14 @@ window.StaffPlanShow = (function(window, document, $) {
   }
 
   _.extend(StaffPlanShow.prototype, {
+    assignmentIndex: function(assignment) {
+      return _.select(
+        this.assignments(),
+        function(_assignment) {
+          return _assignment.client_id == assignment.client_id
+        }
+      ).indexOf(assignment);
+    },
     // calculates the range of beginning_of_weeks we should be show
     calculateWorkWeekRange: function(startParam, count) {
       var count = this.getColumnCount()
