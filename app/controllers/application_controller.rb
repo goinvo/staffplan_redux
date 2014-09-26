@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    if resource.is_a?(User) && resource.companies.empty? && resource.has_pending_invites?
+    if resource.is_a?(User) && resource.companies.empty? && resource.pending_invites.any?
         invites_path
     else
       super
@@ -45,7 +45,6 @@ class ApplicationController < ActionController::Base
 
   def check_current_company
     if current_company.blank?
-       # Flash message to let them know they need a company?
       redirect_to companies_url and return
     end
   end

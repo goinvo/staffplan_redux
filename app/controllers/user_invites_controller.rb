@@ -2,11 +2,11 @@ class UserInvitesController < ApplicationController
   skip_before_filter :check_current_company
 
   def index
-    @invites = Invite.where(email: current_user.email)
+    @invites = current_user.pending_invites
   end
 
   def accept
-    @invite = Invite.find(params[:id]) if Invite.find(params[:id]).email == current_user.email
+    @invite = current_user.pending_invites.find(params[:id])
     @membership = @invite.company.memberships.build(user: current_user)
     @invite.accept
 
@@ -28,7 +28,7 @@ class UserInvitesController < ApplicationController
   end
 
   def decline
-    @invite = Invite.find(params[:id]) if Invite.find(params[:id]).email == current_user.email
+    @invite = current_user.pending_invites.find(params[:id])
     @invite.decline
     if @invite.save
       @invite.send_response_email(current_user)
