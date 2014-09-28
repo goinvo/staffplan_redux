@@ -21,10 +21,16 @@
 
 // navigation
 @import 'refills/navigation';
+@import 'refills/footer-2';
 
 body {
   margin: em(0);
   padding: em(0);
+  height: 100%;
+}
+
+.content {
+  padding-bottom: 2.6em;
 }
 
 @import 'mixins';

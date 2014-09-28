@@ -30,4 +30,7 @@
       = yield(:fixed_header_section)
       = render(partial: "shared/flashes")
 
-    = yield
+    .content
+      = yield
+
+    = render(partial: 'refills/footer_2')
