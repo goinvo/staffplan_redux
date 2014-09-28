@@ -1,6 +1,7 @@
 var AssignmentsListItem = function(params) {
   this.assignment = params.assignment;
   this.weekRange = params.weekRange;
+  this.overallIndex = params.overallIndex;
   this.assignmentIndex = params.assignmentIndex;
 
   this.projectURL = "/projects/" + this.assignment.project_id;
@@ -50,9 +51,16 @@ var AssignmentsListItem = function(params) {
   this.visibleWorkWeeks.extend({rateLimit: 25});
 
   this.firstClientInSection = function() {
-    return this.assignmentIndex === 0;
-  },
+    return;
+  };
 
+  this.newAssignment = function() {
+    return _.isEmpty(this.assignment.project_name);
+  }
+
+  this.addClientProject = function(foo, bar, baz, lol) {
+    return;
+  };
 }
 
 ko.components.register("assignment-list-item", {

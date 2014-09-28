@@ -1,0 +1,10 @@
+<div class="client-info">
+  <div class="client-name">
+    <span data-bind="text: clientName"></span>
+    <input type="text" data-bind="visible: isNewClient()" name="assignment[client_name]" />
+    <a href="#" data-bind="click: addClientProject">add</a>
+  </div>
+</div>
+<ul data-bind="foreach: {data: assignments, as: 'assignment'}">
+  <li class="assignment box" data-bind="component: {name: 'assignment-list-item', params: {assignment: assignment, weekRange: $parent.weekRange}}"></li>
+</ul>

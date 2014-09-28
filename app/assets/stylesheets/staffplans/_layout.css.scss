@@ -16,7 +16,7 @@
   }
 }
 
-ul.flexible-list li {
+ul.flexible-list li.box {
   @include flexible-list;
   font-size: em(14);
 

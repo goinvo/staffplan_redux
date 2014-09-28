@@ -1,12 +1,13 @@
 - content_for(:javascript) do
   :javascript
     $(function() {
-      ko.applyBindings(new StaffPlanShow())
+      window.viewModel = new StaffPlanView()
+      ko.applyBindings(viewModel)
     });
 
 - content_for(:fixed_header_section) do
   %ul.flexible-list.aggregate-chart
-    %li.user{data: {bind: 'component: {name: "user-aggregate-chart", params: {user: userData, weekRange: weekRange, showAssignmentTotals: false, wide: true}}'}}}
+    %li.user.box{data: {bind: 'component: {name: "user-aggregate-chart", params: {user: userData, weekRange: weekRange, showAssignmentTotals: false, wide: true}}'}}}
 
   .list-header
     .single-flexible-column.wide
@@ -23,8 +24,8 @@
     .assignment-totals
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
-%ul.assignment-list.flexible-list{data: {bind: "foreach: assignments"}}
-  %li.assignment{data: {bind: 'component: {name: "assignment-list-item", params: {assignment: $data, weekRange: $parent.weekRange, assignmentIndex: $parent.assignmentIndex($data)}}'}}
+%ul.client-list.flexible-list{data: {bind: "foreach: clients"}}
+  %li.client{data: {bind: 'component: {name: "client-list-item", params: {client: $data, weekRange: $parent.weekRange}}'}}
 
 %script{type: "application/json", id: "assignments"}
   = ActiveModel::ArraySerializer.new(@user_projects, each_serializer: UserProjectsViewSerializer).to_json.html_safe

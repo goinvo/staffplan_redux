@@ -13,7 +13,7 @@
     @include fixed-header;
   }
 
-  .assignment-list {
+  .client-list {
     padding-top: em(190);
   }
 
@@ -36,5 +36,17 @@
   .project-name, .client-name {
     width: em(140);
     display: inline-block;
+  }
+
+  .client-info {
+    width: 100%;
+    height: 50px;
+    background-color: rgba(0,0,0,0.2)
+  }
+
+  li {
+    &.client {
+      width: 100%
+    }
   }
 }
