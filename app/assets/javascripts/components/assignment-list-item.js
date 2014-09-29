@@ -51,10 +51,6 @@ var AssignmentsListItem = function(params) {
 
   this.visibleWorkWeeks.extend({rateLimit: 25});
 
-  this.firstClientInSection = function() {
-    return;
-  };
-
   this.newAssignment = function() {
     return this.assignment.id == null;
   }
