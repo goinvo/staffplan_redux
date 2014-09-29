@@ -11,8 +11,10 @@
     <input type="text" placeholder="Project Name" data-bind="visible: newAssignment()" name="assignment[project_name]" />
   </div>
 </div>
-<div class="work-weeks width-filling-container" data-bind="foreach: visibleWorkWeeks">
+<div class="work-weeks width-filling-container" data-bind="ifnot: newAssignment()">
+  <!-- ko foreach: visibleWorkWeeks -->
   <assignment-work-week params="work_week: $data"></assignment-work-week>
+  <!-- /ko -->
 </div>
 <div class="assignment-totals">
   <div data-bind="text: assignment.estimated_total"></div>
