@@ -17,7 +17,7 @@ _.extend(Client.prototype, {
     this.assignments.push(
       new Assignment(
         _.pick(attributes,
-          "actual_total", "assignment_id", "diff", "estimated_total", "is_active",
+          "actual_total", "assignment_id", "diff", "estimated_total", "is_active", "client_name",
           "is_archived", "is_proposed", "project_id", "project_name", "work_weeks"
         )
       )

@@ -18,7 +18,7 @@ function StaffPlanView() {
 
   _.each(assignmentData, function(assignmentRecord) {
     var client = _.find(self.clients(), function(client) { return client.id === assignmentRecord.client_id; });
-
+    
     if(_.isUndefined(client)) {
       self.clients.push(new Client(assignmentRecord));
     } else {

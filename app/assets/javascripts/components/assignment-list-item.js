@@ -1,5 +1,6 @@
 var AssignmentsListItem = function(params) {
   this.assignment = params.assignment;
+  this.client = params.clientListItem.client;
   this.weekRange = params.weekRange;
   this.overallIndex = params.overallIndex;
   this.assignmentIndex = params.assignmentIndex;
@@ -55,11 +56,11 @@ var AssignmentsListItem = function(params) {
   };
 
   this.newAssignment = function() {
-    return _.isEmpty(this.assignment.project_name);
+    return this.assignment.id == null;
   }
 
-  this.addClientProject = function(foo, bar, baz, lol) {
-    return;
+  this.addClientProject = function(assignment, event) {
+    this.client.addAssignmentRecord({})
   };
 }
 

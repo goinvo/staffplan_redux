@@ -16,7 +16,11 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :companies, :through => :memberships
   has_many :staffplans_list_views, class_name: "StaffplansListView"
-  has_many :user_projects, class_name: "UserProjectsView"
+  has_many :user_projects, class_name: "UserProjectsView" do
+    def for_company(company)
+      where(company_id: company.id)
+    end
+  end
   has_many :invites, as: :sender
 
   after_update do |user|

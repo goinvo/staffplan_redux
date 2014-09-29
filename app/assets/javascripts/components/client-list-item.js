@@ -10,7 +10,7 @@ _.extend(ClientListItem.prototype, {
     return this.client.id == null;
   },
   addClientProject: function(client, event) {
-    return
+    debugger
   }
 })
 

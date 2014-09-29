@@ -3,7 +3,8 @@ function Assignment(attributes) {
 
   if (attributes !== null && _.isPlainObject(attributes)) {
     self.actual_total = attributes.actual_total || 0;
-    self.assignment_id = attributes.assignment_id;
+    self.id = attributes.assignment_id;
+    self.clientName = attributes.client_name;
     self.diff = attributes.diff;
     self.estimated_total = attributes.estimated_total || 0;
     self.is_active = attributes.is_active || true;

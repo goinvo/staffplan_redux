@@ -1,10 +1,14 @@
 <div class="assignment-info single-flexible-column wide">
   <div class="client-name">
-    &nbsp;
+    <span data-bind="if: $index() == 0">
+      <span data-bind="text: $parent.clientName"></span>
+      <a href="#" data-bind="ifnot: newAssignment(), click: addClientProject">add</a>
+      <input type="text" placeholder="Client Name" data-bind="visible: newAssignment()" name="assignment[client_name]" />
+    </span>
   </div>
   <div class="project-name">
     <a data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
-    <input type="text" data-bind="visible: newAssignment()" name="assignment[project_name]" />
+    <input type="text" placeholder="Project Name" data-bind="visible: newAssignment()" name="assignment[project_name]" />
   </div>
 </div>
 <div class="work-weeks width-filling-container" data-bind="foreach: visibleWorkWeeks">
