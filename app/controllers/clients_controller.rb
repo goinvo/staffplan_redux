@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   def index
-    @clients = current_user.current_company.clients
+    @clients = current_user.current_company.clients.order('name asc')
   end
 
   def show

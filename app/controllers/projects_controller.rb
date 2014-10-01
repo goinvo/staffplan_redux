@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = current_user.current_company.projects
+    @projects = current_user.current_company.projects.order('name asc')
   end
 
   def show

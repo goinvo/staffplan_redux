@@ -6,7 +6,7 @@ feature "user cancels account" do
     sign_in_as(user)
 
     within(".manage") do
-      click_link "Account"
+      click_link "Profile"
     end
 
     click_button "Cancel my account"

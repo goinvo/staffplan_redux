@@ -12,6 +12,8 @@ header.navigation {
   $navigation-active-link-color: transparentize(white, 0.5);
   $navigation-submenu-padding: 1em;
   $horizontal-bar-mode: $large-screen;
+  @include linear-gradient(#444, #111);
+  @include box-shadow(0 0 6px 3px #000);
 
   background-color: $navigation-background;
   border-bottom: 1px solid darken($navigation-background, 10);
@@ -136,16 +138,19 @@ header.navigation {
   }
 
   li.more > a {
-    padding-bottom: 2em;
+    padding-bottom: .9em;
   }
 
   li.more a {
     padding-right: .8em;
+
   }
 
   .submenu {
     display: none;
+    background-color: #111;
 
+    @include box-shadow(0 0 6px 3px #000);
     @include media($horizontal-bar-mode) {
       position: absolute;
       top: 2em;
@@ -159,25 +164,21 @@ header.navigation {
       @include media($horizontal-bar-mode) {
         line-height: $navigation-height /1.3;
 
-        &:first-child a {
-          padding-top: 1em;
-        }
         &:last-child a {
           border-bottom-left-radius: $base-border-radius;
           border-bottom-right-radius: $base-border-radius;
-          padding-bottom: .7em;
         }
       }
 
       a {
         text-align: right;
-        background-color: darken($navigation-background, 3);
+        background-color: darken($navigation-background, 6);
         width: 100%;
         display: inline-block;
 
         @include media($horizontal-bar-mode) {
           width: 12em;
-          background-color: $navigation-background;
+          background-color: #111;
           text-align: left;
           padding-left: $navigation-submenu-padding;
         }

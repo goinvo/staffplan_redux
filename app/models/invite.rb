@@ -35,11 +35,11 @@ class Invite < ActiveRecord::Base
     InviteEmails.response_email(current_user, self).deliver
   end
 
-  def email_invitation(current_user)
+  def email_invitation
     if User.exists?(email: email)
-      InviteEmails.existing_user_invite(email, current_user).deliver
+      InviteEmails.existing_user_invite(self).deliver
     else
-      InviteEmails.new_user_invite(email, current_user).deliver
+      InviteEmails.new_user_invite(self).deliver
     end
   end
 end
