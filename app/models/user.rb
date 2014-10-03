@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :companies, :through => :memberships
   has_many :staffplans_list_views, class_name: "StaffplansListView"
   has_many :user_projects, class_name: "UserProjectsView"
-  has_many :invites, as: :sender
+  has_many :sent_invitations, foreign_key: 'sender', class_name: "Invite"
 
   after_update do |user|
     terminator = user.versions.last.try(:terminator)
@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
     self.memberships.where(company: company).first.permissions?(:admin)
   end
 
-  def pending_invites
-    Invite.where(email: email).pending
+  def received_invitations
+    Invite.where(email: email)
   end
 end

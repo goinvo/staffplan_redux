@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    if resource.is_a?(User) && resource.companies.empty? && resource.pending_invites.any?
+    if resource.is_a?(User) && resource.companies.empty? && resource.received_invitations.pending.any?
         invites_path
     else
       super
