@@ -1,4 +1,6 @@
 class ClientsController < ApplicationController
+  before_filter :check_if_disabled
+
   def index
     @clients = current_user.current_company.clients.order('name asc')
   end

@@ -1,5 +1,6 @@
 class InvitesController < ApplicationController
   before_filter :set_company
+  before_filter :check_if_disabled
   before_filter :authorized_for_admin_tools
 
   def index

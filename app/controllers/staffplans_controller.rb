@@ -1,4 +1,6 @@
 class StaffplansController < ApplicationController
+  before_filter :check_if_disabled
+
   def index
     @users = current_company.active_users.includes(:memberships, :staffplans_list_views).to_a
   end

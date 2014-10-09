@@ -1,4 +1,6 @@
 class AssignmentsController < ApplicationController
+  before_filter :check_if_disabled
+
   def index
     @assignments = current_user.current_company.assignments
   end

@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :check_if_disabled
+
   def index
     @projects = current_user.current_company.projects.order('name asc')
   end

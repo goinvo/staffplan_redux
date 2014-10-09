@@ -10,6 +10,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def check_if_disabled
+    if Membership.find_by(user: current_user, company: current_user.current_company).disabled?
+      not_found
+    end
+  end
+
   def authorized_for_admin_tools
     if @company.memberships.where(user: current_user).empty?
       not_found
