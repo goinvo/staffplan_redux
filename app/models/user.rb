@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def selectable_companies
-    Company.where(id: memberships.where(disabled: false).select("memberships.company_id").pluck(:id))
+    Company.where(id: memberships.active.select("memberships.company_id").pluck(:id))
   end
 
   def admin_of?(company)

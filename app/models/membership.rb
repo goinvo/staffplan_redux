@@ -1,4 +1,6 @@
 class Membership < ActiveRecord::Base
+  include AASM
+
   belongs_to :user
   belongs_to :company
 
@@ -9,6 +11,24 @@ class Membership < ActiveRecord::Base
 
   bitmask :roles, :as => [:admin, :employee, :contractor, :financials], :null => false
   bitmask :permissions, :as => [:admin, :financials], :null => false
+
+  aasm do
+    state :active, initial: true
+    state :disabled
+    state :archived
+
+    event :disable do
+      transitions from: [:active, :archived], to: :disabled
+    end
+
+    event :archive do
+      transitions from: [:active, :disabled], to: :archived
+    end
+
+    event :activate do
+      transitions from: [:archived, :disabled], to: :active
+    end
+  end
 
   def permissions=(perms)
     unless perms.nil?
