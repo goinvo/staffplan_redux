@@ -219,15 +219,14 @@ CREATE TABLE memberships (
     id integer NOT NULL,
     user_id integer,
     company_id integer,
-    disabled boolean DEFAULT false NOT NULL,
-    archived boolean DEFAULT false NOT NULL,
     salary numeric(12,2),
     rate numeric(10,2),
     full_time_equivalent numeric(12,2),
     payment_frequency character varying(255),
     weekly_allocation integer,
     employment_status character varying(255) DEFAULT 'fte'::character varying NOT NULL,
-    permissions integer DEFAULT 0 NOT NULL
+    permissions integer DEFAULT 0 NOT NULL,
+    aasm_state character varying(255) DEFAULT 'active'::character varying NOT NULL
 );
 
 
@@ -783,4 +782,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140809143726');
 INSERT INTO schema_migrations (version) VALUES ('20140809143818');
 
 INSERT INTO schema_migrations (version) VALUES ('20140828171709');
+
+INSERT INTO schema_migrations (version) VALUES ('20141009011131');
 
