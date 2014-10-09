@@ -17,7 +17,8 @@ class User < ActiveRecord::Base
   has_many :companies, :through => :memberships
   has_many :staffplans_list_views, class_name: "StaffplansListView"
   has_many :user_projects, class_name: "UserProjectsView"
-  has_many :sent_invitations, foreign_key: 'sender', class_name: "Invite"
+  has_many :sent_invitations, foreign_key: "sender", class_name: "Invite"
+  has_many :received_invitations, foreign_key: "email", primary_key: "email", class_name: "Invite"
 
   after_update do |user|
     terminator = user.versions.last.try(:terminator)
@@ -56,9 +57,5 @@ class User < ActiveRecord::Base
 
   def admin_of?(company)
     self.memberships.where(company: company).first.permissions?(:admin)
-  end
-
-  def received_invitations
-    Invite.where(email: email)
   end
 end
