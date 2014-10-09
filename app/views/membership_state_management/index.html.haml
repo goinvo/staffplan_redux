@@ -1,0 +1,18 @@
+%h1= "Manage Employees for #{@company.name}"
+
+%table
+  %tr
+    %th Name
+    %th Status
+    %th{colspan: 2} Update Status
+
+  - @memberships.each do |membership|
+    %tr
+      %td= "#{membership.user.last_name}, #{membership.user.first_name}"
+      %td= membership.aasm.current_state.to_s.capitalize
+      -if membership.aasm.current_state != :active
+        %td= link_to "Activate", activate_membership_path(membership), method: :put
+      -if membership.aasm.current_state != :disabled
+        %td= link_to "Disable", disable_membership_path(membership), method: :put
+      -if membership.aasm.current_state != :archived
+        %td= link_to "Archive", archive_membership_path(membership), method: :put

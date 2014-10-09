@@ -9,6 +9,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :memberships, only: :index, controller: 'membership_state_management' do
+    member do
+      put :activate
+      put :disable
+      put :archive
+    end
+  end
+
   resources :staffplans
 
   resources :companies do
