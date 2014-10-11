@@ -22,6 +22,8 @@ class Invite < ActiveRecord::Base
   validates :email, uniqueness: { scope: "company_id", message: "This invite already exists." }
   validate :employee_doesnt_exist_already, if: Proc.new { |i| i.company.present? }
 
+  scope :pending, -> { where(aasm_state: :new) }
+
   def employee_doesnt_exist_already
     company.memberships.each do |membership|
       next if membership.new_record?

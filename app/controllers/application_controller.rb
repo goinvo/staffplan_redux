@@ -10,6 +10,14 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def after_sign_in_path_for(resource)
+    if resource.is_a?(User) && resource.companies.empty? && resource.received_invitations.pending.any?
+        invites_path
+    else
+      super
+    end
+  end
+
   def authorized_for_admin_tools
     if @company.memberships.where(user: current_user).empty?
       not_found
