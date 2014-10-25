@@ -4,8 +4,8 @@ $(function() {
       $(this).slideUp('fast');
     });
   }, 5000);
-  
-  $('a.close').click(function() {
+
+  $(document.body).delegate('a.close', 'click', function() {
     $(this).closest('.flash').slideUp('fast')
   });
 })

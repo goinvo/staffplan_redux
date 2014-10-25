@@ -19,6 +19,11 @@ class User < ActiveRecord::Base
   has_many :user_projects, class_name: "UserProjectsView"
   has_many :sent_invitations, foreign_key: "sender", class_name: "Invite"
   has_many :received_invitations, foreign_key: "email", primary_key: "email", class_name: "Invite"
+  has_many :user_projects, class_name: "UserProjectsView" do
+    def for_company(company)
+      where(company_id: company.id)
+    end
+  end
 
   after_update do |user|
     terminator = user.versions.last.try(:terminator)

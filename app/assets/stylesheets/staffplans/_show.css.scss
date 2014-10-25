@@ -1,6 +1,8 @@
 @import "staffplans/mixins";
 
 #staffplans.show {
+  @import "staffplans/forms";
+  
   .gravatar {
     width: 75px;
     border-radius: 3px;
@@ -13,8 +15,8 @@
     @include fixed-header;
   }
 
-  .assignment-list {
-    padding-top: em(190);
+  .client-list {
+    padding-top: 174px;
   }
 
   .aggregate-chart {
@@ -36,5 +38,22 @@
   .project-name, .client-name {
     width: em(140);
     display: inline-block;
+  }
+
+  .client-info {
+    width: 100%;
+    height: 25px;
+    border-bottom: 2px dashed rgba(0,0,0,0.1);
+  }
+
+  li {
+    &.client {
+      width: 100%
+    }
+
+    &.assignment {
+      height: 80px;
+      padding: em(10) 0;
+    }
   }
 }

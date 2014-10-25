@@ -28,9 +28,9 @@
     .fixed-header
       = render(partial: 'refills/navigation')
       = yield(:fixed_header_section)
-      = render(partial: "shared/flashes")
 
     .content
       = yield
 
+    = render(partial: "shared/flashes")
     = render(partial: 'refills/footer_2')

@@ -3,3 +3,4 @@ asset 'jquery-ujs'
 asset 'lodash'
 asset 'knockoutjs', "3.2.0"
 asset 'moment'
+asset 'devbridge-autocomplete'

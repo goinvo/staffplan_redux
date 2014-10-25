@@ -71,7 +71,7 @@ CREATE VIEW assignment_totals_view AS
     sum(work_weeks.actual_hours) AS actual_total,
     (sum(work_weeks.actual_hours) - sum(work_weeks.estimated_hours)) AS diff
    FROM (assignments
-   JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)))
+     JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)))
   GROUP BY assignments.id, work_weeks.assignment_id;
 
 
@@ -81,8 +81,9 @@ CREATE VIEW assignment_totals_view AS
 
 CREATE VIEW assignment_work_weeks_view AS
  SELECT assignments.id AS assignment_id,
-    assignments.proposed AS is_proposed,
-    assignments.archived AS is_archived,
+    assignments.user_id,
+    assignments.proposed AS assignment_proposed,
+    assignments.archived AS assigment_archived,
     work_weeks.id AS work_week_id,
     work_weeks.estimated_hours,
     work_weeks.actual_hours,
@@ -90,7 +91,7 @@ CREATE VIEW assignment_work_weeks_view AS
     work_weeks.year,
     work_weeks.beginning_of_week
    FROM (assignments
-   JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)));
+     JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)));
 
 
 --
@@ -385,16 +386,16 @@ CREATE VIEW user_projects_view AS
     projects.id AS project_id,
     projects.company_id,
     assignments.id AS assignment_id,
-    assignments.proposed AS is_proposed,
-    assignments.archived AS is_archived,
+    assignments.proposed AS assignment_proposed,
+    assignments.archived AS assigment_archived,
     clients.id AS client_id,
     clients.name AS client_name,
     projects.name AS project_name,
-    projects.active AS is_active
+    projects.active AS project_active
    FROM (((users
-   JOIN assignments ON ((assignments.user_id = users.id)))
-   JOIN projects ON ((assignments.project_id = projects.id)))
-   JOIN clients ON ((projects.client_id = clients.id)))
+     JOIN assignments ON ((assignments.user_id = users.id)))
+     JOIN projects ON ((assignments.project_id = projects.id)))
+     JOIN clients ON ((projects.client_id = clients.id)))
   ORDER BY users.id, clients.name DESC;
 
 
@@ -691,8 +692,8 @@ CREATE RULE "_RETURN" AS
     sum(work_weeks.actual_hours) AS actual_total,
     (sum(work_weeks.actual_hours) - sum(work_weeks.estimated_hours)) AS diff
    FROM ((users
-   JOIN assignments ON ((assignments.user_id = users.id)))
-   JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)))
+     JOIN assignments ON ((assignments.user_id = users.id)))
+     JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)))
   GROUP BY users.id, assignments.id, work_weeks.beginning_of_week, work_weeks.cweek, work_weeks.year;
 
 
@@ -772,6 +773,10 @@ INSERT INTO schema_migrations (version) VALUES ('20130221193221');
 
 INSERT INTO schema_migrations (version) VALUES ('20130227192027');
 
+INSERT INTO schema_migrations (version) VALUES ('20140809143355');
+
+INSERT INTO schema_migrations (version) VALUES ('20140809143356');
+
 INSERT INTO schema_migrations (version) VALUES ('20140809143357');
 
 INSERT INTO schema_migrations (version) VALUES ('20140809143536');
@@ -779,8 +784,4 @@ INSERT INTO schema_migrations (version) VALUES ('20140809143536');
 INSERT INTO schema_migrations (version) VALUES ('20140809143639');
 
 INSERT INTO schema_migrations (version) VALUES ('20140809143726');
-
-INSERT INTO schema_migrations (version) VALUES ('20140809143818');
-
-INSERT INTO schema_migrations (version) VALUES ('20140828171709');
 

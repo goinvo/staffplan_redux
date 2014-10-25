@@ -5,7 +5,8 @@
 //= require handlebars.runtime
 //= require knockoutjs/dist/knockout.debug
 //= require_tree ./templates
-//= require_tree ./staffplans
+//= require_tree ./models
+//= require_tree ./views
 //= require_tree ./components
 //= require shared/flashes
 //= require_self

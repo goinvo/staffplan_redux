@@ -4,8 +4,9 @@ class CreateAssignmentWorkWeeksView < ActiveRecord::Migration
       CREATE OR REPLACE VIEW assignment_work_weeks_view AS
         SELECT
           assignments.id AS assignment_id,
-          assignments.proposed AS is_proposed,
-          assignments.archived AS is_archived,
+          assignments.user_id AS user_id,
+          assignments.proposed AS assignment_proposed,
+          assignments.archived AS assigment_archived,
           work_weeks.id AS work_week_id,
           work_weeks.estimated_hours AS estimated_hours,
           work_weeks.actual_hours AS actual_hours,
@@ -16,7 +17,7 @@ class CreateAssignmentWorkWeeksView < ActiveRecord::Migration
         INNER JOIN work_weeks ON work_weeks.assignment_id = assignments.id
     }
   end
-  
+
   def down
     execute "DROP VIEW assignment_work_weeks_view;"
   end
