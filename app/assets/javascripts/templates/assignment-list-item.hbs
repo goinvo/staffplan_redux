@@ -1,14 +1,34 @@
 <div class="assignment-info single-flexible-column wide">
+  <!-- client name -->
   <div class="client-name">
-    <span data-bind="if: $index() == 0">
-      <span data-bind="text: $parent.clientName"></span>
+    <!-- only show client name for the first assignment -->
+    <span data-bind="if: (!newAssignment() && $index() == 0)">
+      <span data-bind="text: $parent.attributes.client_name"></span>
+      <!-- don't show an add link for new assignments. saving may fail and flicker this temporarily -->
       <a href="#" data-bind="ifnot: newAssignment(), click: addClientProject">add</a>
-      <input type="text" placeholder="Client Name" data-bind="visible: newAssignment()" name="assignment[client_name]" />
     </span>
+    <!-- client name input. show for net-new client-list-item components -->
+    <input type="text"
+           placeholder="Client Name"
+           data-bind="visible: (newAssignment() && $index() == 0), value: assignment.attributes.client_name, event: {keyup: onKeyUp}"
+           name="assignment[client_name]" />
   </div>
+  <!-- project name -->
   <div class="project-name">
-    <a data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
-    <input type="text" placeholder="Project Name" data-bind="visible: newAssignment()" name="assignment[project_name]" />
+    <!-- link to the project plan -->
+    
+    <!-- ko ifnot: newAssignment() -->
+    <a data-bind="text: assignment.attributes.project_name, attr: { href: projectURL }"></a>
+    <!-- /ko -->
+
+    <!-- project name input for new assignments -->
+    <!-- ko if: newAssignment() -->
+      <input type="text"
+             placeholder="Project Name"
+             name="assignment[project_name]"
+             data-bind="value: assignment.attributes.project_name, event: {keyup: onKeyUp}" />
+      <input type="submit" value="Save" class='display-none' />
+    <!-- /ko -->
   </div>
 </div>
 <div class="work-weeks width-filling-container" data-bind="ifnot: newAssignment()">

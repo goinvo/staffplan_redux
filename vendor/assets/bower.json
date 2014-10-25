@@ -6,6 +6,6 @@
     "lodash": "latest",
     "knockoutjs": "3.2.0",
     "moment": "latest",
-    "animate.css": "latest"
+    "devbridge-autocomplete": "latest"
   }
 }

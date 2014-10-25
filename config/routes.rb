@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :assignments, only: [:new, :create]
   end
 
+  resources :assignments, only: [:create, :update]
+
   resources :current_companies, only: :update
 
   root 'staffplans#index'

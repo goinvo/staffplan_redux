@@ -1,34 +1,16 @@
 class AssignmentsController < ApplicationController
-  def index
-    @assignments = current_user.current_company.assignments
-  end
 
-  def show
-    @assignment = current_user.current_company.assignments.find(params[:id])
-  end
-
-  def new
-    @employees = current_user.current_company.active_users
-    @projects = current_user.current_company.projects
-    @project = @projects.find(params[:project_id])
-    @assignment = Assignment.new
-  end
+  respond_to :json
 
   def create
-    @assignment = Assignment.new(assignment_params)
-    @assignment.project = current_user.current_company.projects.find(params[:project_id])
+    find_or_initialize_client_by_name
+    find_or_initialize_project_by_name
 
-    if @assignment.save
-      flash[:notice] = "The assignment was created successfully"
-      redirect_to project_path(@assignment.project)
-    else
-      flash.now[:notice] = "Couldn't create the assignment"
-      render :new
-    end
-  end
+    @assignment = @project.assignments.build(assignment_params)
+    @client.projects << @project
+    @client.save
 
-  def edit
-    @assignment = current_user.current_company.assignments.find(params[:id])
+    respond_with(@assignment)
   end
 
   def update
@@ -43,17 +25,59 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  def destroy
-    @assignment = current_user.current_company.assignments.find(params[:id])
-
-    @assignment.destroy
-    flash[:notice] = "The assignment was deleted"
-    redirect_to assignments_path
-  end
-
   private
 
   def assignment_params
-    params.require(:assignment).permit(:user_id, :project_id, :proposed)
+    params.require(:assignment).permit(:user_id, :project_id, :assignment_archived, :assignment_proposed)
+  end
+
+  def client_params
+    params.require(:assignment).permit(:client_name)
+  end
+
+  def project_params
+    params.require(:assignment).permit(:project_name)
+  end
+
+  def find_client_by_client_id
+    @client = current_user.current_company.clients.where(id: params[:assignment][:client_id]).first
+  end
+
+  def find_client_by_client_name
+    @client = current_user.current_company.clients.where(name: params[:assignment][:client_name]).first
+  end
+
+  def find_or_initialize_client_by_name
+    # TODO: create a slug of client's name to use as a unique lookup.
+    find_client_by_client_id
+
+    if @client.nil?
+      find_client_by_client_name
+    end
+
+    if @client.nil?
+      @client = current_user.current_company.clients.build(name: client_params[:client_name])
+    end
+  end
+
+  def find_project_by_project_id
+    @project = current_user.current_company.projects.where(id: params[:assignment][:project_id]).first
+  end
+
+  def find_project_by_project_name
+    @project = current_user.current_company.projects.where(name: params[:assignment][:project_name]).first
+  end
+
+  def find_or_initialize_project_by_name
+    # TODO: create a slug of project's name to use as a unique lookup.
+    find_project_by_project_id
+
+    if @project.nil?
+      find_project_by_project_name
+    end
+
+    if @project.nil?
+      @project = current_user.current_company.projects.build(name: project_params[:project_name])
+    end
   end
 end

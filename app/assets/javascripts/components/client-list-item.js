@@ -1,6 +1,6 @@
 var ClientListItem = function(data) {
   var client = this.client = data.client;
-  this.clientName = client.client_name();
+  this.client_name = client.client_name();
   this.assignments = client.assignments;
   this.weekRange = data.weekRange;
 }
@@ -8,9 +8,6 @@ var ClientListItem = function(data) {
 _.extend(ClientListItem.prototype, {
   isNewClient: function() {
     return this.client.id == null;
-  },
-  addClientProject: function(client, event) {
-    debugger
   }
 })
 

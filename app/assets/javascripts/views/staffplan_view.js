@@ -12,13 +12,11 @@ function StaffPlanView() {
   self.calculateWorkWeekRange();
 
   self.clients = ko.observableArray();
-
-  self.assignments = ko.observableArray();
-  self.assignments.extend({rateLimit: 25});
+  self.clients.extend({rateLimit: 25});
 
   _.each(assignmentData, function(assignmentRecord) {
     var client = _.find(self.clients(), function(client) { return client.id === assignmentRecord.client_id; });
-    
+
     if(_.isUndefined(client)) {
       self.clients.push(new Client(assignmentRecord));
     } else {
@@ -46,15 +44,10 @@ function StaffPlanView() {
 
 _.extend(StaffPlanView.prototype, {
   addClientSection: function(viewModel, event) {
-    this.clients.push(new Client());
-  },
-  assignmentIndex: function(assignment) {
-    return _.findIndex(
-      this.assignments(),
-      function(_assignment) {
-        return _assignment.client_id == assignment.client_id
-      }
-    );
+    this.clients.push(new Client({
+      diff: 0,
+      user_id: this.userData.id }
+    ));
   },
 
   // calculates the range of beginning_of_weeks we should be show

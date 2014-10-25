@@ -7,4 +7,7 @@ class Assignment < ActiveRecord::Base
 
   validates_uniqueness_of :project_id, scope: :user_id, unless: Proc.new { |model| model.user_id.blank? } # TBD user
   validates_presence_of :project
+
+  alias_attribute :assignment_archived, :archived
+  alias_attribute :assignment_proposed, :proposed
 end
