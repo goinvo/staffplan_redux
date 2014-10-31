@@ -22,8 +22,8 @@ function UserAggregateChart(params) {
         this.observedWorkWeeks()[index] = {
             cweek: ko.observable(weekData.cweek())
           , year: ko.observable(weekData.year())
-          , actual: ko.observable(0)
-          , estimated: ko.observable(0)
+          , actual_hours: ko.observable(0)
+          , estimated_hours: ko.observable(0)
           , estimated_proposed: ko.observable(0)
           , estimated_planned: ko.observable(0)
           , beginning_of_week: ko.observable(weekData.beginning_of_week())
@@ -37,12 +37,12 @@ function UserAggregateChart(params) {
 
       // add user data if available
       if(_.isUndefined(userWorkWeek)) {
-        this.observedWorkWeeks()[index].actual(0);
-        this.observedWorkWeeks()[index].estimated(0);
+        this.observedWorkWeeks()[index].actual_hours(0);
+        this.observedWorkWeeks()[index].estimated_hours(0);
         this.observedWorkWeeks()[index].estimated_planned(0);
         this.observedWorkWeeks()[index].estimated_proposed(0);
       } else {
-        this.observedWorkWeeks()[index].actual_hours(userWorkWeek.actual || 0);
+        this.observedWorkWeeks()[index].actual_hours(userWorkWeek.actual_hours || 0);
         this.observedWorkWeeks()[index].estimated_hours(userWorkWeek.estimated_hours || 0);
         this.observedWorkWeeks()[index].estimated_planned(userWorkWeek.estimated_planned || 0);
         this.observedWorkWeeks()[index].estimated_proposed(userWorkWeek.estimated_proposed || 0);

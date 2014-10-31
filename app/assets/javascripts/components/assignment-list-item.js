@@ -23,8 +23,9 @@ var AssignmentsListItem = function(params) {
         this.observedWorkWeeks()[index] = {
             cweek: ko.observable(weekData.cweek())
           , year: ko.observable(weekData.year())
-          , actual: ko.observable(0)
-          , estimated: ko.observable(0)
+          , id: ko.observable()
+          , actual_hours: ko.observable(0)
+          , estimated_hours: ko.observable(0)
           , beginning_of_week: ko.observable(weekData.beginning_of_week())
         }
       } else {
@@ -36,8 +37,9 @@ var AssignmentsListItem = function(params) {
 
       // add user data if available
       if(_.isUndefined(assignmentWorkWeek)) {
-        this.observedWorkWeeks()[index].actual(0);
-        this.observedWorkWeeks()[index].estimated(0);
+        this.observedWorkWeeks()[index].id(null)
+        this.observedWorkWeeks()[index].actual_hours(0);
+        this.observedWorkWeeks()[index].estimated_hours(0);
       } else {
         this.observedWorkWeeks()[index].actual_hours(assignmentWorkWeek.actual_hours || 0);
         this.observedWorkWeeks()[index].estimated_hours(assignmentWorkWeek.estimated_hours || 0);
