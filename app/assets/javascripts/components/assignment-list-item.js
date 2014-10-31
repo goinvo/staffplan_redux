@@ -39,8 +39,9 @@ var AssignmentsListItem = function(params) {
         this.observedWorkWeeks()[index].actual(0);
         this.observedWorkWeeks()[index].estimated(0);
       } else {
-        this.observedWorkWeeks()[index].actual(assignmentWorkWeek.actual);
-        this.observedWorkWeeks()[index].estimated(assignmentWorkWeek.estimated);
+        this.observedWorkWeeks()[index].actual_hours(assignmentWorkWeek.actual_hours || 0);
+        this.observedWorkWeeks()[index].estimated_hours(assignmentWorkWeek.estimated_hours || 0);
+        this.observedWorkWeeks()[index].id(assignmentWorkWeek.id);
       }
 
       return this.observedWorkWeeks()[index];

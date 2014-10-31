@@ -42,10 +42,10 @@ function UserAggregateChart(params) {
         this.observedWorkWeeks()[index].estimated_planned(0);
         this.observedWorkWeeks()[index].estimated_proposed(0);
       } else {
-        this.observedWorkWeeks()[index].actual(userWorkWeek.actual);
-        this.observedWorkWeeks()[index].estimated(userWorkWeek.estimated);
-        this.observedWorkWeeks()[index].estimated_planned(userWorkWeek.estimated_planned);
-        this.observedWorkWeeks()[index].estimated_proposed(userWorkWeek.estimated_proposed);
+        this.observedWorkWeeks()[index].actual_hours(userWorkWeek.actual || 0);
+        this.observedWorkWeeks()[index].estimated_hours(userWorkWeek.estimated_hours || 0);
+        this.observedWorkWeeks()[index].estimated_planned(userWorkWeek.estimated_planned || 0);
+        this.observedWorkWeeks()[index].estimated_proposed(userWorkWeek.estimated_proposed || 0);
       }
 
       return this.observedWorkWeeks()[index];
