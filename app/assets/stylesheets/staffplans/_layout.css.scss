@@ -27,6 +27,9 @@ ul.flexible-list li.box {
 
 aggregate-work-week {
   @include aligned-list-item;
+  height: 90px;
+  padding-top: 5px;
+  position: relative;
 }
 
 .width-filling-container {
