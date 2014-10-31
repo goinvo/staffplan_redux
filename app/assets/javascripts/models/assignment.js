@@ -8,7 +8,7 @@ function Assignment(attributes) {
       user_id: ko.observable(attributes.user_id),
       client_name: ko.observable(attributes.client_name),
       project_active: ko.observable(attributes.project_active || true),
-      assigment_archived: ko.observable(attributes.assigment_archived || false),
+      assignment_archived: ko.observable(attributes.assignment_archived || false),
       assignment_proposed: ko.observable(attributes.assignment_proposed || false),
       project_name: ko.observable(attributes.project_name),
 

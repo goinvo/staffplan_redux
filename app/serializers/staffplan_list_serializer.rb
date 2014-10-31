@@ -33,8 +33,8 @@ class StaffplanListSerializer < ActiveModel::Serializer
 
       key.merge(
         beginning_of_week: values.first.beginning_of_week,
-        estimated: estimated_proposed + estimated_planned,
-        actual: values.inject(0) {|sum, value| sum += (value.actual_total || 0)},
+        estimated_hours: estimated_proposed + estimated_planned,
+        actual_hours: values.inject(0) {|sum, value| sum += (value.actual_total || 0)},
         estimated_proposed: estimated_proposed,
         estimated_planned: estimated_planned
       )

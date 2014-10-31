@@ -18,7 +18,7 @@ _.extend(Client.prototype, {
       new Assignment(
         _.pick(attributes,
           "user_id", "actual_total", "assignment_id", "diff", "estimated_total", "project_active", "client_name", "client_id",
-          "assigment_archived", "assignment_proposed", "project_id", "project_name", "work_weeks"
+          "assignment_archived", "assignment_proposed", "project_id", "project_name", "work_weeks"
         )
       )
     )
