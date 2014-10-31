@@ -16,7 +16,7 @@
   <!-- project name -->
   <div class="project-name">
     <!-- link to the project plan -->
-    
+
     <!-- ko ifnot: newAssignment() -->
     <a data-bind="text: assignment.attributes.project_name, attr: { href: projectURL }"></a>
     <!-- /ko -->
@@ -33,7 +33,7 @@
 </div>
 <div class="work-weeks width-filling-container" data-bind="ifnot: newAssignment()">
   <!-- ko foreach: visibleWorkWeeks -->
-  <assignment-work-week params="work_week: $data"></assignment-work-week>
+  <assignment-work-week params="work_week: $data, assignment_id: $parent.assignment.attributes.id"></assignment-work-week>
   <!-- /ko -->
 </div>
 <div class="assignment-totals">

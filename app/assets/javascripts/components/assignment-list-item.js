@@ -43,7 +43,7 @@ var AssignmentsListItem = function(params) {
       } else {
         this.observedWorkWeeks()[index].actual_hours(assignmentWorkWeek.actual_hours || 0);
         this.observedWorkWeeks()[index].estimated_hours(assignmentWorkWeek.estimated_hours || 0);
-        this.observedWorkWeeks()[index].id(assignmentWorkWeek.id);
+        this.observedWorkWeeks()[index].id(assignmentWorkWeek.work_week_id);
       }
 
       return this.observedWorkWeeks()[index];
