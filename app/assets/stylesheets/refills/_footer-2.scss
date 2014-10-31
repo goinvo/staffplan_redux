@@ -1,16 +1,17 @@
 .footer-2 {
   $footer-background: desaturate(darken($base-accent-color, 20), 30);
-  $footer-color: white;
+  $footer-color: black;
   $footer-link-color: transparentize($footer-color, .6);
   $footer-disclaimer-color: transparentize($footer-color, .6);
 
   font-family: $sans-serif;
-  background: #111;
+  // background: #111;
+  color: #111;
   padding: .3em;
   width: 100%;
   line-height: 31px;
   height: 2.6em;
-  position: fixed;
+  // position: fixed;
   bottom: 0;
 
   @media screen and (max-width: 860px) {

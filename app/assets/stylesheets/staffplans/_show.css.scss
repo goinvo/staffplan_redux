@@ -2,7 +2,7 @@
 
 #staffplans.show {
   @import "staffplans/forms";
-  
+
   .gravatar {
     width: 75px;
     border-radius: 3px;
@@ -12,11 +12,11 @@
 
   /* fixed header styles are page specific. every page is a little different */
   .fixed-header {
-    @include fixed-header;
+    // @include fixed-header;
   }
 
   .client-list {
-    padding-top: 174px;
+    // padding-top: 174px;
   }
 
   .aggregate-chart {

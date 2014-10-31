@@ -13,16 +13,15 @@
   }
 
   .fixed-header {
-    @include fixed-header;
+    // @include fixed-header;
   }
 
   .user-list {
-    padding-top: em(100);
+    padding-top: em(10);
   }
 
   .list-header {
     background-color: #f7f7f7;
-    @include box-shadow(0 0 6px 3px #444);
   }
 
   .user-info {
