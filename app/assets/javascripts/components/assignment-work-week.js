@@ -11,7 +11,7 @@ _.extend(AssignmentWorkWeek.prototype, {
   onValueChanged: function(newValue) {
     this.work_week.actual_hours(parseInt(this.work_week.actual_hours(), 10) || 0)
     this.work_week.estimated_hours(parseInt(this.work_week.estimated_hours(), 10) || 0)
-    
+
     var workWeekData = _.merge(ko.toJS(this.work_week), {assignment_id: this.assignment_id}),
         url = (workWeekData.id == null ? '/work_weeks.json' : '/work_weeks/' + workWeekData.id + '.json'),
         type = (workWeekData.id == null ? "POST" : "PUT");
@@ -24,10 +24,15 @@ _.extend(AssignmentWorkWeek.prototype, {
       type: type,
       data: workWeekData,
       dataType: 'json',
-      complete: _.bind(function(response, data, status, jqxhr) {
+      success: _.bind(function(response, status, jqxhr) {
+        // set id?
+        if(this.work_week.id() == undefined)
+          this.work_week.id(response.id);
+      }, this),
+      complete: _.bind(function() {
         $(document.body).removeAttr('style');
       }, this),
-      error: _.bind(function(response, data, status, jqxhr) {
+      error: _.bind(function() {
         $('.flash-container').append(
           "<p class='flash-error flash'>\
             Unexpected error occurred. Please try again.\
