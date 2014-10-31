@@ -7,8 +7,8 @@
 - content_for(:fixed_header_section) do
   .list-header
     .single-flexible-column
-      %a{data: {bind: "click: sortByName"}} Name
-      %a{data: {bind: "click: sortByWorkload"}} Workload
+      %a{href: '#', data: {bind: "click: sortByName"}} Name
+      %a{href: '#', data: {bind: "click: sortByWorkload"}} Workload
       %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
 
     .date-range-columns.width-filling-container{data: {bind: "foreach: weekRange"}}
