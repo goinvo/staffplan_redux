@@ -19,6 +19,14 @@
     // padding-top: 174px;
   }
 
+  .show-archived {
+    display: inline-block;
+
+    & > * {
+      display: inline-block;
+    }
+  }
+
   .aggregate-chart {
     background-color: #28292a;
     color: #98989b;

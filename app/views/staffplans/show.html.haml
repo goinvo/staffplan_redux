@@ -12,6 +12,9 @@
   .list-header
     .single-flexible-column.wide
       %a{data: {bind: "attr: { href: nextPreviousWeeks().previous}"}} Previous
+      .show-archived
+        %input{id: "showArchived", type: "checkbox", data: {bind: "checked: showArchived"}}
+        %label{for: "showArchived"} show archived
       %div
         .client-name
           Client
@@ -25,7 +28,7 @@
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
 %ul.client-list.flexible-list{data: {bind: "foreach: clients"}}
-  %li.client{data: {bind: 'component: {name: "client-list-item", params: {client: $data, weekRange: $parent.weekRange}}'}}
+  %li.client{data: {bind: 'component: {name: "client-list-item", params: {client: $data, weekRange: $parent.weekRange, showArchived: $parent.showArchived}}'}}
 
 %script{type: "application/json", id: "assignments"}
   = ActiveModel::ArraySerializer.new(@user_projects, each_serializer: UserProjectsViewSerializer).to_json.html_safe

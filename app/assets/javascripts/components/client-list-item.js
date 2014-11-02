@@ -1,8 +1,19 @@
 var ClientListItem = function(data) {
-  var client = this.client = data.client;
-  this.client_name = client.client_name();
-  this.assignments = client.assignments;
-  this.weekRange = data.weekRange;
+  var self = this;
+  var client = self.client = data.client;
+  self.client_name = client.client_name();
+  self.assignments = client.assignments;
+  self.weekRange = data.weekRange;
+  self.showArchived = data.showArchived;
+
+  self.visibleAssignments = ko.computed(function() {
+    return _.select(self.assignments(), function(assignment) {
+      if(!this.showArchived()) {
+        return !assignment.attributes.assignment_archived();
+      } else
+        return true;
+    }, self);
+  });
 }
 
 _.extend(ClientListItem.prototype, {

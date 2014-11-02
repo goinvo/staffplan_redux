@@ -1,3 +1,3 @@
-<ul data-bind="foreach: assignments">
+<ul data-bind="foreach: visibleAssignments">
   <li class="assignment box" data-bind="component: {name: 'assignment-list-item', params: {assignment: $data, clientListItem: $parent, weekRange: $parent.weekRange}}"></li>
 </ul>

@@ -1,6 +1,8 @@
 function StaffPlanView() {
   var self = this;
 
+  self.showArchived = ko.observable(false);
+
   self.userData = JSON.parse($('#user').remove().text());
   var assignmentData = JSON.parse($('#assignments').remove().text());
 

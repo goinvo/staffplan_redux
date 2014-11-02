@@ -4,7 +4,7 @@ class StaffplansController < ApplicationController
   end
 
   def show
-    @user = current_company.users.includes(:staffplans_list_views).find(params[:id])
-    @user_projects = @user.user_projects.for_company(current_company).active.includes(:work_weeks, :assignment_totals).to_a
+    @user = current_company.users.find(params[:id])
+    @user_projects = @user.user_projects.for_company(current_company).includes(:work_weeks, :assignment_totals).to_a
   end
 end
