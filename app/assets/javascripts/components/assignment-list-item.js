@@ -3,8 +3,8 @@ var AssignmentsListItem = function(params) {
   this.client = params.clientListItem.client;
   this.weekRange = params.weekRange;
 
-  this.projectURL = "/projects/" + this.assignment.attributes.project_id;
-  this.clientURL = "/clients/" + this.assignment.attributes.client_id;
+  this.projectURL = "/projects/" + this.assignment.project_id;
+  this.clientURL = "/clients/" + this.assignment.client_id;
 
   this.observedWorkWeeks = ko.observableArray();
   this.observedWorkWeeks.extend({rateLimit: 25});
@@ -12,7 +12,7 @@ var AssignmentsListItem = function(params) {
   this.visibleWorkWeeks = ko.computed(function() {
     return _.map(this.weekRange(), function(weekData, index) {
 
-      var assignmentWorkWeek = _.find(this.assignment.attributes.work_weeks, function(workWeek) {
+      var assignmentWorkWeek = _.find(this.assignment.work_weeks, function(workWeek) {
           return workWeek.cweek == weekData.cweek() && workWeek.year == weekData.year();
         }, this);
 
@@ -56,7 +56,7 @@ var AssignmentsListItem = function(params) {
 _.extend(AssignmentsListItem.prototype, {
   onKeyUp: function(element, event) {
     if(event.keyCode == 13)
-      this.assignment.createAssignment();
+      this.assignment.create();
   },
   addClientProject: function(assignment, event) {
     if(assignment.id == null) {
@@ -70,7 +70,16 @@ _.extend(AssignmentsListItem.prototype, {
     this.client.addAssignmentRecord(assignment);
   },
   newAssignment: function() {
-    return this.assignment.attributes.id() == null;
+    return this.assignment.id() == null;
+  },
+  toggleId: function(prefix) {
+    return prefix + this.assignment.id();
+  },
+  destroyAssignment: function(assignment) {
+    var destroyedAssignment = this.client.assignments.remove(this.assignment);
+    _.each(destroyedAssignment, function(assignment) {
+      assignment.destroy();
+    })
   }
 });
 

@@ -9,7 +9,7 @@ var ClientListItem = function(data) {
   self.visibleAssignments = ko.computed(function() {
     return _.select(self.assignments(), function(assignment) {
       if(!this.showArchived()) {
-        return !assignment.attributes.assignment_archived();
+        return !assignment.assignment_archived();
       } else
         return true;
     }, self);

@@ -3,14 +3,14 @@
   <div class="client-name">
     <!-- only show client name for the first assignment -->
     <span data-bind="if: (!newAssignment() && $index() == 0)">
-      <span data-bind="text: $parent.attributes.client_name"></span>
+      <span data-bind="text: $parent.client_name"></span>
       <!-- don't show an add link for new assignments. saving may fail and flicker this temporarily -->
       <a href="#" data-bind="ifnot: newAssignment(), click: addClientProject">add</a>
     </span>
     <!-- client name input. show for net-new client-list-item components -->
     <input type="text"
            placeholder="Client Name"
-           data-bind="visible: (newAssignment() && $index() == 0), value: assignment.attributes.client_name, event: {keyup: onKeyUp}"
+           data-bind="visible: (newAssignment() && $index() == 0), value: assignment.client_name, event: {keyup: onKeyUp}"
            name="assignment[client_name]" />
   </div>
   <!-- project name -->
@@ -18,7 +18,7 @@
     <!-- link to the project plan -->
 
     <!-- ko ifnot: newAssignment() -->
-    <a data-bind="text: assignment.attributes.project_name, attr: { href: projectURL }"></a>
+    <a data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
     <!-- /ko -->
 
     <!-- project name input for new assignments -->
@@ -26,14 +26,30 @@
       <input type="text"
              placeholder="Project Name"
              name="assignment[project_name]"
-             data-bind="value: assignment.attributes.project_name, event: {keyup: onKeyUp}" />
+             data-bind="value: assignment.project_name, event: {keyup: onKeyUp}" />
       <input type="submit" value="Save" class='display-none' />
     <!-- /ko -->
+  </div>
+  <div class='assignment-actions'>
+    <div class='toggle-proposed'>
+      <input type="checkbox" data-bind="checked: assignment.assignment_proposed, attr: {id: toggleId('proposed')}" />
+      <label data-bind="attr: {for: toggleId('proposed')}">proposed</label>
+    </div>
+    <div class='toggle-archived'>
+      <input type="checkbox" data-bind="checked: assignment.assignment_archived, attr: {id: toggleId('archived')}" />
+      <label data-bind="attr: {for: toggleId('archived')}">archived</label>
+    </div>
+    <div class='delete-assignment'>
+      <a href="#" data-bind="click: destroyAssignment">delete</a>
+    </div>
+    <div class='reassign-assignment'>
+      reassign
+    </div>
   </div>
 </div>
 <div class="work-weeks width-filling-container" data-bind="ifnot: newAssignment()">
   <!-- ko foreach: visibleWorkWeeks -->
-  <assignment-work-week params="work_week: $data, assignment_id: $parent.assignment.attributes.id"></assignment-work-week>
+  <assignment-work-week params="work_week: $data, assignment_id: $parent.assignment.id"></assignment-work-week>
   <!-- /ko -->
 </div>
 <div class="assignment-totals">
