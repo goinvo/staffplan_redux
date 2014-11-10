@@ -17,8 +17,7 @@ class AssignmentsController < ApplicationController
 
   def update
     if @assignment.update(assignment_params)
-      flash[:notice] = "The assignment was updated successfully"
-      redirect_to assignment_path(@assignment)
+      respond_with(@assignment)
     else
       flash.now[:notice] = "Couldn't update your assignment"
       render :edit

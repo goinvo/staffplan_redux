@@ -18,15 +18,25 @@ function Assignment(attributes) {
       project_id: attributes.project_id
     });
   }
+
+  this.user_id.subscribe(_.bind(function(newvalue) {
+    this.updateAssignment();
+  }, this))
 }
 
 _.extend(Assignment.prototype, {
-  update: function() {
+  updateAssignment: function() {
     $.ajax({
       type: "PUT",
       url: '/assignments/' + this.id() + '.json',
       dataType: 'json',
-      data: {assignment: ko.toJS(this)},
+      data: {assignment:
+        _.pick(ko.toJS(this),
+          ["id", "user_id", "client_name", "project_active",
+           "assignment_archived", "assignment_proposed", "project_name",
+           "actual_total", "diff", "estimated_total", "project_id"]
+         )
+        },
       success: _.bind(function(response, data, status, jqxhr) {
         // this.attributes.id(response.id);
         // this.attributes.project_id = response.project_id;

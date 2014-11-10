@@ -43,7 +43,8 @@
       <a href="#" data-bind="click: destroyAssignment">delete</a>
     </div>
     <div class='reassign-assignment'>
-      reassign
+      <label data-bind="attr: {for: toggleId('reassign')}">assigned to</label>
+      <select data-bind="value: assignment.user_id, options: $parents[3].assignableUsers, optionsValue: 'id', optionsText: 'full_name'"></select>
     </div>
   </div>
 </div>
