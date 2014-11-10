@@ -1,4 +1,5 @@
 function UserAggregateChart(params) {
+  var self = this;
   this.user = params.user;
   this.weekRange = params.weekRange;
   this.showAssignmentTotals = typeof params.showAssignmentTotals === "undefined" ? true : params.showAssignmentTotals;
@@ -11,7 +12,7 @@ function UserAggregateChart(params) {
   this.visibleWorkWeeks = ko.computed(function() {
     return _.map(this.weekRange(), function(weekData, index) {
 
-      var userWorkWeek = _.find(this.user.work_weeks, function(workWeek) {
+      var userWorkWeek = _.find(this.user.work_weeks(), function(workWeek) {
         return workWeek.cweek == weekData.cweek() && workWeek.year == weekData.year();
       }, this);
 

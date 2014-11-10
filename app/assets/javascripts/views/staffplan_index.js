@@ -5,7 +5,6 @@ window.StaffPlanIndex = (function(window, document, $) {
     self.sortOrder = "asc";
     self.sortField = "workload";
     self.usersData = JSON.parse($('#users').remove().text());
-    self.usersData = _.sortBy(self.usersData, function(user) { return user.upcoming_estimated_hours; });
 
     this.startHash = ko.observable(initialStartHash);
     var initialStartHash = this.getStartHash();

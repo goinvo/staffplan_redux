@@ -28,10 +28,13 @@
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
 %ul.client-list.flexible-list{data: {bind: "foreach: clients"}}
-  %li.client{data: {bind: 'component: {name: "client-list-item", params: {client: $data, weekRange: $parent.weekRange, showArchived: $parent.showArchived}}'}}
+  %li.client{data: {bind: 'component: {name: "client-list-item", params: {client: $data, showArchived: $parent.showArchived}}'}}
 
 %script{type: "application/json", id: "assignments"}
   = ActiveModel::ArraySerializer.new(@user_projects, each_serializer: UserProjectsViewSerializer).to_json.html_safe
 
 %script{type: "application/json", id: "user"}
   = StaffplanListSerializer.new(@user).to_json.html_safe
+
+%script{type: "application/json", id: "users"}
+  = ActiveModel::ArraySerializer.new((current_user.current_company.active_users << current_user).uniq, each_serializer: CurrentCompanyUsersSerializer).to_json.html_safe

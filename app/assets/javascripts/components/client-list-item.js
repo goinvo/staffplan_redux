@@ -3,7 +3,6 @@ var ClientListItem = function(data) {
   var client = self.client = data.client;
   self.client_name = client.client_name();
   self.assignments = client.assignments;
-  self.weekRange = data.weekRange;
   self.showArchived = data.showArchived;
 
   self.visibleAssignments = ko.computed(function() {
