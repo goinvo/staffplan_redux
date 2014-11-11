@@ -7,7 +7,7 @@
 
 - content_for(:fixed_header_section) do
   %ul.flexible-list.aggregate-chart
-    %li.user.box{data: {bind: 'component: {name: "user-aggregate-chart", params: {user: userData, weekRange: weekRange, showAssignmentTotals: false, wide: true}}'}}}
+    %li.user.box{data: {bind: 'component: {name: "user-aggregate-chart", params: {user: userData, partitionedWorkWeeks: partitionedWorkWeeks, weekRange: weekRange, showAssignmentTotals: false, wide: true}}'}}}
 
   .list-header
     .single-flexible-column.wide

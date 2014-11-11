@@ -50,7 +50,7 @@
 </div>
 <div class="work-weeks width-filling-container" data-bind="ifnot: newAssignment()">
   <!-- ko foreach: visibleWorkWeeks -->
-  <assignment-work-week params="work_week: $data, assignment_id: $parent.assignment.id"></assignment-work-week>
+  <assignment-work-week params="work_week: $data, assignment: $parent.assignment"></assignment-work-week>
   <!-- /ko -->
 </div>
 <div class="assignment-totals">

@@ -41,19 +41,10 @@ function UserAggregateChart(params) {
         this.observedWorkWeeks()[index].estimated_planned(0);
         this.observedWorkWeeks()[index].estimated_proposed(0);
       } else {
-        // TODO: reduce this to one iteration over userWorkWeeks. moar perf.
-        this.observedWorkWeeks()[index].actual_hours(_.reduce(userWorkWeeks, function(sum, workWeek) {
-          return sum += (workWeek.actual_hours || 0);
-        }, 0));
-        this.observedWorkWeeks()[index].estimated_hours(_.reduce(userWorkWeeks, function(sum, workWeek) {
-          return sum += (workWeek.estimated_hours || 0);
-        }, 0));
-        this.observedWorkWeeks()[index].estimated_planned(_.reduce(userWorkWeeks, function(sum, workWeek) {
-          return sum += (workWeek.estimated_planned || 0)
-        }, 0));
-        this.observedWorkWeeks()[index].estimated_proposed(_.reduce(userWorkWeeks, function(sum, workWeek) {
-          return sum += (workWeek.estimated_proposed || 0);
-        }, 0));
+        this.observedWorkWeeks()[index].actual_hours(userWorkWeeks.actual_hours());
+        this.observedWorkWeeks()[index].estimated_hours(userWorkWeeks.estimated_hours());
+        this.observedWorkWeeks()[index].estimated_planned(userWorkWeeks.estimated_planned());
+        this.observedWorkWeeks()[index].estimated_proposed(userWorkWeeks.estimated_proposed());
       }
 
       return this.observedWorkWeeks()[index];
