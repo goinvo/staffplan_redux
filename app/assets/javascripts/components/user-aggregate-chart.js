@@ -5,16 +5,14 @@ function UserAggregateChart(params) {
   this.showAssignmentTotals = typeof params.showAssignmentTotals === "undefined" ? true : params.showAssignmentTotals;
   this.wide = typeof params.wide === "undefined" ? false : params.wide;
   this.staffPlanURL = "/staffplans/" + this.user.id;
-
+  this.partitionedWorkWeeks = params.partitionedWorkWeeks;
   this.observedWorkWeeks = ko.observableArray();
   this.observedWorkWeeks.extend({rateLimit: 25});
 
   this.visibleWorkWeeks = ko.computed(function() {
     return _.map(this.weekRange(), function(weekData, index) {
 
-      var userWorkWeek = _.find(this.user.work_weeks(), function(workWeek) {
-        return workWeek.cweek == weekData.cweek() && workWeek.year == weekData.year();
-      }, this);
+      var userWorkWeeks = self.partitionedWorkWeeks()[weekData.cweek() + "-" + weekData.year()] || [];
 
       if(_.isUndefined(this.observedWorkWeeks()[index])) {
         // add to the set
@@ -37,16 +35,25 @@ function UserAggregateChart(params) {
       }
 
       // add user data if available
-      if(_.isUndefined(userWorkWeek)) {
+      if(_.isEmpty(userWorkWeeks)) {
         this.observedWorkWeeks()[index].actual_hours(0);
         this.observedWorkWeeks()[index].estimated_hours(0);
         this.observedWorkWeeks()[index].estimated_planned(0);
         this.observedWorkWeeks()[index].estimated_proposed(0);
       } else {
-        this.observedWorkWeeks()[index].actual_hours(userWorkWeek.actual_hours || 0);
-        this.observedWorkWeeks()[index].estimated_hours(userWorkWeek.estimated_hours || 0);
-        this.observedWorkWeeks()[index].estimated_planned(userWorkWeek.estimated_planned || 0);
-        this.observedWorkWeeks()[index].estimated_proposed(userWorkWeek.estimated_proposed || 0);
+        // TODO: reduce this to one iteration over userWorkWeeks. moar perf.
+        this.observedWorkWeeks()[index].actual_hours(_.reduce(userWorkWeeks, function(sum, workWeek) {
+          return sum += (workWeek.actual_hours || 0);
+        }, 0));
+        this.observedWorkWeeks()[index].estimated_hours(_.reduce(userWorkWeeks, function(sum, workWeek) {
+          return sum += (workWeek.estimated_hours || 0);
+        }, 0));
+        this.observedWorkWeeks()[index].estimated_planned(_.reduce(userWorkWeeks, function(sum, workWeek) {
+          return sum += (workWeek.estimated_planned || 0)
+        }, 0));
+        this.observedWorkWeeks()[index].estimated_proposed(_.reduce(userWorkWeeks, function(sum, workWeek) {
+          return sum += (workWeek.estimated_proposed || 0);
+        }, 0));
       }
 
       return this.observedWorkWeeks()[index];

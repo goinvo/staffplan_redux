@@ -1,6 +1,7 @@
 var AssignmentWorkWeek = function(data) {
   this.work_week = data.work_week;
-  this.assignment_id = data.assignment_id();
+  this.assignment = data.assignment;
+  this.assignment_id = this.assignment.id();
 }
 
 _.extend(AssignmentWorkWeek.prototype, {
@@ -25,9 +26,23 @@ _.extend(AssignmentWorkWeek.prototype, {
       data: workWeekData,
       dataType: 'json',
       success: _.bind(function(response, status, jqxhr) {
-        // set id?
-        if(this.work_week.id() == undefined)
+        // add new work weeks to the assignment
+        if(this.work_week.id() == undefined) {
           this.work_week.id(response.id);
+          this.assignment.work_weeks.push(this.work_week);
+          $(document.body).trigger('workWeekCreated', [
+            _.merge(ko.toJS(this.work_week),
+              { assignment_id: this.assignment_id,
+                assignment_archived: this.assignment.assignment_archived(),
+                assignment_proposed: this.assignment.assignment_proposed(),
+                user_id: this.assignment.user_id(),
+                work_week_id: this.work_week.id()
+              })
+          ]);
+        } else {
+          $(document.body).trigger('workWeekUpdated', [_.merge(ko.toJS(this.work_week), {assignment_id: this.assignment_id})]);
+        }
+
       }, this),
       complete: _.bind(function() {
         $(document.body).removeAttr('style');

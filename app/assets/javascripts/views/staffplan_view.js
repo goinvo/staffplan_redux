@@ -40,8 +40,8 @@ function StaffPlanView() {
 
   // debounce for window.resize
   // TODO: fix this calculation of available width
-  // var debouncedWeekRangeChange = _.debounce(_.bind(self.calculateWorkWeekRange, this), 200);
-  // $(window).on('resize', debouncedWeekRangeChange);
+  var debouncedWeekRangeChange = _.debounce(_.bind(self.calculateWorkWeekRange, this), 200);
+  $(window).on('resize', debouncedWeekRangeChange);
 }
 
 _.extend(StaffPlanView.prototype, {
@@ -77,7 +77,7 @@ _.extend(StaffPlanView.prototype, {
     }, this);
 
     // lastly, prune any unnecessary indices from weekRange
-    this.weekRange().splice(timestampRange.length, this.weekRange().length);
+    this.weekRange.splice(timestampRange.length, this.weekRange().length);
   },
   // helper for getting/setting the initial beginning_of_day
   getStartHash: function() {
