@@ -53,7 +53,7 @@ function UserAggregateChart(params) {
   this.visibleWorkWeeks.extend({rateLimit: 25});
 }
 
-ko.components.register("user-aggregate-chart", {
+ko.components.register("staffplan-aggregate-chart", {
   viewModel: UserAggregateChart,
-  template: HandlebarsTemplates["user-aggregate-chart"]()
+  template: HandlebarsTemplates["staffplan-aggregate-chart"]()
 });

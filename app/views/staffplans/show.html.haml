@@ -7,7 +7,7 @@
 
 - content_for(:fixed_header_section) do
   %ul.flexible-list.aggregate-chart
-    %li.user.box{data: {bind: 'component: {name: "user-aggregate-chart", params: {user: userData, partitionedWorkWeeks: partitionedWorkWeeks, weekRange: weekRange, showAssignmentTotals: false, wide: true}}'}}}
+    %li.user.box{data: {bind: 'component: {name: "staffplan-aggregate-chart", params: {user: userData, partitionedWorkWeeks: partitionedWorkWeeks, weekRange: weekRange, showAssignmentTotals: false, wide: true}}'}}}
 
   .list-header
     .single-flexible-column.wide
@@ -34,7 +34,7 @@
   = ActiveModel::ArraySerializer.new(@user_projects, each_serializer: UserProjectsViewSerializer).to_json.html_safe
 
 %script{type: "application/json", id: "user"}
-  = StaffplanListSerializer.new(@user).to_json.html_safe
+  = StaffplansShowUserSerializer.new(@user).to_json.html_safe
 
 %script{type: "application/json", id: "users"}
   = ActiveModel::ArraySerializer.new((current_user.current_company.active_users << current_user).uniq, each_serializer: CurrentCompanyUsersSerializer).to_json.html_safe

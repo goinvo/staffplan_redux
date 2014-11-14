@@ -1,4 +1,4 @@
-class StaffplanListSerializer < ActiveModel::Serializer
+class StaffplansShowUserSerializer < ActiveModel::Serializer
   self.root = false
   attributes :id, :gravatar_url, :staffplan_url, :full_name, :email, :estimated_total, :actual_total, :diff, :upcoming_estimated_hours
 
@@ -7,7 +7,7 @@ class StaffplanListSerializer < ActiveModel::Serializer
   end
 
   def staffplan_url
-    staffplans_path(object)
+    staffplan_path(object)
   end
 
   def gravatar_url

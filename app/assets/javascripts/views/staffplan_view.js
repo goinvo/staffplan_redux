@@ -11,7 +11,6 @@ function StaffPlanView() {
   self.observedWorkWeeks.extend({rateLimit: 50});
 
   self.partitionedWorkWeeks = ko.computed(function() {
-    console.log('recalculating partitionedWorkWeeks');
     var workWeekTotals = {};
 
     var partitionedWorkWeekTotals = _.groupBy(self.observedWorkWeeks(), function(workWeek) {
