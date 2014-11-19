@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'work_weeks/create'
+
+  get 'work_weeks/update'
+
   devise_for :users
 
   resources :invites, only: :index, controller: 'user_invites' do
@@ -23,7 +27,9 @@ Rails.application.routes.draw do
     resources :assignments, only: [:new, :create]
   end
 
-  resources :assignments, only: [:create, :update]
+  resources :assignments
+
+  resources :work_weeks
 
   resources :current_companies, only: :update
 

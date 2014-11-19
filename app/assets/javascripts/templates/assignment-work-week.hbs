@@ -1,6 +1,6 @@
 <div class='assignment-work-week'>
-  <input class="planned" type="text" data-bind="value: work_week.estimated()" />
+  <input class="planned" type="text" data-bind="attr: {cweek: work_week.cweek, year: work_week.year}, value: work_week.estimated_hours, event: {change: onValueChanged}" />
   <!-- ko ifnot: isFutureWorkWeek() -->
-    <input class="actual" type="text" data-bind="value: work_week.actual()" />
+  <input class="actual" type="text" data-bind="attr: {cweek: work_week.cweek, year: work_week.year}, value: work_week.actual_hours, event: {change: onValueChanged}" />
   <!-- /ko -->
 </div>

@@ -1,6 +1,6 @@
 class UserProjectsViewSerializer < ActiveModel::Serializer
 
-  attributes :project_id, :user_id, :company_id, :assignment_id, :assignment_proposed, :assigment_archived,
+  attributes :project_id, :user_id, :company_id, :assignment_id, :assignment_proposed, :assignment_archived,
              :client_id, :client_name, :project_name, :project_active, :work_weeks,
              :estimated_total, :actual_total, :diff
 

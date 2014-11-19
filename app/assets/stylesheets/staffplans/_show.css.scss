@@ -19,6 +19,15 @@
     // padding-top: 174px;
   }
 
+  .show-archived {
+    @include self-and-children-inline-block;
+  }
+
+  .toggle-proposed, .toggle-archived, .delete-assignment, .reassign-assignment {
+    @include self-and-children-inline-block;
+    width: 49%;
+  }
+
   .aggregate-chart {
     background-color: #28292a;
     color: #98989b;

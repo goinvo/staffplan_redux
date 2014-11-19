@@ -1,8 +1,40 @@
 function StaffPlanView() {
   var self = this;
 
+  self.showArchived = ko.observable(false);
+
   self.userData = JSON.parse($('#user').remove().text());
   var assignmentData = JSON.parse($('#assignments').remove().text());
+
+  // set up a user-wide partitioned mapping of work weeks to beginning_of_week for column headers
+  self.observedWorkWeeks = ko.observableArray([]);
+  self.observedWorkWeeks.extend({rateLimit: 50});
+
+  self.partitionedWorkWeeks = ko.computed(function() {
+    var workWeekTotals = {};
+
+    var partitionedWorkWeekTotals = _.groupBy(self.observedWorkWeeks(), function(workWeek) {
+      return workWeek.cweek + "-" + workWeek.year;
+    });
+
+    _.each(partitionedWorkWeekTotals, function(workWeeks, key) {
+      if(!_.has(workWeekTotals, key)) {
+        workWeekTotals[key] = {
+          actual_hours: ko.observable(0),
+          estimated_hours: ko.observable(0),
+          estimated_planned: ko.observable(0),
+          estimated_proposed: ko.observable(0)
+        }
+      }
+
+      workWeekTotals[key].actual_hours(_.reduce(workWeeks, function(sum, workWeek) { return sum += (workWeek.actual_hours || 0)}, 0));
+      workWeekTotals[key].estimated_hours(_.reduce(workWeeks, function(sum, workWeek) { return sum += (workWeek.estimated_hours || 0)}, 0));
+      workWeekTotals[key].estimated_planned(_.reduce(workWeeks, function(sum, workWeek) { return sum += (workWeek.estimated_planned || 0)}, 0));
+      workWeekTotals[key].estimated_proposed(_.reduce(workWeeks, function(sum, workWeek) { return sum += (workWeek.estimated_proposed || 0)}, 0));
+    })
+
+    return workWeekTotals;
+  });
 
   self.startHash = ko.observable(initialStartHash);
   var initialStartHash = this.getStartHash();
@@ -15,6 +47,8 @@ function StaffPlanView() {
   self.clients.extend({rateLimit: 25});
 
   _.each(assignmentData, function(assignmentRecord) {
+    self.observedWorkWeeks(self.observedWorkWeeks().concat(assignmentRecord.work_weeks));
+
     var client = _.find(self.clients(), function(client) { return client.id === assignmentRecord.client_id; });
 
     if(_.isUndefined(client)) {
@@ -34,12 +68,22 @@ function StaffPlanView() {
     }
   });
 
-  $(window).on('hashchange', _.bind(self.calculateWorkWeekRange, this));
+  $(document.body).on('workWeekUpdated', function(event, updatedWorkWeek) {
+    console.log('updatedWorkWeek.id: ' + updatedWorkWeek.id)
+    var workWeek = self.observedWorkWeeks.remove(function(workWeek) { return updatedWorkWeek.id == workWeek.work_week_id; }).pop();
+    workWeek.estimated_hours = updatedWorkWeek.estimated_hours;
+    workWeek.actual_hours = updatedWorkWeek.actual_hours;
+    self.observedWorkWeeks.push(workWeek);
+  });
+
+  $(document.body).on('workWeekCreated', function(event, createdWorkWeek) {
+    self.observedWorkWeeks.push(createdWorkWeek);
+  });
 
   // debounce for window.resize
-  // TODO: fix this calculation of available width
-  // var debouncedWeekRangeChange = _.debounce(_.bind(self.calculateWorkWeekRange, this), 200);
-  // $(window).on('resize', debouncedWeekRangeChange);
+  var debouncedWeekRangeChange = _.debounce(_.bind(self.calculateWorkWeekRange, this), 200);
+  $(window).on('hashchange', debouncedWeekRangeChange);
+  $(window).on('resize', debouncedWeekRangeChange);
 }
 
 _.extend(StaffPlanView.prototype, {
@@ -75,7 +119,7 @@ _.extend(StaffPlanView.prototype, {
     }, this);
 
     // lastly, prune any unnecessary indices from weekRange
-    this.weekRange().splice(timestampRange.length, this.weekRange().length);
+    this.weekRange.splice(timestampRange.length, this.weekRange().length);
   },
   // helper for getting/setting the initial beginning_of_day
   getStartHash: function() {

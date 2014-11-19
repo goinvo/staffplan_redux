@@ -1,19 +1,18 @@
 function UserAggregateChart(params) {
+  var self = this;
   this.user = params.user;
   this.weekRange = params.weekRange;
   this.showAssignmentTotals = typeof params.showAssignmentTotals === "undefined" ? true : params.showAssignmentTotals;
   this.wide = typeof params.wide === "undefined" ? false : params.wide;
   this.staffPlanURL = "/staffplans/" + this.user.id;
-
+  this.partitionedWorkWeeks = params.partitionedWorkWeeks;
   this.observedWorkWeeks = ko.observableArray();
   this.observedWorkWeeks.extend({rateLimit: 25});
 
   this.visibleWorkWeeks = ko.computed(function() {
     return _.map(this.weekRange(), function(weekData, index) {
 
-      var userWorkWeek = _.find(this.user.work_weeks, function(workWeek) {
-        return workWeek.cweek == weekData.cweek() && workWeek.year == weekData.year();
-      }, this);
+      var userWorkWeeks = self.partitionedWorkWeeks()[weekData.cweek() + "-" + weekData.year()] || [];
 
       if(_.isUndefined(this.observedWorkWeeks()[index])) {
         // add to the set
@@ -22,8 +21,8 @@ function UserAggregateChart(params) {
         this.observedWorkWeeks()[index] = {
             cweek: ko.observable(weekData.cweek())
           , year: ko.observable(weekData.year())
-          , actual: ko.observable(0)
-          , estimated: ko.observable(0)
+          , actual_hours: ko.observable(0)
+          , estimated_hours: ko.observable(0)
           , estimated_proposed: ko.observable(0)
           , estimated_planned: ko.observable(0)
           , beginning_of_week: ko.observable(weekData.beginning_of_week())
@@ -36,16 +35,16 @@ function UserAggregateChart(params) {
       }
 
       // add user data if available
-      if(_.isUndefined(userWorkWeek)) {
-        this.observedWorkWeeks()[index].actual(0);
-        this.observedWorkWeeks()[index].estimated(0);
+      if(_.isEmpty(userWorkWeeks)) {
+        this.observedWorkWeeks()[index].actual_hours(0);
+        this.observedWorkWeeks()[index].estimated_hours(0);
         this.observedWorkWeeks()[index].estimated_planned(0);
         this.observedWorkWeeks()[index].estimated_proposed(0);
       } else {
-        this.observedWorkWeeks()[index].actual(userWorkWeek.actual);
-        this.observedWorkWeeks()[index].estimated(userWorkWeek.estimated);
-        this.observedWorkWeeks()[index].estimated_planned(userWorkWeek.estimated_planned);
-        this.observedWorkWeeks()[index].estimated_proposed(userWorkWeek.estimated_proposed);
+        this.observedWorkWeeks()[index].actual_hours(userWorkWeeks.actual_hours());
+        this.observedWorkWeeks()[index].estimated_hours(userWorkWeeks.estimated_hours());
+        this.observedWorkWeeks()[index].estimated_planned(userWorkWeeks.estimated_planned());
+        this.observedWorkWeeks()[index].estimated_proposed(userWorkWeeks.estimated_proposed());
       }
 
       return this.observedWorkWeeks()[index];
@@ -54,7 +53,7 @@ function UserAggregateChart(params) {
   this.visibleWorkWeeks.extend({rateLimit: 25});
 }
 
-ko.components.register("user-aggregate-chart", {
+ko.components.register("staffplan-aggregate-chart", {
   viewModel: UserAggregateChart,
-  template: HandlebarsTemplates["user-aggregate-chart"]()
+  template: HandlebarsTemplates["staffplan-aggregate-chart"]()
 });

@@ -6,7 +6,7 @@ class CreateAssignmentWorkWeeksView < ActiveRecord::Migration
           assignments.id AS assignment_id,
           assignments.user_id AS user_id,
           assignments.proposed AS assignment_proposed,
-          assignments.archived AS assigment_archived,
+          assignments.archived AS assignment_archived,
           work_weeks.id AS work_week_id,
           work_weeks.estimated_hours AS estimated_hours,
           work_weeks.actual_hours AS actual_hours,

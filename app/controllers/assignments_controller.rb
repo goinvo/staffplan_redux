@@ -2,6 +2,8 @@ class AssignmentsController < ApplicationController
 
   respond_to :json
 
+  before_filter :find_assignment, only: [:update, :destroy]
+
   def create
     find_or_initialize_client_by_name
     find_or_initialize_project_by_name
@@ -14,15 +16,17 @@ class AssignmentsController < ApplicationController
   end
 
   def update
-    @assignment = current_user.current_company.assignments.find(params[:id])
-
     if @assignment.update(assignment_params)
-      flash[:notice] = "The assignment was updated successfully"
-      redirect_to assignment_path(@assignment)
+      respond_with(@assignment)
     else
       flash.now[:notice] = "Couldn't update your assignment"
       render :edit
     end
+  end
+
+  def destroy
+    # @assignment.destroy
+    render(json: {message: "assignment-destroyed"})
   end
 
   private
@@ -37,6 +41,14 @@ class AssignmentsController < ApplicationController
 
   def project_params
     params.require(:assignment).permit(:project_name)
+  end
+
+  def find_assignment
+    @assignment = current_user.current_company.assignments.find(params[:id])
+
+    if @assignment.nil?
+      render(:json => {error: "not-found"}, status: :not_found) and return
+    end
   end
 
   def find_client_by_client_id

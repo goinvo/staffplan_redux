@@ -8,7 +8,7 @@ class CreateUserProjectsView < ActiveRecord::Migration
           projects.company_id AS company_id,
           assignments.id AS assignment_id,
           assignments.proposed AS assignment_proposed,
-          assignments.archived AS assigment_archived,
+          assignments.archived AS assignment_archived,
           clients.id AS client_id,
           clients.name AS client_name,
           projects.name AS project_name,

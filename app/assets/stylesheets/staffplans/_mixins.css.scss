@@ -8,3 +8,11 @@
   width: 40px;
   text-align: center;
 }
+
+@mixin self-and-children-inline-block {
+  display: inline-block;
+
+  & > * {
+    display: inline-block;
+  }
+}

@@ -1,0 +1,1 @@
+top nav bar: keep my staffplan, all staffplans, dashboard (new screen) and search to the left, everything else to the right (possibly in a drop down)

@@ -7,24 +7,24 @@ _.extend(AggregateWorkWeek.prototype, {
   columnTotal: function() {
     if(this.isBeforeWithActuals()) {
       // for current and past dates prefer the actual hours
-      return this.workWeek.actual();
+      return this.workWeek.actual_hours;
     } else {
       // for future dates always use the estimated
-      return this.workWeek.estimated();
+      return this.workWeek.estimated_hours;
     }
   },
   // true/false, if the work_week is for a prior date with actual hours
   isBeforeWithActuals: function() {
     // have to double check that this still works with the current week
-    return (moment().isAfter(this.workWeek.beginning_of_week()) && this.workWeek.actual() !== 0);
+    return (moment().isAfter(this.workWeek.beginning_of_week()) && this.workWeek.actual_hours !== 0);
   },
   // friendly hover title text for bars
   titleText: function() {
-    var title = "Proposed: " + this.workWeek.estimated_proposed();
-    title +=    "\nPlanned: " + this.workWeek.estimated_planned();
+    var title = "Proposed: " + this.workWeek.estimated_proposed;
+    title +=    "\nPlanned: " + this.workWeek.estimated_planned;
 
     if(this.isBeforeWithActuals()) {
-      title +=    "\nActual: " + this.workWeek.actual();
+      title +=    "\nActual: " + this.workWeek.actual_hours;
     }
 
     return title;
@@ -39,7 +39,7 @@ _.extend(AggregateWorkWeek.prototype, {
     if(this.isBeforeWithActuals()) {
       return "background-color: gray; height: " + this.columnTotal() + "px;";
     } else {
-      if(this.workWeek.estimated_planned() == this.workWeek.estimated()) {
+      if(this.workWeek.estimated_planned == this.workWeek.estimated_hours) {
         // all planned. dark green.
         return "background-color: #5e9b69; height: " + this.columnTotal() + "px;";
       } else {
