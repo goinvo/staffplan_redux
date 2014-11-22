@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,# :lockable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
+  self.primary_key = "id"
+  
   has_paper_trail
 
   has_many :assignments, :dependent => :destroy do
