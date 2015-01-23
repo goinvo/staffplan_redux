@@ -4,7 +4,8 @@ window.StaffPlanIndex = (function(window, document, $) {
 
     self.sortOrder = "asc";
     self.sortField = "workload";
-    self.usersData = JSON.parse($('#users').remove().text());
+
+    self.users = JSON.parse($('#users').remove().text());
 
     this.startHash = ko.observable(initialStartHash);
     var initialStartHash = this.getStartHash();
@@ -13,8 +14,8 @@ window.StaffPlanIndex = (function(window, document, $) {
     this.weekRange.extend({rateLimit: 25});
     this.calculateWorkWeekRange();
 
-    this.users = ko.observableArray(self.usersData);
-    this.users.extend({rateLimit: 25});
+    this.usersData = ko.observableArray([]);
+    this.usersData.extend({rateLimit: 25});
 
     this.nextPreviousWeeks = ko.computed(function() {
       var columnCount = self.getColumnCount()
@@ -25,6 +26,19 @@ window.StaffPlanIndex = (function(window, document, $) {
         previous: "#start=" + moment(startParam).subtract(columnCount, 'weeks').unix() * 1000
       }
     });
+
+    // fetch data
+    $.ajax({
+      url: '/staffplans/date_range.json',
+      data: {
+        from: self.startHash(),
+        to: moment(self.startHash()).add(self.getColumnCount(), 'weeks').unix() * 1000,
+        count: self.getColumnCount()
+      },
+      success: function(data, status, jqxhr, foo, bar) {
+        self.usersData(data);
+      }
+    })
 
     $(window).on('hashchange', _.bind(this.calculateWorkWeekRange, this));
 
@@ -41,11 +55,6 @@ window.StaffPlanIndex = (function(window, document, $) {
       this.sortField = "workload";
 
       this.users.sort(_.bind(function(left, right) {
-        console.log('left: ' + left.full_name);
-        console.log('left.upcoming_estimated_hours: ' + left.upcoming_estimated_hours);
-        console.log('right: ' + right.full_name);
-        console.log('right.upcoming_estimated_hours: ' + right.upcoming_estimated_hours);
-
         return this.sortOrder == "asc" ?
           (parseInt(left.upcoming_estimated_hours, 10) > parseInt(right.upcoming_estimated_hours, 10)) ? 1 : -1 :
           (parseInt(right.upcoming_estimated_hours, 10) < parseInt(left.upcoming_estimated_hours, 10)) ? -1 : 1

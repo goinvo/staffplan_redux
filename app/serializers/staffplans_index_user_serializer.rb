@@ -27,19 +27,31 @@ class StaffplansIndexUserSerializer < ActiveModel::Serializer
   end
 
   def work_weeks
-    object.staffplans_list_views.group_by {|slv| {cweek: slv.cweek, year: slv.year}}.map do |key, values|
-      estimated_proposed = values.select(&:proposed).inject(0) {|sum, value| sum += (value.estimated_total || 0)}
-      estimated_planned = values.reject(&:proposed).inject(0) {|sum, value| sum += (value.estimated_total || 0)}
+    (@options[:from].to_i..@options[:to].to_i).step(604800000).inject([]) do |array, bow|
+      dow = Time.at(bow / 1000).to_date
 
-      key.merge(
-        beginning_of_week: values.first.beginning_of_week,
+      estimated_proposed = 0
+      estimated_planned = 0
+      actual_total = 0
+
+      object.staffplans_list_views.select { |slv| slv.cweek == dow.cweek && slv.year == dow.year }.each do |staffplan_list_view|
+        estimated_proposed += staffplan_list_view.proposed? ? staffplan_list_view.estimated_total.to_i : 0
+        estimated_planned += staffplan_list_view.proposed? ? 0 : staffplan_list_view.estimated_total.to_i
+        actual_total += staffplan_list_view.actual_total || 0
+      end
+
+      array << {
+        cweek: dow.cweek,
+        year: dow.year,
+        beginning_of_week: bow,
         estimated_hours: estimated_proposed + estimated_planned,
-        actual_hours: values.inject(0) {|sum, value| sum += (value.actual_total || 0)},
+        actual_hours: actual_total,
         estimated_proposed: estimated_proposed,
         estimated_planned: estimated_planned
-      )
-    # TODO: use a SortedSet here?
-    end.sort { |x,y| x[:beginning_of_week] <=> y[:beginning_of_week] }
+      }
+
+      array
+    end
   end
 
 

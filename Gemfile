@@ -9,7 +9,7 @@ gem 'haml-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'sdoc', '~> 0.4.0',        group: :doc
-gem 'puma'
+gem 'thin'
 gem 'paper_trail'
 gem 'bitmask_attributes'
 gem 'active_model_serializers'
@@ -28,7 +28,6 @@ gem 'neat'
 gem 'bitters'
 gem 'refills'
 gem "bower-rails"
-
 
 group :development, :test do
   gem 'rspec-rails'

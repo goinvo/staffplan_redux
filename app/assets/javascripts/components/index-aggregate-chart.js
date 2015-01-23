@@ -6,55 +6,42 @@ function UserAggregateChart(params) {
   this.wide = typeof params.wide === "undefined" ? false : params.wide;
   this.staffPlanURL = "/staffplans/" + this.user.id;
 
-  this.partitionedWorkWeeks = _.groupBy(self.user.work_weeks, function(userWorkWeek){
-    return userWorkWeek.cweek + "-" + userWorkWeek.year;
-  })
+  this.userWorkWeeks = ko.computed(function() {
+    // debugger
+    var match = _.find(params.usersData(), function(userData) { return userData.id == this.user.id; }, this);
+    return _.isUndefined(match) ? [] : match.work_weeks;
+  }, this);
 
-  this.observedWorkWeeks = ko.observableArray();
+  // init this.observedWorkWeeks with empty objects for the this.weekRange
+  this.observedWorkWeeks = ko.computed(function() {
+    return _.map(this.weekRange(), function(beginningOfWeek) {
+      return {
+        cweek: beginningOfWeek.cweek(),
+        year: beginningOfWeek.year(),
+        actual_hours: ko.observable(0),
+        estimated_hours: ko.observable(0),
+        estimated_proposed: ko.observable(0),
+        estimated_planned: ko.observable(0),
+        beginning_of_week: ko.observable(beginningOfWeek.beginning_of_week())
+      }
+    })
+  }, this);
   this.observedWorkWeeks.extend({rateLimit: 25});
 
-  this.visibleWorkWeeks = ko.computed(function() {
-    return _.map(this.weekRange(), function(weekData, index) {
+  // use a computed to watch userWorkWeeks for changes, then propagate to observedWorkWeeks
+  ko.computed(function() {
+    _.each(this.observedWorkWeeks(), function(observedWorkWeek) {
+      var matchingWeek = _.find(this.userWorkWeeks(), function(userWorkWeek) { return userWorkWeek.beginning_of_week == observedWorkWeek.beginning_of_week(); });
 
-      var userWorkWeeks = self.partitionedWorkWeeks[weekData.cweek() + "-" + weekData.year()] || [];
-
-      if(_.isUndefined(this.observedWorkWeeks()[index])) {
-        // add to the set
-        var date = moment(weekData.beginning_of_week());
-
-        this.observedWorkWeeks()[index] = {
-            cweek: weekData.cweek
-          , year: weekData.year
-          , actual_hours: 0
-          , estimated_hours: 0
-          , estimated_proposed: 0
-          , estimated_planned: 0
-          , beginning_of_week: ko.observable(weekData.beginning_of_week())
-        }
-      } else {
-        // update
-        this.observedWorkWeeks()[index].cweek =weekData.cweek
-        this.observedWorkWeeks()[index].year = weekData.year
-        this.observedWorkWeeks()[index].beginning_of_week(weekData.beginning_of_week())
+      if(_.isUndefined(matchingWeek)) return
+      else {
+        observedWorkWeek.actual_hours(matchingWeek.actual_hours);
+        observedWorkWeek.estimated_hours(matchingWeek.estimated_hours);
+        observedWorkWeek.estimated_planned(matchingWeek.estimated_planned);
+        observedWorkWeek.estimated_proposed(matchingWeek.estimated_proposed);
       }
-
-      // add user data if available
-      if(_.isEmpty(userWorkWeeks)) {
-        this.observedWorkWeeks()[index].actual_hours = 0;
-        this.observedWorkWeeks()[index].estimated_hours = 0;
-        this.observedWorkWeeks()[index].estimated_planned = 0;
-        this.observedWorkWeeks()[index].estimated_proposed = 0;
-      } else {
-        this.observedWorkWeeks()[index].actual_hours = userWorkWeeks[0].actual_hours;
-        this.observedWorkWeeks()[index].estimated_hours = userWorkWeeks[0].estimated_hours;
-        this.observedWorkWeeks()[index].estimated_planned = userWorkWeeks[0].estimated_planned;
-        this.observedWorkWeeks()[index].estimated_proposed = userWorkWeeks[0].estimated_proposed;
-      }
-
-      return this.observedWorkWeeks()[index];
     }, this);
   }, this);
-  this.visibleWorkWeeks.extend({rateLimit: 25});
 }
 
 ko.components.register("index-aggregate-chart", {
