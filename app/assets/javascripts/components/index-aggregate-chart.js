@@ -12,25 +12,33 @@ function UserAggregateChart(params) {
     return _.isUndefined(match) ? [] : match.work_weeks;
   }, this);
 
-  // init this.observedWorkWeeks with empty objects for the this.weekRange
-  this.observedWorkWeeks = ko.computed(function() {
-    return _.map(this.weekRange(), function(beginningOfWeek) {
-      return {
-        cweek: beginningOfWeek.cweek(),
-        year: beginningOfWeek.year(),
-        actual_hours: ko.observable(0),
-        estimated_hours: ko.observable(0),
-        estimated_proposed: ko.observable(0),
-        estimated_planned: ko.observable(0),
-        beginning_of_week: ko.observable(beginningOfWeek.beginning_of_week())
+  this.visibleWorkWeeks = ko.observableArray([]);
+  this.visibleWorkWeeks.extend({rateLimit: 25});
+
+  ko.computed(function() {
+    _.each(this.weekRange(), function(beginningOfWeek, index) {
+      if(_.isUndefined(this.visibleWorkWeeks()[index])) {
+        this.visibleWorkWeeks()[index] = {
+          cweek: ko.observable(beginningOfWeek.cweek()),
+          year: ko.observable(beginningOfWeek.year()),
+          actual_hours: ko.observable(0),
+          estimated_hours: ko.observable(0),
+          estimated_proposed: ko.observable(0),
+          estimated_planned: ko.observable(0),
+          beginning_of_week: ko.observable(beginningOfWeek.beginning_of_week())
+        }
+      } else {
+        this.visibleWorkWeeks()[index].year(beginningOfWeek.year());
+        this.visibleWorkWeeks()[index].cweek(beginningOfWeek.cweek())
+        this.visibleWorkWeeks()[index].beginning_of_week(beginningOfWeek.beginning_of_week());
       }
-    })
-  }, this);
-  this.observedWorkWeeks.extend({rateLimit: 25});
+    }, this);
+
+  }, this)
 
   // use a computed to watch userWorkWeeks for changes, then propagate to observedWorkWeeks
   ko.computed(function() {
-    _.each(this.observedWorkWeeks(), function(observedWorkWeek) {
+    _.each(this.visibleWorkWeeks(), function(observedWorkWeek) {
       var matchingWeek = _.find(this.userWorkWeeks(), function(userWorkWeek) { return userWorkWeek.beginning_of_week == observedWorkWeek.beginning_of_week(); });
 
       if(_.isUndefined(matchingWeek)) return

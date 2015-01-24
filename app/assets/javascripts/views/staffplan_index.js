@@ -11,7 +11,6 @@ window.StaffPlanIndex = (function(window, document, $) {
     var initialStartHash = this.getStartHash();
 
     this.weekRange = ko.observableArray();
-    this.weekRange.extend({rateLimit: 25});
     this.calculateWorkWeekRange();
 
     this.usersData = ko.observableArray([]);
@@ -27,17 +26,19 @@ window.StaffPlanIndex = (function(window, document, $) {
       }
     });
 
-    // fetch data
-    $.ajax({
-      url: '/staffplans/date_range.json',
-      data: {
-        from: self.startHash(),
-        to: moment(self.startHash()).add(self.getColumnCount(), 'weeks').unix() * 1000,
-        count: self.getColumnCount()
-      },
-      success: function(data, status, jqxhr, foo, bar) {
-        self.usersData(data);
-      }
+    ko.computed(function() {
+      // fetch data
+      $.ajax({
+        url: '/staffplans/date_range.json',
+        data: {
+          from: self.startHash(),
+          to: moment(self.startHash()).add(self.getColumnCount(), 'weeks').unix() * 1000,
+          count: self.getColumnCount()
+        },
+        success: function(data, status, jqxhr, foo, bar) {
+          self.usersData(data);
+        }
+      })
     })
 
     $(window).on('hashchange', _.bind(this.calculateWorkWeekRange, this));
