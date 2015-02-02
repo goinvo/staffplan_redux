@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
 
   has_one :staffplan_list_view
   has_many :staffplan_list_work_weeks
-  
+
   has_many :user_projects, class_name: "UserProjectsView"
   has_many :sent_invitations, foreign_key: "sender", class_name: "Invite"
 
@@ -31,12 +31,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  after_update do |user|
-    terminator = user.versions.last.try(:terminator)
-    if terminator.present? && (terminator.to_i != user.id)
-      User.where(:id => terminator.to_i).first.try(&:update_timestamp!)
-    end
-  end
+  # after_update do |user|
+  #   terminator = user.versions.last.try(:terminator)
+  #   if terminator.present? && (terminator.to_i != user.id)
+  #     User.where(:id => terminator.to_i).first.try(&:update_timestamp!)
+  #   end
+  # end
 
   validates_presence_of :email, :first_name, :last_name
   validates_uniqueness_of :email
