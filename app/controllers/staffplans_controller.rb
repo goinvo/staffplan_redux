@@ -9,7 +9,7 @@ class StaffplansController < ApplicationController
   end
 
   def date_range
-    @users = current_company.active_users.includes(:memberships, :staffplans_list_views).to_a
-    render(json: ActiveModel::ArraySerializer.new(@users, each_serializer: StaffplansIndexUserSerializer, from: params[:from], to: params[:to], count: params[:count]))
+    @users = current_company.active_users.includes(:memberships, :staffplan_list_view).to_a
+    render(json: ActiveModel::ArraySerializer.new(@users, each_serializer: StaffplansListSerializer, from: params[:from], to: params[:to]))
   end
 end

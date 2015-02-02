@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable
 
   self.primary_key = "id"
-  
+
   has_paper_trail
 
   has_many :assignments, :dependent => :destroy do
@@ -17,9 +17,13 @@ class User < ActiveRecord::Base
   has_many :projects, :through => :assignments
   has_many :memberships, :dependent => :destroy
   has_many :companies, :through => :memberships
-  has_many :staffplans_list_views, class_name: "StaffplansListView"
+
+  has_one :staffplan_list_view
+  has_many :staffplan_list_work_weeks
+  
   has_many :user_projects, class_name: "UserProjectsView"
   has_many :sent_invitations, foreign_key: "sender", class_name: "Invite"
+
   has_many :received_invitations, foreign_key: "email", primary_key: "email", class_name: "Invite"
   has_many :user_projects, class_name: "UserProjectsView" do
     def for_company(company)

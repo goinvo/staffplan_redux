@@ -298,20 +298,72 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: staffplan_list_view; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: staffplan_list_views; Type: VIEW; Schema: public; Owner: -
 --
 
-CREATE TABLE staffplan_list_view (
-    user_id integer,
-    assignment_id integer,
-    proposed boolean,
-    beginning_of_week numeric(15,0),
-    cweek smallint,
-    year smallint,
-    estimated_total bigint,
-    actual_total bigint,
-    diff bigint
+CREATE VIEW staffplan_list_views AS
+ SELECT derp.user_id,
+    max(derp.estimated_total) AS estimated_total,
+    max(derp.actual_total) AS actual_total,
+    max(derp.diff) AS diff
+   FROM ( SELECT max(assignments.user_id) AS user_id,
+            COALESCE(sum(work_weeks.estimated_hours), (0)::bigint) AS estimated_total,
+            COALESCE(sum(work_weeks.actual_hours), (0)::bigint) AS actual_total,
+            COALESCE((sum(work_weeks.actual_hours) - sum(work_weeks.estimated_hours)), (0)::bigint) AS diff
+           FROM (assignments
+             JOIN work_weeks ON ((assignments.id = work_weeks.assignment_id)))
+          GROUP BY assignments.user_id) derp
+  GROUP BY derp.user_id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying(255) DEFAULT ''::character varying NOT NULL,
+    password_digest character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    current_company_id integer,
+    registration_token character varying(255),
+    first_name character varying(255),
+    last_name character varying(255),
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying(255),
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip character varying(255),
+    last_sign_in_ip character varying(255),
+    confirmation_token character varying(255),
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    unconfirmed_email character varying(255)
 );
+
+
+--
+-- Name: staffplan_list_work_weeks; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW staffplan_list_work_weeks AS
+ SELECT users.id AS user_id,
+    max(work_weeks.cweek) AS cweek,
+    max(work_weeks.year) AS year,
+    COALESCE(sum(work_weeks.estimated_hours), (0)::bigint) AS estimated_total,
+    COALESCE(sum(work_weeks.actual_hours), (0)::bigint) AS actual_total,
+    COALESCE(sum(work_weeks.estimated_hours), (0)::bigint) AS estimated_proposed,
+    COALESCE(sum(work_weeks.estimated_hours), (0)::bigint) AS estimated_planned,
+    max(work_weeks.beginning_of_week) AS beginning_of_week
+   FROM ((work_weeks
+     JOIN assignments ON ((assignments.id = work_weeks.assignment_id)))
+     JOIN users ON ((assignments.user_id = users.id)))
+  GROUP BY work_weeks.beginning_of_week, assignments.id, users.id
+  ORDER BY users.id;
 
 
 --
@@ -345,36 +397,6 @@ CREATE SEQUENCE user_preferences_id_seq
 --
 
 ALTER SEQUENCE user_preferences_id_seq OWNED BY user_preferences.id;
-
-
---
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE users (
-    id integer NOT NULL,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    password_digest character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    current_company_id integer,
-    registration_token character varying(255),
-    first_name character varying(255),
-    last_name character varying(255),
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying(255),
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255),
-    confirmation_token character varying(255),
-    confirmed_at timestamp without time zone,
-    confirmation_sent_at timestamp without time zone,
-    unconfirmed_email character varying(255)
-);
 
 
 --
@@ -678,26 +700,6 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: _RETURN; Type: RULE; Schema: public; Owner: -
---
-
-CREATE RULE "_RETURN" AS
-    ON SELECT TO staffplan_list_view DO INSTEAD  SELECT users.id AS user_id,
-    assignments.id AS assignment_id,
-    assignments.proposed,
-    work_weeks.beginning_of_week,
-    work_weeks.cweek,
-    work_weeks.year,
-    sum(work_weeks.estimated_hours) AS estimated_total,
-    sum(work_weeks.actual_hours) AS actual_total,
-    (sum(work_weeks.actual_hours) - sum(work_weeks.estimated_hours)) AS diff
-   FROM ((users
-     JOIN assignments ON ((assignments.user_id = users.id)))
-     JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)))
-  GROUP BY users.id, assignments.id, work_weeks.beginning_of_week, work_weeks.cweek, work_weeks.year;
-
-
---
 -- PostgreSQL database dump complete
 --
 
@@ -784,4 +786,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140809143536');
 INSERT INTO schema_migrations (version) VALUES ('20140809143639');
 
 INSERT INTO schema_migrations (version) VALUES ('20140809143726');
+
+INSERT INTO schema_migrations (version) VALUES ('20150125172120');
 

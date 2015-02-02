@@ -35,7 +35,7 @@ window.StaffPlanIndex = (function(window, document, $) {
           to: moment(self.startHash()).add(self.getColumnCount(), 'weeks').unix() * 1000,
           count: self.getColumnCount()
         },
-        success: function(data, status, jqxhr, foo, bar) {
+        success: function(data, status, jqxhr) {
           self.usersData(data);
         }
       })

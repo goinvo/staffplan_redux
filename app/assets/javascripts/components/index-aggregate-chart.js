@@ -7,13 +7,13 @@ function UserAggregateChart(params) {
   this.staffPlanURL = "/staffplans/" + this.user.id;
 
   this.userWorkWeeks = ko.computed(function() {
-    // debugger
     var match = _.find(params.usersData(), function(userData) { return userData.id == this.user.id; }, this);
     return _.isUndefined(match) ? [] : match.work_weeks;
   }, this);
+  this.userWorkWeeks.extend({rateLimit: 50})
 
   this.visibleWorkWeeks = ko.observableArray([]);
-  this.visibleWorkWeeks.extend({rateLimit: 25});
+  this.visibleWorkWeeks.extend({rateLimit: 50});
 
   ko.computed(function() {
     _.each(this.weekRange(), function(beginningOfWeek, index) {
@@ -43,8 +43,8 @@ function UserAggregateChart(params) {
 
       if(_.isUndefined(matchingWeek)) return
       else {
-        observedWorkWeek.actual_hours(matchingWeek.actual_hours);
-        observedWorkWeek.estimated_hours(matchingWeek.estimated_hours);
+        observedWorkWeek.actual_hours(matchingWeek.actual_total);
+        observedWorkWeek.estimated_hours(matchingWeek.estimated_total);
         observedWorkWeek.estimated_planned(matchingWeek.estimated_planned);
         observedWorkWeek.estimated_proposed(matchingWeek.estimated_proposed);
       }

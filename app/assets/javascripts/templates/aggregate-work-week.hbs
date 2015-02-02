@@ -1,4 +1,4 @@
-<div class='aggregate-work-week' data-bind="attr: {style: wrapperStyle(), cweek: workWeek.cweek, year: workWeek.year}">
+<div class='aggregate-work-week' data-bind="attr: {style: wrapperStyle(), cweek: workWeek.cweek, year: workWeek.year, bow: workWeek.beginning_of_week, assignment_id: workWeek.assignment_id}">
   <div data-bind="attr: {style: barGraphStyle(), title: titleText()}" class="actual work-week">
     <div data-bind="text: columnTotal()" class="column-total"></div>
   </div>
