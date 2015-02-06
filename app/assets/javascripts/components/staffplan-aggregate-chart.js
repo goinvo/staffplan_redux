@@ -1,4 +1,4 @@
-function UserAggregateChart(params) {
+function StaffplanAggregateChart(params) {
   var self = this;
   this.user = params.user;
   this.weekRange = params.weekRange;
@@ -54,6 +54,6 @@ function UserAggregateChart(params) {
 }
 
 ko.components.register("staffplan-aggregate-chart", {
-  viewModel: UserAggregateChart,
+  viewModel: StaffplanAggregateChart,
   template: HandlebarsTemplates["staffplan-aggregate-chart"]()
 });

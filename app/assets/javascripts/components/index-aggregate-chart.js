@@ -1,13 +1,14 @@
-function UserAggregateChart(params) {
+function IndexAggregateChart(params) {
   var self = this;
   this.user = params.user;
   this.weekRange = params.weekRange;
   this.showAssignmentTotals = typeof params.showAssignmentTotals === "undefined" ? true : params.showAssignmentTotals;
   this.wide = typeof params.wide === "undefined" ? false : params.wide;
   this.staffPlanURL = "/staffplans/" + this.user.id;
+  this.usersData = params.usersData;
 
   this.userWorkWeeks = ko.computed(function() {
-    var match = _.find(params.usersData(), function(userData) { return userData.id == this.user.id; }, this);
+    var match = _.find(this.usersData(), function(userData) { return userData.id == this.user.id; }, this);
     return _.isUndefined(match) ? [] : match.work_weeks;
   }, this);
   this.userWorkWeeks.extend({rateLimit: 50})
@@ -53,6 +54,6 @@ function UserAggregateChart(params) {
 }
 
 ko.components.register("index-aggregate-chart", {
-  viewModel: UserAggregateChart,
+  viewModel: IndexAggregateChart,
   template: HandlebarsTemplates["index-aggregate-chart"]()
 });
