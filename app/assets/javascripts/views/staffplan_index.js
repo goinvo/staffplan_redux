@@ -5,7 +5,7 @@ window.StaffPlanIndex = (function(window, document, $) {
     self.sortOrder = "asc";
     self.sortField = "workload";
 
-    self.users = JSON.parse($('#users').remove().text());
+    self.users = ko.observableArray(JSON.parse($('#users').remove().text()));
 
     this.startHash = ko.observable(initialStartHash);
     var initialStartHash = this.getStartHash();
@@ -37,6 +37,7 @@ window.StaffPlanIndex = (function(window, document, $) {
         },
         success: function(data, status, jqxhr) {
           self.usersData(data);
+          _.defer(_.bind(self.sortByWorkload, self, self, null, true));
         }
       })
     })
@@ -49,16 +50,24 @@ window.StaffPlanIndex = (function(window, document, $) {
   }
 
   _.extend(StaffPlanIndex.prototype, {
-    sortByWorkload: function() {
-      if(this.sortField == "workload") {
-        this.sortOrder = (this.sortOrder == "asc" ? "desc" : "asc");
-      }
-      this.sortField = "workload";
+    sortByWorkload: function(self, event, preserveSortOrder) {
+      preserveSortOrder = !!preserveSortOrder;
 
+      if(!preserveSortOrder) {
+        if(this.sortField == "workload") {
+          this.sortOrder = (this.sortOrder == "asc" ? "desc" : "asc");
+        }
+      }
+
+      this.sortField = "workload";
       this.users.sort(_.bind(function(left, right) {
+
+        var leftUserData = _.find(this.usersData(), function(userData) { return userData.id == left.id; }),
+            rightUserData = _.find(this.usersData(), function(userData) { return userData.id == right.id; });
+
         return this.sortOrder == "asc" ?
-          (parseInt(left.upcoming_estimated_hours, 10) > parseInt(right.upcoming_estimated_hours, 10)) ? 1 : -1 :
-          (parseInt(right.upcoming_estimated_hours, 10) < parseInt(left.upcoming_estimated_hours, 10)) ? -1 : 1
+          (parseInt(leftUserData.upcoming_estimated_hours, 10) > parseInt(rightUserData.upcoming_estimated_hours, 10)) ? 1 : -1 :
+          (parseInt(rightUserData.upcoming_estimated_hours, 10) < parseInt(leftUserData.upcoming_estimated_hours, 10)) ? -1 : 1
       }, this));
     },
     sortByName: function() {
