@@ -1,7 +1,7 @@
 //= require moment/moment
 //= require jquery/dist/jquery
 //= require jquery-ujs/src/rails
-//= require lodash/dist/lodash
+//= require lodash/lodash
 //= require handlebars.runtime
 //= require knockoutjs/dist/knockout.debug
 //= require_tree ./templates
