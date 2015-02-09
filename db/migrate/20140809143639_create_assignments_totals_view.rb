@@ -1,7 +1,7 @@
-class CreateAssignmentTotalsView < ActiveRecord::Migration
+class CreateAssignmentsTotalsView < ActiveRecord::Migration
   def up
     execute %{
-      CREATE OR REPLACE VIEW assignment_totals_view AS
+      CREATE OR REPLACE VIEW assignments_totals_view AS
         SELECT
           assignments.id AS assignment_id,
           SUM(work_weeks.estimated_hours) AS estimated_total,
@@ -12,8 +12,8 @@ class CreateAssignmentTotalsView < ActiveRecord::Migration
         GROUP BY assignments.id, work_weeks.assignment_id
     }
   end
-  
+
   def down
-    execute "DROP VIEW assignment_totals_view;"
+    execute "DROP VIEW assignments_totals_view;"
   end
 end

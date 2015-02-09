@@ -1,7 +1,7 @@
-class CreateStaffplanListWorkWeeks < ActiveRecord::Migration
+class CreateStaffplansWorkWeeksView < ActiveRecord::Migration
   def up
     execute %{
-      CREATE OR REPLACE VIEW staffplan_list_work_weeks AS
+      CREATE OR REPLACE VIEW staffplans_work_weeks_view AS
         SELECT
           users.id as user_id,
           MAX(work_weeks.cweek) as cweek,
@@ -28,6 +28,6 @@ class CreateStaffplanListWorkWeeks < ActiveRecord::Migration
   end
 
   def down
-    execute "DROP VIEW staffplan_list_work_weeks;"
+    execute "DROP VIEW staffplans_work_weeks_view;"
   end
 end

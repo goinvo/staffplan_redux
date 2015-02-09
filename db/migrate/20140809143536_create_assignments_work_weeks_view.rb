@@ -1,7 +1,7 @@
-class CreateAssignmentWorkWeeksView < ActiveRecord::Migration
+class CreateAssignmentsWorkWeeksView < ActiveRecord::Migration
   def up
     execute %{
-      CREATE OR REPLACE VIEW assignment_work_weeks_view AS
+      CREATE OR REPLACE VIEW assignments_work_weeks_view AS
         SELECT
           assignments.id AS assignment_id,
           assignments.user_id AS user_id,
@@ -19,6 +19,6 @@ class CreateAssignmentWorkWeeksView < ActiveRecord::Migration
   end
 
   def down
-    execute "DROP VIEW assignment_work_weeks_view;"
+    execute "DROP VIEW assignments_work_weeks_view;"
   end
 end

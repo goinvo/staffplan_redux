@@ -45,6 +45,25 @@ CREATE TABLE assignments (
 
 
 --
+-- Name: assignments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE assignments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: assignments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE assignments_id_seq OWNED BY assignments.id;
+
+
+--
 -- Name: work_weeks; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -62,10 +81,10 @@ CREATE TABLE work_weeks (
 
 
 --
--- Name: assignment_totals_view; Type: VIEW; Schema: public; Owner: -
+-- Name: assignments_totals_view; Type: VIEW; Schema: public; Owner: -
 --
 
-CREATE VIEW assignment_totals_view AS
+CREATE VIEW assignments_totals_view AS
  SELECT assignments.id AS assignment_id,
     sum(work_weeks.estimated_hours) AS estimated_total,
     sum(work_weeks.actual_hours) AS actual_total,
@@ -76,10 +95,10 @@ CREATE VIEW assignment_totals_view AS
 
 
 --
--- Name: assignment_work_weeks_view; Type: VIEW; Schema: public; Owner: -
+-- Name: assignments_work_weeks_view; Type: VIEW; Schema: public; Owner: -
 --
 
-CREATE VIEW assignment_work_weeks_view AS
+CREATE VIEW assignments_work_weeks_view AS
  SELECT assignments.id AS assignment_id,
     assignments.user_id,
     assignments.proposed AS assignment_proposed,
@@ -92,25 +111,6 @@ CREATE VIEW assignment_work_weeks_view AS
     work_weeks.beginning_of_week
    FROM (assignments
      JOIN work_weeks ON ((work_weeks.assignment_id = assignments.id)));
-
-
---
--- Name: assignments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE assignments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: assignments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE assignments_id_seq OWNED BY assignments.id;
 
 
 --
@@ -298,10 +298,10 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: staffplan_list_views; Type: VIEW; Schema: public; Owner: -
+-- Name: staffplans_totals_view; Type: VIEW; Schema: public; Owner: -
 --
 
-CREATE VIEW staffplan_list_views AS
+CREATE VIEW staffplans_totals_view AS
  SELECT derp.user_id,
     max(derp.estimated_total) AS estimated_total,
     max(derp.actual_total) AS actual_total,
@@ -347,10 +347,10 @@ CREATE TABLE users (
 
 
 --
--- Name: staffplan_list_work_weeks; Type: VIEW; Schema: public; Owner: -
+-- Name: staffplans_work_weeks_view; Type: VIEW; Schema: public; Owner: -
 --
 
-CREATE VIEW staffplan_list_work_weeks AS
+CREATE VIEW staffplans_work_weeks_view AS
  SELECT users.id AS user_id,
     max(work_weeks.cweek) AS cweek,
     max(work_weeks.year) AS year,

@@ -18,8 +18,8 @@ class User < ActiveRecord::Base
   has_many :memberships, :dependent => :destroy
   has_many :companies, :through => :memberships
 
-  has_one :staffplan_list_view
-  has_many :staffplan_list_work_weeks
+  has_one :staffplans_totals_view
+  has_many :staffplans_work_weeks_view
 
   has_many :user_projects, class_name: "UserProjectsView"
   has_many :sent_invitations, foreign_key: "sender", class_name: "Invite"

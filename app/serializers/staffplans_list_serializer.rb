@@ -15,13 +15,13 @@ class StaffplansListSerializer < ActiveModel::Serializer
   end
 
   def upcoming_estimated_hours
-    scoped_staffplan_list_work_weeks.select { |slww| slww.beginning_of_week >= @options[:from].to_i }.inject(0) do |sum, value|
+    scoped_staffplans_work_weeks_view.select { |slww| slww.beginning_of_week >= @options[:from].to_i }.inject(0) do |sum, value|
       sum += (value.estimated_total || 0)
     end
   end
 
-  def scoped_staffplan_list_work_weeks
-    @scoped_list_work_weeks ||= object.staffplan_list_work_weeks.where(beginning_of_week: @options[:from].to_i..@options[:to].to_i)
+  def scoped_staffplans_work_weeks_view
+    @scoped_list_work_weeks ||= object.staffplans_work_weeks_view.where(beginning_of_week: @options[:from].to_i..@options[:to].to_i)
   end
 
   def work_weeks
@@ -29,7 +29,7 @@ class StaffplansListSerializer < ActiveModel::Serializer
 
     range.step(604800000).inject([]) do |array, bow|
       dow = Time.at(bow / 1000).to_date
-      existing_work_weeks = scoped_staffplan_list_work_weeks.select { |eww| eww.cweek == dow.cweek && eww.year == dow.year }
+      existing_work_weeks = scoped_staffplans_work_weeks_view.select { |eww| eww.cweek == dow.cweek && eww.year == dow.year }
 
       if existing_work_weeks.any?
         array << existing_work_weeks.inject(build_work_week(dow, bow)) do |hash, eww|
@@ -60,15 +60,15 @@ class StaffplansListSerializer < ActiveModel::Serializer
   end
 
   def estimated_total
-    object.staffplan_list_view.estimated_total rescue 0
+    object.staffplans_totals_view.estimated_total rescue 0
   end
 
   def actual_total
-    object.staffplan_list_view.actual_total rescue 0
+    object.staffplans_totals_view.actual_total rescue 0
   end
 
   def diff
-    object.staffplan_list_view.diff rescue 0
+    object.staffplans_totals_view.diff rescue 0
   end
 
   def url

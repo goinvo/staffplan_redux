@@ -1,7 +1,7 @@
-class CreateStaffplanListViews < ActiveRecord::Migration
+class CreateStaffplansTotalsView < ActiveRecord::Migration
   def up
     execute %{
-      CREATE OR REPLACE VIEW staffplan_list_views AS
+      CREATE OR REPLACE VIEW staffplans_totals_view AS
         SELECT
           user_id,
           MAX(estimated_total) AS estimated_total,
@@ -28,6 +28,6 @@ class CreateStaffplanListViews < ActiveRecord::Migration
   end
 
   def down
-    execute "DROP VIEW staffplan_list_views;"
+    execute "DROP VIEW staffplans_totals_view;"
   end
 end
