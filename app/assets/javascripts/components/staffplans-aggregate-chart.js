@@ -1,8 +1,7 @@
-function IndexAggregateChart(params) {
+function StaffplansAggregateChart(params) {
   var self = this;
   this.user = params.user;
   this.weekRange = params.weekRange;
-  this.showAssignmentTotals = typeof params.showAssignmentTotals === "undefined" ? true : params.showAssignmentTotals;
   this.wide = typeof params.wide === "undefined" ? false : params.wide;
   this.staffPlanURL = "/staffplans/" + this.user.id;
   this.usersData = params.usersData;
@@ -34,7 +33,6 @@ function IndexAggregateChart(params) {
         this.visibleWorkWeeks()[index].beginning_of_week(beginningOfWeek.beginning_of_week());
       }
     }, this);
-
   }, this)
 
   // use a computed to watch userWorkWeeks for changes, then propagate to observedWorkWeeks
@@ -53,7 +51,7 @@ function IndexAggregateChart(params) {
   }, this);
 }
 
-ko.components.register("index-aggregate-chart", {
-  viewModel: IndexAggregateChart,
-  template: HandlebarsTemplates["index-aggregate-chart"]()
+ko.components.register("staffplans-aggregate-chart", {
+  viewModel: StaffplansAggregateChart,
+  template: HandlebarsTemplates["staffplans-aggregate-chart"]()
 });

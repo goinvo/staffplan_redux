@@ -1,4 +1,4 @@
-function StaffplanAggregateChart(params) {
+function AssignmentsAggregateChart(params) {
   var self = this;
   this.user = params.user;
   this.weekRange = params.weekRange;
@@ -53,7 +53,7 @@ function StaffplanAggregateChart(params) {
   this.visibleWorkWeeks.extend({rateLimit: 25});
 }
 
-ko.components.register("staffplan-aggregate-chart", {
-  viewModel: StaffplanAggregateChart,
-  template: HandlebarsTemplates["staffplan-aggregate-chart"]()
+ko.components.register("assignments-aggregate-chart", {
+  viewModel: AssignmentsAggregateChart,
+  template: HandlebarsTemplates["assignments-aggregate-chart"]()
 });

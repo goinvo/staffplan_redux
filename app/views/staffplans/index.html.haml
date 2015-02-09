@@ -18,7 +18,7 @@
       %a{data: {bind: "attr: { href: nextPreviousWeeks().next}"}} Next
 
 %ul.user-list.flexible-list{data: {bind: "foreach: users"}}
-  %li.user.box{data: {bind: "component: {name: 'index-aggregate-chart', params: {user: $data, weekRange: $parent.weekRange, usersData: $parent.usersData}}"}}
+  %li.user.box{data: {bind: "component: {name: 'staffplans-aggregate-chart', params: {user: $data, weekRange: $parent.weekRange, usersData: $parent.usersData}}"}}
 
 %script{type: "application/json", id: "users"}
   = ActiveModel::ArraySerializer.new(@users).to_json.html_safe
