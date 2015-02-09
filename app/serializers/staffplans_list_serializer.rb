@@ -28,8 +28,8 @@ class StaffplansListSerializer < ActiveModel::Serializer
     range = (@options[:from].to_i..@options[:to].to_i)
 
     range.step(604800000).inject([]) do |array, bow|
-      existing_work_weeks = scoped_staffplan_list_work_weeks.select { |eww| eww.beginning_of_week == bow }
       dow = Time.at(bow / 1000).to_date
+      existing_work_weeks = scoped_staffplan_list_work_weeks.select { |eww| eww.cweek == dow.cweek && eww.year == dow.year }
 
       if existing_work_weeks.any?
         array << existing_work_weeks.inject(build_work_week(dow, bow)) do |hash, eww|
