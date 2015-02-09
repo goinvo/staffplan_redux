@@ -33,8 +33,5 @@
 %script{type: "application/json", id: "assignments"}
   = ActiveModel::ArraySerializer.new(@user_projects, each_serializer: UserProjectsViewSerializer).to_json.html_safe
 
-%script{type: "application/json", id: "user"}
-  = StaffplansShowUserSerializer.new(@user).to_json.html_safe
-
 %script{type: "application/json", id: "users"}
   = ActiveModel::ArraySerializer.new((current_user.current_company.active_users << current_user).uniq, each_serializer: CurrentCompanyUsersSerializer).to_json.html_safe

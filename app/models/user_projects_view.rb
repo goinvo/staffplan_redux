@@ -7,6 +7,6 @@ class UserProjectsView < ActiveRecord::Base
 
   scope :active, -> { where(assignment_archived: false) }
 
-  has_many :work_weeks, class_name: "AssignmentWorkWeeksView", primary_key: :assignment_id, foreign_key: :assignment_id
-  has_one :assignment_totals, class_name: "AssignmentTotal", primary_key: :assignment_id, foreign_key: :assignment_id
+  has_many :work_weeks, class_name: "AssignmentsWorkWeeksView", primary_key: :assignment_id, foreign_key: :assignment_id
+  has_one :assignment_totals, class_name: "AssignmentsTotalsView", primary_key: :assignment_id, foreign_key: :assignment_id
 end
