@@ -22,7 +22,7 @@ ko.components.register('date-range-column-header', {
       if(this.data().week() == 1)
         output += " (" + this.data().format("YYYY") + ")";
 
-      return output;
+      return new Handlebars.SafeString(output);
     }
 
     this.weekOfMonth = function() {

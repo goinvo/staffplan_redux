@@ -40,6 +40,11 @@ aggregate-work-week {
 
 date-range-column-header {
   @include aligned-list-item;
+  vertical-align: top;
+  
+  & > div {
+    min-height: 20px;
+  }
 }
 
 .aggregate-work-week {

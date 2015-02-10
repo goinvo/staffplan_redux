@@ -1,14 +1,31 @@
 function StaffplansAggregateChart(params) {
   var self = this;
   this.user = params.user;
+  this.estimated_total = ko.observable(0);
+  this.actual_total = ko.observable(0);
+  this.diff = ko.computed(function() {
+    var diffValue = this.estimated_total() - this.actual_total();
+    return "Δ " + (diffValue > 0 ? '+' : '') + diffValue;
+  }, this)
   this.weekRange = params.weekRange;
   this.wide = typeof params.wide === "undefined" ? false : params.wide;
   this.staffPlanURL = "/staffplans/" + this.user.id;
   this.usersData = params.usersData;
 
   this.userWorkWeeks = ko.computed(function() {
-    var match = _.find(this.usersData(), function(userData) { return userData.id == this.user.id; }, this);
-    return _.isUndefined(match) ? [] : match.work_weeks;
+    var workWeeks,
+        match = _.find(this.usersData(), function(userData) { return userData.id == this.user.id; }, this);
+
+    if(_.isUndefined(match)) {
+      workWeeks = [];
+    } else {
+      workWeeks = match.work_weeks;
+      // update estiamted/actual totals while we're here
+      this.estimated_total(match.estimated_total);
+      this.actual_total(match.actual_total);
+    }
+
+    return workWeeks;
   }, this);
   this.userWorkWeeks.extend({rateLimit: 50})
 

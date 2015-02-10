@@ -18,6 +18,14 @@
 
   .user-list {
     padding-top: em(10);
+
+    li {
+      border-top: 1px dotted rgba(0,0,0,0.1);
+
+      &:first-child {
+        border: none;
+      }
+    }
   }
 
   .list-header {
