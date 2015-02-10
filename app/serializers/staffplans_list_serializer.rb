@@ -15,7 +15,7 @@ class StaffplansListSerializer < ActiveModel::Serializer
   end
 
   def upcoming_estimated_hours
-    scoped_staffplans_work_weeks_view.select { |slww| slww.beginning_of_week >= @options[:from].to_i }.inject(0) do |sum, value|
+    object.staffplans_work_weeks_view.where(beginning_of_week: @options[:from].to_i..Float::INFINITY).inject(0) do |sum, value|
       sum += (value.estimated_total || 0)
     end
   end
