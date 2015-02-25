@@ -1,50 +1,68 @@
 <div class="assignment-info single-flexible-column wide">
-  <!-- client name -->
-  <div class="client-name">
-    <!-- only show client name for the first assignment -->
-    <span data-bind="if: (!newAssignment() && $index() == 0)">
-      <span data-bind="text: $parent.client_name"></span>
-      <!-- don't show an add link for new assignments. saving may fail and flicker this temporarily -->
-      <a href="#" data-bind="ifnot: newAssignment(), click: addClientProject">add</a>
-    </span>
-    <!-- client name input. show for net-new client-list-item components -->
-    <input type="text"
-           placeholder="Client Name"
-           data-bind="visible: (newAssignment() && $index() == 0), value: assignment.client_name, event: {keyup: onKeyUp}"
-           name="assignment[client_name]" />
-  </div>
-  <!-- project name -->
-  <div class="project-name">
-    <!-- link to the project plan -->
-
-    <!-- ko ifnot: newAssignment() -->
-    <a data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
-    <!-- /ko -->
-
-    <!-- project name input for new assignments -->
-    <!-- ko if: newAssignment() -->
+  <div data-bind="visible: !editing()">
+    <!-- client name -->
+    <div class="client-name">
+      <!-- only show client name for the first assignment -->
+      <span data-bind="if: (!newAssignment() && $index() == 0)">
+        <span data-bind="text: $parent.client_name"></span>
+        <!-- don't show an add link for new assignments. saving may fail and flicker this temporarily -->
+        <a href="#" data-bind="ifnot: newAssignment(), click: addClientProject">add</a>
+      </span>
+      <!-- client name input. show for net-new client-list-item components -->
       <input type="text"
-             placeholder="Project Name"
-             name="assignment[project_name]"
-             data-bind="value: assignment.project_name, event: {keyup: onKeyUp}" />
-      <input type="submit" value="Save" class='display-none' />
-    <!-- /ko -->
+             placeholder="Client Name"
+             data-bind="visible: (newAssignment() && $index() == 0), value: assignment.client_name, event: {keyup: onKeyUp}"
+             name="assignment[client_name]" />
+    </div>
+    <!-- project name -->
+    <div class="project-name">
+      <!-- link to the project plan -->
+
+      <!-- ko ifnot: newAssignment() -->
+      <a data-bind="text: assignment.project_name, attr: { href: projectURL }"></a>
+      <!-- /ko -->
+
+      <!-- project name input for new assignments -->
+      <!-- ko if: newAssignment() -->
+        <input type="text"
+               placeholder="Project Name"
+               name="assignment[project_name]"
+               data-bind="value: assignment.project_name, event: {keyup: onKeyUp}" />
+        <input type="submit" value="Save" class='display-none' />
+      <!-- /ko -->
+      <!-- ko ifnot: newAssignment() -->
+        <a href="#" data-bind="click: toggleEdit">edit</a>
+      <!-- /ko -->
+    </div>
   </div>
-  <div class='assignment-actions'>
-    <div class='toggle-proposed'>
-      <input type="checkbox" data-bind="checked: assignment.assignment_proposed, attr: {id: toggleId('proposed')}" />
-      <label data-bind="attr: {for: toggleId('proposed')}">proposed</label>
-    </div>
-    <div class='toggle-archived'>
-      <input type="checkbox" data-bind="checked: assignment.assignment_archived, attr: {id: toggleId('archived')}" />
-      <label data-bind="attr: {for: toggleId('archived')}">archived</label>
-    </div>
-    <div class='delete-assignment'>
-      <a href="#" data-bind="click: destroyAssignment">delete</a>
-    </div>
+  <div class='assignment-actions' data-bind="visible: editing()">
     <div class='reassign-assignment'>
       <label data-bind="attr: {for: toggleId('reassign')}">assigned to</label>
       <select data-bind="value: assignment.user_id, options: $parents[3].assignableUsers, optionsValue: 'id', optionsText: 'full_name'"></select>
+    </div>
+    <div class='toggle-proposed'>
+      <!-- ko if: assignment.assignment_proposed -->
+      <p>This assignment is <strong>proposed</strong></p>
+      <a data-bind="click: toggleProposed" href="#">make planned</a>
+      <!-- /ko -->
+      <!-- ko ifnot: assignment.assignment_proposed -->
+      <p>This assignment is <strong>planned</strong></p>
+      <a data-bind="click: toggleProposed" href="#">make proposed</a>
+      <!--/ko -->
+    </div>
+    <div class='toggle-archived'>
+      <!-- ko if: assignment.assigment_archived -->
+      <p>This assignment is <strong>archived</strong></p>
+      <a data-bind="click: toggleArchived" href="#">activate</a>
+      <!-- /ko -->
+      <!-- ko ifnot: assignment.assignment_archived -->
+      <p>This assignment is <strong>active</strong></p>
+      <a data-bind="click: toggleArchived" href="#">archive</a>
+      <!-- /ko -->
+    </div>
+    <div class='delete-or-done'>
+      <a href="#" class="danger" data-bind="click: destroyAssignment">delete</a>
+      <a href="#" data-bind="click: toggleEdit">done</a>
     </div>
   </div>
 </div>

@@ -23,9 +23,16 @@
     @include self-and-children-inline-block;
   }
 
-  .toggle-proposed, .toggle-archived, .delete-assignment, .reassign-assignment {
-    @include self-and-children-inline-block;
-    width: 49%;
+  .reassign-assignment, .toggle-proposed, .toggle-archived, .delete-or-done {
+    font-size: .9em;
+
+    * {
+      display: inline-block;
+    }
+
+    p {
+      margin: 0;
+    }
   }
 
   .aggregate-chart {

@@ -7,6 +7,7 @@ function StaffPlanView() {
   self.userData.extend({rateLimit: 25});
 
   var assignmentData = JSON.parse($('#assignments').remove().text());
+  self.assignableUsers = JSON.parse($('#users').remove().text());
 
   // set up a user-wide partitioned mapping of work weeks to beginning_of_week for column headers
   self.observedWorkWeeks = ko.observableArray([]);

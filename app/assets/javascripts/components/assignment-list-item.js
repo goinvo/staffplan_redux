@@ -2,7 +2,7 @@ var AssignmentsListItem = function(params) {
   this.assignment = params.assignment;
   this.client = params.clientListItem.client;
   this.weekRange = params.weekRange;
-
+  this.editing = ko.observable(false);
   this.projectURL = "/projects/" + this.assignment.project_id;
   this.clientURL = "/clients/" + this.assignment.client_id;
 
@@ -80,6 +80,15 @@ _.extend(AssignmentsListItem.prototype, {
     _.each(destroyedAssignment, function(assignment) {
       assignment.destroy();
     })
+  },
+  toggleEdit: function(foo, bar, baz) {
+    this.editing(!this.editing());
+  },
+  toggleProposed: function() {
+    this.assignment.assignment_proposed(!this.assignment.assignment_proposed());
+  },
+  toggleArchived: function() {
+    this.assignment.assignment_archived(!this.assignment.assignment_archived());
   }
 });
 

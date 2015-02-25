@@ -85,3 +85,11 @@ cite {
     content: '\2014 \00A0';
   }
 }
+
+.danger {
+  color: #f00;
+
+  &:hover {
+    color: #f00;
+  }
+}
