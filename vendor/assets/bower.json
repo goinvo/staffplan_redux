@@ -5,7 +5,6 @@
     "jquery-ujs": "latest",
     "lodash": "latest",
     "knockoutjs": "3.2.0",
-    "moment": "latest",
-    "devbridge-autocomplete": "latest"
+    "moment": "latest"
   }
 }
