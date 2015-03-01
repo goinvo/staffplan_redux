@@ -29,14 +29,15 @@ class StaffplansListSerializer < ActiveModel::Serializer
 
     range.step(604800000).inject([]) do |array, bow|
       dow = Time.at(bow / 1000).to_date
-      existing_work_weeks = scoped_staffplans_work_weeks_view.select { |eww| eww.cweek == dow.cweek && eww.year == dow.year }
+      existing_work_weeks = scoped_staffplans_work_weeks_view.select { |eww| eww.cweek == dow.cweek && eww.year == dow.year }.compact
 
       if existing_work_weeks.any?
         array << existing_work_weeks.inject(build_work_week(dow, bow)) do |hash, eww|
           hash[:estimated_total] += eww.estimated_total
           hash[:actual_total] += eww.actual_total
-          hash[:estimated_proposed] += eww.estimated_proposed
-          hash[:estimated_planned] += eww.estimated_planned
+          hash[:estimated_proposed] += eww.estimated_total if eww.assignment.proposed?
+          hash[:estimated_planned] += eww.estimated_total if !eww.assignment.proposed?
+
           hash
         end
       else

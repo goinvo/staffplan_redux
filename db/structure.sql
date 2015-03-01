@@ -23,6 +23,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -352,17 +366,16 @@ CREATE TABLE users (
 
 CREATE VIEW staffplans_work_weeks_view AS
  SELECT users.id AS user_id,
-    max(work_weeks.cweek) AS cweek,
-    max(work_weeks.year) AS year,
-    COALESCE(sum(work_weeks.estimated_hours), (0)::bigint) AS estimated_total,
-    COALESCE(sum(work_weeks.actual_hours), (0)::bigint) AS actual_total,
-    COALESCE(sum(work_weeks.estimated_hours), (0)::bigint) AS estimated_proposed,
-    COALESCE(sum(work_weeks.estimated_hours), (0)::bigint) AS estimated_planned,
-    max(work_weeks.beginning_of_week) AS beginning_of_week
-   FROM ((work_weeks
-     JOIN assignments ON ((assignments.id = work_weeks.assignment_id)))
+    assignments.id AS assignment_id,
+    max(ww1.cweek) AS cweek,
+    max(ww1.year) AS year,
+    COALESCE(sum(ww1.estimated_hours), (0)::bigint) AS estimated_total,
+    COALESCE(sum(ww1.actual_hours), (0)::bigint) AS actual_total,
+    max(ww1.beginning_of_week) AS beginning_of_week
+   FROM ((work_weeks ww1
+     JOIN assignments ON ((assignments.id = ww1.assignment_id)))
      JOIN users ON ((assignments.user_id = users.id)))
-  GROUP BY work_weeks.beginning_of_week, assignments.id, users.id
+  GROUP BY ww1.beginning_of_week, assignments.id, users.id
   ORDER BY users.id;
 
 

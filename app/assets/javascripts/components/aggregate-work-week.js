@@ -38,19 +38,15 @@ _.extend(AggregateWorkWeek.prototype, {
     // prior week with actuals. gray.
     if(this.isBeforeWithActuals()) {
       return "background-color: gray; height: " + this.columnTotal() + "px;";
+    } else if(this.workWeek.estimated_proposed() > 0) {
+      // some planned, some proposed. split. planned on bottom, proposed on top.
+      var colorStop = (parseFloat(this.workWeek.estimated_planned()) / parseFloat(this.columnTotal()));
+      var style = "background-image: linear-gradient(0deg, #5e9b69, #7eba8d " + colorStop * 100 + "%);";
+      style +=    "height: " + this.columnTotal() + "px;";
+      return style;
     } else {
-      if(this.workWeek.estimated_planned() == this.workWeek.estimated_hours()) {
-        // all planned. dark green.
-        return "background-color: #5e9b69; height: " + this.columnTotal() + "px;";
-      } else {
-        // some planned, some proposed. split. planned on bottom, proposed on top.
-        var style = "background-image: linear-gradient(0deg, #5e9b69, #7eba8d 40%);";
-        style +=    "height: " + this.columnTotal() + "px;";
-        return style;
-      }
+      return "background-color: #5e9b69; height: " + this.columnTotal() + "px;";
     }
-
-    return "background-color: " + bgColor + "; height: " + this.columnTotal() + "px;";
   }
 })
 
