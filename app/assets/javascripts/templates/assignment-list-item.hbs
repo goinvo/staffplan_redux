@@ -53,11 +53,11 @@
     <div class='toggle-archived'>
       <!-- ko if: assignment.assigment_archived -->
       <p>This assignment is <strong>archived</strong></p>
-      <a data-bind="click: toggleArchived" href="#">activate</a>
+      <a data-bind="click: toggleArchived, event: {change: onValueChanged}" href="#">activate</a>
       <!-- /ko -->
       <!-- ko ifnot: assignment.assignment_archived -->
       <p>This assignment is <strong>active</strong></p>
-      <a data-bind="click: toggleArchived" href="#">archive</a>
+      <a data-bind="click: toggleArchived, event: {change: onValueChanged}" href="#">archive</a>
       <!-- /ko -->
     </div>
     <div class='delete-or-done'>

@@ -6,13 +6,8 @@ class User < ActiveRecord::Base
 
   has_paper_trail
 
-  has_many :assignments, :dependent => :destroy do
-    def for_company(company)
-      self.select do |a|
-        a.project.company_id == company.id
-      end
-    end
-  end
+  has_many :assignments, dependent: :destroy, inverse_of: :user
+  has_many :work_weeks, through: :assignments
   has_one :user_preferences, :dependent => :destroy
   has_many :projects, :through => :assignments
   has_many :memberships, :dependent => :destroy
@@ -30,13 +25,6 @@ class User < ActiveRecord::Base
       where(company_id: company.id)
     end
   end
-
-  # after_update do |user|
-  #   terminator = user.versions.last.try(:terminator)
-  #   if terminator.present? && (terminator.to_i != user.id)
-  #     User.where(:id => terminator.to_i).first.try(&:update_timestamp!)
-  #   end
-  # end
 
   validates_presence_of :email, :first_name, :last_name
   validates_uniqueness_of :email

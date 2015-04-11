@@ -86,9 +86,43 @@ _.extend(AssignmentsListItem.prototype, {
   },
   toggleProposed: function() {
     this.assignment.assignment_proposed(!this.assignment.assignment_proposed());
+    this.onValueChanged();
   },
   toggleArchived: function() {
     this.assignment.assignment_archived(!this.assignment.assignment_archived());
+    this.onValueChanged();
+  },
+  onValueChanged: function() {
+    var assignment = ko.toJS(this.assignment),
+        assignmentData = {
+          id: assignment.id,
+          user_id: assignment.user_id,
+          proposed: assignment.assignment_proposed,
+          archived: assignment.assignment_archived
+        },
+        url = (assignmentData.id == null ? '/assignments.json' : '/assignments/' + assignmentData.id + '.json'),
+        type = (assignmentData.id == null ? "POST" : "PUT");
+
+    $(document.body).attr('style', 'cursor: wait;');
+
+    // update
+    $.ajax({
+      url: url,
+      type: type,
+      data: {assignment: assignmentData},
+      dataType: 'json',
+      complete: _.bind(function() {
+        $(document.body).removeAttr('style');
+      }, this),
+      error: _.bind(function() {
+        $('.flash-container').append(
+          "<p class='flash-error flash'>\
+            Unexpected error occurred. Please try again.\
+            <a class='close' href='javascript:void(0)'>close</a>\
+          </p>"
+        )
+      }, this)
+    })
   }
 });
 

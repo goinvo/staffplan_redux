@@ -32,7 +32,7 @@ class AssignmentsController < ApplicationController
   private
 
   def assignment_params
-    params.require(:assignment).permit(:user_id, :project_id, :assignment_archived, :assignment_proposed)
+    params.require(:assignment).permit(:user_id, :archived, :proposed)
   end
 
   def client_params
