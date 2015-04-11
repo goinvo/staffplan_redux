@@ -82,7 +82,6 @@ GEM
       json
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
-    chunky_png (1.3.4)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -91,12 +90,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1)
-    compass (0.12.2)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-    compass-rails (2.0.0)
-      compass (>= 0.12.2)
     connection_pool (2.2.0)
     daemons (1.2.2)
     database_cleaner (1.4.1)
@@ -130,7 +123,6 @@ GEM
     ffi (1.9.8)
     figaro (1.1.0)
       thor (~> 0.14)
-    fssm (0.2.10)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     haml (4.0.6)
@@ -253,12 +245,13 @@ GEM
     ruby_parser (3.6.5)
       sexp_processor (~> 4.1)
     rubyzip (1.1.7)
-    sass (3.2.0)
-    sass-rails (4.0.3)
+    sass (3.4.13)
+    sass-rails (5.0.3)
       railties (>= 4.0.0, < 5.0)
-      sass (~> 3.2.0)
-      sprockets (~> 2.8, <= 2.11.0)
-      sprockets-rails (~> 2.0)
+      sass (~> 3.1)
+      sprockets (>= 2.8, < 4.0)
+      sprockets-rails (>= 2.0, < 4.0)
+      tilt (~> 1.1)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -270,7 +263,7 @@ GEM
     sexp_processor (4.5.0)
     slop (3.6.0)
     spring (1.3.4)
-    sprockets (2.11.0)
+    sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -317,7 +310,6 @@ DEPENDENCIES
   capybara-screenshot
   capybara-webkit
   coffee-rails
-  compass-rails
   database_cleaner
   devise
   draper
@@ -341,7 +333,7 @@ DEPENDENCIES
   react-rails (~> 1.0)
   refills
   rspec-rails
-  sass-rails (~> 4.0.3)
+  sass-rails
   sdoc (~> 0.4.0)
   selenium-webdriver
   spring

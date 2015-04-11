@@ -20,6 +20,7 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
+  host: 127.0.0.1
 
 development:
   <<: *default
@@ -80,6 +81,5 @@ test:
 #
 production:
   <<: *default
-  database: staffplan_redux_production
-  username: staffplan_redux
-  password: <%= ENV['STAFFPLAN_REDUX_DATABASE_PASSWORD'] %>
+  database: staffplan_redux_development
+  

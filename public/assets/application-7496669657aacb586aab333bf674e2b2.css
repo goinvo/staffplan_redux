@@ -1,0 +1,1176 @@
+/* line 2, /Users/rsterner/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/neat-1.5.0/app/assets/stylesheets/grid/_grid.scss */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/extends/_button.scss */
+button,
+input[type="submit"] {
+  -webkit-font-smoothing: antialiased;
+  background-color: #477DCA;
+  border-radius: 0.1875em;
+  color: white;
+  display: inline-block;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1;
+  padding: .75em 1em;
+  text-decoration: none;
+}
+/* line 13, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/extends/_button.scss */
+button:hover,
+input[type="submit"]:hover {
+  background-color: #2c5999;
+  color: white;
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+body {
+  -webkit-font-smoothing: antialiased;
+  background-color: white;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+/* line 10, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  line-height: 1.25em;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+}
+
+/* line 17, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+h1 {
+  font-size: 2.25em;
+}
+
+/* line 21, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+h2 {
+  font-size: 2em;
+}
+
+/* line 25, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+h3 {
+  font-size: 1.75em;
+}
+
+/* line 29, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+h4 {
+  font-size: 1.5em;
+}
+
+/* line 33, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+h5 {
+  font-size: 1.25em;
+}
+
+/* line 37, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+h6 {
+  font-size: 1em;
+}
+
+/* line 41, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+p {
+  margin: 0 0 0.75em;
+}
+
+/* line 45, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+a {
+  -webkit-transition: color 0.1s linear;
+  -moz-transition: color 0.1s linear;
+  transition: color 0.1s linear;
+  color: #477DCA;
+  text-decoration: none;
+}
+/* line 50, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+a:hover {
+  color: #2c5999;
+}
+/* line 54, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+a:active, a:focus {
+  color: #2c5999;
+  outline: none;
+}
+
+/* line 60, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+hr {
+  border-bottom: 1px solid #DDD;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: 1.5em 0;
+}
+
+/* line 68, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+img {
+  margin: 0;
+  max-width: 100%;
+}
+
+/* line 73, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+blockquote {
+  border-left: 2px solid #DDD;
+  color: #595959;
+  margin: 1.5em 0;
+  padding-left: 0.75em;
+}
+
+/* line 80, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+cite {
+  color: #737373;
+  font-style: italic;
+}
+/* line 84, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+cite:before {
+  content: '\2014 \00A0';
+}
+
+/* line 89, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+.danger {
+  color: #f00;
+}
+/* line 92, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_typography.scss */
+.danger:hover {
+  color: #f00;
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+fieldset {
+  background: #f7f7f7;
+  border: 1px solid #DDD;
+  margin: 0 0 0.75em 0;
+  padding: 1.5em;
+}
+
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+input,
+label,
+select {
+  display: block;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 1em;
+}
+
+/* line 16, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+label {
+  font-weight: bold;
+  margin-bottom: 0.375em;
+}
+/* line 20, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+label.required:after {
+  content: "*";
+}
+/* line 24, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+label abbr {
+  display: none;
+}
+
+/* line 29, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+textarea,
+input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"],
+select[multiple=multiple] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: border-color;
+  -moz-transition: border-color;
+  transition: border-color;
+  background-color: white;
+  border-radius: 0.1875em;
+  border: 1px solid #DDD;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 1em;
+  margin-bottom: 0.75em;
+  padding: 0.5em 0.5em;
+  width: 100%;
+}
+/* line 44, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+textarea:hover,
+input[type="email"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="url"]:hover, input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="month"]:hover, input[type="time"]:hover, input[type="week"]:hover,
+select[multiple=multiple]:hover {
+  border-color: #c4c4c4;
+}
+/* line 48, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+textarea:focus,
+input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="url"]:focus, input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus,
+select[multiple=multiple]:focus {
+  border-color: #477DCA;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 5px rgba(55, 112, 192, 0.7);
+  outline: none;
+}
+
+/* line 55, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+textarea {
+  resize: vertical;
+}
+
+/* line 59, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+input[type="search"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+}
+
+/* line 63, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+input[type="checkbox"], input[type="radio"] {
+  display: inline;
+  margin-right: 0.375em;
+}
+
+/* line 68, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+input[type="file"] {
+  margin-bottom: 0.75em;
+  padding-bottom: 0.5em;
+  width: 100%;
+}
+
+/* line 74, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_forms.scss */
+select {
+  width: auto;
+  max-width: 100%;
+  margin-bottom: 1.5em;
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_tables.scss */
+table {
+  border-collapse: collapse;
+  margin: 0.75em 0;
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_tables.scss */
+th {
+  border-bottom: 1px solid #b7b7b7;
+  font-weight: bold;
+  padding: 0.75em 0;
+  text-align: left;
+}
+
+/* line 15, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_tables.scss */
+td {
+  border-bottom: 1px solid #DDD;
+  padding: 0.75em 0;
+}
+
+/* line 20, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_tables.scss */
+tr, td, th {
+  vertical-align: middle;
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_lists.scss */
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+/* line 19, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_lists.scss */
+dl {
+  margin-bottom: 0.75em;
+}
+/* line 22, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_lists.scss */
+dl dt {
+  font-weight: bold;
+  margin-top: 0.75em;
+}
+/* line 27, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_lists.scss */
+dl dd {
+  margin: 0;
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-alert {
+  background: #FFF6BF;
+  color: #8c7800;
+  font-weight: bold;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+}
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-alert a {
+  color: #594c00;
+}
+/* line 11, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-alert a:hover {
+  color: black;
+}
+
+/* line 5, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-error {
+  background: #FBE3E4;
+  color: #96151b;
+  font-weight: bold;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+}
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-error a {
+  color: #6a0f13;
+}
+/* line 11, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-error a:hover {
+  color: #110203;
+}
+
+/* line 9, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-notice {
+  background: #FFF6BF;
+  color: #8c7800;
+  font-weight: bold;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+}
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-notice a {
+  color: #594c00;
+}
+/* line 11, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-notice a:hover {
+  color: black;
+}
+
+/* line 13, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-success {
+  background: #E6EFC2;
+  color: #56651a;
+  font-weight: bold;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+}
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-success a {
+  color: #333c10;
+}
+/* line 11, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-success a:hover {
+  color: black;
+}
+
+/* line 17, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-container {
+  width: 100%;
+  z-index: 99999;
+  height: 4.3em;
+  position: fixed;
+  bottom: 0;
+}
+/* line 24, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-container a.close {
+  float: left;
+  padding-right: 20px;
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_buttons.scss */
+button,
+input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-alert {
+  background: #FFF6BF;
+  color: #8c7800;
+  font-weight: bold;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+}
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-alert a {
+  color: #594c00;
+}
+/* line 11, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-alert a:hover {
+  color: black;
+}
+
+/* line 5, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-error {
+  background: #FBE3E4;
+  color: #96151b;
+  font-weight: bold;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+}
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-error a {
+  color: #6a0f13;
+}
+/* line 11, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-error a:hover {
+  color: #110203;
+}
+
+/* line 9, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-notice {
+  background: #FFF6BF;
+  color: #8c7800;
+  font-weight: bold;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+}
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-notice a {
+  color: #594c00;
+}
+/* line 11, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-notice a:hover {
+  color: black;
+}
+
+/* line 13, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-success {
+  background: #E6EFC2;
+  color: #56651a;
+  font-weight: bold;
+  margin-bottom: 0.75em;
+  padding: 0.75em;
+}
+/* line 8, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-success a {
+  color: #333c10;
+}
+/* line 11, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/mixins/_flash.scss */
+.flash-success a:hover {
+  color: black;
+}
+
+/* line 17, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-container {
+  width: 100%;
+  z-index: 99999;
+  height: 4.3em;
+  position: fixed;
+  bottom: 0;
+}
+/* line 24, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/base/_flashes.scss */
+.flash-container a.close {
+  float: left;
+  padding-right: 20px;
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation {
+  background-color: #343435;
+  border-bottom: 1px solid #1b1b1b;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  height: 40px;
+  width: 100%;
+  z-index: 999;
+  font-size: 0.8125em;
+}
+/* line 24, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .menu-wrapper {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  position: relative;
+  z-index: 9999;
+  padding-left: 10px;
+}
+/* line 15, /Users/rsterner/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/bourbon-3.2.4/app/assets/stylesheets/addons/_clearfix.scss */
+header.navigation .menu-wrapper:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 15, /Users/rsterner/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/bourbon-3.2.4/app/assets/stylesheets/addons/_clearfix.scss */
+header.navigation .menu-wrapper:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 33, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .logo {
+  float: left;
+  max-height: 40px;
+  padding-left: 1em;
+  padding-right: 2em;
+}
+/* line 39, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .logo img {
+  max-height: 40px;
+  padding: .8em 0;
+}
+/* line 45, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .navigation-menu-button {
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: block;
+  float: right;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: 700;
+  line-height: 40px;
+  margin: 0;
+  padding-right: 1em;
+  text-transform: uppercase;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 45, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation .navigation-menu-button {
+    display: none;
+  }
+}
+/* line 61, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .navigation-menu-button:hover {
+  color: white;
+}
+/* line 66, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .nav {
+  z-index: 9999999;
+  float: none;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 66, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation .nav {
+    float: left;
+  }
+}
+/* line 74, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation ul#navigation-menu {
+  clear: both;
+  -webkit-transform-style: preserve-3d;
+  display: none;
+  margin: 0 auto;
+  overflow: visible;
+  padding: 0;
+  width: 100%;
+  z-index: 9999;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 74, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation ul#navigation-menu {
+    display: inline;
+    margin: 0;
+    padding: 0;
+  }
+}
+/* line 91, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation ul li {
+  background: #343435;
+  display: block;
+  line-height: 40px;
+  overflow: hidden;
+  padding-right: .8em;
+  text-align: right;
+  width: 100%;
+  z-index: 9999;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 91, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation ul li {
+    background: transparent;
+    display: inline;
+    line-height: 40px;
+    padding-right: 2em;
+    text-decoration: none;
+    width: auto;
+  }
+}
+/* line 110, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation ul li a {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+/* line 114, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation ul li a:hover {
+  color: white;
+}
+/* line 120, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .active-nav-item a {
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+/* line 125, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation li.more {
+  padding-right: 0;
+}
+/* line 128, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation li.more:hover .submenu {
+  display: block;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 125, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation li.more {
+    position: relative;
+    padding-right: .8em;
+  }
+}
+/* line 138, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation li.more > a {
+  padding-bottom: .9em;
+}
+/* line 142, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation li.more a {
+  padding-right: .8em;
+}
+/* line 147, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .submenu {
+  display: none;
+  background-color: #111;
+  box-shadow: 0 0 6px 3px #000;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 147, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation .submenu {
+    position: absolute;
+    top: 2em;
+    left: -1em;
+  }
+}
+/* line 158, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .submenu li {
+  display: block;
+  padding-right: 0;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 158, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation .submenu li {
+    line-height: 30.76923px;
+  }
+  /* line 165, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation .submenu li:last-child a {
+    border-bottom-left-radius: 0.1875em;
+    border-bottom-right-radius: 0.1875em;
+  }
+}
+/* line 171, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .submenu li a {
+  text-align: right;
+  background-color: #252526;
+  width: 100%;
+  display: inline-block;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 171, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation .submenu li a {
+    width: 12em;
+    background-color: #111;
+    text-align: left;
+    padding-left: 1em;
+  }
+}
+/* line 187, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .navigation-tools {
+  display: block;
+  padding-right: 1em;
+  padding-left: 1em;
+  clear: both;
+  background: #505050;
+}
+/* line 15, /Users/rsterner/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/bourbon-3.2.4/app/assets/stylesheets/addons/_clearfix.scss */
+header.navigation .navigation-tools:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 187, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation .navigation-tools {
+    background: transparent;
+    float: right;
+    clear: none;
+  }
+}
+/* line 202, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .search-bar {
+  padding: 3px 5px;
+  float: left;
+  display: none;
+}
+/* line 211, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .search-bar .search-and-submit {
+  position: relative;
+}
+/* line 214, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .search-bar .search-and-submit input[type=search] {
+  background: #414142;
+  border: 1px solid #272728;
+  padding: .6em .8em;
+  font-size: .9em;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 0.375em;
+  margin: 0;
+}
+/* line 225, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .search-bar .search-and-submit button[type=submit] {
+  border: 1px solid #32323d;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 0 #818181;
+  color: white;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: bold;
+  background-color: #5a5a5c;
+  background-image: -webkit-linear-gradient(#5a5a5c, #383845);
+  background-image: linear-gradient(#5a5a5c, #383845);
+  padding: 7px 18px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #262634;
+  background-clip: padding-box;
+  position: absolute;
+  top: 0.3em;
+  right: 0.3em;
+  bottom: 0.3em;
+  outline: none;
+  padding: 5px 15px;
+}
+/* line 131, /Users/rsterner/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/bourbon-3.2.4/app/assets/stylesheets/addons/_button.scss */
+header.navigation .search-bar .search-and-submit button[type=submit]:hover:not(:disabled) {
+  box-shadow: inset 0 1px 0 0 #686868;
+  cursor: pointer;
+  background-color: #4e4e4e;
+  background-image: -webkit-linear-gradient(#4e4e4e, #32323c);
+  background-image: linear-gradient(#4e4e4e, #32323c);
+}
+/* line 147, /Users/rsterner/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/bourbon-3.2.4/app/assets/stylesheets/addons/_button.scss */
+header.navigation .search-bar .search-and-submit button[type=submit]:active:not(:disabled), header.navigation .search-bar .search-and-submit button[type=submit]:focus:not(:disabled) {
+  border: 1px solid #32323d;
+  box-shadow: inset 0 0 8px 4px #2c2c33, inset 0 0 8px 4px #2c2c33;
+}
+/* line 51, /Users/rsterner/.rbenv/versions/2.1.4/lib/ruby/gems/2.1.0/gems/bourbon-3.2.4/app/assets/stylesheets/addons/_button.scss */
+header.navigation .search-bar .search-and-submit button[type=submit]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* line 231, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+header.navigation .search-bar .search-and-submit button[type=submit] img {
+  height: 12px;
+  opacity: .7;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 202, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation .search-bar {
+    width: 16em;
+    position: relative;
+    display: inline-block;
+  }
+  /* line 243, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_navigation.scss */
+  header.navigation .search-bar input {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
+  }
+}
+
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 {
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  color: #111;
+  padding: .3em;
+  width: 100%;
+  line-height: 31px;
+  height: 2.6em;
+  bottom: 0;
+}
+@media screen and (max-width: 860px) {
+  /* line 19, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+  .footer-2 ul li {
+    display: inline;
+  }
+}
+/* line 25, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .hide-mobile {
+  display: none;
+}
+@media screen and (min-width: 640px) {
+  /* line 25, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+  .footer-2 .hide-mobile {
+    display: inline;
+  }
+}
+/* line 33, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .clear {
+  clear: both;
+}
+/* line 37, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-logo, .footer-2 .footer-invo-logo {
+  margin-bottom: 1em;
+  padding-top: .1em;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 37, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+  .footer-2 .footer-logo, .footer-2 .footer-invo-logo {
+    margin-bottom: 0;
+  }
+}
+/* line 46, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-invo-logo img {
+  height: 1.6em;
+}
+/* line 50, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-logo {
+  margin-right: 1em;
+  float: left;
+}
+/* line 55, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-invo-logo {
+  padding-top: .2em;
+  margin-right: .5em;
+  float: right;
+}
+/* line 61, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .float-right {
+  float: right;
+}
+/* line 65, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 ul {
+  margin-bottom: 1em;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 65, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+  .footer-2 ul {
+    float: left;
+    width: 93%;
+    margin-left: 1em;
+    margin-bottom: 0;
+    padding-left: 2.5em;
+  }
+}
+/* line 76, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 ul li {
+  padding-right: 1em;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 0.8125em;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 76, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+  .footer-2 ul li {
+    display: inline;
+    text-align: left;
+  }
+}
+/* line 87, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 ul li a {
+  color: rgba(0, 0, 0, 0.4);
+}
+/* line 90, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 ul li a:hover {
+  color: black;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 95, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+  .footer-2 .footer-secondary-links {
+    float: right;
+  }
+}
+/* line 100, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-secondary-links li {
+  font-size: .8em;
+  font-weight: 400;
+}
+/* line 105, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-secondary-links ul.footer-social {
+  margin-top: 1em;
+}
+@media screen and (min-width: 53.75em) {
+  /* line 105, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+  .footer-2 .footer-secondary-links ul.footer-social {
+    float: right;
+    margin-top: 0;
+  }
+}
+/* line 113, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-secondary-links ul.footer-social li {
+  float: left;
+  font-size: 1em;
+  padding-right: .7em;
+}
+/* line 118, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-secondary-links ul.footer-social li:last-child {
+  padding-right: 0;
+}
+/* line 123, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-secondary-links ul.footer-social img {
+  opacity: .7;
+  height: 1.6em;
+  padding: 1px;
+}
+/* line 128, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/refills/_footer-2.scss */
+.footer-2 .footer-secondary-links ul.footer-social img:hover {
+  opacity: 1;
+}
+
+/* line 11, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/application.css.scss */
+body {
+  margin: 0em;
+  padding: 0em;
+  height: 100%;
+}
+
+/* line 17, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/application.css.scss */
+.content {
+  padding-bottom: 2.6em;
+}
+
+/* line 3, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+.list-header {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  box-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -o-align-items: stretch;
+  align-items: stretch;
+  -ms-flex-align: stretch;
+  border: 1px solid #e0e0e0;
+  font-size: 0.875em;
+}
+
+/* line 9, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+.single-flexible-column {
+  min-width: 11.25em;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+/* line 13, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+.single-flexible-column.wide {
+  min-width: 18.75em;
+}
+
+/* line 19, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+ul.flexible-list li.box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  box-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -o-align-items: stretch;
+  align-items: stretch;
+  -ms-flex-align: stretch;
+  font-size: 0.875em;
+}
+/* line 23, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+ul.flexible-list li.box * > {
+  display: inline-block;
+}
+
+/* line 28, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+aggregate-work-week {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  height: 90px;
+  padding-top: 5px;
+  position: relative;
+}
+
+/* line 35, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+.width-filling-container {
+  width: 100%;
+  -webkit-box-flex: 20;
+  -moz-box-flex: 20;
+  box-flex: 20;
+  -webkit-flex: 20;
+  -moz-flex: 20;
+  -ms-flex: 20;
+  flex: 20;
+  overflow: hidden;
+}
+
+/* line 41, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+date-range-column-header {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  vertical-align: top;
+}
+/* line 45, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+date-range-column-header > div {
+  min-height: 20px;
+}
+
+/* line 50, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+.aggregate-work-week {
+  bottom: 0;
+  position: absolute;
+}
+/* line 5, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/_mixins.css.scss */
+.aggregate-work-week .column-total {
+  font-size: 0.6875rem;
+  position: absolute;
+  left: 36%;
+  /* this is gross */
+  top: -20px;
+}
+/* line 12, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/_mixins.css.scss */
+.aggregate-work-week .work-week {
+  width: 40px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 2px;
+  -webkit-transition: background-color 0.3s ease-in 0s, height 0.3s ease-in 0s;
+  -moz-transition: background-color 0.3s ease-in 0s, height 0.3s ease-in 0s;
+  transition: background-color 0.3s ease-in 0s, height 0.3s ease-in 0s;
+}
+
+/* line 54, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+assignment-work-week {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  vertical-align: top;
+}
+/* line 59, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+assignment-work-week input {
+  width: 35px;
+  text-align: center;
+  height: 25px;
+  font-size: 0.875em;
+}
+
+/* line 67, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_layout.css.scss */
+.display-none {
+  display: none;
+}
+
+/* line 4, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_index.css.scss */
+#staffplans.index .gravatar {
+  width: 32px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+/* line 10, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_index.css.scss */
+#staffplans.index .assignment-totals {
+  min-width: 6.25em;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+/* line 19, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_index.css.scss */
+#staffplans.index .user-list {
+  padding-top: 0.625em;
+}
+/* line 22, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_index.css.scss */
+#staffplans.index .user-list li {
+  border-top: 1px dotted rgba(0, 0, 0, 0.1);
+}
+/* line 25, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_index.css.scss */
+#staffplans.index .user-list li:first-child {
+  border: none;
+}
+/* line 31, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_index.css.scss */
+#staffplans.index .list-header {
+  background-color: #f7f7f7;
+}
+/* line 37, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_index.css.scss */
+#staffplans.index .user-info a {
+  line-height: 5em;
+}
+
+/* line 3, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show {
+  /* fixed header styles are page specific. every page is a little different */
+}
+/* line 1, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_forms.css.scss */
+#staffplans.show .display-none {
+  display: none;
+}
+/* line 6, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .gravatar {
+  width: 75px;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+/* line 22, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .show-archived {
+  display: inline-block;
+}
+/* line 15, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_mixins.css.scss */
+#staffplans.show .show-archived > * {
+  display: inline-block;
+}
+/* line 26, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .reassign-assignment, #staffplans.show .toggle-proposed, #staffplans.show .toggle-archived, #staffplans.show .delete-or-done {
+  font-size: .9em;
+}
+/* line 29, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .reassign-assignment *, #staffplans.show .toggle-proposed *, #staffplans.show .toggle-archived *, #staffplans.show .delete-or-done * {
+  display: inline-block;
+}
+/* line 33, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .reassign-assignment p, #staffplans.show .toggle-proposed p, #staffplans.show .toggle-archived p, #staffplans.show .delete-or-done p {
+  margin: 0;
+}
+/* line 38, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .aggregate-chart {
+  background-color: #28292a;
+  color: #98989b;
+  min-height: 90px;
+}
+/* line 44, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .list-header {
+  background-color: #f7f7f7;
+}
+/* line 48, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .user-info {
+  width: 180px;
+  line-height: 90px;
+  height: 90px;
+}
+/* line 54, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .project-name, #staffplans.show .client-name {
+  width: 8.75em;
+  display: inline-block;
+}
+/* line 59, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show .client-info {
+  width: 100%;
+  height: 25px;
+  border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
+}
+/* line 66, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show li.client {
+  width: 100%;
+}
+/* line 70, /Users/rsterner/code/rcllc/staffplan_redux/app/assets/stylesheets/staffplans/_show.css.scss */
+#staffplans.show li.assignment {
+  min-height: 80px;
+  padding: 0.625em 0;
+}
