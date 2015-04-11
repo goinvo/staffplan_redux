@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby "2.1.4"
 
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.1'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
 gem 'haml-rails'
@@ -19,6 +19,7 @@ gem 'compass-rails'
 gem 'figaro'
 gem 'devise'
 gem 'aasm'
+gem 'react-rails', '~> 1.0'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
