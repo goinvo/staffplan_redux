@@ -22,6 +22,9 @@ default: &default
 development:
   <<: *default
   database: staffplan_redux_development
+  host: localhost
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  username: postgres
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -56,6 +59,9 @@ development:
 test:
   <<: *default
   database: staffplan_redux_test
+  host: localhost
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  username: postgres
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -79,6 +85,7 @@ test:
 #
 production:
   <<: *default
+  # host: 24.199.64.247
   database: staffplan_redux_production
   username: staffplan_redux
   password: <%= ENV["STAFFPLAN_REDUX_DATABASE_PASSWORD"] %>

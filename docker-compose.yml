@@ -1,0 +1,46 @@
+version: "3"
+services:
+  db:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    volumes:
+      - data:/var/lib/postgresql/data
+    env_file: .env
+    container_name: staffplan-postgres
+
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/var/lib/redis/data
+    env_file: .env
+    container_name: staffplan-redis
+
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566"
+      - "127.0.0.1:4510-4559:4510-4559"
+    environment:
+      - SERVICES=sns,sqs,s3
+      - DEBUG=${DEBUG-}
+      - PERSISTENCE=${PERSISTENCE-}
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - LOCALSTACK_HOSTNAME=localhost
+      - BUCKET_NAME=family-circle-active-storage-uploads
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./tmp/volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ./localstack-init:/etc/localstack/init/ready.d
+    command: localstack.sh
+    container_name: staffplan-localstack
+
+volumes:
+  bundle_path:
+  redis:
+  data:
+  mongo-data:
+  mongo-config:
