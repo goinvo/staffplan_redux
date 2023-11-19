@@ -10,6 +10,8 @@ For local development we'll assume a couple of things:
 2. You have bundler installed
 3. You have Docker installed
 
+Additionally, this app assumes you've got access to the 1Password account where the secrets are stored. Eventually these will live in a repository owned by GoInvo.
+
 If you don't have any of these things, please install them before continuing. When you've got the minimum requirements, running the following should get you up and running:
 
 ```bash
