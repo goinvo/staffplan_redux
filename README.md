@@ -1,24 +1,28 @@
-# README
+# staffplan_redux
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+If at first you don't plan, plan again.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+For local development we'll assume a couple of things:
 
-* System dependencies
+1. You have a working Ruby 3.2.0 installation
+2. You have bundler installed
+3. You have Docker installed
 
-* Configuration
+If you don't have any of these things, please install them before continuing. When you've got the minimum requirements, running the following should get you up and running:
 
-* Database creation
+```bash
+bundle install
+gem install kamal
+kamal envify --skip-push
+docker compose up --detach
+bin/rails db:setup
+bin/dev
+```
 
-* Database initialization
+Ensure that the test suite runs and is green:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+rspec
+```
