@@ -44,4 +44,4 @@ jobs:
         env:
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/staffplan_redux_test"
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: rspec
+        run: bundle exec rspec
