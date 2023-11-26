@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+  belongs_to :current_company, class_name: 'Company', foreign_key: :current_company_id
+  has_many :memberships, dependent: :destroy
+  has_many :companies, through: :memberships
+
+  validates :name, presence: true
+  validates :current_company, presence: true
   validates :email,
     presence: true,
     uniqueness: { case_sensitive: false },
