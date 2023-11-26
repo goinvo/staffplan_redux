@@ -20,8 +20,8 @@ jobs:
           - "5432:5432"
         env:
           POSTGRES_DB: staffplan_redux_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
@@ -36,10 +36,12 @@ jobs:
       # Add or replace database setup steps here
       - name: Set up database schema
         env:
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/staffplan_redux_test"
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: bin/rails db:schema:load
       # Add or replace test runners here
       - name: Run tests
         env:
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/staffplan_redux_test"
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: rspec
