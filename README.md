@@ -2,6 +2,14 @@
 
 If at first you don't plan, plan again.
 
+## StaffPlan v3 Now
+
+Our useful staff planning service (https://github.com/goinvo/StaffPlan) was a bit long in the tooth. And we needed ~6 small math operations (total actual vs planned hours on a single project) + a better all-projects n' people view... and after a few years of fumbling with custom Airtables + google sheets and trying Runn, they all sucked and couldn't measure up to StaffPlan.
+
+So time for an update.
+
+## Ship date = late Jan-ish 24
+
 ## Installation
 
 For local development we'll assume a couple of things:
