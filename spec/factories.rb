@@ -24,4 +24,33 @@ FactoryBot.define do
     status { 'active' }
     role { 'owner' }
   end
+
+  factory :client do
+    company
+    name { Faker::Company.name }
+    status { 'active' }
+  end
+
+  factory :project do
+    client
+    name { Faker::Company.name }
+    status { 'active' }
+    cost { Faker::Number.decimal(l_digits: 2) }
+    payment_frequency { 'monthly' }
+  end
+
+  factory :assignment do
+    user
+    project
+    status { 'active' }
+  end
+
+  factory :work_week do
+    assignment
+    cweek { Date.today.cweek }
+    year { Date.today.year }
+    beginning_of_week { Date.today.beginning_of_week.to_datetime.to_i }
+    estimated_hours { rand(2..8) }
+    actual_hours { rand(2..8) }
+  end
 end

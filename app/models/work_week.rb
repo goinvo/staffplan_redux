@@ -1,0 +1,13 @@
+class WorkWeek < ApplicationRecord
+  belongs_to :assignment
+  has_one :user, through: :assignment
+  has_one :project, through: :assignment
+
+  validates :assignment_id, presence: true, uniqueness: { scope: :beginning_of_week }
+  validates :cweek, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 53 }
+  validates :year, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 2021, less_than_or_equal_to: 2023 }
+  validates :beginning_of_week, presence: true, numericality: { only_integer: true }
+  validates :estimated_hours, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 24 }
+  validates :actual_hours, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 24 }
+
+end
