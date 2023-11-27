@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= authenticate_by_session(User)
   end
+  helper_method :current_user
+
+  def current_company
+    @current_company ||= current_user.current_company
+  end
+  helper_method :current_company
 
   def require_user!
     return if current_user
