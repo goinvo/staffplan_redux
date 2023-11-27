@@ -13,7 +13,7 @@
 
   <div class="my-5">
     <%= form.label :client_id %>
-    <%= form.number_field :client_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :client_id, current_company.clients.active.map { |c| [c.name, c.id] }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
@@ -23,17 +23,7 @@
 
   <div class="my-5">
     <%= form.label :status %>
-    <%= form.text_field :status, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :company_id %>
-    <%= form.number_field :company_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :proposed %>
-    <%= form.check_box :proposed, class: "block mt-2 h-5 w-5" %>
+    <%= form.select :status, Project::VALID_STATUSES, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
@@ -43,7 +33,7 @@
 
   <div class="my-5">
     <%= form.label :payment_frequency %>
-    <%= form.text_field :payment_frequency, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :payment_frequency, Project::VALID_PAYMENT_FREQUENCIES, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

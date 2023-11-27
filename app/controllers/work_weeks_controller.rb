@@ -1,4 +1,5 @@
 class WorkWeeksController < ApplicationController
+  before_action :require_user!
   before_action :set_work_week, only: %i[ show edit update destroy ]
 
   # GET /work_weeks or /work_weeks.json

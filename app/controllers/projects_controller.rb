@@ -1,9 +1,10 @@
 class ProjectsController < ApplicationController
+  before_action :require_user!
   before_action :set_project, only: %i[ show edit update destroy ]
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.includes(:company). all
   end
 
   # GET /projects/1 or /projects/1.json
@@ -65,6 +66,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:client_id, :name, :status, :company_id, :proposed, :cost, :payment_frequency)
+      params.require(:project).permit(:client_id, :name, :status, :cost, :payment_frequency)
     end
 end

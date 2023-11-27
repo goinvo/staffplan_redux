@@ -13,22 +13,17 @@
 
   <div class="my-5">
     <%= form.label :user_id %>
-    <%= form.number_field :user_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :user_id, current_company.users.map { |u| [u.name, u.id] }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
     <%= form.label :project_id %>
-    <%= form.number_field :project_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :proposed %>
-    <%= form.check_box :proposed, class: "block mt-2 h-5 w-5" %>
+    <%= form.select :project_id, current_company.projects.map { |p| [p.name, p.id] }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
     <%= form.label :status %>
-    <%= form.text_field :status, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :status, Assignment::VALID_STATUSES, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

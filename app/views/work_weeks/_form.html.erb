@@ -33,7 +33,7 @@
 
   <div class="my-5">
     <%= form.label :assignment_id %>
-    <%= form.number_field :assignment_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :assignment_id, current_company.projects.includes(assignments: :user).flat_map { |p| p.assignments.map { |a| ["[#{p.name}] #{a.user.name}", a.id] } }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">

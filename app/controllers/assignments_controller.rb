@@ -1,4 +1,5 @@
 class AssignmentsController < ApplicationController
+  before_action :require_user!
   before_action :set_assignment, only: %i[ show edit update destroy ]
 
   # GET /assignments or /assignments.json
@@ -65,6 +66,6 @@ class AssignmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def assignment_params
-      params.require(:assignment).permit(:user_id, :project_id, :proposed, :status)
+      params.require(:assignment).permit(:user_id, :project_id, :status)
     end
 end
