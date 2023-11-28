@@ -1,0 +1,2 @@
+module StaffPlan::UsersHelper
+end

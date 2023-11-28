@@ -8,4 +8,6 @@ class Assignment < ApplicationRecord
   validates :user_id, presence: true, uniqueness: { scope: :project_id }
   validates :project_id, presence: true, uniqueness: { scope: :user_id }
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
+
+  scope :for_user, ->(user) { where(user: user) }
 end

@@ -5,6 +5,8 @@ class Project < ApplicationRecord
   has_many :users, through: :assignments
   has_many :work_weeks, through: :assignments, dependent: :destroy
 
+  scope :active, -> { where(status: 'active') }
+
   VALID_STATUSES = %w(proposed active archived cancelled completed).freeze
   VALID_PAYMENT_FREQUENCIES = %w(weekly monthly fortnightly quarterly annually).freeze
 
