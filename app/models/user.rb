@@ -13,4 +13,8 @@ class User < ApplicationRecord
     format: { with: URI::MailTo::EMAIL_REGEXP }
 
   passwordless_with :email
+
+  def owner?
+    memberships.find_by(company: current_company).role == Membership::OWNER
+  end
 end

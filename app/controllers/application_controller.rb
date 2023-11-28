@@ -3,7 +3,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  layout :choose_layout
+
   private
+
+  def choose_layout
+    current_user.blank? ? 'public' : 'application'
+  end
 
   def current_user
     @current_user ||= authenticate_by_session(User)

@@ -1,0 +1,3 @@
+<% content_for(:header) do %>
+  <%= current_user == @viewing_user ? "My StaffPlan" : "#{@viewing_user.name}'s StaffPlan" %>
+<% end %>
