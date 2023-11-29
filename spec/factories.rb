@@ -9,8 +9,11 @@ FactoryBot.define do
       next if user.current_company.present?
 
       company = create(:company)
-      build(:membership, user: user, company: company)
       user.current_company = company
+    end
+
+    after(:create) do |user, options|
+      create(:membership, user: user, company: user.current_company)
     end
   end
 

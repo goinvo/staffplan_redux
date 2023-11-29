@@ -15,7 +15,7 @@ module Queries
         includes(:work_weeks, project: :client).
         order('clients.name')
     end
-    
+
     def assignment_for(project:)
       @assignments.find { |assignment| assignment.project == project }
     end
