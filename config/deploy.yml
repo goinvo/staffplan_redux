@@ -2,29 +2,27 @@
 service: staffplan-redux
 
 # Name of the container image.
-image: goinvo/staffplan-redux
+image: fermion/staffplan-redux
 
 # Deploy to these servers.
 servers:
-  - 104.236.5.22
+  - 159.65.172.245
 
 # Credentials for your image host.
 registry:
-  server: registry.digitalocean.com
-  username:
-    - KAMAL_REGISTRY_PASSWORD
+  username: fermion
   password:
-    - KAMAL_REGISTRY_PASSWORD
+    - DOCKER_REGISTRY_TOKEN
 
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 104.236.5.22
+    DB_HOST: 159.65.172.245
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
-    - KAMAL_REGISTRY_PASSWORD
+    - DOCKER_REGISTRY_TOKEN
 
   # Use a different ssh user than root
   # ssh:
@@ -44,7 +42,7 @@ env:
 accessories:
   db:
     image: postgres:15
-    host: 104.236.5.22
+    host: 159.65.172.245
     port: 5432
     env:
       clear:
