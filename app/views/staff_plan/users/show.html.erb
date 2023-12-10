@@ -12,7 +12,11 @@
           <% @query.clients.each do |client| %>
             <%= render(ClientRowComponent.new(client:)) %>
             <% @query.projects_for(client: client).each do |project| %>
-              <%= render(AssignmentRowComponent.new(assignment: @query.assignment_for(project:), work_weeks: @query.work_weeks_for(project:))) %>
+              <%= render(AssignmentRowComponent.new(
+                assignment: @query.assignment_for(project:),
+                work_weeks: @query.work_weeks_for(project:),
+                beginning_of_week: @query.beginning_of_week))
+              %>
             <% end %>
           <% end %>
           </tbody>

@@ -31,8 +31,19 @@ if goinvo.clients.none?
       client.projects.create(
         name: Faker::Company.name,
         cost: Faker::Number.decimal(l_digits: 2),
-        payment_frequency: "monthly"
+        payment_frequency: "monthly",
+        status: Project::ACTIVE
       )
+    end
+
+    [rob, juhan].each do |user|
+      client.projects.sample(2).each do |project|
+        Assignment.create!(
+          user: user,
+          project: project,
+          status: Assignment::ACTIVE
+        )
+      end
     end
   end
 else

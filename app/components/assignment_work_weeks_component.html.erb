@@ -1,3 +1,9 @@
 <% 12.times do |count| %>
-  <%= render(WorkWeekComponent.new(work_week: nil)) %>
+  <% work_week_beginning_of_week = @beginning_of_week + count.weeks %>
+  <%= render(WorkWeekComponent.new(
+    work_week: work_week_for(work_week_beginning_of_week),
+    assignment: @assignment,
+    work_week_beginning_of_week: work_week_beginning_of_week,
+    beginning_of_week: @beginning_of_week
+  )) %>
 <% end %>

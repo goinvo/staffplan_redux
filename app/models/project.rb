@@ -7,7 +7,13 @@ class Project < ApplicationRecord
 
   scope :active, -> { where(status: 'active') }
 
-  VALID_STATUSES = %w(proposed active archived cancelled completed).freeze
+  PROPOSED = "proposed".freeze
+  ACTIVE = "active".freeze
+  ARCHIVED = "archived".freeze
+  CANCELLED = "cancelled".freeze
+  COMPLETED = "completed".freeze
+
+  VALID_STATUSES = [PROPOSED, ACTIVE, ARCHIVED, CANCELLED, COMPLETED].freeze
   VALID_PAYMENT_FREQUENCIES = %w(weekly monthly fortnightly quarterly annually).freeze
 
   validates :client_id, presence: true

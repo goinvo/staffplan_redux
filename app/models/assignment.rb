@@ -3,7 +3,11 @@ class Assignment < ApplicationRecord
   belongs_to :project
   has_many :work_weeks, dependent: :destroy
 
-  VALID_STATUSES = %w(proposed active archived completed).freeze
+  PROPOSED = "proposed".freeze
+  ACTIVE = "active".freeze
+  ARCHIVED = "archived".freeze
+  COMPLETED = "completed".freeze
+  VALID_STATUSES = [PROPOSED, ACTIVE, ARCHIVED, COMPLETED].freeze
 
   validates :user_id, presence: true, uniqueness: { scope: :project_id }
   validates :project_id, presence: true, uniqueness: { scope: :user_id }

@@ -1,1 +1,9 @@
-<td class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">work week</td>
+<td data-controller="work-week" class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+  <%= work_week_form do |form| %>
+    <%= form.text_field :estimated_hours, class: "block w-10 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 mb-1 text-center mx-auto" %>
+
+    <% if render_actual_hours? %>
+      <%= form.text_field :actual_hours, class: "block w-10 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center mx-auto" %>
+    <% end %>
+  <% end %>
+</td>
