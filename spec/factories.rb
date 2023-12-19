@@ -1,7 +1,8 @@
 FactoryBot.define do
+
   factory :user do
-    name { Faker::Name.name }
-    email { Faker::Internet.email }
+    name { Faker::Name.name + " #{rand(1..100).to_s}" }
+    sequence(:email) { |n| "#{n}#{Faker::Internet.email}" }
 
     after(:build) do |user, options|
       # a current company is required for the user to be valid
@@ -36,7 +37,7 @@ FactoryBot.define do
 
   factory :project do
     client
-    name { Faker::Company.name }
+    name { Faker::Company.name + " #{rand(1..100).to_s}"}
     status { 'active' }
     cost { Faker::Number.decimal(l_digits: 2) }
     payment_frequency { 'monthly' }

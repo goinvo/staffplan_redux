@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Authentication", type: :system do
-  before do
-    driven_by(:rack_test)
-  end
-
   context "when user is not signed in" do
     it "redirects to sign in page" do
       visit root_path
