@@ -8,7 +8,7 @@ RSpec.describe WorkWeek, type: :model do
     it { should validate_presence_of(:cweek) }
     it { should validate_numericality_of(:cweek).only_integer.is_greater_than_or_equal_to(1).is_less_than_or_equal_to(53) }
     it { should validate_presence_of(:year) }
-    it { should validate_numericality_of(:year).only_integer.is_greater_than_or_equal_to(2021).is_less_than_or_equal_to(2023) }
+    it { should validate_numericality_of(:year).only_integer.is_greater_than_or_equal_to(2000).is_less_than_or_equal_to(2200) }
     it { should validate_presence_of(:beginning_of_week) }
     it { should validate_numericality_of(:beginning_of_week).only_integer }
     it { should validate_presence_of(:estimated_hours) }
