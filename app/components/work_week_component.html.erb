@@ -4,6 +4,7 @@
 <%= tag.turbo_frame id: turbo_frame_id do %>
   <%= form_for @work_week, url: form_path, data: { work_week_target: "form" } do |form| %>
     <%= hidden_field_tag :assignment_id, @assignment.id %>
+    <%= hidden_field_tag :beginning_of_week, @beginning_of_week %>
     <%= form.hidden_field :cweek %>
     <%= form.hidden_field :year %>
     <%= form.hidden_field :beginning_of_week %>

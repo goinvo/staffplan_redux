@@ -1,4 +1,6 @@
 class StaffPlans::WorkWeeksController < ApplicationController
+
+  before_action :set_beginning_of_week
   def create
     @work_week = assignment.work_weeks.create(create_work_week_params)
   end
@@ -9,6 +11,10 @@ class StaffPlans::WorkWeeksController < ApplicationController
   end
 
   private
+
+  def set_beginning_of_week
+    @beginning_of_week = params[:beginning_of_week].to_i
+  end
 
   def create_work_week_params
     params.require(:work_week).permit(:estimated_hours, :actual_hours, :cweek, :year, :beginning_of_week)
