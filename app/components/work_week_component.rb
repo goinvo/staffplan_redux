@@ -1,11 +1,18 @@
 # frozen_string_literal: true
 
 class WorkWeekComponent < ViewComponent::Base
-  def initialize(work_week: new_work_week, assignment:, work_week_beginning_of_week:, beginning_of_week:)
+  include Turbo::FramesHelper
+
+  def initialize(work_week: nil, assignment:, work_week_beginning_of_week:, beginning_of_week:, render_td: true)
     @assignment = assignment
     @work_week_beginning_of_week = work_week_beginning_of_week
     @beginning_of_week = beginning_of_week
-    @work_week = work_week
+    @render_td = render_td
+    @work_week = work_week || new_work_week
+  end
+
+  def render_td?
+    @render_td
   end
 
   def actual_hours
@@ -17,7 +24,7 @@ class WorkWeekComponent < ViewComponent::Base
   end
 
   def work_week_form(&block)
-    form_for @work_week, data: { work_week_target: "form" } do |form|
+    form_for @work_week, url: form_path, data: { work_week_target: "form" } do |form|
       yield(form)
     end
   end
@@ -26,12 +33,27 @@ class WorkWeekComponent < ViewComponent::Base
     @work_week_beginning_of_week <= @beginning_of_week
   end
 
+  def turbo_frame_id
+    @work_week.turbo_frame_id
+  end
+
+  def form_path
+    if @work_week.persisted?
+      staff_plans_work_week_path(@work_week)
+    else
+      staff_plans_work_weeks_path
+    end
+  end
+
   private
+
+
 
   def new_work_week
     date = Time.at(@work_week_beginning_of_week.to_i).to_date
 
     @assignment.work_weeks.new(
+      assignment: @assignment,
       beginning_of_week: @work_week_beginning_of_week,
       cweek: date.cweek,
       year: date.year

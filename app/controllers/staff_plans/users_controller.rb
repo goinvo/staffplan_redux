@@ -1,4 +1,4 @@
-class StaffPlan::UsersController < ApplicationController
+class StaffPlans::UsersController < ApplicationController
 
   def show
     @viewing_user = params[:id].blank? ? current_user : current_company.users.find(params[:id])

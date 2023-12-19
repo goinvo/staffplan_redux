@@ -1,6 +1,9 @@
-<td data-controller="work-week" class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-  <%= work_week_form do |form| %>
-    <%= form.hidden_field :assignment_id %>
+<% if render_td? %>
+  <td data-controller="work-week" class="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+<% end %>
+<%= tag.turbo_frame id: turbo_frame_id do %>
+  <%= form_for @work_week, url: form_path, data: { work_week_target: "form" } do |form| %>
+    <%= hidden_field_tag :assignment_id, @assignment.id %>
     <%= form.hidden_field :cweek %>
     <%= form.hidden_field :year %>
     <%= form.hidden_field :beginning_of_week %>
@@ -13,4 +16,7 @@
                         style: "#{render_actual_hours? ? '' : 'visibility: hidden;'}",
                         data: { action: "blur->work-week#submit", work_week_target: "actualInput" } %>
   <% end %>
-</td>
+<% end %>
+<% if render_td? %>
+  </td>
+<% end %>

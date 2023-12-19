@@ -12,7 +12,7 @@ module Queries
       @assignments = user.
         assignments.
         where(project: company.projects.active).
-        includes(:work_weeks, project: :client).
+        includes(work_weeks: :assignment, project: :client).
         order('clients.name')
     end
 
@@ -25,7 +25,7 @@ module Queries
     end
 
     def work_weeks_for(project:)
-      work_weeks.select { |work_week| work_week.project == project }
+      work_weeks.select { |work_week| work_week.assignment.project_id == project.id }
     end
 
     def clients

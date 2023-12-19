@@ -1,0 +1,2 @@
+module StaffPlan::WorkWeeksHelper
+end

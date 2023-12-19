@@ -12,8 +12,12 @@ Rails.application.routes.draw do
 
   resource :dashboard, only: [:show], controller: "dashboard"
 
-  resources :staff_plans, only: [:show], controller: "staff_plan/users"
-  get '/staff_plan', to: "staff_plan/users#show"
+  namespace :staff_plans do
+    resources :users, only: [:show]
+    resources :work_weeks, only: [:create, :update]
+  end
+
+  get '/staff_plans', to: "staff_plans/users#show"
 
   root "dashboard#show"
 end
