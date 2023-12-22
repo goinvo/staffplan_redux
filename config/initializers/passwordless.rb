@@ -1,5 +1,5 @@
 Passwordless.configure do |config|
-  config.default_from_address = "noreply@staffplan.com"
+  config.default_from_address = "noreply@prettygood.software"
   config.parent_mailer = "ActionMailer::Base"
   config.restrict_token_reuse = true # A token/link can only be used once
   config.token_generator = Passwordless::ShortTokenGenerator.new # Used to generate magic link tokens.
