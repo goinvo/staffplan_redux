@@ -6,7 +6,7 @@ image: fermion/staffplan-redux
 
 # Deploy to these servers.
 servers:
-  - 159.203.169.235
+  - 45.55.196.107
 
 # Credentials for your image host.
 registry:
@@ -18,7 +18,7 @@ registry:
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 159.203.169.235
+    DB_HOST: 45.55.196.107
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -42,7 +42,7 @@ env:
 accessories:
   db:
     image: postgres:15
-    host: 159.203.169.235
+    host: 45.55.196.107
     port: 5432
     env:
       clear:

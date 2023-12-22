@@ -85,7 +85,7 @@ test:
 #
 production:
   <<: *default
-  host: 159.203.169.235
+  host: 45.55.196.107
   database: staffplan_redux_production
   username: staffplan_redux
   password: <%= ENV["POSTGRES_PASSWORD"] %>
