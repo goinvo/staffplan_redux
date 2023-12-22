@@ -23,4 +23,15 @@ module ApplicationHelper
     gravatar_url = "http://secure.gravatar.com/avatar/#{gravatar_id}"
     image_tag(gravatar_url, alt: user.name, class: css_classes)
   end
+
+  def user_staff_plan_turbo_frame_id(viewing_user)
+    "staff_plan:u:#{viewing_user.id}|c:#{current_user.current_company_id}"
+  end
+
+  def work_week_turbo_frame_id(work_week)
+    frame_id = "work_week|a:#{work_week.assignment.id}"
+    frame_id += "|u:#{work_week.assignment.user.id}|bow:#{work_week.beginning_of_week}"
+    frame_id += "|cweek:#{work_week.cweek}|year:#{work_week.year}"
+    frame_id
+  end
 end

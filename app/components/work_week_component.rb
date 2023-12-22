@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class WorkWeekComponent < ViewComponent::Base
-  include Turbo::FramesHelper
-
   def initialize(work_week: nil, assignment:, work_week_beginning_of_week:, beginning_of_week:, render_td: true)
     @assignment = assignment
     @work_week_beginning_of_week = work_week_beginning_of_week
@@ -34,7 +32,7 @@ class WorkWeekComponent < ViewComponent::Base
   end
 
   def turbo_frame_id
-    @work_week.turbo_frame_id
+    helpers.work_week_turbo_frame_id(@work_week)
   end
 
   def form_path

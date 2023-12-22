@@ -11,6 +11,6 @@ class WorkWeek < ApplicationRecord
   validates :actual_hours, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 24 }
 
   def turbo_frame_id
-    "work_week|a:#{assignment.id}|u:#{assignment.user.id}|bow:#{beginning_of_week}|cweek:#{cweek}|year:#{year}"
+
   end
 end

@@ -1,0 +1,49 @@
+<%= tag.turbo_frame id: helpers.user_staff_plan_turbo_frame_id(@viewing_user) do %>
+  <div class="px-4 sm:px-6 lg:px-8">
+    <div class="mt-8 flow-root">
+      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <table class="min-w-full divide-y divide-gray-300">
+            <%= render(StaffPlanColumnHeaderComponent.new(beginning_of_week: @query.beginning_of_week)) %>
+            <tbody class="divide-y divide-gray-200 bg-white">
+            <% @query.clients.each do |client| %>
+              <%= render(ClientRowComponent.new(client:)) %>
+              <% @query.projects_for(client: client).each do |project| %>
+                <%= render(AssignmentRowComponent.new(
+                  assignment: @query.assignment_for(project:),
+                  work_weeks: @query.work_weeks_for(project:),
+                  beginning_of_week: @query.beginning_of_week))
+                %>
+              <% end %>
+            <% end %>
+            </tbody>
+          </table>
+          <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
+            <div class="-mt-px flex w-0 flex-1">
+              <%= link_to staff_plans_user_path(@viewing_user, beginning_of_week: @query.previous_week),
+                          class: "inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                          data: { "turbo-stream": "" } do %>
+                <svg class="mr-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M18 10a.75.75 0 01-.75.75H4.66l2.1 1.95a.75.75 0 11-1.02 1.1l-3.5-3.25a.75.75 0 010-1.1l3.5-3.25a.75.75 0 111.02 1.1l-2.1 1.95h12.59A.75.75 0 0118 10z" clip-rule="evenodd" />
+                </svg>
+                Previous
+              <% end %>
+            </div>
+            <div class="hidden md:-mt-px md:flex">
+            </div>
+            <div class="-mt-px flex w-0 flex-1 justify-end">
+              <%= link_to staff_plans_user_path(@viewing_user, beginning_of_week: @query.next_week),
+                          class: "inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700",
+                          data: { "turbo-stream": "" } do %>
+                Next
+                <svg class="ml-3 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M2 10a.75.75 0 01.75-.75h12.59l-2.1-1.95a.75.75 0 111.02-1.1l3.5 3.25a.75.75 0 010 1.1l-3.5 3.25a.75.75 0 11-1.02-1.1l2.1-1.95H2.75A.75.75 0 012 10z" clip-rule="evenodd" />
+                </svg>
+              <% end %>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

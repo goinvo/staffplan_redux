@@ -2,7 +2,7 @@ module Queries
   class UserStaffPlan
     attr_reader :user, :company, :beginning_of_week
 
-    def initialize(user:, company:, beginning_of_week: Date.today.beginning_of_week)
+    def initialize(user:, company:, beginning_of_week:)
       raise ArgumentError, "user must be a User" unless user.is_a?(User)
       raise ArgumentError, "company must be a Company" unless company.is_a?(Company)
 
@@ -34,6 +34,14 @@ module Queries
 
     def projects_for(client:)
       @assignments.map { |assignment| assignment.project if assignment.project.client == client }.compact
+    end
+
+    def previous_week
+      (beginning_of_week - 16.weeks).to_i
+    end
+
+    def next_week
+      (beginning_of_week + 16.weeks).to_i
     end
   end
 end
