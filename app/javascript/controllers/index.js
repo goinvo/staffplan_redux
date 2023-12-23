@@ -2,10 +2,7 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "controllers/application"
 
-import MobileNavController from "./mobile_nav_controller"
-application.register("mobile-nav", MobileNavController)
-
-import WorkWeekController from "./work_week_controller"
-application.register("work-week", WorkWeekController)
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
+eagerLoadControllersFrom("controllers", application)
