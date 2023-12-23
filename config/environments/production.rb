@@ -105,6 +105,6 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  Rails.application.routes.default_url_options[:host] = 'staffplan.com'
+  Rails.application.routes.default_url_options[:host] = 'staffplan.fermion.dev'
   Rails.application.routes.default_url_options[:protocol] = 'https'
 end
