@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import MobileNavController from "./mobile_nav_controller"
+import MobileNavController from "./mobile_nav_controller.js"
 application.register("mobile-nav", MobileNavController)
 
-import WorkWeekController from "./work_week_controller"
+import WorkWeekController from "./work_week_controller.js"
 application.register("work-week", WorkWeekController)
