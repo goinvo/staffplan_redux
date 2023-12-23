@@ -23,6 +23,7 @@ env:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
     - DOCKER_REGISTRY_TOKEN
+    - STAFF_PLAN_EMAILS
 
   # Use a different ssh user than root
   # ssh:
