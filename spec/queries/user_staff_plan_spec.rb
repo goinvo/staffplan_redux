@@ -5,13 +5,21 @@ RSpec.describe Queries::UserStaffPlan do
   context "argument validation" do
     it "raises an error if user is not a User" do
       expect {
-        Queries::UserStaffPlan.new(user: nil, company: create(:company))
+        Queries::UserStaffPlan.new(
+          user: nil,
+          company: create(:company),
+          beginning_of_week: Time.zone.today.beginning_of_week
+        )
       }.to raise_error(ArgumentError)
     end
 
     it "raises an error if company is not a Company" do
       expect {
-        Queries::UserStaffPlan.new(user: create(:user), company: nil)
+        Queries::UserStaffPlan.new(
+          user: create(:user),
+          company: nil,
+          beginning_of_week: Time.zone.today.beginning_of_week
+        )
       }.to raise_error(ArgumentError)
     end
   end
@@ -19,13 +27,21 @@ RSpec.describe Queries::UserStaffPlan do
   context "initialization" do
     it "sets a user attribute" do
       user = create(:user)
-      query = Queries::UserStaffPlan.new(user: user, company: create(:company))
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: create(:company),
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.user).to eq(user)
     end
 
     it "sets a company attribute" do
       company = create(:company)
-      query = Queries::UserStaffPlan.new(user: create(:user), company: company)
+      query = Queries::UserStaffPlan.new(
+        user: create(:user),
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.company).to eq(company)
     end
 
@@ -33,7 +49,11 @@ RSpec.describe Queries::UserStaffPlan do
       user = create(:user)
       company = create(:company)
       assignment = create(:assignment, user: user, project: create(:project, client: create(:client, company: company)))
-      query = Queries::UserStaffPlan.new(user: user, company: company)
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.instance_variable_get(:@assignments)).to eq([assignment])
     end
   end
@@ -44,7 +64,11 @@ RSpec.describe Queries::UserStaffPlan do
       company = create(:company)
       assignment = create(:assignment, user: user, project: create(:project, client: create(:client, company: company)))
       work_week = create(:work_week, assignment: assignment)
-      query = Queries::UserStaffPlan.new(user: user, company: company)
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.work_weeks).to eq([work_week])
     end
 
@@ -56,7 +80,11 @@ RSpec.describe Queries::UserStaffPlan do
       other_assignment = create(:assignment, user: user, project: create(:project, client: create(:client, company: other_company)))
       create(:work_week, assignment: assignment)
       create(:work_week, assignment: other_assignment)
-      query = Queries::UserStaffPlan.new(user: user, company: company)
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.work_weeks).to eq(assignment.work_weeks)
     end
   end
@@ -66,7 +94,11 @@ RSpec.describe Queries::UserStaffPlan do
       user = create(:user)
       company = create(:company)
       assignment = create(:assignment, user: user, project: create(:project, client: create(:client, company: company)))
-      query = Queries::UserStaffPlan.new(user: user, company: company)
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.clients).to eq([assignment.project.client])
     end
 
@@ -76,7 +108,11 @@ RSpec.describe Queries::UserStaffPlan do
       other_company = create(:company)
       assignment = create(:assignment, user: user, project: create(:project, client: create(:client, company: company)))
       create(:assignment, user: user, project: create(:project, client: create(:client, company: other_company)))
-      query = Queries::UserStaffPlan.new(user: user, company: company)
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.clients).to eq([assignment.project.client])
     end
 
@@ -86,7 +122,11 @@ RSpec.describe Queries::UserStaffPlan do
       other_company = create(:company)
       assignment = create(:assignment, user: user, project: create(:project, client: create(:client, company: company)))
       create(:assignment, user: user, project: create(:project, client: create(:client, company: other_company)))
-      query = Queries::UserStaffPlan.new(user: user, company: company)
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.clients).to eq([assignment.project.client])
     end
   end
@@ -96,7 +136,11 @@ RSpec.describe Queries::UserStaffPlan do
       user = create(:user)
       company = create(:company)
       assignment = create(:assignment, user: user, project: create(:project, client: create(:client, company: company)))
-      query = Queries::UserStaffPlan.new(user: user, company: company)
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.projects_for(client: assignment.project.client)).to eq([assignment.project])
     end
 
@@ -105,7 +149,11 @@ RSpec.describe Queries::UserStaffPlan do
       company = create(:company)
       assignment = create(:assignment, user: user, project: create(:project, client: create(:client, company: company)))
       create(:assignment, user: user, project: create(:project, client: create(:client)))
-      query = Queries::UserStaffPlan.new(user: user, company: company)
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.projects_for(client: assignment.project.client)).to eq([assignment.project])
     end
 
@@ -115,7 +163,11 @@ RSpec.describe Queries::UserStaffPlan do
       other_company = create(:company)
       assignment = create(:assignment, user: user, project: create(:project, client: create(:client, company: company)))
       create(:assignment, user: user, project: create(:project, client: create(:client, company: other_company)))
-      query = Queries::UserStaffPlan.new(user: user, company: company)
+      query = Queries::UserStaffPlan.new(
+        user: user,
+        company: company,
+        beginning_of_week: Time.zone.today.beginning_of_week
+      )
       expect(query.projects_for(client: assignment.project.client)).to eq([assignment.project])
     end
   end
