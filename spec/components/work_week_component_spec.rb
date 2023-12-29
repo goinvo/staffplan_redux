@@ -47,13 +47,13 @@ RSpec.describe WorkWeekComponent, type: :component do
     subject { component.render_actual_hours? }
 
     context "when the work_week_beginning_of_week is before the beginning_of_week" do
-      let(:beginning_of_week) { work_week_beginning_of_week + 1.week }
+      let(:work_week_beginning_of_week) { 2.weeks.ago.to_i }
 
       it { is_expected.to eq(true) }
     end
 
     context "when the work_week_beginning_of_week is after the beginning_of_week" do
-      let(:beginning_of_week) { work_week_beginning_of_week - 1.week }
+      let(:work_week_beginning_of_week) { 2.weeks.from_now.to_i }
 
       it { is_expected.to eq(false) }
     end

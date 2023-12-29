@@ -28,7 +28,8 @@ class WorkWeekComponent < ViewComponent::Base
   end
 
   def render_actual_hours?
-    @work_week_beginning_of_week <= Time.zone.now.at_beginning_of_week.to_i
+    # only allow input for work weeks that are the current week or in the past
+    Time.zone.now.at_beginning_of_week.to_i >= @work_week_beginning_of_week
   end
 
   def turbo_frame_id
