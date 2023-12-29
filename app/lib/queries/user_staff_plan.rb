@@ -21,7 +21,7 @@ module Queries
     end
 
     def work_weeks
-      @work_weeks ||= @assignments.flat_map(&:work_weeks)
+      @_work_weeks ||= @assignments.flat_map(&:work_weeks)
     end
 
     def work_weeks_for(project:)
@@ -29,11 +29,11 @@ module Queries
     end
 
     def clients
-      @clients ||= @assignments.flat_map(&:project).map(&:client).uniq
+      @_clients ||= @assignments.flat_map(&:project).map(&:client).uniq
     end
 
     def projects_for(client:)
-      @assignments.map { |assignment| assignment.project if assignment.project.client == client }.compact
+      @_projects_for ||= @assignments.map { |assignment| assignment.project if assignment.project.client == client }.compact
     end
 
     def previous_week

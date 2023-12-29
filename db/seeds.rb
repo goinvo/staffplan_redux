@@ -31,6 +31,7 @@ if goinvo.clients.none?
   end
 
   goinvo.clients.each do |client|
+    next if client.projects.any?
     7.times do
       client.projects.create(
         name: Faker::Company.name,
