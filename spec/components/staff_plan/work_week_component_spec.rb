@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe WorkWeekComponent, type: :component do
+RSpec.describe StaffPlan::WorkWeekComponent, type: :component do
   let(:assignment) { create(:assignment) }
   let(:work_week) { create(:work_week, assignment: assignment) }
   let(:work_week_beginning_of_week) { work_week.beginning_of_week }
@@ -36,7 +36,7 @@ RSpec.describe WorkWeekComponent, type: :component do
     it "renders a form with some data attributes" do
       render_inline(component)
 
-      expect(page).to have_selector "td[data-controller='work-week']"
+      expect(page).to have_selector "div[data-controller='work-week']"
       expect(page).to have_css "form[data-work-week-target='form']"
       expect(page).to have_css "input[data-work-week-target='proposedInput'][data-action='blur->work-week#submit']"
       expect(page).to have_css "input[data-work-week-target='actualInput'][data-action='blur->work-week#submit']"
