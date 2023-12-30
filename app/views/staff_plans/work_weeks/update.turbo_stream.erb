@@ -1,11 +1,10 @@
 <% # currently assuming happy path. Need to handle/render validation errors. %>
 <%= turbo_stream.update(
       work_week_turbo_frame_id(@work_week),
-      render(WorkWeekComponent.new(
+      render(StaffPlan::WorkWeekComponent.new(
         work_week: @work_week,
         assignment: @work_week.assignment,
         work_week_beginning_of_week: @work_week.beginning_of_week,
-        beginning_of_week: @beginning_of_week,
-        render_td: false
+        beginning_of_week: @beginning_of_week
       ))
     ) %>

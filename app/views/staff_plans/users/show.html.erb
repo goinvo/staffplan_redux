@@ -2,4 +2,4 @@
   <%= current_user == @viewing_user ? "My StaffPlan" : "#{@viewing_user.name}'s StaffPlan" %>
 <% end %>
 
-<%= render(StaffPlanComponent.new(query: @query, viewing_user: @viewing_user, beginning_of_week: @beginning_of_week)) %>
+<%= render(StaffPlan::MainComponent.new(query: @query, viewing_user: @viewing_user, beginning_of_week: @beginning_of_week)) %>

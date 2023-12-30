@@ -3,21 +3,13 @@
     <div class="mt-8 flow-root">
       <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-          <table class="min-w-full divide-y divide-gray-300">
-            <%= render(StaffPlanColumnHeaderComponent.new(beginning_of_week: @query.beginning_of_week)) %>
-            <tbody class="divide-y divide-gray-200 bg-white">
+          <div class="table w-full">
+            <%= render(StaffPlan::HeaderComponent.new(beginning_of_week: @beginning_of_week)) %>
             <% @query.clients.each do |client| %>
-              <%= render(ClientRowComponent.new(client:)) %>
-              <% @query.projects_for(client: client).each do |project| %>
-                <%= render(AssignmentRowComponent.new(
-                  assignment: @query.assignment_for(project:),
-                  work_weeks: @query.work_weeks_for(project:),
-                  beginning_of_week: @query.beginning_of_week))
-                %>
-              <% end %>
+              <%= render(StaffPlan::ClientComponent.new(client: client, query: @query)) %>
             <% end %>
-            </tbody>
-          </table>
+          </div>
+
           <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
             <div class="-mt-px flex w-0 flex-1">
               <%= link_to staff_plans_user_path(@viewing_user, beginning_of_week: @query.previous_week),

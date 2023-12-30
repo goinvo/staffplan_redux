@@ -1,0 +1,14 @@
+<div class="table-header-group">
+  <div class="table-row flex">
+    <div class="table-cell text-left lg:w-52 md:w-40 w-24 bg-blue-500">blank space</div>
+    <div class="table-cell text-left flex-1 bg-green-50">
+      <div class="flex">
+        <% 16.times do |count| %>
+          <div class="flex-1">
+            <%= Time.at(date_plus_count(count)).to_date.strftime("%m/%d") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

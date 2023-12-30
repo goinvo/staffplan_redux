@@ -1,0 +1,8 @@
+<div class="table-row flex">
+  <div class="table-cell text-left lg:w-52 md:w-40 w-24 bg-blue-500">
+    <%= @project.name %>
+  </div>
+  <div class="table-cell text-left flex-1 bg-green-50">
+    <%= render(StaffPlan::WorkWeeksComponent.new(assignment: @assignment, beginning_of_week: @beginning_of_week)) %>
+  </div>
+</div>
