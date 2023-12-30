@@ -1,4 +1,5 @@
 class StaffPlans::WorkWeeksController < ApplicationController
+  before_action :require_user!
 
   before_action :set_beginning_of_week
   def create

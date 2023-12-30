@@ -1,4 +1,5 @@
 class StaffPlans::UsersController < ApplicationController
+  before_action :require_user!
 
   before_action :redirect_to_user_id, only: [:show]
 
