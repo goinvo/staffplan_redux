@@ -2,11 +2,12 @@
 
 module StaffPlan
   class WorkWeekComponent < ViewComponent::Base
-    def initialize(work_week: nil, assignment:, work_week_beginning_of_week:, beginning_of_week:)
+    def initialize(work_week: nil, assignment:, work_week_beginning_of_week:, beginning_of_week:, count:)
       @assignment = assignment
       @work_week_beginning_of_week = work_week_beginning_of_week
       @beginning_of_week = beginning_of_week
       @work_week = work_week || new_work_week
+      @count = count
     end
 
     def actual_hours

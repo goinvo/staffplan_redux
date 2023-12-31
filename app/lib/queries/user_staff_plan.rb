@@ -33,15 +33,15 @@ module Queries
     end
 
     def projects_for(client:)
-      @_projects_for ||= @assignments.map { |assignment| assignment.project if assignment.project.client == client }.compact
+      @assignments.map { |assignment| assignment.project if assignment.project.client == client }.compact
     end
 
-    def previous_week
-      (beginning_of_week - 16.weeks).to_i
+    def previous_week(diff)
+      (beginning_of_week - diff.weeks).to_i
     end
 
-    def next_week
-      (beginning_of_week + 16.weeks).to_i
+    def next_week(diff)
+      (beginning_of_week + diff.weeks).to_i
     end
   end
 end

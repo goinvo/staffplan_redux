@@ -1,7 +1,10 @@
-<div class="table-row-group">
+<div class="table-row-group border-b-2 border-indigo-200">
   <div class="table-row flex">
-    <div class="table-cell flex-1">
+    <div class="table-cell bg-green-50">
       <%= @client.name %>
+    </div>
+    <div class="bg-green-50 flex-1">
+      &nbsp;
     </div>
   </div>
   <% @query.projects_for(client: @client).each do |project| %>

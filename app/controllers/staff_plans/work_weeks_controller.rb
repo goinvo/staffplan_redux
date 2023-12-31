@@ -2,6 +2,7 @@ class StaffPlans::WorkWeeksController < ApplicationController
   before_action :require_user!
 
   before_action :set_beginning_of_week
+  before_action :set_count
   def create
     @work_week = assignment.work_weeks.create(create_work_week_params)
   end
@@ -15,6 +16,10 @@ class StaffPlans::WorkWeeksController < ApplicationController
 
   def set_beginning_of_week
     @beginning_of_week = params[:beginning_of_week].to_i
+  end
+
+  def set_count
+    @count = params[:count].to_i
   end
 
   def create_work_week_params

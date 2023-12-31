@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .work-weeks {
+        .work-week:nth-child( n + 5 ){
+            display: none;
+        }
+    }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+    .work-weeks {
+        .work-week:nth-child( n + 9 ){
+            display: none;
+        }
+    }
+}
+@media (min-width: 1024px) {
+    .work-weeks {
+        .work-week {
+            display: initial;
+        }
+    }
+}

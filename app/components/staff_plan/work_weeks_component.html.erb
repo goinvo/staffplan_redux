@@ -1,11 +1,12 @@
-<div class="flex">
+<div class="flex work-weeks">
   <% 16.times do |count| %>
     <% work_week_beginning_of_week = @beginning_of_week + count.weeks %>
     <%= render(StaffPlan::WorkWeekComponent.new(
       work_week: work_week_for(work_week_beginning_of_week),
       assignment: @assignment,
       work_week_beginning_of_week: work_week_beginning_of_week,
-      beginning_of_week: @beginning_of_week
+      beginning_of_week: @beginning_of_week,
+      count: count
     )) %>
   <% end %>
 </div>
