@@ -12,7 +12,8 @@ RSpec.describe StaffPlan::WorkWeekComponent, type: :component do
       assignment: assignment,
       work_week: work_week,
       work_week_beginning_of_week: work_week_beginning_of_week,
-      beginning_of_week: beginning_of_week
+      beginning_of_week: beginning_of_week,
+      count: 0
     )
   end
 
