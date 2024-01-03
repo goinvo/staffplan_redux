@@ -25,12 +25,12 @@ module Types
 
     field :assignments, [Types::StaffPlan::AssignmentType], null: false
     def assignments
-      User.first.assignments.all
+      context[:current_user].assignments.all
     end
 
     field :users, [Types::StaffPlan::UserType], null: false
     def users
-      Company.first.users.all
+      context[:current_user].current_company.users.all
     end
   end
 end
