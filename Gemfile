@@ -27,6 +27,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 gem "passwordless", "~> 1.1"
 gem "graphql", "~> 2.2"
+gem "graphiql-rails"
 gem "view_component"
 
 # Reduces boot times through caching; required in config/boot.rb
@@ -52,7 +53,6 @@ group :development do
   # gem "rack-mini-profiler"
 
   gem "letter_opener"
-  gem "graphiql-rails"
 end
 
 group :test do
