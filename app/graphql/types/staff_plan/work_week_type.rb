@@ -4,6 +4,7 @@ module Types
   module StaffPlan
     class WorkWeekType < Types::BaseObject
       field :id, ID, null: false
+      field :user, Types::StaffPlan::UserType, null: false
       field :assignment_id, Integer, null: false
       field :cweek, Integer, null: false
       field :year, Integer, null: false
@@ -12,8 +13,6 @@ module Types
       field :actual_hours, Integer, null: false
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-
-      field :user, Types::StaffPlan::UserType, null: false
 
       def user
         object.user

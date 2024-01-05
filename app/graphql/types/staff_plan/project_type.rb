@@ -4,7 +4,7 @@ module Types
   module StaffPlan
     class ProjectType < Types::BaseObject
       field :id, ID, null: false
-      field :client_id, ID, null: false
+      field :client, Types::StaffPlan::ClientType, null: false
       field :name, String, null: false
       field :status, String, null: false
       field :payment_frequency, String, null: false

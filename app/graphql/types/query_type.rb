@@ -23,9 +23,30 @@ module Types
       context[:current_user].current_company.clients.all
     end
 
-    field :assignments, [Types::StaffPlan::AssignmentType], null: false
-    def assignments
-      context[:current_user].assignments.all
+    field :project_assignments, [Types::StaffPlan::AssignmentType], null: false do
+      argument :project_id, ID, required: true, description: "ID of the project to fetch assignments for."
+    end
+
+    def project_assignments(project_id: nil)
+      context[:current_company]
+        .projects
+        .find(project_id)
+        .assignments
+        .all
+    end
+
+    field :user_assignments, [Types::StaffPlan::AssignmentType], null: false do
+      argument :user_id, ID, required: false,
+               description: "ID of the user to fetch assignments for. The current user's assignments will be returned if this argument is not provided."
+    end
+    def user_assignments(user_id: nil)
+      target = if user_id.present?
+        context[:current_company].users.find(user_id)
+      else
+        context[:current_user]
+      end
+
+      target.assignments.all
     end
 
     field :users, [Types::StaffPlan::UserType], null: false
