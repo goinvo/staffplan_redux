@@ -1,0 +1,97 @@
+type Assignment {
+  createdAt: ISO8601DateTime!
+  id: ID!
+  project: Project!
+  status: String!
+  updatedAt: ISO8601DateTime!
+  user: User!
+  workWeeks: [WorkWeek!]!
+}
+
+type Client {
+  createdAt: ISO8601DateTime!
+  description: String
+  id: ID!
+  name: String!
+  projects: [Project!]!
+  status: String!
+  updatedAt: ISO8601DateTime!
+}
+
+type Company {
+  clients: [Client!]!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String!
+  projects: [Project!]!
+  updatedAt: ISO8601DateTime!
+  users: [User!]!
+}
+
+"""
+An ISO 8601-encoded datetime
+"""
+scalar ISO8601DateTime @specifiedBy(url: "https://tools.ietf.org/html/rfc3339")
+
+type Mutation {
+  createWorkWeek: WorkWeek!
+  setCurrentCompany(companyId: ID!): Company!
+  updateWorkWeek: WorkWeek!
+}
+
+type Project {
+  assignments: [Assignment!]!
+  client: Client!
+  createdAt: ISO8601DateTime!
+  id: ID!
+  name: String!
+  paymentFrequency: String!
+  status: String!
+  updatedAt: ISO8601DateTime!
+  users: [User!]!
+  workWeeks: [WorkWeek!]!
+}
+
+type Query {
+  clients: [Client!]!
+  projectAssignments(
+    """
+    ID of the project to fetch assignments for.
+    """
+    projectId: ID!
+  ): [Assignment!]!
+  userAssignments(
+    """
+    ID of the user to fetch assignments for. The current user's assignments will
+    be returned if this argument is not provided.
+    """
+    userId: ID
+  ): [Assignment!]!
+  users: [User!]!
+}
+
+type User {
+  assignments: [Assignment!]!
+  companies: [Company!]!
+  createdAt: ISO8601DateTime!
+  currentCompanyId: ID
+  email: String!
+  id: ID!
+  name: String!
+  projects: [Project!]!
+  updatedAt: ISO8601DateTime!
+}
+
+type WorkWeek {
+  actualHours: Int!
+  assignmentId: Int!
+  beginningOfWeek: Int!
+  createdAt: ISO8601DateTime!
+  cweek: Int!
+  estimatedHours: Int!
+  id: ID!
+  project: Project!
+  updatedAt: ISO8601DateTime!
+  user: User!
+  year: Int!
+}
