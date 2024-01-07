@@ -13,4 +13,10 @@ class Membership < ApplicationRecord
   validates :company, presence: true, uniqueness: { scope: :user }
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
   validates :role, presence: true, inclusion: { in: VALID_ROLES }
+
+  scope :active, -> { where(status: 'active') }
+
+  def active?
+    status == 'active'
+  end
 end

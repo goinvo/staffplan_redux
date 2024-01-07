@@ -1,13 +1,28 @@
 module Mutations
   class SetCurrentCompany < BaseMutation
-    # arguments passed to the `resolve` method
-    argument :company_id, ID, required: true
+    argument :company_id, ID,
+             required: true,
+             description: "The ID of the company to set as the current user's current_company_id. User must be an active member of the company."
 
     # return type from the mutation
     type Types::StaffPlan::CompanyType
 
-    def resolve
-      # TODO: implement
+    def resolve(company_id:)
+      user = context[:current_user]
+
+      membership = user.
+        memberships.
+        active.
+        find_by(company_id:)
+
+      # user is not an active member of the company
+      if membership.blank? || !membership.active?
+        raise GraphQL::ExecutionError, "Company not found."
+      end
+
+      user.update!(current_company: membership.company)
+
+      user.current_company
     end
   end
 end
