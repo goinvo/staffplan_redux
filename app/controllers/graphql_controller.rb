@@ -7,6 +7,7 @@ class GraphqlController < ApplicationController
   # protect_from_forgery with: :null_session
 
   skip_before_action :verify_authenticity_token
+  before_action :ensure_current_user
 
   def execute
     variables = prepare_variables(params[:variables])
@@ -51,5 +52,9 @@ class GraphqlController < ApplicationController
     logger.error e.backtrace.join("\n")
 
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
+  end
+
+  def ensure_current_user
+    raise ActionController::RoutingError.new("Not Found") if current_user.blank?
   end
 end
