@@ -1,6 +1,7 @@
 class Assignment < ApplicationRecord
   belongs_to :user
   belongs_to :project
+  has_one :company, through: :user, source: :current_company
   has_many :work_weeks, dependent: :destroy
 
   PROPOSED = "proposed".freeze

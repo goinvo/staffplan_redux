@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :companies, through: :memberships
   has_many :assignments, dependent: :destroy
   has_many :projects, through: :assignments
+  has_many :work_weeks, through: :assignments
 
   validates :name, presence: true
   validates :current_company, presence: true

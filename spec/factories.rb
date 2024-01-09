@@ -55,5 +55,10 @@ FactoryBot.define do
     year { Date.today.year }
     estimated_hours { rand(2..8) }
     actual_hours { rand(2..8) }
+
+    trait :blank do
+      estimated_hours { 0 }
+      actual_hours { 0 }
+    end
   end
 end
