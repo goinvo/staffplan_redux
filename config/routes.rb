@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   end
 
   # if Rails.env.development?
-    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
+      # only allow authenticated users
+      Passwordless::Session.exists?(id: request.session[:"passwordless_session_id--user"])
+    }
   # end
 
   post "/graphql", to: "graphql#execute"
