@@ -1,5 +1,5 @@
 module Mutations
-  class CreateWorkWeek < BaseMutation
+  class UpsertWorkWeek < BaseMutation
     # arguments passed to the `resolve` method
     # argument :description, String, required: true
     # argument :url, String, required: true
