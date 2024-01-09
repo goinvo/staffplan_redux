@@ -53,7 +53,6 @@ FactoryBot.define do
     assignment
     cweek { Date.today.cweek }
     year { Date.today.year }
-    beginning_of_week { Date.today.beginning_of_week.to_datetime.to_i }
     estimated_hours { rand(2..8) }
     actual_hours { rand(2..8) }
   end

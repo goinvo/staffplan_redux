@@ -8,7 +8,6 @@ module Types
       field :assignment_id, Integer, null: false
       field :cweek, Integer, null: false
       field :year, Integer, null: false
-      field :beginning_of_week, Integer, null: false
       field :estimated_hours, Integer, null: false
       field :actual_hours, Integer, null: false
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false

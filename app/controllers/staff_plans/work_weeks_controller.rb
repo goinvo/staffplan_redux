@@ -23,11 +23,11 @@ class StaffPlans::WorkWeeksController < ApplicationController
   end
 
   def create_work_week_params
-    params.require(:work_week).permit(:estimated_hours, :actual_hours, :cweek, :year, :beginning_of_week)
+    params.require(:work_week).permit(:estimated_hours, :actual_hours, :cweek, :year)
   end
 
   def edit_work_week_params
-    params.require(:work_week).permit(:estimated_hours, :actual_hours, :cweek, :year, :beginning_of_week)
+    params.require(:work_week).permit(:estimated_hours, :actual_hours, :cweek, :year)
   end
 
   def assignment
