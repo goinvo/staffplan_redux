@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_09_005840) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_09_011047) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -90,7 +90,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_09_005840) do
     t.bigint "assignment_id", null: false
     t.integer "cweek", null: false
     t.integer "year", null: false
-    t.decimal "beginning_of_week", precision: 15, null: false
     t.integer "estimated_hours", default: 0, null: false
     t.integer "actual_hours", default: 0, null: false
     t.datetime "created_at", null: false
