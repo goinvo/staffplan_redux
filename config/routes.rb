@@ -3,12 +3,10 @@ Rails.application.routes.draw do
     get 'current_user/create'
   end
 
-  # if Rails.env.development?
-    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
-      # only allow authenticated users
-      Passwordless::Session.exists?(id: request.session[:"passwordless_session_id--user"])
-    }
-  # end
+  mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
+    # only allow authenticated users, otherwise 404
+    Passwordless::Session.exists?(id: request.session[:"passwordless_session_id--user"])
+  }
 
   post "/graphql", to: "graphql#execute"
 
