@@ -1,5 +1,0 @@
-<% content_for(:header) do %>
-  <%= current_user == @viewing_user ? "My StaffPlan" : "#{@viewing_user.name}'s StaffPlan" %>
-<% end %>
-
-<%= render(StaffPlan::MainComponent.new(query: @query, viewing_user: @viewing_user, beginning_of_week: @beginning_of_week)) %>
