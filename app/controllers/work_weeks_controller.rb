@@ -27,10 +27,8 @@ class WorkWeeksController < ApplicationController
     respond_to do |format|
       if @work_week.save
         format.html { redirect_to work_week_url(@work_week), notice: "Work week was successfully created." }
-        format.json { render :show, status: :created, location: @work_week }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @work_week.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -40,10 +38,8 @@ class WorkWeeksController < ApplicationController
     respond_to do |format|
       if @work_week.update(work_week_params)
         format.html { redirect_to work_week_url(@work_week), notice: "Work week was successfully updated." }
-        format.json { render :show, status: :ok, location: @work_week }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @work_week.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,6 +62,6 @@ class WorkWeeksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def work_week_params
-      params.require(:work_week).permit(:estimated_hours, :actual_hours, :cweek, :year, :assignment_id, :beginning_of_week)
+      params.require(:work_week).permit(:estimated_hours, :actual_hours, :cweek, :year, :assignment_id)
     end
 end
