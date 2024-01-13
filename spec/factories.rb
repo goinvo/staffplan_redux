@@ -4,13 +4,23 @@ FactoryBot.define do
     name { Faker::Name.name + " #{rand(1..100).to_s}" }
     sequence(:email) { |n| "#{n}#{Faker::Internet.email}" }
 
+    trait(:needs_validation) do
+      validation_status { User::VALIDATION_STATUS_PENDING }
+    end
+
     after(:build) do |user, options|
       # a current company is required for the user to be valid
       # unless one is already set, create one
+      next if user.email_validation_pending?
       next if user.current_company.present?
 
-      company = create(:company)
-      user.current_company = company
+      if user.memberships.length == 1
+        user.current_company = user.memberships.first.company
+        next
+      else
+        company = create(:company)
+        user.current_company = company
+      end
     end
 
     after(:create) do |user, options|
@@ -24,7 +34,7 @@ FactoryBot.define do
 
   factory :membership do
     company
-    user
+    user { build(:user, current_company: company) }
     status { 'active' }
     role { 'owner' }
   end
