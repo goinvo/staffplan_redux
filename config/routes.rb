@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
   post "/graphql", to: "graphql#execute"
 
-  resources :work_weeks
   resources :assignments
   resources :projects
   resources :clients
