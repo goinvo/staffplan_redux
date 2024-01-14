@@ -4,10 +4,6 @@ FactoryBot.define do
     name { Faker::Name.name + " #{rand(1..100).to_s}" }
     sequence(:email) { |n| "#{n}#{Faker::Internet.email}" }
 
-    trait(:needs_validation) do
-      validation_status { User::VALIDATION_STATUS_PENDING }
-    end
-
     after(:build) do |user, options|
       # a current company is required for the user to be valid
       # unless one is already set, create one

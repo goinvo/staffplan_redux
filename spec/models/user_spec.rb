@@ -50,20 +50,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-
-  describe "#email_validated?" do
-    context "when user has a validated email address" do
-      it "returns true" do
-        user = build(:user, validation_status: User::VALIDATION_STATUS_VALIDATED)
-        expect(user.email_validated?).to be_truthy
-      end
-    end
-
-    context "when user does not have a validated email address" do
-      it "returns false" do
-        user = build(:user, validation_status: User::VALIDATION_STATUS_PENDING)
-        expect(user.email_validated?).to be_falsey
-      end
-    end
-  end
 end
