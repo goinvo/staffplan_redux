@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resource :dashboard, only: [:show], controller: "dashboard"
 
-  resource :settings, only: [:show], controller: "settings" do
+  resource :settings, only: [:show, :update], controller: "settings" do
     resource :billing_information, only: [:show, :edit, :update], controller: "settings/billing_information"
   end
 
