@@ -8,18 +8,36 @@
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
       <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
         <%= render("shared/flash") %>
-        <%= form_with(model: @registration, url: registrations_path, html: { class: "space-y-6" }) do |f| %>
+        <%= form_with(model: @registration, url: registrations_path, html: { class: "space-y-6" }, data: { turbo: false }) do |f| %>
           <div>
             <%= f.label :name, class: "block text-sm font-medium leading-6 text-gray-900" %>
             <div class="mt-2">
-              <%= f.text_field :name, required: true, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+              <%
+                name_css_class = "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                name_css_class << " text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500" if @registration.errors[:name].any?
+              %>
+              <%= f.text_field :name,
+                               required: true,
+                               class: name_css_class %>
             </div>
+            <% if @registration.errors[:name].any? %>
+              <p class="mt-2 text-sm text-red-600" id="email-error">What should we call you?</p>
+            <% end %>
           </div>
           <div>
             <%= f.label :email, class: "block text-sm font-medium leading-6 text-gray-900" %>
             <div class="mt-2">
-              <%= f.email_field :email, required: true, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+              <%
+                email_css_class = "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                email_css_class << " text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500" if @registration.errors[:email].any?
+              %>
+              <%= f.email_field :email,
+                                required: true,
+                                class: email_css_class %>
             </div>
+            <% if @registration.errors[:email].any? %>
+              <p class="mt-2 text-sm text-red-600" id="email-error">Please provide a valid email address.</p>
+            <% end %>
           </div>
 
           <div>
