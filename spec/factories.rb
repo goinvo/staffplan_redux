@@ -7,7 +7,6 @@ FactoryBot.define do
     after(:build) do |user, options|
       # a current company is required for the user to be valid
       # unless one is already set, create one
-      next if user.email_validation_pending?
       next if user.current_company.present?
 
       if user.memberships.length == 1

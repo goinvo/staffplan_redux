@@ -2,22 +2,12 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   context "validations" do
-    context "when user has a validated email address" do
-      it "requires a current company" do
-        user = build(:user)
-        user.update(current_company: nil)
-        expect(user).to_not be_valid
-      end
+    it "requires a current company" do
+      user = build(:user)
+      user.update(current_company: nil)
+      expect(user).to_not be_valid
     end
-
-    context "when user does not have a validated email address" do
-      it "does not require a current company" do
-        user = build(:user, :needs_validation)
-        user.update(current_company: nil, current_company_id: nil)
-        expect(user).to_not be_valid
-      end
-    end
-
+    
     it "requires a unique email" do
       user = create(:membership).user
       other_user = build(:membership, user: build(:user, email: user.email)).user
