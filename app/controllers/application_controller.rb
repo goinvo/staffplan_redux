@@ -12,12 +12,14 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= authenticate_by_session(User)
+    return @current_user if defined?(@current_user)
+    @current_user = authenticate_by_session(User)
   end
   helper_method :current_user
 
   def current_company
-    @current_company ||= current_user.current_company
+    return @current_company if defined?(@current_company)
+    @current_company = current_user.current_company
   end
   helper_method :current_company
 
