@@ -28,7 +28,7 @@
                   <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
                   <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">People</a>
                   <% if current_user.owner? %>
-                    <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Settings</a>
+                    <%= header_link_to "Settings", settings_path %>
                   <% end %>
                 </div>
               </div>
@@ -100,7 +100,7 @@
             <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
             <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">People</a>
             <% if current_user.owner? %>
-              <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Settings</a>
+              <%= mobile_header_link_to "Settings", settings_path %>
             <% end %>
           </div>
           <div class="border-t border-gray-700 pb-3 pt-4">
