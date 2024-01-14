@@ -59,7 +59,7 @@ class Registration < ApplicationRecord
     key = ActiveSupport::KeyGenerator.new(
       Rails.application.secret_key_base
     ).generate_key(
-      Rails.application.credentials[Rails.env].registration_salt
+      Rails.application.credentials.registration_salt
     )
     OpenSSL::HMAC.hexdigest("SHA256", key, string)
   end
