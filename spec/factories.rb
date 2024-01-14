@@ -71,4 +71,12 @@ FactoryBot.define do
       actual_hours { 0 }
     end
   end
+
+  factory :registration do
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    expires_at { 1.week.from_now }
+    ip_address { Faker::Internet.ip_v4_address }
+    token { Faker::Internet.password(min_length: 10, max_length: 20) }
+  end
 end

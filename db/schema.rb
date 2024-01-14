@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_12_163948) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_13_233253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -75,6 +75,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_163948) do
     t.datetime "updated_at", null: false
     t.index ["client_id", "name"], name: "index_projects_on_client_id_and_name", unique: true
     t.index ["client_id"], name: "index_projects_on_client_id"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "name", null: false
+    t.datetime "expires_at", null: false
+    t.datetime "registered_at"
+    t.string "token_digest", null: false
+    t.uuid "identifier", default: -> { "gen_random_uuid()" }, null: false
+    t.integer "user_id"
+    t.string "ip_address", limit: 15, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["identifier"], name: "index_registrations_on_identifier", unique: true
   end
 
   create_table "users", force: :cascade do |t|
