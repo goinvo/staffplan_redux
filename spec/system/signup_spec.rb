@@ -137,4 +137,14 @@ RSpec.describe "Signing up for StaffPlan", type: :system do
       end
     end
   end
+
+  context "when a registration has already been used" do
+    it "should redirect the user to the sign in page" do
+      registration = create(:registration, registered_at: Time.current)
+      visit register_registration_path(registration, token: registration.token)
+
+      expect(page).to have_current_path(auth_sign_in_path)
+      expect(page).to have_content("Sorry, that link is invalid.")
+    end
+  end
 end

@@ -29,6 +29,8 @@ class RegistrationsController < ApplicationController
     else
       redirect_to auth_sign_in_url, notice: "Sorry, that link is invalid."
     end
+  rescue Registration::RegistrationNotAvailableError
+    redirect_to auth_sign_in_url, notice: "Sorry, that link is invalid."
   end
 
   private
