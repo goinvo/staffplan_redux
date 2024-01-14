@@ -9,8 +9,13 @@ FactoryBot.define do
       # unless one is already set, create one
       next if user.current_company.present?
 
-      company = create(:company)
-      user.current_company = company
+      if user.memberships.length == 1
+        user.current_company = user.memberships.first.company
+        next
+      else
+        company = create(:company)
+        user.current_company = company
+      end
     end
 
     after(:create) do |user, options|
@@ -24,7 +29,7 @@ FactoryBot.define do
 
   factory :membership do
     company
-    user
+    user { build(:user, current_company: company) }
     status { 'active' }
     role { 'owner' }
   end
@@ -60,5 +65,13 @@ FactoryBot.define do
       estimated_hours { 0 }
       actual_hours { 0 }
     end
+  end
+
+  factory :registration do
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+    expires_at { 1.week.from_now }
+    ip_address { Faker::Internet.ip_v4_address }
+    token { Faker::Internet.password(min_length: 10, max_length: 20) }
   end
 end

@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :api do
-    get 'current_user/create'
-  end
 
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
     # only allow authenticated users, otherwise 404
@@ -10,10 +7,14 @@ Rails.application.routes.draw do
 
   post "/graphql", to: "graphql#execute"
 
-  resources :work_weeks
   resources :assignments
   resources :projects
   resources :clients
+  resources :registrations, only: [:new, :create] do
+    member do
+      get :register
+    end
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
