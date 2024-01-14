@@ -22,7 +22,7 @@ class RegistrationsController < ApplicationController
   def register
     registration = Registration.find_by!(identifier: params[:id])
 
-    if registration.token_digest == Passwordless.digest(params[:token])
+    if registration.valid_token_digest?(params[:token])
       registration.register!
       sign_in(create_passwordless_session(registration.user))
       redirect_to root_url, notice: "Thanks for registering! You're now signed in."
