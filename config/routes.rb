@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  namespace :api do
-    get 'current_user/create'
-  end
 
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
     # only allow authenticated users, otherwise 404
