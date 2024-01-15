@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "AddUserToCompany", type: :system do
+RSpec.describe "AddUserToCompany" do
   context "when given an existing user's email address" do
     it "adds the user to the company" do
       company = create(:company)
