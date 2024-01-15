@@ -1,0 +1,1 @@
+Stripe.api_key = Rails.application.credentials[Rails.env].stripe_api_key
