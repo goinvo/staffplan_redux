@@ -42,5 +42,3 @@ volumes:
   bundle_path:
   redis:
   data:
-  mongo-data:
-  mongo-config:
