@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Signing up for StaffPlan", type: :system do
+RSpec.describe "Signing up for StaffPlan", type: :system, vcr: true do
   context "when registering for StaffPlan" do
     describe "the registration form" do
       it "has a name and email field" do
