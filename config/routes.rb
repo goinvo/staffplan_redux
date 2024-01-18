@@ -25,6 +25,11 @@ Rails.application.routes.draw do
 
   resource :settings, only: [:show, :update], controller: "settings" do
     resource :billing_information, only: [:show, :edit, :update], controller: "settings/billing_information"
+    resource :subscription, only: [:new, :destroy], controller: "settings/subscriptions" do
+      member do
+        post :create_checkout_session
+      end
+    end
   end
 
   root "dashboard#show"

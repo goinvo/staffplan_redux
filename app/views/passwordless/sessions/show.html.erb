@@ -8,10 +8,10 @@
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
       <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
         <%= render("shared/flash") %>
-        <%= form_with(model: @session, url: url_for(action: 'update'), scope: 'passwordless', method: 'patch', data: { turbo: false }) do |f| %>
+        <%= form_with(model: @session, url: url_for(action: 'update'), scope: 'passwordless', method: 'patch', html: { class: "space-y-6" }, data: { turbo: false }) do |f| %>
 
           <div>
-            <%= f.label :token, autocomplete: "off", class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <%= f.label :token, "Please enter the token we've sent you via e-mail", autocomplete: "off", class: "block text-sm font-medium leading-6 text-gray-900" %>
             <div class="mt-2">
               <%= f.text_field :token, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
             </div>
@@ -22,7 +22,10 @@
           </div>
         <% end %>
         <p class="text-center text-sm leading-6 text-gray-500 pt-6">
-          StaffPlan does not use passwords. You will receive an email with a link to sign in.
+          StaffPlan does not use passwords. You will receive an email with a link to sign in. Entered in the wrong email address? <%= link_to "Try again", root_path, class: "font-semibold leading-6 text-indigo-600 hover:text-indigo-500" %>.
+        </p>
+        <p class="text-center text-sm leading-6 text-gray-500 pt-6">
+          Not a StaffPlan user? <%= link_to "Create your account", new_registration_path, class: "font-semibold leading-6 text-indigo-600 hover:text-indigo-500" %> today.
         </p>
       </div>
     </div>

@@ -15,7 +15,6 @@ require 'vcr'
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
-# If you are not using ActiveRecord, you can remove these lines.
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
@@ -51,12 +50,11 @@ RSpec.configure do |config|
     Sidekiq::Worker.clear_all
   end
 
-  config.before(:each, type: :system) do
-    driven_by :rack_test
-  end
-
-  config.before(:each, type: :system, js: true) do
-    driven_by :selenium_chrome_headless
+  config.around(:each, type: :system) do |ex|
+    previous_host = Rails.application.default_url_options[:host]
+    Rails.application.default_url_options[:host] = Capybara.server_host
+    ex.run
+    Rails.application.default_url_options[:host] = previous_host
   end
 
   config.include ViewComponent::TestHelpers, type: :component
