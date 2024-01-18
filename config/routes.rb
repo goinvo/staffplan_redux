@@ -30,6 +30,7 @@ Rails.application.routes.draw do
         post :create_checkout_session
       end
     end
+    resources :users, controller: "settings/users"
   end
 
   root "dashboard#show"

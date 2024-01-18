@@ -1,0 +1,9 @@
+<%= render(Settings::TabsComponent.new) %>
+
+<div class="bg-white p-4 mt-4">
+  <ul role="list" class="divide-y divide-gray-100">
+    <% @users.each do |user| %>
+      <%= render(Settings::Users::ListItemComponent.new(user:, current_company:)) %>
+    <% end %>
+  </ul>
+</div>
