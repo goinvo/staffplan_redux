@@ -34,13 +34,7 @@ class Registration < ApplicationRecord
   def register!
     raise RegistrationNotAvailableError if registered?
 
-    company = Company.create(name: "#{name}'s' Company")
-
-    user = AddUserToCompany.new(
-      email:, name:, company:, role: "owner"
-    ).call
-
-    update(user:, registered_at: Time.current)
+    CreateNewCompany.new(self).call
   end
 
   def registered?

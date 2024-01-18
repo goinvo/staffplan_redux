@@ -38,4 +38,16 @@ RSpec.describe Membership, type: :model do
       expect(membership).to_not be_valid
     end
   end
+
+  describe "#active?" do
+    it "returns true if status is active" do
+      membership = build(:membership, status: "active")
+      expect(membership.active?).to eq(true)
+    end
+
+    it "returns false if status is not active" do
+      membership = build(:membership, status: "inactive")
+      expect(membership.active?).to eq(false)
+    end
+  end
 end

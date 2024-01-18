@@ -28,4 +28,9 @@ class ApplicationController < ActionController::Base
     save_passwordless_redirect_location!(User)
     redirect_to auth_sign_in_url, flash: { notice: 'Please sign in.' }
   end
+
+  def require_company_owner_or_admin!
+    return if current_user.owner? || current_user.admin?
+    redirect_to root_url, flash: { error: 'You are not authorized to access this page.' }
+  end
 end

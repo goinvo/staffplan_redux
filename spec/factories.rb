@@ -30,28 +30,28 @@ FactoryBot.define do
   factory :membership do
     company
     user { build(:user, current_company: company) }
-    status { 'active' }
-    role { 'owner' }
+    status { Membership::ACTIVE }
+    role { Membership::OWNER }
   end
 
   factory :client do
     company
     name { Faker::Company.name }
-    status { 'active' }
+    status { Client::ACTIVE }
   end
 
   factory :project do
     client
     name { Faker::Company.name + " #{rand(1..100).to_s}"}
-    status { 'active' }
+    status { Project::ACTIVE }
     cost { Faker::Number.decimal(l_digits: 2) }
-    payment_frequency { 'monthly' }
+    payment_frequency { Project::MONTHLY }
   end
 
   factory :assignment do
     user
     project
-    status { 'active' }
+    status { Assignment::ACTIVE }
   end
 
   factory :work_week do

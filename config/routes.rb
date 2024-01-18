@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
     # only allow authenticated users, otherwise 404
     Passwordless::Session.exists?(id: request.session[:"passwordless_session_id--user"])
@@ -23,6 +22,15 @@ Rails.application.routes.draw do
   passwordless_for :users, at: '/', as: :auth
 
   resource :dashboard, only: [:show], controller: "dashboard"
+
+  resource :settings, only: [:show, :update], controller: "settings" do
+    resource :billing_information, only: [:show, :edit, :update], controller: "settings/billing_information"
+    resource :subscription, only: [:new, :destroy], controller: "settings/subscriptions" do
+      member do
+        post :create_checkout_session
+      end
+    end
+  end
 
   root "dashboard#show"
 end

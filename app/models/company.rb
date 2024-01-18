@@ -7,4 +7,10 @@ class Company < ApplicationRecord
   has_many :assignments, through: :projects
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+
+  def subscription
+    @_subscription if defined?(@_subscription)
+
+    @_subscription = Stripe::Subscription.list({ customer: stripe_id }).first
+  end
 end

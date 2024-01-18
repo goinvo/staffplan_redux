@@ -12,9 +12,14 @@ class Project < ApplicationRecord
   ARCHIVED = "archived".freeze
   CANCELLED = "cancelled".freeze
   COMPLETED = "completed".freeze
+  WEEKLY = "weekly".freeze
+  MONTHLY = "monthly".freeze
+  FORTNIGHTLY = "fortnightly".freeze
+  QUARTERLY = "quarterly".freeze
+  ANNUALLY = "annually".freeze
 
   VALID_STATUSES = [PROPOSED, ACTIVE, ARCHIVED, CANCELLED, COMPLETED].freeze
-  VALID_PAYMENT_FREQUENCIES = %w(weekly monthly fortnightly quarterly annually).freeze
+  VALID_PAYMENT_FREQUENCIES = [WEEKLY, MONTHLY, FORTNIGHTLY, QUARTERLY, ANNUALLY].freeze
 
   validates :client_id, presence: true
   validates :name, presence: true, uniqueness: { case_sensitive: false }

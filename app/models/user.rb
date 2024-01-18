@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def owner?
     memberships.find_by(company: current_company).role == Membership::OWNER
   end
+
+  def admin?
+    memberships.find_by(company: current_company).role == Membership::ADMIN
+  end
 end

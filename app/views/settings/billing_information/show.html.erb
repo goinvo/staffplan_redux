@@ -1,0 +1,5 @@
+<% if current_company.subscription.blank? %>
+  <%= render(Settings::Billing::NeedsSubscriptionComponent.new(company: current_company)) %>
+<% else %>
+  <%= render(Settings::Billing::SubscriptionDetailsComponent.new(company: current_company)) %>
+<% end %>

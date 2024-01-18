@@ -5,7 +5,8 @@ RSpec.configure do |config|
     if ENV["SHOW_BROWSER"] == "true"
       driven_by :selenium_chrome
     else
-      driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
+      # driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
+      driven_by :rack_test
     end
   end
 end
