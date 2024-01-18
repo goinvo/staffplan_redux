@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   layout :choose_layout
 
+  before_action :set_paper_trail_whodunnit
+
   private
 
   def choose_layout
@@ -32,5 +34,9 @@ class ApplicationController < ActionController::Base
   def require_company_owner_or_admin!
     return if current_user.owner? || current_user.admin?
     redirect_to root_url, flash: { error: 'You are not authorized to access this page.' }
+  end
+
+  def set_paper_trail_whodunnit
+    PaperTrail.request.whodunnit = current_user&.id
   end
 end

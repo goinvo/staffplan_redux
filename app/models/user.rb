@@ -15,6 +15,8 @@ class User < ApplicationRecord
 
   passwordless_with :email
 
+  has_paper_trail
+
   def owner?
     memberships.find_by(company: current_company).role == Membership::OWNER
   end

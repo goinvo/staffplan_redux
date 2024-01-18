@@ -4,6 +4,8 @@ class Assignment < ApplicationRecord
   has_one :company, through: :user, source: :current_company
   has_many :work_weeks, dependent: :destroy
 
+  has_paper_trail
+
   PROPOSED = "proposed".freeze
   ACTIVE = "active".freeze
   ARCHIVED = "archived".freeze
