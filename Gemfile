@@ -15,6 +15,7 @@ gem "importmap-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
 gem "stripe"
+gem "money"
 gem "tailwindcss-rails"
 
 # Use Redis adapter to run Action Cable in production
