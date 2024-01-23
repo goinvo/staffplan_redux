@@ -10,6 +10,7 @@ gem "sprockets-rails"
 gem "pg", "~> 1.1"
 
 gem "puma", ">= 5.0"
+gem 'rack-cors'
 gem "sidekiq", "~> 7.2"
 gem "importmap-rails"
 gem "turbo-rails"
