@@ -1,6 +1,72 @@
 require 'rails_helper'
 
 RSpec.describe "AddUserToCompany" do
+  context "validations" do
+    it "is invalid without a name" do
+      company = create(:company)
+      command = nil
+
+      command = AddUserToCompany.new(
+        email: Faker::Internet.email,
+        name: nil,
+        company: company
+      )
+
+      expect { command.call }.to raise_error(ActiveRecord::RecordInvalid)
+
+      user = command.user
+      expect(user.errors.count).to eq(1)
+      expect(user.errors[:name]).to eq(["can't be blank"])
+    end
+
+    it "is invalid without an email" do
+      company = create(:company)
+
+      command = AddUserToCompany.new(
+        email: nil,
+        name: Faker::Name.name,
+        company: company
+      )
+
+      expect { command.call }.to raise_error(ActiveRecord::RecordInvalid)
+      user = command.user
+
+      expect(user.errors.count).to eq(2)
+      expect(user.errors[:email]).to eq(["can't be blank", "is invalid"])
+    end
+
+    it "is invalid without a role" do
+      company = create(:company)
+
+      command = AddUserToCompany.new(
+        email: Faker::Internet.email,
+        name: Faker::Name.name,
+        role: nil,
+        company: company
+      )
+
+      expect { command.call }.to raise_error(ActiveRecord::RecordInvalid)
+      membership = command.membership
+
+      expect(membership.errors.count).to eq(2)
+      expect(membership.errors[:role]).to eq(["can't be blank", "is not included in the list"])
+    end
+
+    it "is invalid without a company" do
+      command = AddUserToCompany.new(
+        email: Faker::Internet.email,
+        name: Faker::Name.name,
+        company: nil
+      )
+
+      expect { command.call }.to raise_error(ActiveRecord::RecordInvalid)
+      user = command.user
+
+      expect(user.errors.count).to eq(2)
+      expect(user.errors[:current_company]).to eq(["must exist", "can't be blank"])
+    end
+  end
+
   context "when given an existing user's email address" do
     it "adds the user to the company" do
       company = create(:company)
@@ -63,7 +129,23 @@ RSpec.describe "AddUserToCompany" do
       expect(company.users).to include user
     end
 
-    it "sets the company as the user's current company" do
+    it "does not set the current_company for existing users" do
+      company = create(:company)
+      user = create(:user)
+      current_company = user.current_company
+      expect(current_company).to eq(user.companies.first)
+
+      AddUserToCompany.new(
+        email: user.email,
+        name: user.name,
+        company: company
+      ).call
+
+      expect(user.companies.count).to eq(2)
+      expect(user.reload.current_company).to eq(current_company)
+    end
+
+    it "sets the company as the user's current company for new users" do
       company = create(:company)
       email = Faker::Internet.email
 

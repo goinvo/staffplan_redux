@@ -16,11 +16,35 @@ class Settings::UsersController < ApplicationController
   end
 
   def new
+    @user = User.new
   end
 
   def create
+    begin
+      @command = AddUserToCompany.new(
+          email: create_params[:email],
+          name: create_params[:name],
+          role: create_params[:role],
+          company: current_company
+      )
+
+      @command.call
+
+      flash[:notice] = 'User added successfully'
+      redirect_to settings_users_path
+    rescue ActiveRecord::RecordInvalid
+      @user = @command.user
+      @user.valid?
+      render :new
+    end
   end
 
   def destroy
+  end
+
+  private
+
+  def create_params
+    params.require(:user).permit(:email, :name, :role)
   end
 end
