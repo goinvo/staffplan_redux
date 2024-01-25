@@ -50,7 +50,7 @@ RSpec.describe "User Management", type: :system do
       expect(page).to have_current_path(settings_users_path)
       expect(page).to have_text("User added successfully")
     end
-    
+
     it "re-renders the form when there are errors" do
       membership = create(:membership, role: Membership::ADMIN)
       passwordless_sign_in(membership.user)

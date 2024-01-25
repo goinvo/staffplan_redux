@@ -18,6 +18,8 @@ class AddUserToCompany
     User.transaction do
       find_or_create_user
       add_user_to_company
+      send_welcome_email
+      update_stripe_subscription_count
     end
 
     @user
@@ -37,5 +39,13 @@ class AddUserToCompany
   def add_user_to_company
     @membership = @company.memberships.build(user: @user, role: @role, status: 'active')
     @membership.save!
+  end
+
+  def send_welcome_email
+
+  end
+
+  def update_stripe_subscription_count
+
   end
 end
