@@ -56,6 +56,7 @@ group :development do
   # gem "rack-mini-profiler"
 
   gem "letter_opener"
+  gem "foreman"
 end
 
 group :test do

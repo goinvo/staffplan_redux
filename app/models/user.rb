@@ -24,4 +24,12 @@ class User < ApplicationRecord
   def admin?
     memberships.find_by(company: current_company).role == Membership::ADMIN
   end
+
+  def role
+    memberships.find_by(company: current_company).role
+  end
+
+  def role=(role)
+    memberships.find_by(company: current_company).update(role: role)
+  end
 end

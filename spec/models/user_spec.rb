@@ -48,4 +48,19 @@ RSpec.describe User, type: :model do
       expect(user.admin?).to be_falsey
     end
   end
+
+  describe "#role" do
+    it "returns the user's role" do
+      user = create(:membership, role: Membership::ADMIN).user
+      expect(user.role).to eq(Membership::ADMIN)
+    end
+  end
+
+  describe "#role=" do
+    it "updates the user's role" do
+      user = create(:membership, role: Membership::ADMIN).user
+      user.role = Membership::MEMBER
+      expect(user.role).to eq(Membership::MEMBER)
+    end
+  end
 end
