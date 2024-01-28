@@ -4,7 +4,6 @@ RSpec.describe "AddUserToCompany" do
   context "validations" do
     it "is invalid without a name" do
       company = create(:company)
-      command = nil
 
       command = AddUserToCompany.new(
         email: Faker::Internet.email,
@@ -67,9 +66,35 @@ RSpec.describe "AddUserToCompany" do
     end
   end
 
+  context "for all users" do
+    it "sends a welcome email from the new company" do
+      company = create(:membership).company
+      expect(SyncCustomerSubscriptionCountJob).to receive(:perform_async).with(company.id)
+
+      AddUserToCompany.new(
+        email: user_email = Faker::Internet.email,
+        name: Faker::Name.name,
+        company: company
+      ).call
+    end
+
+    it "updates the company's Stripe subscription count" do
+      company = create(:membership).company
+      expect(SyncCustomerSubscriptionCountJob).to receive(:perform_async).with(company.id)
+
+      AddUserToCompany.new(
+        email: Faker::Internet.email,
+        name: Faker::Name.name,
+        company: company
+      ).call
+    end
+  end
+
   context "when given an existing user's email address" do
     it "adds the user to the company" do
-      company = create(:company)
+      company = create(:membership).company
+      expect(SyncCustomerSubscriptionCountJob).to receive(:perform_async).with(company.id)
+
       user = create(:user)
 
       expect(company.users).to_not include user
@@ -84,7 +109,8 @@ RSpec.describe "AddUserToCompany" do
     end
 
     it "does not create a new user" do
-      company = create(:company)
+      company = create(:membership).company
+      expect(SyncCustomerSubscriptionCountJob).to receive(:perform_async).with(company.id)
       user = create(:user)
 
       expect do
@@ -95,13 +121,13 @@ RSpec.describe "AddUserToCompany" do
         ).call
       end.to change { User.count }.by(0)
     end
-
-    pending "sends a welcome email from the new company"
   end
 
   context "when given an new user email address" do
     it "creates a new user" do
-      company = create(:company)
+      company = create(:membership).company
+      expect(SyncCustomerSubscriptionCountJob).to receive(:perform_async).with(company.id)
+
       email = Faker::Internet.email
 
       expect(User.find_by(email:)).to be_nil
@@ -118,7 +144,8 @@ RSpec.describe "AddUserToCompany" do
     end
 
     it "adds the user to the company" do
-      company = create(:company)
+      company = create(:membership).company
+      expect(SyncCustomerSubscriptionCountJob).to receive(:perform_async).with(company.id)
 
       user = AddUserToCompany.new(
         email: Faker::Internet.email,
@@ -130,7 +157,9 @@ RSpec.describe "AddUserToCompany" do
     end
 
     it "does not set the current_company for existing users" do
-      company = create(:company)
+      company = create(:membership).company
+      expect(SyncCustomerSubscriptionCountJob).to receive(:perform_async).with(company.id)
+
       user = create(:user)
       current_company = user.current_company
       expect(current_company).to eq(user.companies.first)
@@ -146,7 +175,9 @@ RSpec.describe "AddUserToCompany" do
     end
 
     it "sets the company as the user's current company for new users" do
-      company = create(:company)
+      company = create(:membership).company
+      expect(SyncCustomerSubscriptionCountJob).to receive(:perform_async).with(company.id)
+
       email = Faker::Internet.email
 
       user = AddUserToCompany.new(

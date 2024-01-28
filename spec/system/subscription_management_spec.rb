@@ -9,7 +9,7 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
     it "shows a page with some content and a link to go create a subscription" do
       registration = create(:registration)
       registration.register!
-      user = registration.user
+      user = registration.reload.user
       passwordless_sign_in(user)
 
       visit settings_billing_information_url
@@ -22,7 +22,7 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
     it "shows information about the subscription" do
       registration = create(:registration)
       registration.register!
-      user = registration.user
+      user = registration.reload.user
       passwordless_sign_in(user)
 
       expect(user.companies.length).to eq(1)
@@ -53,7 +53,7 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
     it "cancels the subscription" do
       registration = create(:registration)
       registration.register!
-      user = registration.user
+      user = registration.reload.user
       passwordless_sign_in(user)
 
       expect(user.companies.length).to eq(1)

@@ -4,7 +4,7 @@ FactoryBot.define do
     name { Faker::Name.name + " #{rand(1..100).to_s}" }
     sequence(:email) { |n| "#{n}#{Faker::Internet.email}" }
 
-    after(:build) do |user, options|
+    after(:build) do |user, _options|
       # a current company is required for the user to be valid
       # unless one is already set, create one
       next if user.current_company.present?
@@ -32,11 +32,19 @@ FactoryBot.define do
     user { build(:user, current_company: company) }
     status { Membership::ACTIVE }
     role { Membership::OWNER }
+
+    after(:build) do |membership, _options|
+      next if membership.user.blank?
+      next if membership.company.blank?
+
+      membership.user.current_company = membership.company
+      membership.user.current_company_id = membership.company.id
+    end
   end
 
   factory :client do
     company
-    name { Faker::Company.name }
+    sequence(:name) { |n| "#{Faker::Company.name} #{n}" }
     status { Client::ACTIVE }
   end
 
@@ -68,8 +76,8 @@ FactoryBot.define do
   end
 
   factory :registration do
-    name { Faker::Name.name }
-    email { Faker::Internet.email }
+    sequence(:name) { |n| "#{Faker::Company.name} #{n}" }
+    sequence(:email) { |n| "#{n}#{Faker::Internet.email}" }
     expires_at { 1.week.from_now }
     ip_address { Faker::Internet.ip_v4_address }
     token { Faker::Internet.password(min_length: 10, max_length: 20) }

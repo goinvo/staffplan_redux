@@ -1,9 +1,11 @@
 class CreateNewCompany
 
-  attr_reader :registration, :company, :user
+  attr_reader :email, :user, :registration_id, :company, :user
 
-  def initialize(registration)
-    @registration = registration
+  def initialize(email:, name:, registration_id:)
+    @email = email
+    @name = name
+    @registration_id = registration_id
   end
 
   def call
@@ -18,15 +20,16 @@ class CreateNewCompany
   private
 
   def create_company_record
-    @company = Company.create(name: "#{@registration.name}'s' Company")
+    @company = Company.create(name: "#{@name}'s' Company")
   end
 
   def add_initial_owner
     @user = AddUserToCompany.new(
-      email: @registration.email,
-      name: @registration.name,
+      email: @email,
+      name: @name,
       company: @company,
-      role: "owner"
+      role: "owner",
+      creating_new_company: true
     ).call
   end
 
@@ -35,6 +38,9 @@ class CreateNewCompany
   end
 
   def claim_registration
-    @registration.update(user: @user, registered_at: Time.current)
+    Registration.find_by!(id: @registration_id).update!(
+      user: @user,
+      registered_at: Time.current
+    )
   end
 end

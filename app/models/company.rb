@@ -13,4 +13,8 @@ class Company < ApplicationRecord
 
     @_subscription = Stripe::Subscription.list({ customer: stripe_id }).first
   end
+
+  def owners
+    memberships.owners.map(&:user)
+  end
 end

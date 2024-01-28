@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Crysta+Gutmann%27s%27+Company+%7C+Crysta+Gutmann&email=otto%40reilly.example
+      string: name=Wisoky+LLC+25%27s%27+Company+%7C+Wisoky+LLC+25&email=22darron%40lesch.test
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/5.55.0
@@ -14,7 +14,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_R6JANvxrkMvoL0","request_duration_ms":272}}'
+      - '{"last_request_metrics":{"request_id":"req_8SQNZbf4G7zi7n","request_duration_ms":229}}'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"5.55.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
         fwank.local 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:51 PST 2023;
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 15 Jan 2024 19:24:57 GMT
+      - Sun, 28 Jan 2024 19:43:25 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '671'
+      - '669'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -56,11 +56,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - 8c121405-fd88-4c63-b560-ba0c50e75c9e
+      - 194b4bd5-5976-4f22-b81a-5831a1ab9642
       Original-Request:
-      - req_nMkjrJD9TZ3SKe
+      - req_CNF8lkZpaOV3qh
       Request-Id:
-      - req_nMkjrJD9TZ3SKe
+      - req_CNF8lkZpaOV3qh
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -75,18 +75,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_PNhAWIvSSdYjVj",
+          "id": "cus_PSZPmg7YPg1iaP",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1705346697,
+          "created": 1706471004,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
-          "email": "otto@reilly.example",
-          "invoice_prefix": "E3C04100",
+          "email": "22darron@lesch.test",
+          "invoice_prefix": "4F18FFF7",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -95,7 +95,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Crysta Gutmann's' Company | Crysta Gutmann",
+          "name": "Wisoky LLC 25's' Company | Wisoky LLC 25",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -103,5 +103,5 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Mon, 15 Jan 2024 19:24:57 GMT
+  recorded_at: Sun, 28 Jan 2024 19:43:24 GMT
 recorded_with: VCR 6.2.0

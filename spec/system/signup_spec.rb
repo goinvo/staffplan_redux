@@ -94,7 +94,7 @@ RSpec.describe "Signing up for StaffPlan", type: :system, vcr: true do
     describe "when registration is successful" do
       it "should confirm the registration and sign the user in" do
         registration = create(:registration)
-        visit register_registration_path(registration, token: registration.token)
+        visit register_registration_path(registration.reload, token: registration.token)
 
         expect(page).to have_current_path(root_path)
         expect(page).to have_content("Thanks for registering! You're now signed in.")

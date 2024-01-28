@@ -7,10 +7,11 @@ class AddUserToCompany
 
   class InvalidArguments < StandardError; end
 
-  def initialize(email:, name:, role: "member", company:)
+  def initialize(email:, name:, role: "member", company:, creating_new_company: false)
     @email = email
     @name = name
     @role = role
+    @creating_new_company = creating_new_company
     @company = company
   end
 
@@ -18,8 +19,11 @@ class AddUserToCompany
     User.transaction do
       find_or_create_user
       add_user_to_company
-      send_welcome_email
-      update_stripe_subscription_count
+
+      unless @creating_new_company
+        send_welcome_email
+        update_stripe_subscription_count
+      end
     end
 
     @user
@@ -42,10 +46,10 @@ class AddUserToCompany
   end
 
   def send_welcome_email
-
+    CompanyMailer.welcome(@company, @user).deliver_later
   end
 
   def update_stripe_subscription_count
-
+    SyncCustomerSubscriptionCountJob.perform_async(@company.id)
   end
 end
