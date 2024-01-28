@@ -5,6 +5,7 @@ module Settings
     SELECTED_LINK_CSS_CLASS = "border-indigo-500 text-indigo-600 whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium"
 
     renders_one :action_buttons
+    renders_one :header
 
     def initialize
 
