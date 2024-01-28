@@ -25,11 +25,18 @@ class User < ApplicationRecord
     memberships.find_by(company: current_company).role == Membership::ADMIN
   end
 
-  def role
-    memberships.find_by(company: current_company).role
+  def role(company:)
+    memberships.find_by(company:).role
   end
 
-  def role=(role)
-    memberships.find_by(company: current_company).update(role: role)
+  def inactive?(company:)
+    memberships.find_by(company: company).inactive?
+  end
+
+  def toggle_status!(company:)
+    membership = memberships.find_by!(company:)
+    membership.update!(status: membership.active? ? Membership::INACTIVE : Membership::ACTIVE)
+
+    SyncCustomerSubscriptionCountJob.perform_async(current_company.id) if membership.inactive?
   end
 end

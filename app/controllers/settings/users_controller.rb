@@ -17,7 +17,7 @@ class Settings::UsersController < ApplicationController
   def update
     @user = current_company.users.find(params[:id])
 
-    if @user.update(edit_params)
+    if @user.memberships.find_by(company: current_company).update(role: params[:user][:role])
       flash[:notice] = 'User updated successfully'
       redirect_to settings_user_path(@user)
     else
@@ -49,16 +49,22 @@ class Settings::UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def toggle_status
+    @user = current_company.users.find(params[:id])
+
+    if @user == current_user
+      flash[:error] = 'You cannot deactivate yourself'
+      redirect_to settings_user_path(@user)
+    else
+      @user.toggle_status!(company: current_company)
+      flash[:notice] = 'User status updated successfully. StaffPlan subscription should be updated within 5 minutes.'
+      redirect_to settings_user_path(@user)
+    end
   end
 
   private
 
   def create_params
     params.require(:user).permit(:email, :name, :role)
-  end
-
-  def edit_params
-    params.require(:user).permit(:name, :role)
   end
 end

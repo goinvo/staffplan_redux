@@ -22,4 +22,8 @@ class Membership < ApplicationRecord
   def active?
     status == Membership::ACTIVE
   end
+
+  def inactive?
+    status == Membership::INACTIVE
+  end
 end

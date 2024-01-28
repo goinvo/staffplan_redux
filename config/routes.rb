@@ -30,7 +30,11 @@ Rails.application.routes.draw do
         post :create_checkout_session
       end
     end
-    resources :users, controller: "settings/users"
+    resources :users, controller: "settings/users", except: [:destroy] do
+      member do
+        post :toggle_status
+      end
+    end
   end
 
   root "dashboard#show"

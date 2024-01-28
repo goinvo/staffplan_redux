@@ -19,7 +19,7 @@ module Settings
       end
 
       def user_role
-        @user.role
+        @user.role(company: current_company)
       end
 
       def user_job_title
