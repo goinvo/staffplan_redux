@@ -8,13 +8,13 @@ image: fermion/staffplan-redux
 servers:
   web:
     hosts:
-      - 159.203.143.173
+      - 164.90.132.211
     cmd: bundle exec puma -C config/puma.rb
     options:
       "add-host": host.docker.internal:host-gateway
   job:
     hosts:
-      - 159.203.143.173
+      - 164.90.132.211
     cmd: bundle exec sidekiq -C config/sidekiq.yml
     options:
       "add-host": host.docker.internal:host-gateway
@@ -29,7 +29,7 @@ registry:
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 159.203.143.173
+    DB_HOST: 164.90.132.211
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -54,7 +54,7 @@ env:
 accessories:
   db:
     image: postgres:15
-    host: 159.203.143.173
+    host: 164.90.132.211
     port: 5432
     env:
       clear:
@@ -72,8 +72,8 @@ accessories:
    port: 6379
    volumes:
      - data:/var/lib/redis/data
-   options:
-     network: "private"
+#   options:
+#     network: "private"
 
 # Configure custom arguments for Traefik
 # traefik:
