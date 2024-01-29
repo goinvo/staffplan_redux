@@ -1,4 +1,9 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  # TODO: some kind of auth here
+  mount Sidekiq::Web => '/sidekiq'
+
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
     # only allow authenticated users, otherwise 404
     Passwordless::Session.exists?(id: request.session[:"passwordless_session_id--user"])
