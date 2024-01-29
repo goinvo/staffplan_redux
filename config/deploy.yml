@@ -72,8 +72,6 @@ accessories:
    port: 6379
    volumes:
      - data:/var/lib/redis/data
-   options:
-     network: "private"
 
 # Configure custom arguments for Traefik
 # traefik:
