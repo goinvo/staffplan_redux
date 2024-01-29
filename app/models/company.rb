@@ -17,4 +17,9 @@ class Company < ApplicationRecord
   def owners
     memberships.owners.map(&:user)
   end
+
+  def can_access?(user:)
+    membership = memberships.find_by(user: user)
+    membership.present? && membership.active?
+  end
 end

@@ -28,24 +28,24 @@ RSpec.describe User, type: :model do
   describe "#owner?" do
     it "is true when user is an owner" do
       user = create(:membership, role: Membership::OWNER).user
-      expect(user.owner?).to be_truthy
+      expect(user.owner?(company: user.current_company)).to be_truthy
     end
 
     it "is false when user is not an owner" do
       user = create(:membership, role: Membership::MEMBER).user
-      expect(user.owner?).to be_falsey
+      expect(user.owner?(company: user.current_company)).to be_falsey
     end
   end
 
   describe "#admin?" do
     it "is true when user is an admin" do
       user = create(:membership, role: Membership::ADMIN).user
-      expect(user.admin?).to be_truthy
+      expect(user.admin?(company: user.current_company)).to be_truthy
     end
 
     it "is false when user is not an admin" do
       user = create(:membership, role: Membership::MEMBER).user
-      expect(user.admin?).to be_falsey
+      expect(user.admin?(company: user.current_company)).to be_falsey
     end
   end
 

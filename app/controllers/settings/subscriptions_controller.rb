@@ -1,5 +1,6 @@
 class Settings::SubscriptionsController < ApplicationController
-
+  before_action :require_user!
+  before_action :require_company_owner_or_admin!
   def new
     price = Stripe::Price.retrieve(Rails.application.credentials.stripe_price_id)
 

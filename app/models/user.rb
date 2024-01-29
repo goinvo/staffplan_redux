@@ -17,12 +17,12 @@ class User < ApplicationRecord
 
   has_paper_trail
 
-  def owner?
-    memberships.find_by(company: current_company).role == Membership::OWNER
+  def owner?(company:)
+    memberships.find_by(company:).role == Membership::OWNER
   end
 
-  def admin?
-    memberships.find_by(company: current_company).role == Membership::ADMIN
+  def admin?(company:)
+    memberships.find_by(company:).role == Membership::ADMIN
   end
 
   def role(company:)
@@ -30,13 +30,13 @@ class User < ApplicationRecord
   end
 
   def inactive?(company:)
-    memberships.find_by(company: company).inactive?
+    memberships.find_by(company:).inactive?
   end
 
   def toggle_status!(company:)
     membership = memberships.find_by!(company:)
     membership.update!(status: membership.active? ? Membership::INACTIVE : Membership::ACTIVE)
 
-    SyncCustomerSubscriptionCountJob.perform_async(current_company.id) if membership.inactive?
+    SyncCustomerSubscriptionCountJob.perform_async(current_company.id)
   end
 end
