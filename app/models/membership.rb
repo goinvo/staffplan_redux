@@ -17,8 +17,13 @@ class Membership < ApplicationRecord
   validates :role, presence: true, inclusion: { in: VALID_ROLES }
 
   scope :active, -> { where(status: Membership::ACTIVE) }
+  scope :owners, -> { where(role: Membership::OWNER) }
 
   def active?
     status == Membership::ACTIVE
+  end
+
+  def inactive?
+    status == Membership::INACTIVE
   end
 end

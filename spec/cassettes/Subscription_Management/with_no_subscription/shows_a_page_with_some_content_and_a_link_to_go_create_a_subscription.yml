@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Sen.+Kristie+Fisher%27s%27+Company+%7C+Sen.+Kristie+Fisher&email=clarence%40macgyver-schmidt.example
+      string: name=Kuhic%2C+Volkman+and+Quigley+29%27s%27+Company+%7C+Kuhic%2C+Volkman+and+Quigley+29&email=24cherise_romaguera%40goodwin.test
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/5.55.0
@@ -14,7 +14,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_gHT9pdb1WFomOD","request_duration_ms":0}}'
+      - '{"last_request_metrics":{"request_id":"req_P2vaJWBdTq1LrW","request_duration_ms":171}}'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"5.55.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
         fwank.local 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:51 PST 2023;
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 18 Jan 2024 15:18:34 GMT
+      - Sun, 28 Jan 2024 19:43:27 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '695'
+      - '714'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -56,11 +56,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - 832333ea-5b28-47e8-8c71-712f28ba12dd
+      - 6c0ccd5e-a0ca-4502-9b5e-bc5f7e8aa510
       Original-Request:
-      - req_3vYxFiC4swV7Hi
+      - req_GKXcOZvaOeQRqk
       Request-Id:
-      - req_3vYxFiC4swV7Hi
+      - req_GKXcOZvaOeQRqk
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -75,18 +75,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_POksh0L83B0FJI",
+          "id": "cus_PSZPg55h7HhXRO",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1705591114,
+          "created": 1706471006,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
-          "email": "clarence@macgyver-schmidt.example",
-          "invoice_prefix": "1F0EA763",
+          "email": "24cherise_romaguera@goodwin.test",
+          "invoice_prefix": "294EF439",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -95,7 +95,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Sen. Kristie Fisher's' Company | Sen. Kristie Fisher",
+          "name": "Kuhic, Volkman and Quigley 29's' Company | Kuhic, Volkman and Quigley 29",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -103,10 +103,10 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Thu, 18 Jan 2024 15:18:34 GMT
+  recorded_at: Sun, 28 Jan 2024 19:43:27 GMT
 - request:
     method: get
-    uri: https://api.stripe.com/v1/subscriptions?customer=cus_POksh0L83B0FJI
+    uri: https://api.stripe.com/v1/subscriptions?customer=cus_PSZPg55h7HhXRO
     body:
       encoding: US-ASCII
       string: ''
@@ -118,7 +118,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_3vYxFiC4swV7Hi","request_duration_ms":375}}'
+      - '{"last_request_metrics":{"request_id":"req_GKXcOZvaOeQRqk","request_duration_ms":278}}'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"5.55.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
         fwank.local 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:51 PST 2023;
@@ -135,7 +135,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Thu, 18 Jan 2024 15:18:34 GMT
+      - Sun, 28 Jan 2024 19:43:27 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -160,7 +160,7 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Request-Id:
-      - req_pPEcqSmIURSMvn
+      - req_PQnlHz6nxzC3CW
       Stripe-Version:
       - '2023-10-16'
       Vary:
@@ -178,5 +178,5 @@ http_interactions:
           "has_more": false,
           "url": "/v1/subscriptions"
         }
-  recorded_at: Thu, 18 Jan 2024 15:18:34 GMT
+  recorded_at: Sun, 28 Jan 2024 19:43:27 GMT
 recorded_with: VCR 6.2.0

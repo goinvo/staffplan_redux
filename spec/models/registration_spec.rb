@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Registration, type: :model, vcr: true do
+RSpec.describe Registration, type: :model do
   context "validations" do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:email) }
@@ -33,8 +33,11 @@ RSpec.describe Registration, type: :model, vcr: true do
     describe "register!" do
       it "raises RegistrationNotAvailableError if claimed?" do
         registration = create(:registration)
+        expect(CreateStripeCustomerJob).to receive(:perform_async)
+
         registration.register!
-        expect { registration.register! }.to raise_error(Registration::RegistrationNotAvailableError)
+
+        expect { registration.reload.register! }.to raise_error(Registration::RegistrationNotAvailableError)
       end
 
       it "calls CreateNewCompany" do

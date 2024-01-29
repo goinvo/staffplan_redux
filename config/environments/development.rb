@@ -87,4 +87,9 @@ Rails.application.configure do
 
   Rails.application.routes.default_url_options[:host] = 'localhost'
   Rails.application.routes.default_url_options[:port] = 3000
+
+  # allow ngrok
+  config.hosts << "sunny-bluebird-radically.ngrok-free.app"
+  config.hosts << "localhost;localhost:3000"
+  config.hosts << "localhost:3000"
 end

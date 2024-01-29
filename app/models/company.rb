@@ -13,4 +13,13 @@ class Company < ApplicationRecord
 
     @_subscription = Stripe::Subscription.list({ customer: stripe_id }).first
   end
+
+  def owners
+    memberships.owners.map(&:user)
+  end
+
+  def can_access?(user:)
+    membership = memberships.find_by(user: user)
+    membership.present? && membership.active?
+  end
 end

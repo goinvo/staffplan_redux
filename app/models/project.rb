@@ -5,6 +5,8 @@ class Project < ApplicationRecord
   has_many :users, through: :assignments
   has_many :work_weeks, through: :assignments, dependent: :destroy
 
+  has_paper_trail
+
   scope :active, -> { where(status: 'active') }
 
   PROPOSED = "proposed".freeze

@@ -2,18 +2,29 @@
 
 class AddUserToCompany
 
-  attr_accessor :user
+  attr_accessor :user, :membership
+  attr_reader :errors
 
-  def initialize(email:, name:, role: "member", company:)
+  class InvalidArguments < StandardError; end
+
+  def initialize(email:, name:, role: "member", company:, creating_new_company: false)
     @email = email
     @name = name
     @role = role
+    @creating_new_company = creating_new_company
     @company = company
   end
 
   def call
-    find_or_create_user
-    add_user_to_company
+    User.transaction do
+      find_or_create_user
+      add_user_to_company
+
+      unless @creating_new_company
+        send_welcome_email
+        update_stripe_subscription_count
+      end
+    end
 
     @user
   end
@@ -25,10 +36,20 @@ class AddUserToCompany
       user.name = @name
       user.current_company = @company
     end
+
+    @user.save!
   end
 
   def add_user_to_company
-    @company.memberships.build(user: @user, role: @role, status: 'active')
-    @company.save!
+    @membership = @company.memberships.build(user: @user, role: @role, status: 'active')
+    @membership.save!
+  end
+
+  def send_welcome_email
+    CompanyMailer.welcome(@company, @user).deliver_later
+  end
+
+  def update_stripe_subscription_count
+    SyncCustomerSubscriptionCountJob.perform_async(@company.id)
   end
 end

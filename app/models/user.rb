@@ -15,11 +15,28 @@ class User < ApplicationRecord
 
   passwordless_with :email
 
-  def owner?
-    memberships.find_by(company: current_company).role == Membership::OWNER
+  has_paper_trail
+
+  def owner?(company:)
+    memberships.find_by(company:).role == Membership::OWNER
   end
 
-  def admin?
-    memberships.find_by(company: current_company).role == Membership::ADMIN
+  def admin?(company:)
+    memberships.find_by(company:).role == Membership::ADMIN
+  end
+
+  def role(company:)
+    memberships.find_by(company:).role
+  end
+
+  def inactive?(company:)
+    memberships.find_by(company:).inactive?
+  end
+
+  def toggle_status!(company:)
+    membership = memberships.find_by!(company:)
+    membership.update!(status: membership.active? ? Membership::INACTIVE : Membership::ACTIVE)
+
+    SyncCustomerSubscriptionCountJob.perform_async(current_company.id)
   end
 end

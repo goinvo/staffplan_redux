@@ -34,7 +34,13 @@ class Registration < ApplicationRecord
   def register!
     raise RegistrationNotAvailableError if registered?
 
-    CreateNewCompany.new(self).call
+    CreateNewCompany.new(
+      email:,
+      name:,
+      registration_id: id
+    ).call
+
+    reload
   end
 
   def registered?

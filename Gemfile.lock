@@ -120,6 +120,7 @@ GEM
       railties (>= 5.0.0)
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
+    foreman (0.87.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     graphiql-rails (1.9.0)
@@ -175,6 +176,9 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
+    paper_trail (15.1.0)
+      activerecord (>= 6.1)
+      request_store (~> 1.4)
     passwordless (1.2.0)
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
@@ -232,6 +236,8 @@ GEM
     regexp_parser (2.8.3)
     reline (0.4.1)
       io-console (~> 0.5)
+    request_store (1.5.1)
+      rack (>= 1.4)
     rexml (3.2.6)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
@@ -327,11 +333,13 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faker
+  foreman
   graphiql-rails
   graphql (~> 2.2)
   importmap-rails
   letter_opener
   money
+  paper_trail
   passwordless (~> 1.1)
   pg (~> 1.1)
   puma (>= 5.0)

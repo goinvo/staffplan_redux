@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Byron+Volkman%27s%27+Company+%7C+Byron+Volkman&email=casie.heller%40hermiston-krajcik.example
+      string: name=Becker%2C+Block+and+Flatley+26%27s%27+Company+%7C+Becker%2C+Block+and+Flatley+26&email=23alanna%40oconner.test
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/5.55.0
@@ -14,7 +14,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_SEu7xXLeTXvHIn","request_duration_ms":0}}'
+      - '{"last_request_metrics":{"request_id":"req_CNF8lkZpaOV3qh","request_duration_ms":268}}'
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"5.55.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
         fwank.local 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:51 PST 2023;
@@ -31,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 15 Jan 2024 19:24:57 GMT
+      - Sun, 28 Jan 2024 19:43:25 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '688'
+      - '701'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -56,11 +56,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - 91bc51a5-db42-45bd-8098-d85d928da593
+      - d1ae89f8-9884-4043-a845-3283d0773c91
       Original-Request:
-      - req_R6JANvxrkMvoL0
+      - req_BVuGl7PGo4g4jm
       Request-Id:
-      - req_R6JANvxrkMvoL0
+      - req_BVuGl7PGo4g4jm
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -75,18 +75,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_PNhAlHb17MJkUG",
+          "id": "cus_PSZPyICXUSCpNX",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1705346697,
+          "created": 1706471005,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
-          "email": "casie.heller@hermiston-krajcik.example",
-          "invoice_prefix": "D2E62DD2",
+          "email": "23alanna@oconner.test",
+          "invoice_prefix": "01032A18",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -95,7 +95,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Byron Volkman's' Company | Byron Volkman",
+          "name": "Becker, Block and Flatley 26's' Company | Becker, Block and Flatley 26",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -103,5 +103,5 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Mon, 15 Jan 2024 19:24:57 GMT
+  recorded_at: Sun, 28 Jan 2024 19:43:25 GMT
 recorded_with: VCR 6.2.0
