@@ -65,7 +65,7 @@ accessories:
     directories:
       - data:/var/lib/postgresql/data
   redis:
-   image: redis:7.0
+   image: redis:latest
    roles:
      - web
      - job
