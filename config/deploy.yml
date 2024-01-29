@@ -35,6 +35,7 @@ env:
     - POSTGRES_PASSWORD
     - DOCKER_REGISTRY_TOKEN
     - STAFF_PLAN_EMAILS
+    - REDIS_URL
 
   # Use a different ssh user than root
   # ssh:
