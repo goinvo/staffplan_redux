@@ -10,10 +10,14 @@ servers:
     hosts:
       - 45.55.196.107
     cmd: bundle exec puma -C config/puma.rb
+    options:
+      "add-host": host.docker.internal:host-gateway
   job:
     hosts:
       - 45.55.196.107
     cmd: bundle exec sidekiq -C config/sidekiq.yml
+    options:
+      "add-host": host.docker.internal:host-gateway
 
 # Credentials for your image host.
 registry:
@@ -62,9 +66,6 @@ accessories:
       - data:/var/lib/postgresql/data
   redis:
    image: redis:7.0
-   roles:
-     - web
-     - job
    host: 45.55.196.107
    port: 6379
    directories:
