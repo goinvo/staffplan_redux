@@ -8,13 +8,13 @@ image: fermion/staffplan-redux
 servers:
   web:
     hosts:
-      - 45.55.196.107
+      - 159.203.143.173
     cmd: bundle exec puma -C config/puma.rb
     options:
       "add-host": host.docker.internal:host-gateway
   job:
     hosts:
-      - 45.55.196.107
+      - 159.203.143.173
     cmd: bundle exec sidekiq -C config/sidekiq.yml
     options:
       "add-host": host.docker.internal:host-gateway
@@ -29,7 +29,7 @@ registry:
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 45.55.196.107
+    DB_HOST: 159.203.143.173
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -54,7 +54,7 @@ env:
 accessories:
   db:
     image: postgres:15
-    host: 45.55.196.107
+    host: 159.203.143.173
     port: 5432
     env:
       clear:
