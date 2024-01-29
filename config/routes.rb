@@ -21,7 +21,11 @@ Rails.application.routes.draw do
 
   passwordless_for :users, at: '/', as: :auth
 
-  resource :dashboard, only: [:show], controller: "dashboard"
+  resource :dashboard, only: [:show], controller: "dashboard" do
+    collection do
+      post :switch_account
+    end
+  end
 
   resource :settings, only: [:show, :update], controller: "settings" do
     resource :billing_information, only: [:show, :edit, :update], controller: "settings/billing_information"
