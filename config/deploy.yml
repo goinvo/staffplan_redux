@@ -70,8 +70,8 @@ accessories:
      - web
      - job
    port: 6379
-   directories:
-     - data:/data
+   volumes:
+     - data:/var/lib/redis/data
    options:
      network: "private"
 
