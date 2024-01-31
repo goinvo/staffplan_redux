@@ -53,5 +53,12 @@ RSpec.describe Client, type: :model do
       client.toggle_archived!
       expect(client.status).to eq("active")
     end
+
+    it "archives all projects when archived" do
+      client = create(:client, status: "active")
+      project = create(:project, client: client, status: "active")
+      client.toggle_archived!
+      expect(project.reload.status).to eq("archived")
+    end
   end
 end

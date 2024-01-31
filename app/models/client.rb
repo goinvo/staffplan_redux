@@ -23,6 +23,14 @@ class Client < ApplicationRecord
   end
   def toggle_archived!
     new_status = active? ? Client::ARCHIVED : Client::ACTIVE
-    update!(status: new_status)
+
+    Client.transaction do
+      update!(status: new_status)
+
+      # archive all projects
+      if new_status == Client::ARCHIVED
+        projects.update_all(status: Project::ARCHIVED)
+      end
+    end
   end
 end
