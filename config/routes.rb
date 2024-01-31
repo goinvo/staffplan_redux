@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post "/graphql", to: "graphql#execute"
 
   resources :assignments
-  resources :projects
+  resources :projects, except: [:destroy]
   resources :clients, except: [:destroy] do
     member do
       post :toggle_archived
