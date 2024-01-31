@@ -13,4 +13,16 @@ class Client < ApplicationRecord
 
   scope :active, -> { where(status: 'active') }
   scope :archived, -> { where(status: 'archived') }
+
+  def active?
+    status == ACTIVE
+  end
+
+  def archived?
+    status == ARCHIVED
+  end
+  def toggle_archived!
+    new_status = active? ? Client::ARCHIVED : Client::ACTIVE
+    update!(status: new_status)
+  end
 end

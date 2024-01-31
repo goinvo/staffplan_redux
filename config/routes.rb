@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   resources :assignments
   resources :projects
-  resources :clients
+  resources :clients, except: [:destroy] do
+    member do
+      post :toggle_archived
+    end
+  end
   resources :registrations, only: [:new, :create] do
     member do
       get :register
