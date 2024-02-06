@@ -16,4 +16,49 @@ RSpec.describe Client, type: :model do
     it { should belong_to(:company) }
     it { should have_many(:projects).dependent(:destroy) }
   end
+
+  describe "#active?" do
+    it "returns true if status is active" do
+      client = build(:client, status: "active")
+      expect(client.active?).to be true
+    end
+
+    it "returns false if status is archived" do
+      client = build(:client, status: "archived")
+      expect(client.active?).to be false
+    end
+  end
+
+  describe "archived?" do
+    it "returns true if status is archived" do
+      client = build(:client, status: "archived")
+      expect(client.archived?).to be true
+    end
+
+    it "returns false if status is active" do
+      client = build(:client, status: "active")
+      expect(client.archived?).to be false
+    end
+  end
+
+  describe "#toggle_archived!" do
+    it "changes status from active to archived" do
+      client = create(:client, status: "active")
+      client.toggle_archived!
+      expect(client.status).to eq("archived")
+    end
+
+    it "changes status from archived to active" do
+      client = create(:client, status: "archived")
+      client.toggle_archived!
+      expect(client.status).to eq("active")
+    end
+
+    it "archives all projects when archived" do
+      client = create(:client, status: "active")
+      project = create(:project, client: client, status: "active")
+      client.toggle_archived!
+      expect(project.reload.status).to eq("archived")
+    end
+  end
 end

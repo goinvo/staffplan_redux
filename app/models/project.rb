@@ -28,4 +28,24 @@ class Project < ApplicationRecord
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
   validates :cost, presence: true, numericality: { greater_than_or_equal_to: 0.0 }
   validates :payment_frequency, presence: true, inclusion: { in: VALID_PAYMENT_FREQUENCIES }
+
+  def active?
+    status == ACTIVE
+  end
+
+  def archived?
+    status == ARCHIVED
+  end
+
+  def proposed?
+    status == PROPOSED
+  end
+
+  def cancelled?
+    status == CANCELLED
+  end
+
+  def completed?
+    status == COMPLETED
+  end
 end

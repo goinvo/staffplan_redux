@@ -19,4 +19,64 @@ RSpec.describe Project, type: :model do
     it { should have_many(:assignments).dependent(:destroy) }
     it { should have_many(:users).through(:assignments) }
   end
+
+  describe "#active?" do
+    it "returns true if the status is active" do
+      project = build(:project, status: "active")
+      expect(project.active?).to eq(true)
+    end
+
+    it "returns false if the status is not active" do
+      project = build(:project, status: "archived")
+      expect(project.active?).to eq(false)
+    end
+  end
+
+  describe "#archived?" do
+    it "returns true if the status is archived" do
+      project = build(:project, status: "archived")
+      expect(project.archived?).to eq(true)
+    end
+
+    it "returns false if the status is not archived" do
+      project = build(:project, status: "active")
+      expect(project.archived?).to eq(false)
+    end
+  end
+
+  describe "#proposed?" do
+    it "returns true if the status is proposed" do
+      project = build(:project, status: "proposed")
+      expect(project.proposed?).to eq(true)
+    end
+
+    it "returns false if the status is not proposed" do
+      project = build(:project, status: "active")
+      expect(project.proposed?).to eq(false)
+    end
+  end
+
+  describe "#cancelled?" do
+    it "returns true if the status is cancelled" do
+      project = build(:project, status: "cancelled")
+      expect(project.cancelled?).to eq(true)
+    end
+
+    it "returns false if the status is not cancelled" do
+      project = build(:project, status: "active")
+      expect(project.cancelled?).to eq(false)
+    end
+  end
+
+  describe "#completed?" do
+    it "returns true if the status is completed" do
+      project = build(:project, status: "completed")
+      expect(project.completed?).to eq(true)
+    end
+
+    it "returns false if the status is not completed" do
+      project = build(:project, status: "active")
+      expect(project.completed?).to eq(false)
+    end
+  end
 end

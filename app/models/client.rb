@@ -13,4 +13,24 @@ class Client < ApplicationRecord
 
   scope :active, -> { where(status: 'active') }
   scope :archived, -> { where(status: 'archived') }
+
+  def active?
+    status == ACTIVE
+  end
+
+  def archived?
+    status == ARCHIVED
+  end
+  def toggle_archived!
+    new_status = active? ? Client::ARCHIVED : Client::ACTIVE
+
+    Client.transaction do
+      update!(status: new_status)
+
+      # archive all projects
+      if new_status == Client::ARCHIVED
+        projects.update_all(status: Project::ARCHIVED)
+      end
+    end
+  end
 end
