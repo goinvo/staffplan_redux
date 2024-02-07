@@ -42,3 +42,5 @@ spec/examples.txt
 .DS_Store
 
 /config/credentials/production.key
+config/credentials/test.key
+config/credentials/development.key
