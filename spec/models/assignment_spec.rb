@@ -17,4 +17,30 @@ RSpec.describe Assignment, type: :model do
     it { should belong_to(:project) }
     it { should have_many(:work_weeks) }
   end
+
+  context "starts_on and ends_on" do
+    it "does not allow starts_on to be after ends_on" do
+      assignment = build(:assignment, starts_on: Date.today, ends_on: Date.yesterday)
+      expect(assignment).to_not be_valid
+      expect(assignment.errors[:starts_on]).to include("can't be after the assignment ends")
+    end
+
+    it "does not allow ends_on to be before starts_on" do
+      assignment = build(:assignment, starts_on: Date.tomorrow, ends_on: Date.today)
+      expect(assignment).to_not be_valid
+      expect(assignment.errors[:ends_on]).to include("can't come before the assignment starts")
+    end
+
+    it "does not allow ends_on to be set without starts_on" do
+      assignment = build(:assignment, starts_on: nil, ends_on: Date.today)
+      expect(assignment).to_not be_valid
+      expect(assignment.errors[:starts_on]).to include("is required if an end date is set")
+    end
+
+    it "does not allow starts_on to be set without ends_on" do
+      assignment = build(:assignment, starts_on: Date.today, ends_on: nil)
+      expect(assignment).to_not be_valid
+      expect(assignment.errors[:ends_on]).to include("is required if a start date is set")
+    end
+  end
 end
