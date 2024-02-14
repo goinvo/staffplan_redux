@@ -14,7 +14,7 @@ RSpec.describe GraphqlController, type: :request do
 
       post '/graphql', params: { query: query }
 
-      expect(response.status).to eq(404)
+      expect(response.status).to eq(403)
     end
   end
 end
