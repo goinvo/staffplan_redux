@@ -55,6 +55,6 @@ class GraphqlController < ApplicationController
   end
 
   def ensure_current_user
-    raise ActionController::RoutingError.new("Not Found") if current_user.blank?
+    head :forbidden and return if current_user.blank?
   end
 end
