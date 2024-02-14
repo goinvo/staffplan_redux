@@ -7,6 +7,8 @@ module Types
       field :user, Types::StaffPlan::UserType, null: false
       field :project, Types::StaffPlan::ProjectType, null: false
       field :status, String, null: false
+      field :starts_on, GraphQL::Types::ISO8601Date, null: true
+      field :ends_on, GraphQL::Types::ISO8601Date, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 

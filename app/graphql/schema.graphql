@@ -1,7 +1,9 @@
 type Assignment {
   createdAt: ISO8601DateTime!
+  endsOn: ISO8601Date
   id: ID!
   project: Project!
+  startsOn: ISO8601Date
   status: String!
   updatedAt: ISO8601DateTime!
   user: User!
@@ -27,6 +29,11 @@ type Company {
   updatedAt: ISO8601DateTime!
   users: [User!]!
 }
+
+"""
+An ISO 8601-encoded date
+"""
+scalar ISO8601Date @specifiedBy(url: "https://tools.ietf.org/html/rfc3339")
 
 """
 An ISO 8601-encoded datetime
