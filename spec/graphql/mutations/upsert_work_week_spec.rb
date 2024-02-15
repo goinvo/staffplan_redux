@@ -4,14 +4,6 @@ require "rails_helper"
 
 RSpec.describe Mutations::UpsertWorkWeek do
 
-  # when the :work_weeks factory is used the user's current_company
-  # is not the same as the one the project/assignment belongs to.
-  def assignment_for_user(user:)
-    client = create(:client, company: user.current_company)
-    project = create(:project, client:)
-    create(:assignment, user:, project:)
-  end
-
   context "when updating a work week" do
     it "updates the work week with valid params" do
       query_string = <<-GRAPHQL
