@@ -49,6 +49,41 @@ type Mutation {
   ): Company!
 
   """
+  Create or update an assignment.
+  """
+  upsertAssignment(
+    """
+    The date this assignment ends.
+    """
+    endsOn: ISO8601Date
+
+    """
+    The ID of the assignment to update.
+    """
+    id: ID
+
+    """
+    The ID of the project this assignment is being created for.
+    """
+    projectId: ID!
+
+    """
+    The date this assignment starts.
+    """
+    startsOn: ISO8601Date
+
+    """
+    The status of the assignment.
+    """
+    status: String!
+
+    """
+    The ID of the user being assigned to the project.
+    """
+    userId: ID!
+  ): Assignment!
+
+  """
   Create or update a work week record for a StaffPlan user.
   """
   upsertWorkWeek(

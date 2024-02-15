@@ -43,4 +43,16 @@ RSpec.describe Assignment, type: :model do
       expect(assignment.errors[:ends_on]).to include("is required if a start date is set")
     end
   end
+
+  describe "#project_and_user_belong_to_same_company" do
+    it "validates that the user and project belong to the same company" do
+      user = create(:user)
+      project = create(:project)
+      assignment = build(:assignment, user: user, project: project)
+      expect(project.company.active_users).to_not include(user)
+
+      expect(assignment).to_not be_valid
+      expect(assignment.errors[:project]).to include("user must belong to the same company as the project")
+    end
+  end
 end

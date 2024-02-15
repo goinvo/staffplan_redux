@@ -8,6 +8,10 @@ class Company < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
+  def active_users
+    users.joins(:memberships).where(memberships: { status: Membership::ACTIVE })
+  end
+
   def subscription
     @_subscription if defined?(@_subscription)
 

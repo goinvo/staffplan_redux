@@ -16,10 +16,18 @@ class Assignment < ApplicationRecord
   validates :project_id, presence: true, uniqueness: { scope: :user_id }
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
   validate :starts_and_ends_on_rules
+  validate :project_and_user_belong_to_same_company
 
   scope :for_user, ->(user) { where(user: user) }
 
   private
+
+  def project_and_user_belong_to_same_company
+    project_company_users = project.company.active_users
+    return if project_company_users.include?(user)
+
+    errors.add(:project, "and user must belong to the same company")
+  end
 
   def starts_and_ends_on_rules
     if starts_on.blank? && ends_on.present?
