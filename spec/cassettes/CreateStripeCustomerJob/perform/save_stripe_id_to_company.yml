@@ -5,20 +5,22 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Runolfsson-Kunde+27%27s%27+Company+%7C+Runolfsson-Kunde+27&email=something%40static.com
+      string: name=Skiles+and+Sons+31%27s%27+Company+%7C+Skiles+and+Sons+31&email=something%40static.com
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/5.55.0
+      - Stripe/v1 RubyBindings/10.10.0
       Authorization:
       - Bearer <BEARER_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_BVuGl7PGo4g4jm","request_duration_ms":225}}'
+      - '{"last_request_metrics":{"request_id":"req_RmhiGihfnmT8wy","request_duration_ms":178}}'
+      Stripe-Version:
+      - '2023-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"5.55.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
-        fwank.local 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:51 PST 2023;
-        root:xnu-10002.61.3~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank.local"}'
+      - '{"bindings_version":"10.10.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-2.local 23.3.0 Darwin Kernel Version 23.3.0: Wed Dec 20 21:30:59 PST
+        2023; root:xnu-10002.81.5~7/RELEASE_ARM64_T6030 arm64","hostname":"fwank-2.local"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,11 +33,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 28 Jan 2024 19:43:26 GMT
+      - Fri, 23 Feb 2024 17:34:38 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '682'
+      - '680'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -56,11 +58,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - 4d73f207-9770-42e0-baa9-af6d26506454
+      - 6af55973-49f5-4f47-b16b-e75111ef22b1
       Original-Request:
-      - req_QWLah9lkqlJkNC
+      - req_TRWIuvb0wT0yia
       Request-Id:
-      - req_QWLah9lkqlJkNC
+      - req_TRWIuvb0wT0yia
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -75,18 +77,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_PSZPK7jiJGUy4P",
+          "id": "cus_PcHCoAIiMvAYRi",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1706471005,
+          "created": 1708709678,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
           "email": "something@static.com",
-          "invoice_prefix": "285649BA",
+          "invoice_prefix": "EBE9D732",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -95,7 +97,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Runolfsson-Kunde 27's' Company | Runolfsson-Kunde 27",
+          "name": "Skiles and Sons 31's' Company | Skiles and Sons 31",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -103,26 +105,28 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Sun, 28 Jan 2024 19:43:25 GMT
+  recorded_at: Fri, 23 Feb 2024 17:34:38 GMT
 - request:
     method: get
-    uri: https://api.stripe.com/v1/customers/cus_PSZPK7jiJGUy4P
+    uri: https://api.stripe.com/v1/customers/cus_PcHCoAIiMvAYRi
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/5.55.0
+      - Stripe/v1 RubyBindings/10.10.0
       Authorization:
       - Bearer <BEARER_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_QWLah9lkqlJkNC","request_duration_ms":248}}'
+      - '{"last_request_metrics":{"request_id":"req_TRWIuvb0wT0yia","request_duration_ms":239}}'
+      Stripe-Version:
+      - '2023-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"5.55.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
-        fwank.local 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:51 PST 2023;
-        root:xnu-10002.61.3~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank.local"}'
+      - '{"bindings_version":"10.10.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-2.local 23.3.0 Darwin Kernel Version 23.3.0: Wed Dec 20 21:30:59 PST
+        2023; root:xnu-10002.81.5~7/RELEASE_ARM64_T6030 arm64","hostname":"fwank-2.local"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -135,11 +139,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 28 Jan 2024 19:43:26 GMT
+      - Fri, 23 Feb 2024 17:34:38 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '682'
+      - '680'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -161,7 +165,7 @@ http_interactions:
         'none'; frame-ancestors 'none'; img-src 'self'; script-src 'self' 'report-sample';
         style-src 'self'
       Request-Id:
-      - req_WU7SoeIKQPnYkr
+      - req_cACJ4Fas0O8QsZ
       Stripe-Version:
       - '2023-10-16'
       Vary:
@@ -174,18 +178,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_PSZPK7jiJGUy4P",
+          "id": "cus_PcHCoAIiMvAYRi",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1706471005,
+          "created": 1708709678,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
           "email": "something@static.com",
-          "invoice_prefix": "285649BA",
+          "invoice_prefix": "EBE9D732",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -194,7 +198,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Runolfsson-Kunde 27's' Company | Runolfsson-Kunde 27",
+          "name": "Skiles and Sons 31's' Company | Skiles and Sons 31",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -202,5 +206,5 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Sun, 28 Jan 2024 19:43:26 GMT
+  recorded_at: Fri, 23 Feb 2024 17:34:38 GMT
 recorded_with: VCR 6.2.0

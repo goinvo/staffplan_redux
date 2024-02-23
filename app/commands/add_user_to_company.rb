@@ -50,6 +50,6 @@ class AddUserToCompany
   end
 
   def update_stripe_subscription_count
-    SyncCustomerSubscriptionCountJob.perform_async(@company.id)
+    SyncCustomerSubscriptionJob.perform_async(@company.id)
   end
 end

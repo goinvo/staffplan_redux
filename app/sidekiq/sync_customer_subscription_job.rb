@@ -1,19 +1,21 @@
-class SyncCustomerSubscriptionCountJob
+class SyncCustomerSubscriptionJob
   include Sidekiq::Job
 
   def perform(id)
     company = Company.find_by!(id: id)
     return if company.blank?
 
+    company.create_subscription if company.subscription.blank?
+
     # TODO: when there's a free trial, we'll check the trial's expiration here
-    subscription = company.subscription
-    return if subscription.blank?
+    stripe_subscription = company.stripe_subscription
+    return if stripe_subscription.blank?
 
     subscription_count = company.memberships.active.count
-    item_id = subscription.items.first.id
+    item_id = stripe_subscription.items.first.id
 
     Stripe::Subscription.update(
-      subscription.id,
+      stripe_subscription.id,
       { items: [
         {id: item_id,  quantity: subscription_count }
       ]}
