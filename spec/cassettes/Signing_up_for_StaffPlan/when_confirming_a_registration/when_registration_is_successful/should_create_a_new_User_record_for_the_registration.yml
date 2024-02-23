@@ -5,20 +5,22 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Wisoky+LLC+25%27s%27+Company+%7C+Wisoky+LLC+25&email=22darron%40lesch.test
+      string: name=Bergstrom%2C+Zieme+and+Hilll+27%27s%27+Company+%7C+Bergstrom%2C+Zieme+and+Hilll+27&email=24ling%40leuschke-koss.test
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/5.55.0
+      - Stripe/v1 RubyBindings/10.10.0
       Authorization:
       - Bearer <BEARER_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_8SQNZbf4G7zi7n","request_duration_ms":229}}'
+      - '{"last_request_metrics":{"request_id":"req_zMvhyTohPQozwU","request_duration_ms":270}}'
+      Stripe-Version:
+      - '2023-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"5.55.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
-        fwank.local 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:51 PST 2023;
-        root:xnu-10002.61.3~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank.local"}'
+      - '{"bindings_version":"10.10.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-2.local 23.3.0 Darwin Kernel Version 23.3.0: Wed Dec 20 21:30:59 PST
+        2023; root:xnu-10002.81.5~7/RELEASE_ARM64_T6030 arm64","hostname":"fwank-2.local"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,11 +33,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 28 Jan 2024 19:43:25 GMT
+      - Fri, 23 Feb 2024 17:34:37 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '669'
+      - '707'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -56,11 +58,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - 194b4bd5-5976-4f22-b81a-5831a1ab9642
+      - 55e0939e-bb54-4f94-b0ec-3a85d4dd85b3
       Original-Request:
-      - req_CNF8lkZpaOV3qh
+      - req_abELYxW311DPY4
       Request-Id:
-      - req_CNF8lkZpaOV3qh
+      - req_abELYxW311DPY4
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -75,18 +77,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_PSZPmg7YPg1iaP",
+          "id": "cus_PcHCOARkfFug8l",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1706471004,
+          "created": 1708709676,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
-          "email": "22darron@lesch.test",
-          "invoice_prefix": "4F18FFF7",
+          "email": "24ling@leuschke-koss.test",
+          "invoice_prefix": "7951F12C",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -95,7 +97,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Wisoky LLC 25's' Company | Wisoky LLC 25",
+          "name": "Bergstrom, Zieme and Hilll 27's' Company | Bergstrom, Zieme and Hilll 27",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -103,5 +105,5 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Sun, 28 Jan 2024 19:43:24 GMT
+  recorded_at: Fri, 23 Feb 2024 17:34:37 GMT
 recorded_with: VCR 6.2.0

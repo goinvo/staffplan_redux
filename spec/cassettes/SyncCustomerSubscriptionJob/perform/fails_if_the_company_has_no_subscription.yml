@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Gleason-Mills+6%27s%27+Company+%7C+Gleason-Mills+6&email=3colin%40bailey-tillman.example
+      string: name=Murray-Abshire+1%27s%27+Company+%7C+Murray-Abshire+1&email=something%40static.com
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/10.10.0
@@ -13,8 +13,6 @@ http_interactions:
       - Bearer <BEARER_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
-      X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_jlB7ZOhSBqJRM0","request_duration_ms":218}}'
       Stripe-Version:
       - '2023-10-16'
       X-Stripe-Client-User-Agent:
@@ -33,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 23 Feb 2024 17:34:33 GMT
+      - Fri, 23 Feb 2024 17:34:15 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '683'
+      - '676'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -58,11 +56,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - bc6c229c-1983-486f-9bcc-54cb9120976a
+      - 64cfba81-2062-4e81-bd2d-d030c21be002
       Original-Request:
-      - req_se1Fv94H37RfH6
+      - req_x3AGNv2nsmYOM4
       Request-Id:
-      - req_se1Fv94H37RfH6
+      - req_x3AGNv2nsmYOM4
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -77,18 +75,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_PcHCnbcBt2vse6",
+          "id": "cus_PcHBC3sidSgePK",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1708709673,
+          "created": 1708709655,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
-          "email": "3colin@bailey-tillman.example",
-          "invoice_prefix": "7BE0B0B4",
+          "email": "something@static.com",
+          "invoice_prefix": "243B5D16",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -97,7 +95,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Gleason-Mills 6's' Company | Gleason-Mills 6",
+          "name": "Murray-Abshire 1's' Company | Murray-Abshire 1",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -105,10 +103,10 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Fri, 23 Feb 2024 17:34:33 GMT
+  recorded_at: Fri, 23 Feb 2024 17:34:15 GMT
 - request:
     method: get
-    uri: https://api.stripe.com/v1/subscriptions?customer=cus_PcHCnbcBt2vse6
+    uri: https://api.stripe.com/v1/subscriptions?customer=cus_PcHBC3sidSgePK
     body:
       encoding: US-ASCII
       string: ''
@@ -120,7 +118,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_se1Fv94H37RfH6","request_duration_ms":242}}'
+      - '{"last_request_metrics":{"request_id":"req_x3AGNv2nsmYOM4","request_duration_ms":334}}'
       Stripe-Version:
       - '2023-10-16'
       X-Stripe-Client-User-Agent:
@@ -139,7 +137,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 23 Feb 2024 17:34:33 GMT
+      - Fri, 23 Feb 2024 17:34:15 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -164,7 +162,7 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Request-Id:
-      - req_8HT1TvTRnRNcsp
+      - req_EDnAzmqfI3lhDD
       Stripe-Version:
       - '2023-10-16'
       Vary:
@@ -182,5 +180,5 @@ http_interactions:
           "has_more": false,
           "url": "/v1/subscriptions"
         }
-  recorded_at: Fri, 23 Feb 2024 17:34:33 GMT
+  recorded_at: Fri, 23 Feb 2024 17:34:15 GMT
 recorded_with: VCR 6.2.0

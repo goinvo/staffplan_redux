@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe SyncCustomerSubscriptionCountJob, type: :job, vcr: true do
+RSpec.describe SyncCustomerSubscriptionJob, type: :job, vcr: true do
 
   before do
     Sidekiq::Testing.inline!
@@ -8,7 +8,7 @@ RSpec.describe SyncCustomerSubscriptionCountJob, type: :job, vcr: true do
 
   context "perform" do
     it "fails if it cannot find the company" do
-      expect { SyncCustomerSubscriptionCountJob.perform_async(0) }.to raise_error { ActiveRecord::RecordNotFound }
+      expect { SyncCustomerSubscriptionJob.perform_async(0) }.to raise_error { ActiveRecord::RecordNotFound }
     end
 
     it "fails if the company has no subscription" do
@@ -20,7 +20,7 @@ RSpec.describe SyncCustomerSubscriptionCountJob, type: :job, vcr: true do
       expect_any_instance_of(Company).to receive(:subscription).and_return(nil)
       expect_any_instance_of(Company).to_not receive(:memberships)
 
-      SyncCustomerSubscriptionCountJob.perform_inline(company.id)
+      SyncCustomerSubscriptionJob.perform_inline(company.id)
     end
 
     it "updates the subscription item quantity" do
@@ -45,12 +45,12 @@ RSpec.describe SyncCustomerSubscriptionCountJob, type: :job, vcr: true do
         }
       )
 
-      expect(company.subscription.items.first.quantity).to eq(1)
+      expect(company.stripe_subscription.items.first.quantity).to eq(1)
       create(:membership, company: company)
       expect(company.memberships.active.count).to eq(2)
 
-      SyncCustomerSubscriptionCountJob.perform_inline(company.id)
-      expect(company.reload.subscription.items.first.quantity).to eq(2)
+      SyncCustomerSubscriptionJob.perform_inline(company.id)
+      expect(company.reload.stripe_subscription.items.first.quantity).to eq(2)
     end
 
     it "sends an email to the company's owners" do
@@ -78,7 +78,7 @@ RSpec.describe SyncCustomerSubscriptionCountJob, type: :job, vcr: true do
       # adds a new active user to company
       create(:membership, company: company)
 
-      SyncCustomerSubscriptionCountJob.perform_inline(company.id)
+      SyncCustomerSubscriptionJob.perform_inline(company.id)
 
       expect(ActionMailer::Base.deliveries.count).to eq(1)
       expect(ActionMailer::Base.deliveries.first.to).to eq(company.owners.map(&:email))

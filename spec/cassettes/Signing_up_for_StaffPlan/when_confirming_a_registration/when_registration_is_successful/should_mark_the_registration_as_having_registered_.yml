@@ -5,20 +5,22 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Becker%2C+Block+and+Flatley+26%27s%27+Company+%7C+Becker%2C+Block+and+Flatley+26&email=23alanna%40oconner.test
+      string: name=Jakubowski-Kshlerin+26%27s%27+Company+%7C+Jakubowski-Kshlerin+26&email=23tawanda.bradtke%40rau.test
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/5.55.0
+      - Stripe/v1 RubyBindings/10.10.0
       Authorization:
       - Bearer <BEARER_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_CNF8lkZpaOV3qh","request_duration_ms":268}}'
+      - '{"last_request_metrics":{"request_id":"req_G1GNFJhsapfU8I","request_duration_ms":232}}'
+      Stripe-Version:
+      - '2023-10-16'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"5.55.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
-        fwank.local 23.2.0 Darwin Kernel Version 23.2.0: Wed Nov 15 21:54:51 PST 2023;
-        root:xnu-10002.61.3~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank.local"}'
+      - '{"bindings_version":"10.10.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-2.local 23.3.0 Darwin Kernel Version 23.3.0: Wed Dec 20 21:30:59 PST
+        2023; root:xnu-10002.81.5~7/RELEASE_ARM64_T6030 arm64","hostname":"fwank-2.local"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -31,11 +33,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 28 Jan 2024 19:43:25 GMT
+      - Fri, 23 Feb 2024 17:34:36 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '701'
+      - '694'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -56,11 +58,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - d1ae89f8-9884-4043-a845-3283d0773c91
+      - 0dc8c186-e764-402f-9a5f-eef31cec6710
       Original-Request:
-      - req_BVuGl7PGo4g4jm
+      - req_zMvhyTohPQozwU
       Request-Id:
-      - req_BVuGl7PGo4g4jm
+      - req_zMvhyTohPQozwU
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -75,18 +77,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_PSZPyICXUSCpNX",
+          "id": "cus_PcHCqluRH9mdcT",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1706471005,
+          "created": 1708709676,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
-          "email": "23alanna@oconner.test",
-          "invoice_prefix": "01032A18",
+          "email": "23tawanda.bradtke@rau.test",
+          "invoice_prefix": "F06418C0",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -95,7 +97,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Becker, Block and Flatley 26's' Company | Becker, Block and Flatley 26",
+          "name": "Jakubowski-Kshlerin 26's' Company | Jakubowski-Kshlerin 26",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -103,5 +105,5 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Sun, 28 Jan 2024 19:43:25 GMT
+  recorded_at: Fri, 23 Feb 2024 17:34:36 GMT
 recorded_with: VCR 6.2.0
