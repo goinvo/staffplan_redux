@@ -118,9 +118,11 @@ type Project {
   assignments: [Assignment!]!
   client: Client!
   createdAt: ISO8601DateTime!
+  endsOn: ISO8601Date
   id: ID!
   name: String!
   paymentFrequency: String!
+  startsOn: ISO8601Date
   status: String!
   updatedAt: ISO8601DateTime!
   users: [User!]!

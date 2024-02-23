@@ -8,6 +8,8 @@ module Types
       field :name, String, null: false
       field :status, String, null: false
       field :payment_frequency, String, null: false
+      field :starts_on, GraphQL::Types::ISO8601Date, null: true
+      field :ends_on, GraphQL::Types::ISO8601Date, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
