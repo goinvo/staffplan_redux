@@ -26,7 +26,7 @@ class Settings::SubscriptionsController < ApplicationController
   def destroy
     subscriptions = Stripe::Subscription.list(customer: current_company.stripe_id)
     subscriptions.map do |subscription|
-      Stripe::Subscription.delete(subscription.id)
+      Stripe::Subscription.cancel(subscription.id)
     end
 
     flash[:success] = "Your subscription has been cancelled."
