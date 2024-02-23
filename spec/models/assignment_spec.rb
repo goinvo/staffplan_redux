@@ -52,7 +52,7 @@ RSpec.describe Assignment, type: :model do
       expect(project.company.active_users).to_not include(user)
 
       expect(assignment).to_not be_valid
-      expect(assignment.errors[:project]).to include("user must belong to the same company as the project")
+      expect(assignment.errors[:project]).to eql(["and user must belong to the same company"])
     end
   end
 end

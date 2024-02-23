@@ -1,8 +1,10 @@
 FactoryBot.define do
 
+  sequence(:email) { |n| "#{n}#{Faker::Internet.email}#{n}" }
+
   factory :user do
     name { Faker::Name.name + " #{rand(1..100).to_s}" }
-    sequence(:email) { |n| "#{n}#{Faker::Internet.email}" }
+    sequence(:email) { generate :email }
 
     after(:build) do |user, _options|
       # a current company is required for the user to be valid
@@ -57,9 +59,19 @@ FactoryBot.define do
   end
 
   factory :assignment do
-    user
-    project
     status { Assignment::ACTIVE }
+
+    after(:build) do |assignment, _options|
+      if assignment.user.blank?
+        assignment.user = create(:user)
+      end
+
+      if assignment.project.blank?
+        assignment.project = create(:project, client: create(:client, company: assignment.user.current_company))
+      end
+
+      foo = 'bar'
+    end
   end
 
   factory :work_week do

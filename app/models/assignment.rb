@@ -23,6 +23,9 @@ class Assignment < ApplicationRecord
   private
 
   def project_and_user_belong_to_same_company
+    # other validations will catch this, so we can return early
+    return if project.blank? || user.blank?
+
     project_company_users = project.company.active_users
     return if project_company_users.include?(user)
 
