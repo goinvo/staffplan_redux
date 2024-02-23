@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_23_004046) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_23_155317) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_004046) do
     t.index ["identifier"], name: "index_registrations_on_identifier", unique: true
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.string "stripe_id"
+    t.string "stripe_price_id"
+    t.string "customer_name"
+    t.string "customer_email"
+    t.integer "plan_amount"
+    t.integer "quantity"
+    t.string "credit_card_brand"
+    t.string "credit_card_last_four"
+    t.string "credit_card_exp_month"
+    t.string "credit_card_exp_year"
+    t.date "current_period_start"
+    t.date "current_period_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_subscriptions_on_company_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -128,4 +147,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_004046) do
     t.index ["assignment_id"], name: "index_work_weeks_on_assignment_id"
   end
 
+  add_foreign_key "subscriptions", "companies"
 end

@@ -5,6 +5,7 @@ class Company < ApplicationRecord
   has_many :projects, through: :clients
   has_many :work_weeks, through: :projects
   has_many :assignments, through: :projects
+  has_one :subscription
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
@@ -12,7 +13,7 @@ class Company < ApplicationRecord
     users.joins(:memberships).where(memberships: { status: Membership::ACTIVE })
   end
 
-  def subscription
+  def stripe_subscription
     @_subscription if defined?(@_subscription)
 
     @_subscription = Stripe::Subscription.list({ customer: stripe_id }).first

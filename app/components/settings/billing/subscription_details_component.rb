@@ -8,7 +8,7 @@ module Settings
       def subscription
         return @_subscription if defined?(@_subscription)
 
-        @_subscription = @company.subscription
+        @_subscription = @company.stripe_subscription
       end
 
       def subscription_percentage
