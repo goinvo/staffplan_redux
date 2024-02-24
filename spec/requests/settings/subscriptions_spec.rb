@@ -11,7 +11,7 @@ RSpec.describe "Settings::Subscriptions", type: :request, vcr: true do
 
       get new_settings_subscription_path
 
-      expect(response).to redirect_to /https:\/\/checkout\.stripe\.com\/c\/pay\/.*/
+      expect(response).to redirect_to /https:\/\/billing\.stripe\.com\/p\/session\/.*/
     end
   end
 end

@@ -13,12 +13,6 @@ class Company < ApplicationRecord
     users.joins(:memberships).where(memberships: { status: Membership::ACTIVE })
   end
 
-  def stripe_subscription
-    @_subscription if defined?(@_subscription)
-
-    @_subscription = Stripe::Subscription.list({ customer: stripe_id }).first
-  end
-
   def owners
     memberships.owners.map(&:user)
   end

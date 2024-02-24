@@ -28,19 +28,23 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
       expect(user.companies.length).to eq(1)
       company = user.companies.first
 
-      # attach a test payment method
-      method = Stripe::PaymentMethod.attach(
-        "pm_card_visa",
-        {customer: company.stripe_id}
-      )
-
-      # actually create the subscription
-      Stripe::Subscription.create(
-        {
-          customer: company.stripe_id,
-          items: [{price: Rails.application.credentials.stripe_price_id}],
-          default_payment_method: method.id,
-        }
+      company.subscription.update(
+        status: 'trialing',
+        trial_end: 30.days.from_now,
+        stripe_id: Faker::Alphanumeric.alpha(number: 10),
+        stripe_price_id: Faker::Alphanumeric.alpha(number: 10),
+        customer_name: company.name,
+        customer_email: user.email,
+        plan_amount: 300,
+        quantity: 1,
+        item_id: Faker::Alphanumeric.alpha(number: 10),
+        default_payment_method: Faker::Alphanumeric.alpha(number: 10),
+        current_period_start: 60.minutes.ago,
+        current_period_end: 30.days.from_now,
+        credit_card_brand: 'visa',
+        credit_card_last_four: '4242',
+        credit_card_exp_month: '12',
+        credit_card_exp_year: '29'
       )
 
       visit settings_billing_information_url
@@ -59,19 +63,23 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
       expect(user.companies.length).to eq(1)
       company = user.companies.first
 
-      # attach a test payment method
-      method = Stripe::PaymentMethod.attach(
-        "pm_card_visa",
-        {customer: company.stripe_id}
-      )
-
-      # actually create the subscription
-      Stripe::Subscription.create(
-        {
-          customer: company.stripe_id,
-          items: [{price: Rails.application.credentials.stripe_price_id}],
-          default_payment_method: method.id,
-        }
+      company.subscription.update(
+        status: 'trialing',
+        trial_end: 30.days.from_now,
+        stripe_id: Faker::Alphanumeric.alpha(number: 10),
+        stripe_price_id: Faker::Alphanumeric.alpha(number: 10),
+        customer_name: company.name,
+        customer_email: user.email,
+        plan_amount: 300,
+        quantity: 1,
+        item_id: Faker::Alphanumeric.alpha(number: 10),
+        default_payment_method: Faker::Alphanumeric.alpha(number: 10),
+        current_period_start: 60.minutes.ago,
+        current_period_end: 30.days.from_now,
+        credit_card_brand: 'visa',
+        credit_card_last_four: '4242',
+        credit_card_exp_month: '12',
+        credit_card_exp_year: '29'
       )
 
       visit settings_billing_information_url

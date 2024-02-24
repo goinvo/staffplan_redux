@@ -50,5 +50,11 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :webhooks do
+    namespace :stripe do
+      resources :subscriptions, only: [:create]
+    end
+  end
+
   root "dashboard#show"
 end
