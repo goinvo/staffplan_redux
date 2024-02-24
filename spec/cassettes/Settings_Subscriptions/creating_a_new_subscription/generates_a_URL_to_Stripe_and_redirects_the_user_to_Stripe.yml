@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Static+Name%27s%27+Company+%7C+Static+Name&email=static%40email.com
+      string: name=Gerlach+LLC+17+%7C+Static+Name&email=static%40email.com
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/10.10.0
@@ -14,7 +14,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_cACJ4Fas0O8QsZ","request_duration_ms":170}}'
+      - '{"last_request_metrics":{"request_id":"req_ADRQPyYk0bgc4k","request_duration_ms":211}}'
       Stripe-Version:
       - '2023-10-16'
       X-Stripe-Client-User-Agent:
@@ -33,11 +33,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 23 Feb 2024 17:34:39 GMT
+      - Sat, 24 Feb 2024 01:17:02 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '662'
+      - '654'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -58,11 +58,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - 49d65fbe-efbb-4a0f-8d44-f60d8bc47703
+      - 4ad74e35-6c5a-4ca4-a590-5eba6a76e25c
       Original-Request:
-      - req_V3URA66vwsxf1F
+      - req_aTSbsuBQJbRnCH
       Request-Id:
-      - req_V3URA66vwsxf1F
+      - req_aTSbsuBQJbRnCH
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -77,18 +77,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_PcHCdF1h13EJCK",
+          "id": "cus_PcOeZieF0nnZ9t",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1708709679,
+          "created": 1708737422,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
           "email": "static@email.com",
-          "invoice_prefix": "F3E8AFCB",
+          "invoice_prefix": "1791BF3A",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -97,7 +97,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Static Name's' Company | Static Name",
+          "name": "Gerlach LLC 17 | Static Name",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -105,13 +105,13 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Fri, 23 Feb 2024 17:34:39 GMT
+  recorded_at: Sat, 24 Feb 2024 01:17:02 GMT
 - request:
-    method: get
-    uri: https://api.stripe.com/v1/prices/price_1OdkCHBLjyMcgacQoXsoA2v0
+    method: post
+    uri: https://api.stripe.com/v1/subscriptions
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: customer=cus_PcOeZieF0nnZ9t&items[0][price]=price_1OdkCHBLjyMcgacQoXsoA2v0&items[0][quantity]=1&trial_period_days=30&trial_settings[end_behavior][missing_payment_method]=cancel
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/10.10.0
@@ -120,7 +120,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_V3URA66vwsxf1F","request_duration_ms":242}}'
+      - '{"last_request_metrics":{"request_id":"req_aTSbsuBQJbRnCH","request_duration_ms":625}}'
       Stripe-Version:
       - '2023-10-16'
       X-Stripe-Client-User-Agent:
@@ -139,7 +139,238 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 23 Feb 2024 17:34:39 GMT
+      - Sat, 24 Feb 2024 01:17:03 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '4210'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET,HEAD,PUT,PATCH,POST,DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required,
+        X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Content-Security-Policy:
+      - report-uri https://q.stripe.com/csp-report?p=v1%2Fsubscriptions; block-all-mixed-content;
+        default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
+        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
+      Idempotency-Key:
+      - 49156735-7497-4725-b7e7-4398635060a7
+      Original-Request:
+      - req_iCyMrxbmp0vynN
+      Request-Id:
+      - req_iCyMrxbmp0vynN
+      Stripe-Should-Retry:
+      - 'false'
+      Stripe-Version:
+      - '2023-10-16'
+      Vary:
+      - Origin
+      X-Stripe-Routing-Context-Priority-Tier:
+      - api-testmode
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "sub_1On9rPBLjyMcgacQpuK1KIUv",
+          "object": "subscription",
+          "application": null,
+          "application_fee_percent": null,
+          "automatic_tax": {
+            "enabled": false,
+            "liability": null
+          },
+          "billing_cycle_anchor": 1711329423,
+          "billing_cycle_anchor_config": null,
+          "billing_thresholds": null,
+          "cancel_at": null,
+          "cancel_at_period_end": false,
+          "canceled_at": null,
+          "cancellation_details": {
+            "comment": null,
+            "feedback": null,
+            "reason": null
+          },
+          "collection_method": "charge_automatically",
+          "created": 1708737423,
+          "currency": "usd",
+          "current_period_end": 1711329423,
+          "current_period_start": 1708737423,
+          "customer": "cus_PcOeZieF0nnZ9t",
+          "days_until_due": null,
+          "default_payment_method": null,
+          "default_source": null,
+          "default_tax_rates": [],
+          "description": null,
+          "discount": null,
+          "ended_at": null,
+          "invoice_settings": {
+            "account_tax_ids": null,
+            "issuer": {
+              "type": "self"
+            }
+          },
+          "items": {
+            "object": "list",
+            "data": [
+              {
+                "id": "si_PcOeyF418Dawj4",
+                "object": "subscription_item",
+                "billing_thresholds": null,
+                "created": 1708737423,
+                "metadata": {},
+                "plan": {
+                  "id": "price_1OdkCHBLjyMcgacQoXsoA2v0",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 300,
+                  "amount_decimal": "300",
+                  "billing_scheme": "per_unit",
+                  "created": 1706493821,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "nickname": null,
+                  "product": "prod_PSfXu5KouT6GdC",
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "price": {
+                  "id": "price_1OdkCHBLjyMcgacQoXsoA2v0",
+                  "object": "price",
+                  "active": true,
+                  "billing_scheme": "per_unit",
+                  "created": 1706493821,
+                  "currency": "usd",
+                  "custom_unit_amount": null,
+                  "livemode": false,
+                  "lookup_key": null,
+                  "metadata": {},
+                  "nickname": null,
+                  "product": "prod_PSfXu5KouT6GdC",
+                  "recurring": {
+                    "aggregate_usage": null,
+                    "interval": "month",
+                    "interval_count": 1,
+                    "trial_period_days": null,
+                    "usage_type": "licensed"
+                  },
+                  "tax_behavior": "unspecified",
+                  "tiers_mode": null,
+                  "transform_quantity": null,
+                  "type": "recurring",
+                  "unit_amount": 300,
+                  "unit_amount_decimal": "300"
+                },
+                "quantity": 1,
+                "subscription": "sub_1On9rPBLjyMcgacQpuK1KIUv",
+                "tax_rates": []
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/subscription_items?subscription=sub_1On9rPBLjyMcgacQpuK1KIUv"
+          },
+          "latest_invoice": "in_1On9rPBLjyMcgacQFAmbOvFp",
+          "livemode": false,
+          "metadata": {},
+          "next_pending_invoice_item_invoice": null,
+          "on_behalf_of": null,
+          "pause_collection": null,
+          "payment_settings": {
+            "payment_method_options": null,
+            "payment_method_types": null,
+            "save_default_payment_method": "off"
+          },
+          "pending_invoice_item_interval": null,
+          "pending_setup_intent": "seti_1On9rPBLjyMcgacQE1uzmFTa",
+          "pending_update": null,
+          "plan": {
+            "id": "price_1OdkCHBLjyMcgacQoXsoA2v0",
+            "object": "plan",
+            "active": true,
+            "aggregate_usage": null,
+            "amount": 300,
+            "amount_decimal": "300",
+            "billing_scheme": "per_unit",
+            "created": 1706493821,
+            "currency": "usd",
+            "interval": "month",
+            "interval_count": 1,
+            "livemode": false,
+            "metadata": {},
+            "nickname": null,
+            "product": "prod_PSfXu5KouT6GdC",
+            "tiers_mode": null,
+            "transform_usage": null,
+            "trial_period_days": null,
+            "usage_type": "licensed"
+          },
+          "quantity": 1,
+          "schedule": null,
+          "start_date": 1708737423,
+          "status": "trialing",
+          "test_clock": null,
+          "transfer_data": null,
+          "trial_end": 1711329423,
+          "trial_settings": {
+            "end_behavior": {
+              "missing_payment_method": "cancel"
+            }
+          },
+          "trial_start": 1708737423
+        }
+  recorded_at: Sat, 24 Feb 2024 01:17:03 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/prices/price_1OdkCHBLjyMcgacQoXsoA2v0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/10.10.0
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_iCyMrxbmp0vynN","request_duration_ms":961}}'
+      Stripe-Version:
+      - '2023-10-16'
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"10.10.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-2.local 23.3.0 Darwin Kernel Version 23.3.0: Wed Dec 20 21:30:59 PST
+        2023; root:xnu-10002.81.5~7/RELEASE_ARM64_T6030 arm64","hostname":"fwank-2.local"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 24 Feb 2024 01:17:04 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -164,7 +395,7 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Request-Id:
-      - req_ygVjftTCbBgCmQ
+      - req_6Twq35ATJWoGnE
       Stripe-Version:
       - '2023-10-16'
       Vary:
@@ -203,13 +434,13 @@ http_interactions:
           "unit_amount": 300,
           "unit_amount_decimal": "300"
         }
-  recorded_at: Fri, 23 Feb 2024 17:34:39 GMT
+  recorded_at: Sat, 24 Feb 2024 01:17:04 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/checkout/sessions
     body:
       encoding: UTF-8
-      string: mode=subscription&customer=cus_PcHCdF1h13EJCK&billing_address_collection=required&line_items[0][quantity]=1&line_items[0][price]=price_1OdkCHBLjyMcgacQoXsoA2v0&success_url=http%3A%2F%2Flocalhost%3A3000%2Fsettings%2Fbilling_information%3Fsession_id%3D%7BCHECKOUT_SESSION_ID%7D&cancel_url=http%3A%2F%2Flocalhost%3A3000%2Fsettings%2Fbilling_information
+      string: mode=subscription&customer=cus_PcOeZieF0nnZ9t&billing_address_collection=required&line_items[0][quantity]=1&line_items[0][price]=price_1OdkCHBLjyMcgacQoXsoA2v0&success_url=http%3A%2F%2Flocalhost%3A3000%2Fsettings%2Fbilling_information%3Fsession_id%3D%7BCHECKOUT_SESSION_ID%7D&cancel_url=http%3A%2F%2Flocalhost%3A3000%2Fsettings%2Fbilling_information
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/10.10.0
@@ -218,7 +449,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_ygVjftTCbBgCmQ","request_duration_ms":158}}'
+      - '{"last_request_metrics":{"request_id":"req_6Twq35ATJWoGnE","request_duration_ms":227}}'
       Stripe-Version:
       - '2023-10-16'
       X-Stripe-Client-User-Agent:
@@ -237,7 +468,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 23 Feb 2024 17:34:39 GMT
+      - Sat, 24 Feb 2024 01:17:04 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -262,11 +493,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - f30e43fd-4d64-43d6-afb8-adf8ebdfcb45
+      - abbb892e-c08c-4b80-b4a9-1dbe0d019a1c
       Original-Request:
-      - req_cvrDWxue24epiJ
+      - req_nt6qqdPpZ5emDt
       Request-Id:
-      - req_cvrDWxue24epiJ
+      - req_nt6qqdPpZ5emDt
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -281,7 +512,7 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cs_test_a1nXONBsxTTGibTzdMUNwCK353TpDz0fymLtoSJbUsOXTeb3lVUTip9VPX",
+          "id": "cs_test_a1JwJUbG9lfPoEIbB4g4WuE1iWaV8s45wDoWtJ2tZLhWlULXKY38ixaurS",
           "object": "checkout.session",
           "after_expiration": null,
           "allow_promotion_codes": null,
@@ -298,7 +529,7 @@ http_interactions:
           "client_secret": null,
           "consent": null,
           "consent_collection": null,
-          "created": 1708709679,
+          "created": 1708737424,
           "currency": "usd",
           "currency_conversion": null,
           "custom_fields": [],
@@ -308,7 +539,7 @@ http_interactions:
             "submit": null,
             "terms_of_service_acceptance": null
           },
-          "customer": "cus_PcHCdF1h13EJCK",
+          "customer": "cus_PcOeZieF0nnZ9t",
           "customer_creation": null,
           "customer_details": {
             "address": null,
@@ -319,7 +550,7 @@ http_interactions:
             "tax_ids": null
           },
           "customer_email": null,
-          "expires_at": 1708796079,
+          "expires_at": 1708823824,
           "invoice": null,
           "invoice_creation": null,
           "livemode": false,
@@ -354,7 +585,7 @@ http_interactions:
             "amount_tax": 0
           },
           "ui_mode": "hosted",
-          "url": "https://checkout.stripe.com/c/pay/cs_test_a1nXONBsxTTGibTzdMUNwCK353TpDz0fymLtoSJbUsOXTeb3lVUTip9VPX#fid2cGd2ZndsdXFsamtQa2x0cGBrYHZ2QGtkZ2lgYSc%2FY2RpdmApJ2R1bE5gfCc%2FJ3VuWnFgdnFaMDRKVm11bUdJb3xIZmJkZlRAYDF8V3NhPWFzXFVzV3VPR0RsXHZfcTJXXEw9U0p8VDNgUE1%2FS0tRX3xTTDQyPGNtNUBzV01fV1FXUTE2bGBxd2Izc05Ka0E1NUltTDZtbDdzJyknY3dqaFZgd3Ngdyc%2FcXdwYCknaWR8anBxUXx1YCc%2FJ3Zsa2JpYFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl"
+          "url": "https://checkout.stripe.com/c/pay/cs_test_a1JwJUbG9lfPoEIbB4g4WuE1iWaV8s45wDoWtJ2tZLhWlULXKY38ixaurS#fid2cGd2ZndsdXFsamtQa2x0cGBrYHZ2QGtkZ2lgYSc%2FY2RpdmApJ2R1bE5gfCc%2FJ3VuWnFgdnFaMDRKVm11bUdJb3xIZmJkZlRAYDF8V3NhPWFzXFVzV3VPR0RsXHZfcTJXXEw9U0p8VDNgUE1%2FS0tRX3xTTDQyPGNtNUBzV01fV1FXUTE2bGBxd2Izc05Ka0E1NUltTDZtbDdzJyknY3dqaFZgd3Ngdyc%2FcXdwYCknaWR8anBxUXx1YCc%2FJ3Zsa2JpYFpscWBoJyknYGtkZ2lgVWlkZmBtamlhYHd2Jz9xd3BgeCUl"
         }
-  recorded_at: Fri, 23 Feb 2024 17:34:39 GMT
+  recorded_at: Sat, 24 Feb 2024 01:17:04 GMT
 recorded_with: VCR 6.2.0

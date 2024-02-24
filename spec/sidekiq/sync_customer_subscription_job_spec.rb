@@ -17,7 +17,8 @@ RSpec.describe SyncCustomerSubscriptionJob, type: :job, vcr: true do
       expect(Company.count).to eq(1)
 
       company = Company.first
-      expect_any_instance_of(Company).to receive(:subscription).and_return(nil)
+
+      expect_any_instance_of(Company).to receive(:stripe_subscription).and_return(nil)
       expect_any_instance_of(Company).to_not receive(:memberships)
 
       SyncCustomerSubscriptionJob.perform_inline(company.id)

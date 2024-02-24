@@ -5,8 +5,6 @@ class SyncCustomerSubscriptionJob
     company = Company.find_by!(id: id)
     return if company.blank?
 
-    company.create_subscription if company.subscription.blank?
-
     # TODO: when there's a free trial, we'll check the trial's expiration here
     stripe_subscription = company.stripe_subscription
     return if stripe_subscription.blank?
