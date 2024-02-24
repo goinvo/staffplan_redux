@@ -2,6 +2,7 @@ class Registration < ApplicationRecord
   belongs_to :user, optional: true
 
   validates :name, presence: true
+  validates :company_name, presence: true
   validates :email, presence: true
   validates :expires_at, presence: true
   validates :token_digest, presence: true
@@ -35,6 +36,7 @@ class Registration < ApplicationRecord
     raise RegistrationNotAvailableError if registered?
 
     CreateNewCompany.new(
+      company_name:,
       email:,
       name:,
       registration_id: id

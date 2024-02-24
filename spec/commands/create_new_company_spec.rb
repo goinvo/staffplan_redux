@@ -7,6 +7,7 @@ RSpec.describe CreateNewCompany do
       expect(CreateStripeCustomerJob).to receive(:perform_async)
       expect {
         CreateNewCompany.new(
+          company_name: registration.company_name,
           email: registration.email,
           name: registration.name,
           registration_id: registration.id
@@ -19,6 +20,7 @@ RSpec.describe CreateNewCompany do
       expect(CreateStripeCustomerJob).to receive(:perform_async)
       expect {
         CreateNewCompany.new(
+          company_name: registration.company_name,
           email: registration.email,
           name: registration.name,
           registration_id: registration.id
@@ -30,19 +32,21 @@ RSpec.describe CreateNewCompany do
       registration = create(:registration)
       expect(CreateStripeCustomerJob).to receive(:perform_async)
       CreateNewCompany.new(
+        company_name: registration.company_name,
         email: registration.email,
         name: registration.name,
         registration_id: registration.id
       ).call
       user = registration.reload.user
       expect(user.companies.length).to eq(1)
-      expect(user.companies.first.name).to match(user.name)
+      expect(user.companies.first.name).to match(registration.company_name)
     end
 
     it "sets the user's name and email from the registration" do
       registration = create(:registration)
       expect(CreateStripeCustomerJob).to receive(:perform_async)
       CreateNewCompany.new(
+        company_name: registration.company_name,
         email: registration.email,
         name: registration.name,
         registration_id: registration.id
@@ -55,6 +59,7 @@ RSpec.describe CreateNewCompany do
       registration = create(:registration)
       expect(CreateStripeCustomerJob).to receive(:perform_async)
       CreateNewCompany.new(
+        company_name: registration.company_name,
         email: registration.email,
         name: registration.name,
         registration_id: registration.id
@@ -66,6 +71,7 @@ RSpec.describe CreateNewCompany do
       registration = create(:registration)
       expect(CreateStripeCustomerJob).to receive(:perform_async)
       CreateNewCompany.new(
+        company_name: registration.company_name,
         email: registration.email,
         name: registration.name,
         registration_id: registration.id
@@ -77,6 +83,7 @@ RSpec.describe CreateNewCompany do
       registration = create(:registration)
       expect(CreateStripeCustomerJob).to receive(:perform_async)
       CreateNewCompany.new(
+        company_name: registration.company_name,
         email: registration.email,
         name: registration.name,
         registration_id: registration.id
@@ -89,6 +96,7 @@ RSpec.describe CreateNewCompany do
       expect(CreateStripeCustomerJob).to receive(:perform_async)
 
       command = CreateNewCompany.new(
+        company_name: registration.company_name,
         email: registration.email,
         name: registration.name,
         registration_id: registration.id

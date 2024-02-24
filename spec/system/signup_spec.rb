@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe "Signing up for StaffPlan", type: :system, vcr: true do
   context "when registering for StaffPlan" do
     describe "the registration form" do
-      it "has a name and email field" do
+      it "has a company name, name, and email field" do
         visit new_registration_path
+        expect(page).to have_field("registration[company_name]")
         expect(page).to have_field("registration[name]")
         expect(page).to have_field("registration[email]")
       end
@@ -15,17 +16,19 @@ RSpec.describe "Signing up for StaffPlan", type: :system, vcr: true do
       # declare themselves as required.
       it "requires a name" do
         visit new_registration_path
+        fill_in "registration[company_name]", with: Faker::Company.name
         fill_in "registration[name]", with: ""
         fill_in "registration[email]", with: Faker::Internet.email
 
         click_button "Create account"
 
-        expect(page).to have_content("What should we call you?")
+        expect(page).to have_content("What's your name? You'll be the first person in your new account, you can add co-workers later.")
         expect(page).to have_css("input.text-red-900")
       end
 
       it "requires an email" do
         visit new_registration_path
+        fill_in "registration[company_name]", with: Faker::Company.name
         fill_in "registration[name]", with: Faker::Name.name
         fill_in "registration[email]", with: ""
 
@@ -39,6 +42,7 @@ RSpec.describe "Signing up for StaffPlan", type: :system, vcr: true do
     describe "when providing valid information" do
       it "should create a new registration" do
         visit new_registration_path
+        fill_in "registration[company_name]", with: Faker::Company.name
         fill_in "registration[name]", with: Faker::Name.name
         fill_in "registration[email]", with: Faker::Internet.email
 
@@ -54,6 +58,7 @@ RSpec.describe "Signing up for StaffPlan", type: :system, vcr: true do
 
       it "should send the user an email with a link to confirm their account" do
         visit new_registration_path
+        fill_in "registration[company_name]", with: Faker::Company.name
         fill_in "registration[name]", with: Faker::Name.name
         fill_in "registration[email]", with: Faker::Internet.email
 
@@ -70,6 +75,7 @@ RSpec.describe "Signing up for StaffPlan", type: :system, vcr: true do
 
       it "should redirect the user to the sign in page" do
         visit new_registration_path
+        fill_in "registration[company_name]", with: Faker::Company.name
         fill_in "registration[name]", with: Faker::Name.name
         fill_in "registration[email]", with: Faker::Internet.email
 
@@ -80,6 +86,7 @@ RSpec.describe "Signing up for StaffPlan", type: :system, vcr: true do
 
       it "should show the user a message that they need to check their email" do
         visit new_registration_path
+        fill_in "registration[company_name]", with: Faker::Company.name
         fill_in "registration[name]", with: Faker::Name.name
         fill_in "registration[email]", with: Faker::Internet.email
 
