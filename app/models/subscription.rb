@@ -11,4 +11,20 @@ class Subscription < ApplicationRecord
   belongs_to :company
 
   validates :status, presence: true, inclusion: { in: [INCOMPLETE, INCOMPLETE_EXPIRED, TRIALING, ACTIVE, PAST_DUE, CANCELED, UNPAID] }
+
+  def active?
+    status == ACTIVE
+  end
+
+  def canceled?
+    status == CANCELED
+  end
+
+  def trialing?
+    status == TRIALING && default_payment_method.blank?
+  end
+
+  def trialing_with_payment_method?
+    status == TRIALING && default_payment_method.present?
+  end
 end

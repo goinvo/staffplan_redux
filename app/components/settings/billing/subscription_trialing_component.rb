@@ -1,6 +1,6 @@
 module Settings
   module Billing
-    class NeedsSubscriptionComponent < ViewComponent::Base
+    class SubscriptionTrialingComponent < ViewComponent::Base
       def initialize(company:)
         @company = company
       end

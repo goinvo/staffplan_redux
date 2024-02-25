@@ -1,6 +1,10 @@
 <% # TODO: make this switch based on the status and payment method presence. Need to handle trialing, trialing with payment method, canceled, active to start. %>
-<% if current_company.subscription.default_payment_method.blank? %>
-  <%= render(Settings::Billing::NeedsSubscriptionComponent.new(company: current_company)) %>
-<% else %>
-  <%= render(Settings::Billing::SubscriptionDetailsComponent.new(company: current_company)) %>
+<% if current_company.subscription.trialing? %>
+  <%= render(Settings::Billing::SubscriptionTrialingComponent.new(company: current_company)) %>
+<% elsif current_company.subscription.trialing_with_payment_method? %>
+  <%= render(Settings::Billing::SubscriptionTrialingWithPaymentMethodComponent.new(company: current_company)) %>
+<% elsif current_company.subscription.active? %>
+  <%= render(Settings::Billing::SubscriptionActiveComponent.new(company: current_company)) %>
+<% elsif current_company.subscription.canceled? %>
+  <%= render(Settings::Billing::SubscriptionCanceledComponent.new(company: current_company)) %>
 <% end %>
