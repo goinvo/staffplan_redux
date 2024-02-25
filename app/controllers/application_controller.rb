@@ -2,10 +2,19 @@ class ApplicationController < ActionController::Base
   include Passwordless::ControllerHelpers
 
   helper_method :current_user
+  before_action :check_subscription_status
 
   layout :choose_layout
 
   private
+
+  def check_subscription_status
+    return if current_company.blank?
+    return unless current_company.subscription.canceled?
+
+    # TODO: make this link allow the user to update their subscription status too
+    flash[:error] = 'Your subscription has expired. Please <a style="text-decoration-line: underline;" href="/settings/subscription/new">update your payment information</a> to continue using StaffPlan.'.html_safe
+  end
 
   def choose_layout
     current_user.blank? ? 'public' : 'application'
