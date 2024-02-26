@@ -36,10 +36,4 @@ class Settings::SubscriptionsController < ApplicationController
 
     redirect_to session.url, status: 303, allow_other_host: true
   end
-  def destroy
-    Stripe::Subscription.cancel(current_company.subscription.stripe_id)
-
-    flash[:success] = "Your subscription has been cancelled."
-    redirect_to settings_path
-  end
 end

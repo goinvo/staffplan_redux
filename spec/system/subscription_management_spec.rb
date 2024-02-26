@@ -86,43 +86,4 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
       expect(page).to have_text("Your StaffPlan subscription comes with no cap on the number of clients or projects that you can track")
     end
   end
-
-  describe "cancelling a subscription" do
-    it "cancels the subscription" do
-      registration = create(:registration)
-      registration.register!
-      user = registration.reload.user
-      passwordless_sign_in(user)
-
-      expect(user.companies.length).to eq(1)
-      company = user.companies.first
-
-      company.subscription.update(
-        status: 'trialing',
-        trial_end: 30.days.from_now,
-        stripe_id: Faker::Alphanumeric.alpha(number: 10),
-        stripe_price_id: Faker::Alphanumeric.alpha(number: 10),
-        customer_name: company.name,
-        customer_email: user.email,
-        plan_amount: 300,
-        quantity: 1,
-        item_id: Faker::Alphanumeric.alpha(number: 10),
-        default_payment_method: Faker::Alphanumeric.alpha(number: 10),
-        current_period_start: 60.minutes.ago,
-        current_period_end: 30.days.from_now,
-        credit_card_brand: 'visa',
-        credit_card_last_four: '4242',
-        credit_card_exp_month: '12',
-        credit_card_exp_year: '29'
-      )
-
-      visit settings_billing_information_url
-      expect(Stripe::Subscription).to receive(:cancel).with(company.subscription.stripe_id)
-      click_button "Cancel my subscription"
-
-      company.subscription.update(status: 'canceled')
-      visit settings_billing_information_url # janky, to get the page to reload
-      expect(page).to have_text("Your StaffPlan subscription has been canceled.")
-    end
-  end
 end

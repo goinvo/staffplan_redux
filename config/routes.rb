@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   resource :settings, only: [:show, :update], controller: "settings" do
     resource :billing_information, only: [:show, :edit, :update], controller: "settings/billing_information"
-    resource :subscription, only: [:new, :destroy], controller: "settings/subscriptions"
+    resource :subscription, only: [:new], controller: "settings/subscriptions"
     resources :users, controller: "settings/users", except: [:destroy] do
       member do
         post :toggle_status
