@@ -22,9 +22,6 @@ class CreateNewCompany
 
   def create_company_record
     @company = Company.create(name: @company_name)
-    # these values will be overwritten by the webhook, but set them here so the page
-    # can render before the webhook is received
-    @company.create_subscription(status: "trialing", trial_end: 30.days.from_now)
   end
 
   def add_initial_owner
