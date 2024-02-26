@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Parker+Group+2+%7C+Toni+Gerlach+DC+2&email=2rene_effertz%40hilpert-connelly.test
+      string: name=static+company+name+%7C+static+name&email=something%40static.com
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/10.10.0
@@ -13,8 +13,6 @@ http_interactions:
       - Bearer <BEARER_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
-      X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_lpWyj6AYIEoKfl","request_duration_ms":153}}'
       Stripe-Version:
       - '2023-10-16'
       X-Stripe-Client-User-Agent:
@@ -33,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 24 Feb 2024 21:08:38 GMT
+      - Mon, 26 Feb 2024 00:43:53 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '679'
+      - '663'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -58,11 +56,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - 67ea5df0-77fe-4e89-bf57-566c5b85b8cd
+      - 0a7d57b0-a894-4130-9535-cc1f418b3285
       Original-Request:
-      - req_jHPT8oPWsPHJXl
+      - req_lKGC8VIGWkYlOz
       Request-Id:
-      - req_jHPT8oPWsPHJXl
+      - req_lKGC8VIGWkYlOz
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -77,18 +75,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_Pchsjywu9mYpQX",
+          "id": "cus_Pd8ZkMTFPagA4S",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1708808917,
+          "created": 1708908233,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
-          "email": "2rene_effertz@hilpert-connelly.test",
-          "invoice_prefix": "8EFEC55D",
+          "email": "something@static.com",
+          "invoice_prefix": "EAFDB5E3",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -97,7 +95,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Parker Group 2 | Toni Gerlach DC 2",
+          "name": "static company name | static name",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -105,13 +103,13 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Sat, 24 Feb 2024 21:08:37 GMT
+  recorded_at: Mon, 26 Feb 2024 00:43:53 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/subscriptions
     body:
       encoding: UTF-8
-      string: customer=cus_Pchsjywu9mYpQX&items[0][price]=price_1OdkCHBLjyMcgacQoXsoA2v0&items[0][quantity]=1&trial_period_days=30&trial_settings[end_behavior][missing_payment_method]=cancel&payment_settings[save_default_payment_method]=on_subscription
+      string: customer=cus_Pd8ZkMTFPagA4S&items[0][price]=price_1OdkCHBLjyMcgacQoXsoA2v0&items[0][quantity]=1&trial_period_days=30&trial_settings[end_behavior][missing_payment_method]=cancel&payment_settings[save_default_payment_method]=on_subscription
     headers:
       User-Agent:
       - Stripe/v1 RubyBindings/10.10.0
@@ -120,7 +118,7 @@ http_interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_jHPT8oPWsPHJXl","request_duration_ms":246}}'
+      - '{"last_request_metrics":{"request_id":"req_lKGC8VIGWkYlOz","request_duration_ms":319}}'
       Stripe-Version:
       - '2023-10-16'
       X-Stripe-Client-User-Agent:
@@ -139,7 +137,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sat, 24 Feb 2024 21:08:38 GMT
+      - Mon, 26 Feb 2024 00:43:54 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -164,11 +162,11 @@ http_interactions:
         default-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none';
         img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'
       Idempotency-Key:
-      - 1b9ce32f-b3e8-4b5a-bb36-84b84dd511bd
+      - 6cb9a5c7-18a7-492b-99cb-3aa43356fcaa
       Original-Request:
-      - req_480VhcEZEzLjkD
+      - req_MHYU4QtA0lVssv
       Request-Id:
-      - req_480VhcEZEzLjkD
+      - req_MHYU4QtA0lVssv
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
@@ -183,7 +181,7 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "sub_1OnSSYBLjyMcgacQ5Wzk77N5",
+          "id": "sub_1OnsIQBLjyMcgacQ6A3JiYZY",
           "object": "subscription",
           "application": null,
           "application_fee_percent": null,
@@ -191,7 +189,7 @@ http_interactions:
             "enabled": false,
             "liability": null
           },
-          "billing_cycle_anchor": 1711400918,
+          "billing_cycle_anchor": 1711500234,
           "billing_cycle_anchor_config": null,
           "billing_thresholds": null,
           "cancel_at": null,
@@ -203,11 +201,11 @@ http_interactions:
             "reason": null
           },
           "collection_method": "charge_automatically",
-          "created": 1708808918,
+          "created": 1708908234,
           "currency": "usd",
-          "current_period_end": 1711400918,
-          "current_period_start": 1708808918,
-          "customer": "cus_Pchsjywu9mYpQX",
+          "current_period_end": 1711500234,
+          "current_period_start": 1708908234,
+          "customer": "cus_Pd8ZkMTFPagA4S",
           "days_until_due": null,
           "default_payment_method": null,
           "default_source": null,
@@ -225,10 +223,10 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "si_Pchsy3yPeV5SYa",
+                "id": "si_Pd8Zvs3ZlAfurx",
                 "object": "subscription_item",
                 "billing_thresholds": null,
-                "created": 1708808918,
+                "created": 1708908234,
                 "metadata": {},
                 "plan": {
                   "id": "price_1OdkCHBLjyMcgacQoXsoA2v0",
@@ -279,15 +277,15 @@ http_interactions:
                   "unit_amount_decimal": "300"
                 },
                 "quantity": 1,
-                "subscription": "sub_1OnSSYBLjyMcgacQ5Wzk77N5",
+                "subscription": "sub_1OnsIQBLjyMcgacQ6A3JiYZY",
                 "tax_rates": []
               }
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/subscription_items?subscription=sub_1OnSSYBLjyMcgacQ5Wzk77N5"
+            "url": "/v1/subscription_items?subscription=sub_1OnsIQBLjyMcgacQ6A3JiYZY"
           },
-          "latest_invoice": "in_1OnSSYBLjyMcgacQLOcwPIcd",
+          "latest_invoice": "in_1OnsIQBLjyMcgacQZxzEXfvd",
           "livemode": false,
           "metadata": {},
           "next_pending_invoice_item_invoice": null,
@@ -299,7 +297,7 @@ http_interactions:
             "save_default_payment_method": "on_subscription"
           },
           "pending_invoice_item_interval": null,
-          "pending_setup_intent": "seti_1OnSSYBLjyMcgacQLSvT6E9d",
+          "pending_setup_intent": "seti_1OnsIQBLjyMcgacQ1YUVlLSB",
           "pending_update": null,
           "plan": {
             "id": "price_1OdkCHBLjyMcgacQoXsoA2v0",
@@ -324,17 +322,17 @@ http_interactions:
           },
           "quantity": 1,
           "schedule": null,
-          "start_date": 1708808918,
+          "start_date": 1708908234,
           "status": "trialing",
           "test_clock": null,
           "transfer_data": null,
-          "trial_end": 1711400918,
+          "trial_end": 1711500234,
           "trial_settings": {
             "end_behavior": {
               "missing_payment_method": "cancel"
             }
           },
-          "trial_start": 1708808918
+          "trial_start": 1708908234
         }
-  recorded_at: Sat, 24 Feb 2024 21:08:38 GMT
+  recorded_at: Mon, 26 Feb 2024 00:43:54 GMT
 recorded_with: VCR 6.2.0

@@ -17,7 +17,7 @@ class Subscription < ApplicationRecord
   end
 
   def canceled?
-    status == CANCELED
+    status == CANCELED || canceled_at.present?
   end
 
   def trialing?
@@ -26,5 +26,9 @@ class Subscription < ApplicationRecord
 
   def trialing_with_payment_method?
     status == TRIALING && default_payment_method.present?
+  end
+
+  def can_be_resumed?
+    canceled? && current_period_end > Time.now.utc
   end
 end

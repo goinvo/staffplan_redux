@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_24_195236) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_26_013319) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -117,6 +117,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_195236) do
     t.datetime "trial_end"
     t.string "item_id"
     t.string "default_payment_method"
+    t.datetime "canceled_at", precision: nil
     t.index ["company_id"], name: "index_subscriptions_on_company_id"
   end
 

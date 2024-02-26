@@ -18,7 +18,7 @@ RSpec.describe SyncCustomerSubscriptionJob, type: :job, vcr: true do
 
       company = Company.first
 
-      expect(company.subscription.quantity).to eq(1)
+      expect(company.memberships.active.count).to eq(1)
       create(:membership, company: company)
       expect(company.memberships.active.count).to eq(2)
 

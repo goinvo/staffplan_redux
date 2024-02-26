@@ -2,7 +2,6 @@
 
 <div class="bg-white p-4 mt-4">
   <main class="mx-auto max-w-2xl pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
-    <h1>SubscriptionActiveComponent</h1>
     <section aria-labelledby="subscription-heading" class="mt-6">
       <h2 id="subscription-heading" class="sr-only">Products purchased</h2>
 
@@ -91,13 +90,9 @@
       <h2 id="cancel-subscription" class="sr-only">Cancel Subscription</h2>
 
       <div class="px-4 py-6 sm:rounded-lg sm:px-6 lg:gap-x-8 lg:px-8 lg:py-8 text-center">
-        Not happy with StaffPlan? We're sorry to see you go. You can cancel your subscription at any time, no questions asked.
+        Not happy with StaffPlan? We would be sorry to see you go. You can cancel your subscription at any time, no questions asked.
 
-        <%= button_to "Cancel my subscription",
-                    settings_subscription_path,
-                    method: :delete,
-                    data: { turbo_method: :delete },
-                    class: "mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+        <%= link_to "Manage StaffPlan Subscription", Rails.application.credentials.stripe_customer_portal_url, class: "mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
       </div>
     </section>
 

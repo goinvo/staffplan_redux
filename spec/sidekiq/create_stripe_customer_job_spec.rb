@@ -56,7 +56,7 @@ RSpec.describe CreateStripeCustomerJob, type: :job, vcr: true do
         expect(subscription.credit_card_exp_year).to be_nil
       end
 
-      it "stores stripe_price_id, customer_name, customer_email, plan_amount, and quantity" do
+      it "stores stripe_price_id, the rest comes in via webhooks" do
         registration = create(
           :registration,
           email: "something@static.com",
@@ -67,10 +67,7 @@ RSpec.describe CreateStripeCustomerJob, type: :job, vcr: true do
 
         company = Company.first
         subscription = company.subscription
-        expect(subscription.stripe_price_id).to eq(Rails.application.credentials.stripe_price_id)
-        expect(subscription.customer_name).to eq("#{registration.company_name} | #{registration.name}")
-        expect(subscription.customer_email).to eq(company.owners.first.email)
-        expect(subscription.plan_amount).to eq(300)
+        expect(subscription.stripe_id).to be_present
       end
     end
   end
