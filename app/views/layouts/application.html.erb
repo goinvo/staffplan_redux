@@ -25,9 +25,9 @@
               <div class="hidden md:block">
                 <div class="ml-10 flex items-baseline space-x-4">
                   <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                  <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" onclick="alert('Assumption: this will render the current user StaffPlan view'); return false;">My StaffPlan</a>
+                  <a href="https://staffplan-ui.fermion.dev/me" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My StaffPlan</a>
                   <%= header_link_to "Clients", clients_path %>
-                  <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" onclick="alert('Assumption: this will render the projects StaffPlan view'); return false;">Projects</a>
+                  <a href="https://staffplan-ui.fermion.dev/projects" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
                   <% if current_user.owner?(company: current_company) %>
                     <%= header_link_to "Settings", settings_path %>
                   <% end %>
@@ -96,9 +96,9 @@
         <!-- Mobile menu, show/hide based on menu state. -->
         <div class="border-b border-gray-700 md:hidden hidden" id="mobile-menu">
           <div class="space-y-1 px-2 py-3 sm:px-3">
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" onclick="alert('Assumption: this will render the current user StaffPlan view'); return false;">My StaffPlan</a>
+            <a href="https://staffplan-ui.fermion.dev/me" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">My StaffPlan</a>
             <%= mobile_header_link_to "Clients", clients_path %>
-            <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium" onclick="alert('Assumption: this will render the projects StaffPlan view'); return false;">Projects</a>
+            <a href="https://staffplan-ui.fermion.dev/projects" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
             <% if current_user.owner?(company: current_company) %>
               <%= mobile_header_link_to "Settings", settings_path %>
             <% end %>
