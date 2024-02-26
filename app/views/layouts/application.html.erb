@@ -28,7 +28,7 @@
                   <a href="https://staffplan-ui.fermion.dev/me" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My StaffPlan</a>
                   <%= header_link_to "Clients", clients_path %>
                   <a href="https://staffplan-ui.fermion.dev/projects" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
-                  <% if current_user.owner?(company: current_company) || current_user.owner?(company: current_company) %>
+                  <% if current_user.owner?(company: current_company) || current_user.admin?(company: current_company) %>
                     <%= header_link_to "Settings", settings_path %>
                   <% end %>
                 </div>
@@ -99,7 +99,7 @@
             <a href="https://staffplan-ui.fermion.dev/me" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">My StaffPlan</a>
             <%= mobile_header_link_to "Clients", clients_path %>
             <a href="https://staffplan-ui.fermion.dev/projects" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-            <% if current_user.owner?(company: current_company) || current_user.owner?(company: current_company) %>
+            <% if current_user.owner?(company: current_company) || current_user.admin?(company: current_company) %>
               <%= mobile_header_link_to "Settings", settings_path %>
             <% end %>
           </div>
