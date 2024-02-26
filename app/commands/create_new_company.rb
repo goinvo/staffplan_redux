@@ -1,8 +1,9 @@
 class CreateNewCompany
 
-  attr_reader :email, :user, :registration_id, :company, :user
+  attr_reader :company_name, :email, :user, :registration_id, :company, :user
 
-  def initialize(email:, name:, registration_id:)
+  def initialize(company_name:, email:, name:, registration_id:)
+    @company_name = company_name
     @email = email
     @name = name
     @registration_id = registration_id
@@ -20,7 +21,7 @@ class CreateNewCompany
   private
 
   def create_company_record
-    @company = Company.create(name: "#{@name}'s' Company")
+    @company = Company.create(name: @company_name)
   end
 
   def add_initial_owner

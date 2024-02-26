@@ -5,17 +5,20 @@ class Company < ApplicationRecord
   has_many :projects, through: :clients
   has_many :work_weeks, through: :projects
   has_many :assignments, through: :projects
+  has_one :subscription
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-  def active_users
-    users.joins(:memberships).where(memberships: { status: Membership::ACTIVE })
+  before_create :build_default_subscription
+
+  def build_default_subscription
+    # these values will be overwritten by the webhook, but set them here so the page
+    # can render before the webhook is received
+    build_subscription(status: "trialing", trial_end: 30.days.from_now)
   end
 
-  def subscription
-    @_subscription if defined?(@_subscription)
-
-    @_subscription = Stripe::Subscription.list({ customer: stripe_id }).first
+  def active_users
+    users.joins(:memberships).where(memberships: { status: Membership::ACTIVE })
   end
 
   def owners

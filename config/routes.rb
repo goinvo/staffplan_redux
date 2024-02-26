@@ -38,16 +38,16 @@ Rails.application.routes.draw do
 
   resource :settings, only: [:show, :update], controller: "settings" do
     resource :billing_information, only: [:show, :edit, :update], controller: "settings/billing_information"
-    resource :subscription, only: [:new, :destroy], controller: "settings/subscriptions" do
-      member do
-        post :create_checkout_session
-      end
-    end
+    resource :subscription, only: [:new], controller: "settings/subscriptions"
     resources :users, controller: "settings/users", except: [:destroy] do
       member do
         post :toggle_status
       end
     end
+  end
+
+  namespace :webhooks do
+    resource :stripe, only: [:create], controller: "stripe"
   end
 
   root "dashboard#show"

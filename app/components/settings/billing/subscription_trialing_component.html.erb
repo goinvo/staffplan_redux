@@ -4,9 +4,12 @@
   <div class="bg-white py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto max-w-4xl sm:text-center">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Simple no-tricks pricing</h2>
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Your free trial of StaffPlan is active!</h2>
         <p class="mt-6 text-lg leading-8 text-gray-600">
-          StaffPlan costs $3 per month, per user. There are no hidden fees or extra charges.
+          Your free trial has no limitations. You can use all features and invite as many team members as you want. When your trial is up, you will be asked to enter your payment details to continue using StaffPlan.
+        </p>
+        <p class="mt-6 p-6 text-s leading-5 text-white bg-indigo-700/50">
+          Your trial ends in <%= distance_of_time_in_words(Date.today, subscription.trial_end) %>
         </p>
       </div>
       <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
@@ -56,17 +59,27 @@
                 <span class="text-5xl font-bold tracking-tight text-gray-900">$3</span>
                 <span class="text-sm font-semibold leading-6 tracking-wide text-gray-600">USD</span>
               </p>
-              <%= link_to "Get access",
+              <%= link_to "Provide payment details",
                           new_settings_subscription_path,
                           class: "mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                           data: { turbo: "false" } %>
+
               <p class="mt-6 text-xs leading-5 text-gray-600">
-                Invoices and receipts available for easy company reimbursement.
+                You won't be charged until your trial ends.
               </p>
             </div>
           </div>
         </div>
       </div>
+      <section aria-labelledby="cancel-subscription" class="mt-16">
+        <h2 id="cancel-subscription" class="sr-only">Cancel Subscription</h2>
+
+        <div class="px-4 py-6 sm:rounded-lg sm:px-6 lg:gap-x-8 lg:px-8 lg:py-8 text-center">
+          Not happy with StaffPlan? We would be sorry to see you go. You can cancel your subscription at any time, no questions asked.
+
+          <%= link_to "Manage StaffPlan Subscription", Rails.application.credentials.stripe_customer_portal_url, class: "mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+        </div>
+      </section>
     </div>
   </div>
 </div>

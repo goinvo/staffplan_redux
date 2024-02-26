@@ -88,7 +88,8 @@ FactoryBot.define do
   end
 
   factory :registration do
-    sequence(:name) { |n| "#{Faker::Company.name} #{n}" }
+    sequence(:company_name) { |n| "#{Faker::Company.name} #{n}" }
+    sequence(:name) { |n| "#{Faker::Name.name} #{n}" }
     sequence(:email) { |n| "#{n}#{Faker::Internet.email}" }
     expires_at { 1.week.from_now }
     ip_address { Faker::Internet.ip_v4_address }

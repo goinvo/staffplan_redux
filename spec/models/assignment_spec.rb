@@ -20,7 +20,7 @@ RSpec.describe Assignment, type: :model do
 
   context "starts_on and ends_on" do
     it "does not allow starts_on to be after ends_on" do
-      assignment = build(:assignment, starts_on: Date.today, ends_on: Date.yesterday)
+      assignment = build(:assignment, starts_on: Date.today, ends_on: 3.days.ago.to_date)
       expect(assignment).to_not be_valid
       expect(assignment.errors[:starts_on]).to include("can't be after the assignment ends")
     end
