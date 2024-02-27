@@ -153,20 +153,39 @@ type Project {
 }
 
 type Query {
+  """
+  Fetches all clients for the current company.
+  """
   clients: [Client!]!
+
+  """
+  Fetches all assignments for the company's projects.
+  """
   projectAssignments(
     """
-    ID of the project to fetch assignments for.
+    Optional: ID of the company's project to fetch assignments for.
     """
     projectId: ID!
   ): [Assignment!]!
+
+  """
+  Fetches all projects for the current company.
+  """
+  projects: [Project!]!
+
+  """
+  Fetches all of the project assignments for the current user.
+  """
   userAssignments(
     """
-    ID of the user to fetch assignments for. The current user's assignments will
-    be returned if this argument is not provided.
+    Optional: ID of the user to fetch assignments for.
     """
     userId: ID
   ): [Assignment!]!
+
+  """
+  Fetches all users for the current company.
+  """
   users: [User!]!
 }
 
