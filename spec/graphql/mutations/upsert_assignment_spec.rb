@@ -13,7 +13,7 @@ RSpec.describe Mutations::UpsertAssignment do
             project {
               id
             }
-            user {
+            assignedUser {
               id
             }  
             status
@@ -42,7 +42,7 @@ RSpec.describe Mutations::UpsertAssignment do
       post_result = result["data"]["upsertAssignment"]
       expect(result["errors"]).to be_nil
       expect(post_result["project"]["id"]).to eq(project.id.to_s)
-      expect(post_result["user"]["id"]).to eq(user.id.to_s)
+      expect(post_result["assignedUser"]["id"]).to eq(user.id.to_s)
       expect(post_result["status"]).to eq(Assignment::PROPOSED)
       expect(post_result["startsOn"]).to be_nil
       expect(post_result["endsOn"]).to be_nil
@@ -56,7 +56,7 @@ RSpec.describe Mutations::UpsertAssignment do
             project {
               id
             }
-            user {
+            assignedUser {
               id
             }  
             status
@@ -100,7 +100,7 @@ RSpec.describe Mutations::UpsertAssignment do
             project {
               id
             }
-            user {
+            assignedUser {
               id
             }  
             status
@@ -143,7 +143,7 @@ RSpec.describe Mutations::UpsertAssignment do
             project {
               id
             }
-            user {
+            assignedUser {
               id
             }  
             status
