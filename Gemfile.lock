@@ -183,7 +183,7 @@ GEM
     passwordless (1.2.0)
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
-    pg (1.5.4)
+    pg (1.5.5)
     psych (5.1.2)
       stringio
     public_suffix (5.0.4)
@@ -348,7 +348,7 @@ DEPENDENCIES
   money
   paper_trail
   passwordless (~> 1.1)
-  pg (~> 1.1)
+  pg (~> 1.5)
   puma (>= 5.0)
   rack-cors
   rails (= 7.1.2)
