@@ -7,7 +7,7 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
 
   # TODO: these tests are great, but the individual components should have their own tests
   describe "when trialing" do
-    it "shows a page with some content and a link to go create a subscription" do
+    it "shows a page with some content and a link to go set up payment for a subscription" do
       registration = create(:registration)
       registration.register!
       user = registration.reload.user
@@ -15,7 +15,7 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
 
       visit settings_billing_information_url
       expect(page).to have_text("Your free trial has no limitations")
-      expect(page).to have_css("a[href='#{new_settings_subscription_path}']")
+      expect(page).to have_text("Manage StaffPlan Subscription")
     end
   end
 
@@ -42,10 +42,13 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
         default_payment_method: Faker::Alphanumeric.alpha(number: 10),
         current_period_start: 60.minutes.ago,
         current_period_end: 30.days.from_now,
-        credit_card_brand: 'visa',
-        credit_card_last_four: '4242',
-        credit_card_exp_month: '12',
-        credit_card_exp_year: '29'
+        payment_method_type: "card",
+        payment_metadata: {
+          credit_card_brand: 'visa',
+          credit_card_last_four: '4242',
+          credit_card_exp_month: '12',
+          credit_card_exp_year: '29'
+        }
       )
 
       visit settings_billing_information_url
@@ -75,10 +78,13 @@ RSpec.describe "Subscription Management", type: :system, vcr: true, headless: tr
         default_payment_method: Faker::Alphanumeric.alpha(number: 10),
         current_period_start: 60.minutes.ago,
         current_period_end: 30.days.from_now,
-        credit_card_brand: 'visa',
-        credit_card_last_four: '4242',
-        credit_card_exp_month: '12',
-        credit_card_exp_year: '29'
+        payment_method_type: "card",
+        payment_metadata: {
+          credit_card_brand: 'visa',
+          credit_card_last_four: '4242',
+          credit_card_exp_month: '12',
+          credit_card_exp_year: '29'
+        }
       )
 
       visit settings_billing_information_url
