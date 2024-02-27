@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_26_013319) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_27_134950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -105,10 +105,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_013319) do
     t.string "customer_email"
     t.integer "plan_amount"
     t.integer "quantity"
-    t.string "credit_card_brand"
-    t.string "credit_card_last_four"
-    t.string "credit_card_exp_month"
-    t.string "credit_card_exp_year"
     t.date "current_period_start"
     t.date "current_period_end"
     t.datetime "created_at", null: false
@@ -118,6 +114,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_26_013319) do
     t.string "item_id"
     t.string "default_payment_method"
     t.datetime "canceled_at", precision: nil
+    t.string "payment_method_type"
+    t.jsonb "payment_metadata", default: {}
     t.index ["company_id"], name: "index_subscriptions_on_company_id"
   end
 
