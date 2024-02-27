@@ -55,4 +55,17 @@ class Subscription < ApplicationRecord
     return if default_payment_method.blank?
     payment_metadata["credit_card_exp_year"]
   end
+
+  def link_email
+    return if default_payment_method.blank?
+    payment_metadata["email"]
+  end
+
+  def card_payment_method?
+    payment_method_type == CARD
+  end
+
+  def link_payment_method?
+    payment_method_type == LINK
+  end
 end
