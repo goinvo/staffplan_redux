@@ -41,6 +41,10 @@ class Webhooks::StripeController < ApplicationController
     # when a trial runs out? cancel the subscription.
     subscription = event.data.object
     company = Company.find_by(stripe_id: subscription.customer)
+    if company.blank?
+      Rollbar.report_message("Customer not found for Stripe ID: #{@customer.id}", 'warning')
+      return
+    end
 
     company.subscription.update(
       status: subscription.status,
@@ -61,6 +65,10 @@ class Webhooks::StripeController < ApplicationController
     # the relevant subscription data so we have it
     subscription = event.data.object
     company = Company.find_by(stripe_id: subscription.customer)
+    if company.blank?
+      Rollbar.report_message("Customer not found for Stripe ID: #{@customer.id}", 'warning')
+      return
+    end
 
     company.subscription.update(
       status: subscription.status,

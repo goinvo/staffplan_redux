@@ -6,6 +6,11 @@ module Stripe
 
     def call
       company = Company.find_by(stripe_id: @subscription.customer)
+      if company.blank?
+        Rollbar.report_message("Customer not found for Stripe ID: #{@customer.id}", 'warning')
+        return
+      end
+
       previous_quantity = company.subscription.quantity
 
       canceled_at = @subscription.canceled_at.present? ? Time.at(@subscription.canceled_at) : nil
