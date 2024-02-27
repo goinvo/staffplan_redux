@@ -18,13 +18,18 @@ module Types
       ids.map { |id| context.schema.object_from_id(id, context) }
     end
 
-    field :clients, [Types::StaffPlan::ClientType], null: false
+    field :clients, [Types::StaffPlan::ClientType], null: false, description: "Fetches all clients for the current company."
     def clients
       context[:current_user].current_company.clients.all
     end
 
-    field :project_assignments, [Types::StaffPlan::AssignmentType], null: false do
-      argument :project_id, ID, required: true, description: "ID of the project to fetch assignments for."
+    field :projects, [Types::StaffPlan::ProjectType], null: false, description: "Fetches all projects for the current company."
+    def projects
+      context[:current_company].projects.all
+    end
+
+    field :project_assignments, [Types::StaffPlan::AssignmentType], null: false, description: "Fetches all assignments for the company's projects."do
+      argument :project_id, ID, required: true, description: "Optional: ID of the company's project to fetch assignments for."
     end
 
     def project_assignments(project_id: nil)
@@ -35,9 +40,9 @@ module Types
         .all
     end
 
-    field :user_assignments, [Types::StaffPlan::AssignmentType], null: false do
+    field :user_assignments, [Types::StaffPlan::AssignmentType], null: false, description: "Fetches all of the project assignments for the current user." do
       argument :user_id, ID, required: false,
-               description: "ID of the user to fetch assignments for. The current user's assignments will be returned if this argument is not provided."
+               description: "Optional: ID of the user to fetch assignments for."
     end
     def user_assignments(user_id: nil)
       target = if user_id.present?
@@ -49,7 +54,7 @@ module Types
       target.assignments.all
     end
 
-    field :users, [Types::StaffPlan::UserType], null: false
+    field :users, [Types::StaffPlan::UserType], null: false, description: "Fetches all users for the current company."
     def users
       context[:current_user].current_company.users.all
     end
