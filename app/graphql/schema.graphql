@@ -1,12 +1,35 @@
 type Assignment {
+  """
+  The user assigned to this assignment
+  """
+  assignedUser: User!
   createdAt: ISO8601DateTime!
+
+  """
+  The date the assignment ends
+  """
   endsOn: ISO8601Date
   id: ID!
+
+  """
+  The project this assignment is for
+  """
   project: Project!
+
+  """
+  The date the assignment starts
+  """
   startsOn: ISO8601Date
+
+  """
+  The status of the assignment
+  """
   status: String!
   updatedAt: ISO8601DateTime!
-  user: User!
+
+  """
+  The work weeks for this assignment
+  """
   workWeeks: [WorkWeek!]!
 }
 
