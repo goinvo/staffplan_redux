@@ -21,7 +21,8 @@ module Stripe
       if @customer.invoice_settings.default_payment_method.present?
         payment_method = Stripe::PaymentMethod.retrieve(@customer.invoice_settings.default_payment_method)
         updates = updates.merge(
-          default_payment_method: @customer.invoice_settings.default_payment_method
+          default_payment_method: @customer.invoice_settings.default_payment_method,
+          payment_method_type: payment_method.type
         )
 
         case payment_method.type
