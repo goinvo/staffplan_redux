@@ -4,7 +4,12 @@ module Types
   module StaffPlan
     class AssignmentType < Types::BaseObject
       field :id, ID, null: false
+
       field :assigned_user, Types::StaffPlan::UserType, null: false, description: 'The user assigned to this assignment'
+      def assigned_user
+        object.user
+      end
+
       field :project, Types::StaffPlan::ProjectType, null: false, description: 'The project this assignment is for'
       field :status, String, null: false, description: 'The status of the assignment'
       field :starts_on, GraphQL::Types::ISO8601Date, null: true, description: 'The date the assignment starts'
