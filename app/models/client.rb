@@ -2,6 +2,8 @@ class Client < ApplicationRecord
   belongs_to :company
   has_many :projects, dependent: :destroy
 
+  has_paper_trail
+
   ACTIVE = 'active'.freeze
   ARCHIVED = 'archived'.freeze
 
