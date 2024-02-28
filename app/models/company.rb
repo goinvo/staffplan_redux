@@ -7,6 +7,8 @@ class Company < ApplicationRecord
   has_many :assignments, through: :projects
   has_one :subscription
 
+  has_paper_trail
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   before_create :build_default_subscription

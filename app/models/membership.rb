@@ -2,6 +2,8 @@ class Membership < ApplicationRecord
   belongs_to :user
   belongs_to :company
 
+  has_paper_trail
+
   OWNER = 'owner'.freeze
   ADMIN = 'admin'.freeze
   MEMBER = 'member'.freeze
