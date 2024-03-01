@@ -1,6 +1,7 @@
 class Webhooks::StripeController < ApplicationController
 
   skip_before_action :verify_authenticity_token
+  skip_before_action :check_subscription_status
 
   def create
     endpoint_secret = Rails.application.credentials.stripe_signing_secret
