@@ -27,7 +27,7 @@ RSpec.describe SyncCustomerSubscriptionJob, type: :job, vcr: true do
         { items: [
           {id: company.subscription.item_id,  quantity: 2 }
         ]},
-        {:proration_date=>"2024-02-29"}
+        {proration_date: Date.today.iso8601}
       )
 
       SyncCustomerSubscriptionJob.perform_inline(company.id)
