@@ -9,7 +9,7 @@ module Stripe
       company = Company.find_by(stripe_id: @customer.id)
 
       if company.blank?
-        Rollbar.report_message("Customer not found for Stripe ID: #{@customer.id}", 'warning')
+        # Rollbar.report_message("Customer not found for Stripe ID: #{@customer.id}", 'warning')
         return
       end
 

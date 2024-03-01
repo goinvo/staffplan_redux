@@ -43,7 +43,7 @@ class Webhooks::StripeController < ApplicationController
     subscription = event.data.object
     company = Company.find_by(stripe_id: subscription.customer)
     if company.blank?
-      Rollbar.report_message("Customer not found for Stripe ID: #{@customer.id}", 'warning')
+      # Rollbar.report_message("Customer not found for Stripe ID: #{@customer.id}", 'warning')
       return
     end
 
@@ -67,7 +67,7 @@ class Webhooks::StripeController < ApplicationController
     subscription = event.data.object
     company = Company.find_by(stripe_id: subscription.customer)
     if company.blank?
-      Rollbar.report_message("Customer not found for Stripe ID: #{@customer.id}", 'warning')
+      # Rollbar.report_message("Customer not found for Stripe ID: #{@customer.id}", 'warning')
       return
     end
 
