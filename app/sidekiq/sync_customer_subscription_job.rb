@@ -11,8 +11,7 @@ class SyncCustomerSubscriptionJob
       company.subscription.stripe_id,
       { items: [
         {id: company.subscription.item_id,  quantity: subscription_count }
-      ]},
-      proration_date: Date.today.iso8601
+      ]}
     )
   end
 end
