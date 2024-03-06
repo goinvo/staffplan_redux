@@ -27,6 +27,12 @@ FactoryBot.define do
 
   factory :company do
     name { Faker::Company.name }
+
+    after(:build) do |company, _options|
+      next if company.memberships.any?
+
+      company.memberships << build(:membership, company: company)
+    end
   end
 
   factory :membership do
