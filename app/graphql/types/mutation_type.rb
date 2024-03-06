@@ -5,5 +5,6 @@ module Types
     field :set_current_company, mutation: Mutations::SetCurrentCompany
     field :upsert_work_week, mutation: Mutations::UpsertWorkWeek
     field :upsert_assignment, mutation: Mutations::UpsertAssignment
+    field :upsert_project, mutation: Mutations::UpsertProject
   end
 end

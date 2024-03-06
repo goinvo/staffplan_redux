@@ -7,6 +7,7 @@ module Types
       field :client, Types::StaffPlan::ClientType, null: false
       field :name, String, null: false
       field :status, String, null: false
+      field :cost, Float, null: false
       field :payment_frequency, String, null: false
       field :starts_on, GraphQL::Types::ISO8601Date, null: true
       field :ends_on, GraphQL::Types::ISO8601Date, null: true

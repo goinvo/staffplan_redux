@@ -24,10 +24,10 @@ class Project < ApplicationRecord
   VALID_PAYMENT_FREQUENCIES = [WEEKLY, MONTHLY, FORTNIGHTLY, QUARTERLY, ANNUALLY].freeze
 
   validates :client_id, presence: true
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validates :status, presence: true, inclusion: { in: VALID_STATUSES }
-  validates :cost, presence: true, numericality: { greater_than_or_equal_to: 0.0 }
-  validates :payment_frequency, presence: true, inclusion: { in: VALID_PAYMENT_FREQUENCIES }
+  validates :name, presence: true, uniqueness: { scope: :client_id, case_sensitive: false }
+  validates :status, inclusion: { in: VALID_STATUSES }, allow_blank: true
+  validates :cost, numericality: { greater_than_or_equal_to: 0.0 }, allow_blank: true
+  validates :payment_frequency, inclusion: { in: VALID_PAYMENT_FREQUENCIES }, allow_blank: true
 
   def active?
     status == ACTIVE
