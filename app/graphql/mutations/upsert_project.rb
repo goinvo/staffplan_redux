@@ -24,7 +24,18 @@ module Mutations
       end
 
       if project.blank?
-        project = current_company.projects.new(client_id:, name:, status:)
+        client = current_company.clients.find_by(id: client_id)
+
+        # client must belong to the current company
+        if client.nil?
+          context.add_error(
+            GraphQL::ExecutionError.new("Client not found", extensions: { attribute: "client_id" })
+          )
+
+          return
+        end
+
+        project = client.projects.new
       end
 
       project.assign_attributes(name:) if name.present?

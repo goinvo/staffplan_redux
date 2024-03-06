@@ -46,6 +46,45 @@ RSpec.describe Mutations::UpsertAssignment do
       expect(post_result["endsOn"]).to be_nil
     end
 
+    it "does not allow a client_id from another company to be specified" do
+      query_string = <<-GRAPHQL
+        mutation($clientId: ID, $name: String) {
+          upsertProject(clientId: $clientId, name: $name) {
+            id
+            client {
+              id
+            }
+            name
+          }
+        }
+      GRAPHQL
+
+      user = create(:user)
+      client = create(:client, company: user.current_company)
+      other_client = create(:client)
+
+      expect(client.company).to_not eq(other_client.company)
+      expect(other_client.company.users).to_not include(user)
+      result = nil
+
+      expect do
+        result = StaffplanReduxSchema.execute(
+          query_string,
+          context: {
+            current_user: user,
+            current_company: user.current_company
+          },
+          variables: {
+            clientId: other_client.id,
+            name: project_name = Faker::Company.buzzword
+          }
+        )
+      end.to_not change(Project, :count)
+
+      post_result = result["errors"]
+      expect(post_result.first["message"]).to eq("Client not found")
+    end
+
     it "updates a project with valid params" do
       query_string = <<-GRAPHQL
         mutation($id: ID, $clientId: ID, $name: String, $status: String, $cost: Float, $paymentFrequency: String, $startsOn: ISO8601Date, $endsOn: ISO8601Date) {
