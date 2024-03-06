@@ -13,7 +13,7 @@ module Mutations
     argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this assignment ends."
 
     # return type from the mutation
-    type Types::StaffPlan::ProjectType
+    type Types::StaffPlan::ProjectType, null: true
 
     def resolve(id: nil, client_id: nil, name: nil, status: nil, cost: nil, payment_frequency: nil, starts_on: nil, ends_on: nil)
       current_company = context[:current_company]
@@ -32,7 +32,7 @@ module Mutations
             GraphQL::ExecutionError.new("Client not found", extensions: { attribute: "client_id" })
           )
 
-          return
+          return {}
         end
 
         project = client.projects.new

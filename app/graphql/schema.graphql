@@ -113,7 +113,7 @@ type Mutation {
     """
     The ID of the client for this project.
     """
-    clientId: ID!
+    clientId: ID
 
     """
     The cost of the project.
@@ -133,7 +133,7 @@ type Mutation {
     """
     The name of the project.
     """
-    name: String!
+    name: String
 
     """
     The frequency of payment for the project.
@@ -148,8 +148,8 @@ type Mutation {
     """
     The status of the assignment.
     """
-    status: String!
-  ): Project!
+    status: String
+  ): Project
 
   """
   Create or update a work week record for a StaffPlan user.
