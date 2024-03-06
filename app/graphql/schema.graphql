@@ -140,6 +140,7 @@ type Mutation {
 type Project {
   assignments: [Assignment!]!
   client: Client!
+  cost: Float!
   createdAt: ISO8601DateTime!
   endsOn: ISO8601Date
   id: ID!
