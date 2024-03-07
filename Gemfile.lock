@@ -129,7 +129,7 @@ GEM
     graphql (2.2.11)
       base64
     hashdiff (1.1.0)
-    i18n (1.14.1)
+    i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
@@ -156,7 +156,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.22.2)
-    money (6.18.0)
+    money (6.19.0)
       i18n (>= 0.6.4, <= 2)
     msgpack (1.7.2)
     mutex_m (0.2.0)
