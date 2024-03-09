@@ -205,6 +205,11 @@ type Query {
   clients: [Client!]!
 
   """
+  The company in scope for all other company-related queries.
+  """
+  currentCompany: Company
+
+  """
   Fetches all assignments for the company's projects.
   """
   projectAssignments(
@@ -233,16 +238,32 @@ type Query {
   Fetches all users for the current company.
   """
   users: [User!]!
+
+  """
+  The currently authenticated user.
+  """
+  viewer: User
 }
 
 type User {
+  """
+  Fetches all of the user's assignments for the current company.
+  """
   assignments: [Assignment!]!
+
+  """
+  Fetches all companies for the current user.
+  """
   companies: [Company!]!
   createdAt: ISO8601DateTime!
   currentCompanyId: ID
   email: String!
   id: ID!
   name: String!
+
+  """
+  Fetches all projects for the current user for the current company.
+  """
   projects: [Project!]!
   updatedAt: ISO8601DateTime!
 }
