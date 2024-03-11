@@ -18,6 +18,16 @@ module Types
       ids.map { |id| context.schema.object_from_id(id, context) }
     end
 
+    field :viewer, Types::StaffPlan::UserType, null: true, description: "The currently authenticated user."
+    def viewer
+      context[:current_user]
+    end
+
+    field :current_company, Types::StaffPlan::CompanyType, null: true, description: "The company in scope for all other company-related queries."
+    def current_company
+      context[:current_company]
+    end
+
     field :clients, [Types::StaffPlan::ClientType], null: false, description: "Fetches all clients for the current company."
     def clients
       context[:current_user].current_company.clients.all
