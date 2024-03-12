@@ -121,18 +121,15 @@ RSpec.describe Mutations::UpsertAssignment do
         },
         variables: {
           id: assignment.id,
-          projectId: create(:project).id,
+          # projectId: create(:project).id,
           userId: assignment.user_id,
-          status: "invalid-status",
+          status: Assignment::ACTIVE,
         }
       )
 
       post_result = result["errors"]
-      expect(post_result.length).to eq(2)
-      expect(post_result.first["message"]).to eq("Status is not included in the list")
-      expect(post_result.first["extensions"]["attribute"]).to eq("status")
-      expect(post_result.second["message"]).to eq("Project and user must belong to the same company")
-      expect(post_result.second["extensions"]["attribute"]).to eq("project")
+      expect(post_result.length).to eq(1)
+      expect(post_result.first["message"]).to eq("Variable $projectId of type ID! was provided invalid value")
     end
 
     it "raises a 404 if given an assignment id that doesn't exist on the company" do

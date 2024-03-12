@@ -6,9 +6,9 @@ module Types
       field :id, ID, null: false
       field :client, Types::StaffPlan::ClientType, null: false
       field :name, String, null: false
-      field :status, String, null: false
+      field :status,  Enums::ProjectStatus, null: false
       field :cost, Float, null: false
-      field :payment_frequency, String, null: false
+      field :payment_frequency, Enums::ProjectPaymentFrequency, null: false
       field :starts_on, GraphQL::Types::ISO8601Date, null: true
       field :ends_on, GraphQL::Types::ISO8601Date, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false

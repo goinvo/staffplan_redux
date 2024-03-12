@@ -11,7 +11,7 @@ module Types
       end
 
       field :project, Types::StaffPlan::ProjectType, null: false, description: 'The project this assignment is for'
-      field :status, String, null: false, description: 'The status of the assignment'
+      field :status, Enums::AssignmentStatus, null: false, description: 'The status of the assignment'
       field :starts_on, GraphQL::Types::ISO8601Date, null: true, description: 'The date the assignment starts'
       field :ends_on, GraphQL::Types::ISO8601Date, null: true, description: 'The date the assignment ends'
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
