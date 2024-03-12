@@ -2,10 +2,10 @@
 
 require "rails_helper"
 
-RSpec.describe Mutations::UpsertAssignment do
+RSpec.describe Mutations::UpsertProject do
 
   context "resolve" do
-    it "creates a new assignment with valid params" do
+    it "creates a new project with valid params" do
       query_string = <<-GRAPHQL
         mutation($clientId: ID, $name: String, $status: String) {
           upsertProject(clientId: $clientId, name: $name, status: $status) {
@@ -169,7 +169,7 @@ RSpec.describe Mutations::UpsertAssignment do
       expect(post_result["client"]["id"]).to eq(project.client.id.to_s)
     end
 
-    it "raises a 404 if given an assignment id that doesn't exist on the company" do
+    it "raises a 404 if given an project id that doesn't exist on the company" do
       query_string = <<-GRAPHQL
         mutation($id: ID, $name: String) {
           upsertProject(id: $id, name: $name) {
