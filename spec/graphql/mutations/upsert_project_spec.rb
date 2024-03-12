@@ -169,39 +169,6 @@ RSpec.describe Mutations::UpsertAssignment do
       expect(post_result["client"]["id"]).to eq(project.client.id.to_s)
     end
 
-    it "renders validation errors" do
-      query_string = <<-GRAPHQL
-        mutation($id: ID, $status: String) {
-          upsertProject(id: $id, status: $status) {
-            id
-            client {
-              id
-            }  
-            status
-          }
-        }
-      GRAPHQL
-
-      project = create(:project)
-      user = project.company.users.first
-
-      result = StaffplanReduxSchema.execute(
-        query_string,
-        context: {
-          current_user: user,
-          current_company: user.current_company
-        },
-        variables: {
-          id: project.id,
-          status: "invalid-status",
-        }
-      )
-
-      post_result = result["errors"]
-      expect(post_result.length).to eq(1)
-      expect(post_result.first["message"]).to eq("Status is not included in the list")
-    end
-
     it "raises a 404 if given an assignment id that doesn't exist on the company" do
       query_string = <<-GRAPHQL
         mutation($id: ID, $name: String) {

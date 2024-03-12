@@ -24,7 +24,7 @@ type Assignment {
   """
   The status of the assignment
   """
-  status: String!
+  status: AssignmentStatus!
   updatedAt: ISO8601DateTime!
 
   """
@@ -33,14 +33,48 @@ type Assignment {
   workWeeks: [WorkWeek!]!
 }
 
+enum AssignmentStatus {
+  """
+  The assignment is currently in progress.
+  """
+  active
+
+  """
+  The assignment has been archived and is no longer in progress.
+  """
+  archived
+
+  """
+  The assignment has been completed.
+  """
+  completed
+
+  """
+  The assignment has been proposed, but not yet started.
+  """
+  proposed
+}
+
 type Client {
   createdAt: ISO8601DateTime!
   description: String
   id: ID!
   name: String!
   projects: [Project!]!
-  status: String!
+  status: ClientStatus!
   updatedAt: ISO8601DateTime!
+}
+
+enum ClientStatus {
+  """
+  The client is active.
+  """
+  active
+
+  """
+  The client is no longer active and should no longer be used.
+  """
+  archived
 }
 
 type Company {
@@ -190,12 +224,66 @@ type Project {
   endsOn: ISO8601Date
   id: ID!
   name: String!
-  paymentFrequency: String!
+  paymentFrequency: ProjectPaymentFrequency!
   startsOn: ISO8601Date
-  status: String!
+  status: ProjectStatus!
   updatedAt: ISO8601DateTime!
   users: [User!]!
   workWeeks: [WorkWeek!]!
+}
+
+enum ProjectPaymentFrequency {
+  """
+  The project is paid annually.
+  """
+  annually
+
+  """
+  The project is paid fortnightly.
+  """
+  fortnightly
+
+  """
+  The project is paid monthly.
+  """
+  monthly
+
+  """
+  The project is paid quarterly.
+  """
+  quarterly
+
+  """
+  The project is paid weekly.
+  """
+  weekly
+}
+
+enum ProjectStatus {
+  """
+  The project is active.
+  """
+  active
+
+  """
+  The project is archived and is no longer active.
+  """
+  archived
+
+  """
+  The project is canceled.
+  """
+  cancelled
+
+  """
+  The project is completed.
+  """
+  completed
+
+  """
+  The project is proposed.
+  """
+  proposed
 }
 
 type Query {
