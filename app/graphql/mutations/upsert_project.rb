@@ -6,11 +6,11 @@ module Mutations
     argument :id, ID, required: false, description: "The ID of the project to update."
     argument :client_id, ID, required: false, description: "The ID of the client for this project."
     argument :name, String, required: false, description: "The name of the project."
-    argument :status, String, required: false, description: "The status of the assignment."
+    argument :status, String, required: false, description: "The status of the project."
     argument :cost, Float, required: false, description: "The cost of the project."
     argument :payment_frequency, String, required: false, description: "The frequency of payment for the project."
-    argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this assignment starts."
-    argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this assignment ends."
+    argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project starts."
+    argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project ends."
 
     # return type from the mutation
     type Types::StaffPlan::ProjectType, null: true

@@ -6,5 +6,6 @@ module Types
     field :upsert_work_week, mutation: Mutations::UpsertWorkWeek
     field :upsert_assignment, mutation: Mutations::UpsertAssignment
     field :upsert_project, mutation: Mutations::UpsertProject
+    field :upsert_client, mutation: Mutations::UpsertClient
   end
 end
