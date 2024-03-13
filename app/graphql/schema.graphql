@@ -141,6 +141,31 @@ type Mutation {
   ): Assignment!
 
   """
+  Create or update a client.
+  """
+  upsertClient(
+    """
+    The client's description.
+    """
+    description: String
+
+    """
+    The ID of the client to update.
+    """
+    id: ID
+
+    """
+    The name of the client.
+    """
+    name: String
+
+    """
+    The status of the client.
+    """
+    status: String
+  ): Client
+
+  """
   Create or update a project.
   """
   upsertProject(
