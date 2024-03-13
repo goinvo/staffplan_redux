@@ -150,11 +150,11 @@ GEM
       net-imap
       net-pop
       net-smtp
-    marcel (1.0.3)
+    marcel (1.0.4)
     matrix (0.4.2)
     method_source (1.0.0)
     mini_mime (1.1.5)
-    minitest (5.22.2)
+    minitest (5.22.3)
     money (6.19.0)
       i18n (>= 0.6.4, <= 2)
     msgpack (1.7.2)
@@ -178,7 +178,7 @@ GEM
     paper_trail (15.1.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
-    passwordless (1.4.0)
+    passwordless (1.5.0)
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
     pg (1.5.6)
@@ -344,7 +344,7 @@ DEPENDENCIES
   letter_opener
   money
   paper_trail
-  passwordless (~> 1.1)
+  passwordless (~> 1.5)
   pg (~> 1.5)
   puma (>= 5.0)
   rack-cors
