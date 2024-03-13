@@ -3,10 +3,15 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   before_action :check_subscription_status
+  after_action :set_csrf_header
 
   layout :choose_layout
 
   private
+
+  def set_csrf_header
+    response.headers['X-CSRF-Token'] = form_authenticity_token
+  end
 
   def check_subscription_status
     return if current_company.blank?
