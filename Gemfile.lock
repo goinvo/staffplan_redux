@@ -79,7 +79,7 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     base64 (0.2.0)
     bcrypt (3.1.20)
-    bigdecimal (3.1.6)
+    bigdecimal (3.1.7)
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
@@ -266,7 +266,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    shoulda-matchers (6.1.0)
+    shoulda-matchers (6.2.0)
       activesupport (>= 5.2.0)
     sidekiq (7.2.2)
       concurrent-ruby (< 2)
@@ -353,7 +353,7 @@ DEPENDENCIES
   rollbar
   rspec-rails
   selenium-webdriver
-  shoulda-matchers (~> 6.1)
+  shoulda-matchers (~> 6.2)
   sidekiq (~> 7.2)
   sprockets-rails
   stimulus-rails
