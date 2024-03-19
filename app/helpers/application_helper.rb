@@ -19,8 +19,6 @@ module ApplicationHelper
     link_to text, path, class: css_classes
   end
   def user_gravatar(user:, css_classes: "h-8 w-8 rounded-full")
-    gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
-    gravatar_url = "http://secure.gravatar.com/avatar/#{gravatar_id}"
-    image_tag(gravatar_url, alt: user.name, class: css_classes)
+    image_tag(user.gravatar_url, alt: user.name, class: css_classes)
   end
 end

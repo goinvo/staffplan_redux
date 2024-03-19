@@ -7,8 +7,8 @@ module Types
       field :name, String, null: false
       field :email, String, null: false
       field :current_company_id, ID, null: true
-      field :created_at, GraphQL::Types::ISO8601DateTime, null: false
-      field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+      field :avatar_url, String, null: false
 
       field :companies, [Types::StaffPlan::CompanyType], null: false, description: "Fetches all companies for the current user."
 
@@ -27,6 +27,9 @@ module Types
       def projects
         object.projects.where(client_id: object.current_company.clients.map(&:id))
       end
+
+      field :created_at, GraphQL::Types::ISO8601DateTime, null: false
+      field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     end
   end
 end

@@ -39,4 +39,9 @@ class User < ApplicationRecord
 
     SyncCustomerSubscriptionJob.perform_async(current_company.id)
   end
+
+  def avatar_url
+    gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+    "http://secure.gravatar.com/avatar/#{gravatar_id}"
+  end
 end
