@@ -3,11 +3,16 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   before_action :check_subscription_status
+  before_action :set_access_control_headers
   after_action :set_csrf_header
 
   layout :choose_layout
 
   private
+
+  def set_access_control_headers
+    response.set_header('Access-Control-Expose-Headers', 'x-csrf-token')
+  end
 
   def set_csrf_header
     response.headers['X-CSRF-Token'] = form_authenticity_token
