@@ -363,6 +363,7 @@ type User {
   Fetches all of the user's assignments for the current company.
   """
   assignments: [Assignment!]!
+  avatarUrl: String!
 
   """
   Fetches all companies for the current user.
