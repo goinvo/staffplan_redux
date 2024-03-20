@@ -44,3 +44,5 @@ spec/examples.txt
 /config/credentials/production.key
 config/credentials/test.key
 config/credentials/development.key
+
+.venv

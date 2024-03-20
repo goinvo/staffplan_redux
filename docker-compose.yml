@@ -24,17 +24,15 @@ services:
       - "127.0.0.1:4566:4566"
       - "127.0.0.1:4510-4559:4510-4559"
     environment:
-      - SERVICES=sns,sqs,s3
-      - DEBUG=${DEBUG-}
+      - SERVICES=s3
+      - DEBUG=1
       - PERSISTENCE=${PERSISTENCE-}
-      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
       - DOCKER_HOST=unix:///var/run/docker.sock
-      - LOCALSTACK_HOSTNAME=localhost
-      - BUCKET_NAME=family-circle-active-storage-uploads
+      - BUCKET_NAME=staffplan-redux
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./tmp/volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - ./localstack-init:/etc/localstack/init/ready.d
+      - ./localstack-init:/etc/localstack/init/ready.d/init-s3.sh
     command: localstack.sh
     container_name: staffplan-localstack
 
