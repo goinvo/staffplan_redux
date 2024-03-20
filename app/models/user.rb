@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def avatar_url
-    gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+    gravatar_id = Digest::MD5::hexdigest(email.downcase)
     "http://secure.gravatar.com/avatar/#{gravatar_id}"
   end
 end

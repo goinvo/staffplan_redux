@@ -19,6 +19,6 @@ module ApplicationHelper
     link_to text, path, class: css_classes
   end
   def user_gravatar(user:, css_classes: "h-8 w-8 rounded-full")
-    image_tag(user.gravatar_url, alt: user.name, class: css_classes)
+    image_tag(user.avatar_url, alt: user.name, class: css_classes)
   end
 end
