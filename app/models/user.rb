@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :projects, through: :assignments
   has_many :work_weeks, through: :assignments
 
+  has_one_attached :uploaded_avatar
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
@@ -45,7 +46,11 @@ class User < ApplicationRecord
   end
 
   def avatar_url(size: 80)
-    gravatar_id = Digest::MD5::hexdigest(email.downcase)
-    "http://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+    if avatar.attached?
+      avatar.variant(:thumb)
+    else
+      gravatar_id = Digest::MD5::hexdigest(email.downcase)
+      "http://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+    end
   end
 end

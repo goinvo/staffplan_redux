@@ -18,17 +18,30 @@
 
           <div class="col-span-full">
             <%= f.label :avatar, "Avatar", class: "block text-sm font-medium leading-6 text-gray-900" %>
-            <div class="mt-2 flex items-center gap-x-3">
+            <div class="mt-2 flex items-center gap-x-3" data-controller="avatar-file">
               <% if current_user.avatar.present? %>
-                custom avatar
+                <%= image_tag(current_user.avatar.variant(:thumb)) %>
               <% else %>
                 <%= user_gravatar(user: current_user, size: 200, css_classes: "h-32 w-32 rounded-full text-gray-300") %>
               <% end %>
-              <%= f.file_field :avatar, style: "display: none;" %>
-              <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Change</button>
+              <%= f.file_field :avatar,
+                               class: "hidden",
+                               accept: ".jpg,.jpeg,.png,.gif",
+                               data: {
+                                 "avatar-file-target" => "fileInput",
+                                 "action" => "change->avatar-file#change"
+                               } %>
+              <button type="button"
+                      data-avatar-file-target="changeButton"
+                      data-action="click->avatar-file#click"
+                      class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                Change
+              </button>
 
               <% unless current_user.avatar.present? %>
-                <p class="mt-1 text-sm leading-6 text-gray-600">This avatar is from <%= link_to "Gravatar", "https://gravatar.com/" %>.</p>
+                <p class="mt-1 text-sm leading-6 text-gray-600" data-avatar-file-target="gravatarNote">
+                  <strong>Note</strong>: this avatar is from <%= link_to "Gravatar", "https://gravatar.com/" %>.
+                </p>
               <% end %>
             </div>
           </div>
