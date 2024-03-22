@@ -29,7 +29,7 @@ gem "tailwindcss-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem 'paper_trail'
 gem "passwordless", "~> 1.5"
-gem "graphql", "~> 2.2"
+gem "graphql", "~> 2.3"
 gem "graphiql-rails"
 gem "view_component"
 
