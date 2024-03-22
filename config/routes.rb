@@ -36,6 +36,9 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :users do
+    resource :profile, only: [:show, :edit, :update], controller: "profile"
+  end
   resource :settings, only: [:show, :update], controller: "settings" do
     resource :billing_information, only: [:show, :edit, :update], controller: "settings/billing_information"
     resource :subscription, only: [:new], controller: "settings/subscriptions"

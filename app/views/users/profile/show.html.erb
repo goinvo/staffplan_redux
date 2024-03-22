@@ -1,0 +1,43 @@
+<div class="bg-white p-4 mt-4">
+  <%= form_for current_user, url: users_profile_path do |f| %>
+    <div class="space-y-12">
+      <div class="border-b border-gray-900/10 pb-12">
+        <h2 class="text-base font-semibold leading-7 text-gray-900">Your Profile</h2>
+        <p class="mt-1 text-sm leading-6 text-gray-600">
+          This information will be displayed to other StaffPlan users in your company.
+        </p>
+
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-4">
+            <%= f.label :name, "Name", class: "block text-sm font-medium leading-6 text-gray-900" %>
+
+            <div class="mt-2">
+              <%= f.text_field :name, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+            </div>
+          </div>
+
+          <div class="col-span-full">
+            <%= f.label :avatar, "Avatar", class: "block text-sm font-medium leading-6 text-gray-900" %>
+            <div class="mt-2 flex items-center gap-x-3">
+              <% if current_user.avatar.present? %>
+                custom avatar
+              <% else %>
+                <%= user_gravatar(user: current_user, size: 200, css_classes: "h-32 w-32 rounded-full text-gray-300") %>
+              <% end %>
+              <%= f.file_field :avatar, style: "display: none;" %>
+              <button type="button" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Change</button>
+
+              <% unless current_user.avatar.present? %>
+                <p class="mt-1 text-sm leading-6 text-gray-600">This avatar is from <%= link_to "Gravatar", "https://gravatar.com/" %>.</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 flex items-center justify-end gap-x-6">
+      <%= f.submit "Save", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+    </div>
+  <% end %>
+</div>
