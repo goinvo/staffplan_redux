@@ -55,4 +55,49 @@ RSpec.describe User, type: :model do
       expect(user.role(company: user.current_company)).to eq(Membership::ADMIN)
     end
   end
+
+  describe "#inactive?" do
+    it "is true when user is inactive" do
+      user = create(:membership, status: Membership::INACTIVE).user
+      expect(user.inactive?(company: user.current_company)).to be_truthy
+    end
+
+    it "is false when user is active" do
+      user = create(:membership, status: Membership::ACTIVE).user
+      expect(user.inactive?(company: user.current_company)).to be_falsey
+    end
+  end
+
+  describe "#toggle_status!" do
+    it "toggles the user's status from active to inactive" do
+      user = create(:membership, status: Membership::ACTIVE).user
+      user.toggle_status!(company: user.current_company)
+      expect(user.inactive?(company: user.current_company)).to be_truthy
+    end
+
+    it "toggles the user's status from inactive to active" do
+      user = create(:membership, status: Membership::INACTIVE).user
+      user.toggle_status!(company: user.current_company)
+      expect(user.inactive?(company: user.current_company)).to be_falsey
+    end
+
+    it "syncs the customer subscription" do
+      user = create(:membership, status: Membership::ACTIVE).user
+      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(user.current_company.id)
+      user.toggle_status!(company: user.current_company)
+    end
+  end
+
+  describe "#avatar_url" do
+    it "returns the gravatar URL if the user hasn't set an avatar" do
+      user = create(:user)
+      expect(user.avatar_url).to include("http://secure.gravatar.com/avatar")
+    end
+
+    it "returns the avatar URL if the user has set an avatar" do
+      user = create(:user)
+      user.update(avatar: fixture_file_upload("avatar.jpg", "image/jpg"))
+      expect(user.avatar_url).to be_a(ActiveStorage::VariantWithRecord)
+    end
+  end
 end
