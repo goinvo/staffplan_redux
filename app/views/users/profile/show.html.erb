@@ -38,9 +38,15 @@
                 Change
               </button>
 
-              <% unless current_user.avatar.present? %>
-                <p class="mt-1 text-sm leading-6 text-gray-600" data-avatar-file-target="gravatarNote">
-                  <strong>Note</strong>: this avatar is from <%= link_to "Gravatar", "https://gravatar.com/" %>.
+              <% if current_user.avatar.present? %>
+                <p class="mt-1">
+                  <%= link_to "Remove",
+                              avatar_path(current_user.id),
+                              data: {
+                                "turbo-method": :delete,
+                                "turbo-confirm": "Are you sure? This will use your Gravatar instead."
+                              }, class: "text-sm font-semibold text-red-600"
+                  %>
                 </p>
               <% end %>
             </div>
