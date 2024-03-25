@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :update], controller: "profile"
   end
 
-  resources :avatars, only: [:destroy]
+  resource :avatars, only: [:destroy]
 
   resource :settings, only: [:show, :update], controller: "settings" do
     resource :billing_information, only: [:show, :edit, :update], controller: "settings/billing_information"

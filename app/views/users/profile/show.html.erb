@@ -41,7 +41,7 @@
               <% if current_user.avatar.present? %>
                 <p class="mt-1">
                   <%= link_to "Remove",
-                              avatar_path(current_user.id),
+                              avatars_path,
                               data: {
                                 "turbo-method": :delete,
                                 "turbo-confirm": "Are you sure? This will use your Gravatar instead."
