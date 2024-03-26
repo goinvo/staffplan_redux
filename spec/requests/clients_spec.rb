@@ -175,7 +175,7 @@ RSpec.describe "Clients", type: :request do
     describe "POST /toggle_archived" do
       it "toggles the client's status" do
         client = FactoryBot.create(:client, company: @user.current_company)
-        expect(client.active?).to eq(true)
+        expect(client.confirmed?).to eq(true)
         post toggle_archived_client_path(client)
         expect(client.reload.archived?).to eq(true)
       end

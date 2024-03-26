@@ -39,7 +39,7 @@ RSpec.describe Membership, type: :model do
     end
   end
 
-  describe "#active?" do
+  describe "#confirmed?" do
     it "returns true if status is active" do
       membership = build(:membership, status: "active")
       expect(membership.active?).to eq(true)

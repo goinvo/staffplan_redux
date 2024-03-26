@@ -17,15 +17,15 @@ RSpec.describe Project, type: :model do
     it { should have_many(:users).through(:assignments) }
   end
 
-  describe "#active?" do
+  describe "#confirmed?" do
     it "returns true if the status is active" do
       project = build(:project, status: "active")
-      expect(project.active?).to eq(true)
+      expect(project.confirmed?).to eq(true)
     end
 
     it "returns false if the status is not active" do
       project = build(:project, status: "archived")
-      expect(project.active?).to eq(false)
+      expect(project.confirmed?).to eq(false)
     end
   end
 
@@ -41,15 +41,15 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  describe "#proposed?" do
+  describe "#unconfirmed?" do
     it "returns true if the status is proposed" do
       project = build(:project, status: "proposed")
-      expect(project.proposed?).to eq(true)
+      expect(project.unconfirmed?).to eq(true)
     end
 
     it "returns false if the status is not proposed" do
       project = build(:project, status: "active")
-      expect(project.proposed?).to eq(false)
+      expect(project.unconfirmed?).to eq(false)
     end
   end
 

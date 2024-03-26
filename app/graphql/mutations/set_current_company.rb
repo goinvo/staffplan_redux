@@ -16,7 +16,7 @@ module Mutations
         find_by(company_id:)
 
       # user is not an active member of the company
-      if membership.blank? || !membership.active?
+      if membership.blank? || !membership.confirmed?
         raise GraphQL::ExecutionError, "Company not found."
       end
 

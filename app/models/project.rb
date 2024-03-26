@@ -9,8 +9,8 @@ class Project < ApplicationRecord
 
   scope :active, -> { where(status: 'active') }
 
-  PROPOSED = "proposed".freeze
-  ACTIVE = "active".freeze
+  UNCONFIRMED = "unconfirmed".freeze
+  CONFIRMED = "confirmed".freeze
   ARCHIVED = "archived".freeze
   CANCELLED = "cancelled".freeze
   COMPLETED = "completed".freeze
@@ -20,7 +20,7 @@ class Project < ApplicationRecord
   QUARTERLY = "quarterly".freeze
   ANNUALLY = "annually".freeze
 
-  VALID_STATUSES = [PROPOSED, ACTIVE, ARCHIVED, CANCELLED, COMPLETED].freeze
+  VALID_STATUSES = [UNCONFIRMED, CONFIRMED, ARCHIVED, CANCELLED, COMPLETED].freeze
   VALID_PAYMENT_FREQUENCIES = [WEEKLY, MONTHLY, FORTNIGHTLY, QUARTERLY, ANNUALLY].freeze
 
   validates :client_id, presence: true
@@ -29,16 +29,16 @@ class Project < ApplicationRecord
   validates :cost, numericality: { greater_than_or_equal_to: 0.0 }, allow_blank: true
   validates :payment_frequency, inclusion: { in: VALID_PAYMENT_FREQUENCIES }, allow_blank: true
 
-  def active?
-    status == ACTIVE
+  def confirmed?
+    status == CONFIRMED
   end
 
   def archived?
     status == ARCHIVED
   end
 
-  def proposed?
-    status == PROPOSED
+  def unconfirmed?
+    status == UNCONFIRMED
   end
 
   def cancelled?

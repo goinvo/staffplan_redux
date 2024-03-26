@@ -59,7 +59,7 @@ FactoryBot.define do
   factory :project do
     client
     name { Faker::Company.name + " #{rand(1..100).to_s}"}
-    status { Project::ACTIVE }
+    status { Project::CONFIRMED }
     cost { Faker::Number.decimal(l_digits: 2) }
     payment_frequency { Project::MONTHLY }
   end

@@ -33,7 +33,7 @@ RSpec.describe Mutations::UpsertProject do
         variables: {
           clientId: client.id,
           name: project_name = Faker::Company.buzzword,
-          status: Project::PROPOSED
+          status: Project::UNCONFIRMED
         }
       )
 
@@ -41,7 +41,7 @@ RSpec.describe Mutations::UpsertProject do
       expect(result["errors"]).to be_nil
       expect(post_result["client"]["id"]).to eq(client.id.to_s)
       expect(post_result["name"]).to eq(project_name)
-      expect(post_result["status"]).to eq(Project::PROPOSED)
+      expect(post_result["status"]).to eq(Project::UNCONFIRMED)
       expect(post_result["startsOn"]).to be_nil
       expect(post_result["endsOn"]).to be_nil
     end

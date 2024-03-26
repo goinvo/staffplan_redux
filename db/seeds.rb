@@ -37,7 +37,7 @@ if goinvo.clients.none?
         name: Faker::Company.name,
         cost: Faker::Number.decimal(l_digits: 2),
         payment_frequency: "monthly",
-        status: Project::ACTIVE
+        status: Project::CONFIRMED
       )
     end
 

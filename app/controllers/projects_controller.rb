@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
       client_id: params[:client_id],
 
       # TODO: make these configurable?
-      status: Project::PROPOSED,
+      status: Project::UNCONFIRMED,
       payment_frequency: Project::MONTHLY
     )
   end

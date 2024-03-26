@@ -17,7 +17,7 @@
               <% current_user.memberships.includes(:company).each do |membership| %>
                 <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
                   <div class="flex w-0 flex-1 items-center">
-                    <% if membership.active? %>
+                    <% if membership.confirmed? %>
                       <span class="inline-flex items-center gap-x-1.5 rounded-md bg-green-100 px-1.5 py-0.5 text-xs font-medium text-green-700">
                         <svg class="h-1.5 w-1.5 fill-green-500" viewBox="0 0 6 6" aria-hidden="true">
                           <circle cx="3" cy="3" r="3" />
