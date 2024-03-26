@@ -71,12 +71,14 @@ RSpec.describe User, type: :model do
   describe "#toggle_status!" do
     it "toggles the user's status from active to inactive" do
       user = create(:membership, status: Membership::ACTIVE).user
+      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(user.current_company.id)
       user.toggle_status!(company: user.current_company)
       expect(user.inactive?(company: user.current_company)).to be_truthy
     end
 
     it "toggles the user's status from inactive to active" do
       user = create(:membership, status: Membership::INACTIVE).user
+      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(user.current_company.id)
       user.toggle_status!(company: user.current_company)
       expect(user.inactive?(company: user.current_company)).to be_falsey
     end
