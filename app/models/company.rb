@@ -29,6 +29,6 @@ class Company < ApplicationRecord
 
   def can_access?(user:)
     membership = memberships.find_by(user: user)
-    membership.present? && membership.confirmed?
+    membership.present? && membership.active?
   end
 end

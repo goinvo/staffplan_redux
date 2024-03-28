@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
   def toggle_status!(company:)
     membership = memberships.find_by!(company:)
-    membership.update!(status: membership.confirmed? ? Membership::INACTIVE : Membership::ACTIVE)
+    membership.update!(status: membership.active? ? Membership::INACTIVE : Membership::ACTIVE)
 
     SyncCustomerSubscriptionJob.perform_async(current_company.id)
   end

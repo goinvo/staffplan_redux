@@ -5,6 +5,6 @@
   <%= render(Settings::Billing::SubscriptionTrialingComponent.new(company: current_company)) %>
 <% elsif current_company.subscription.trialing_with_payment_method? %>
   <%= render(Settings::Billing::SubscriptionTrialingWithPaymentMethodComponent.new(company: current_company)) %>
-<% elsif current_company.subscription.confirmed? %>
+<% elsif current_company.subscription.active? %>
   <%= render(Settings::Billing::SubscriptionActiveComponent.new(company: current_company)) %>
 <% end %>

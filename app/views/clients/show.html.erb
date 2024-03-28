@@ -14,7 +14,7 @@
     <%= link_to "Edit", edit_client_path(@client), class: "ml-3 inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
 
     <% link_text = @client.active? ? 'Archive' : 'Activate' %>
-    <% confirmation_text = @client.confirmed? ? 'Are you sure? This will archive all projects for this client.' : "Are you sure?" %>
+    <% confirmation_text = @client.active? ? 'Are you sure? This will archive all projects for this client.' : "Are you sure?" %>
     <%= button_to link_text, toggle_archived_client_path(@client), method: :post, data: { turbo_confirm: confirmation_text }, form_class: "inline", class: "ml-3 inline-flex items-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600" %>
   </div>
 </div>
@@ -64,7 +64,7 @@
                     <svg class="h-1.5 w-1.5 fill-yellow-500" viewBox="0 0 6 6" aria-hidden="true">
                       <circle cx="3" cy="3" r="3" />
                     </svg>
-                    Proposed
+                    Unconfirmed
                   </span>
                 <% elsif project.archived? %>
                   <span class="inline-flex items-center gap-x-1.5 rounded-md bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-600">
