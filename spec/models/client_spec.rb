@@ -17,7 +17,7 @@ RSpec.describe Client, type: :model do
     it { should have_many(:projects).dependent(:destroy) }
   end
 
-  describe "#active?" do
+  describe "#confirmed?" do
     it "returns true if status is active" do
       client = build(:client, status: "active")
       expect(client.active?).to be true
@@ -56,7 +56,7 @@ RSpec.describe Client, type: :model do
 
     it "archives all projects when archived" do
       client = create(:client, status: "active")
-      project = create(:project, client: client, status: "active")
+      project = create(:project, client: client, status: "confirmed")
       client.toggle_archived!
       expect(project.reload.status).to eq("archived")
     end

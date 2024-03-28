@@ -286,11 +286,6 @@ enum ProjectPaymentFrequency {
 
 enum ProjectStatus {
   """
-  The project is active.
-  """
-  active
-
-  """
   The project is archived and is no longer active.
   """
   archived
@@ -306,9 +301,14 @@ enum ProjectStatus {
   completed
 
   """
-  The project is proposed.
+  The project is confirmed.
   """
-  proposed
+  confirmed
+
+  """
+  The project is unconfirmed.
+  """
+  unconfirmed
 }
 
 type Query {

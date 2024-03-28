@@ -48,9 +48,9 @@ RSpec.describe "Projects", type: :request do
         expect(assigns(:project).client_id).to eq(client.id)
       end
 
-      it "sets the status to proposed on the new project" do
+      it "sets the status to unconfirmed on the new project" do
         get new_project_path
-        expect(assigns(:project).status).to eq("proposed")
+        expect(assigns(:project).status).to eq("unconfirmed")
       end
 
       it "sets the payment_frequency to monthly on the new project" do

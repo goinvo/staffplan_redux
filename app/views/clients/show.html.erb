@@ -51,7 +51,7 @@
           <% @client.projects.each do |project| %>
             <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
               <div class="flex w-0 flex-1 items-center">
-                <% if project.active? %>
+                <% if project.confirmed? %>
                   <span class="inline-flex items-center gap-x-1.5 rounded-md bg-green-100 px-1.5 py-0.5 text-xs font-medium text-green-700">
                     <svg class="h-1.5 w-1.5 fill-green-500" viewBox="0 0 6 6" aria-hidden="true">
                       <circle cx="3" cy="3" r="3" />
@@ -59,12 +59,12 @@
                       Active
                     </span>
                   </span>
-                <% elsif project.proposed? %>
+                <% elsif project.unconfirmed? %>
                   <span class="inline-flex items-center gap-x-1.5 rounded-md bg-yellow-100 px-1.5 py-0.5 text-xs font-medium text-yellow-800">
                     <svg class="h-1.5 w-1.5 fill-yellow-500" viewBox="0 0 6 6" aria-hidden="true">
                       <circle cx="3" cy="3" r="3" />
                     </svg>
-                    Proposed
+                    Unconfirmed
                   </span>
                 <% elsif project.archived? %>
                   <span class="inline-flex items-center gap-x-1.5 rounded-md bg-gray-100 px-1.5 py-0.5 text-xs font-medium text-gray-600">

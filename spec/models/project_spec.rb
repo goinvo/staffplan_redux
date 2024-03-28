@@ -6,7 +6,7 @@ RSpec.describe Project, type: :model do
 
     it { should validate_presence_of(:client_id) }
     it { should validate_presence_of(:name) }
-    it { should validate_inclusion_of(:status).in_array(%w(active archived)) }
+    it { should validate_inclusion_of(:status).in_array(Project::VALID_STATUSES) }
     it { should validate_numericality_of(:cost).is_greater_than_or_equal_to(0.0) }
     it { should validate_inclusion_of(:payment_frequency).in_array(%w(weekly monthly fortnightly quarterly annually)) }
   end
@@ -17,15 +17,15 @@ RSpec.describe Project, type: :model do
     it { should have_many(:users).through(:assignments) }
   end
 
-  describe "#active?" do
-    it "returns true if the status is active" do
-      project = build(:project, status: "active")
-      expect(project.active?).to eq(true)
+  describe "#confirmed?" do
+    it "returns true if the status is confirmed" do
+      project = build(:project, status: "confirmed")
+      expect(project.confirmed?).to eq(true)
     end
 
-    it "returns false if the status is not active" do
+    it "returns false if the status is not confirmed" do
       project = build(:project, status: "archived")
-      expect(project.active?).to eq(false)
+      expect(project.confirmed?).to eq(false)
     end
   end
 
@@ -41,15 +41,15 @@ RSpec.describe Project, type: :model do
     end
   end
 
-  describe "#proposed?" do
-    it "returns true if the status is proposed" do
-      project = build(:project, status: "proposed")
-      expect(project.proposed?).to eq(true)
+  describe "#unconfirmed?" do
+    it "returns true if the status is unconfirmed" do
+      project = build(:project, status: "unconfirmed")
+      expect(project.unconfirmed?).to eq(true)
     end
 
-    it "returns false if the status is not proposed" do
-      project = build(:project, status: "active")
-      expect(project.proposed?).to eq(false)
+    it "returns false if the status is not unconfirmed" do
+      project = build(:project, status: "confirmed")
+      expect(project.unconfirmed?).to eq(false)
     end
   end
 
@@ -60,7 +60,7 @@ RSpec.describe Project, type: :model do
     end
 
     it "returns false if the status is not cancelled" do
-      project = build(:project, status: "active")
+      project = build(:project, status: "confirmed")
       expect(project.cancelled?).to eq(false)
     end
   end
