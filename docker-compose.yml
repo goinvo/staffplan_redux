@@ -18,25 +18,23 @@ services:
     env_file: .env
     container_name: staffplan-redis
 
-  localstack:
-    image: localstack/localstack
-    ports:
-      - "127.0.0.1:4566:4566"
-      - "127.0.0.1:4510-4559:4510-4559"
-    environment:
-      - SERVICES=sns,sqs,s3
-      - DEBUG=${DEBUG-}
-      - PERSISTENCE=${PERSISTENCE-}
-      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
-      - DOCKER_HOST=unix:///var/run/docker.sock
-      - LOCALSTACK_HOSTNAME=localhost
-      - BUCKET_NAME=family-circle-active-storage-uploads
-    volumes:
-      - "${LOCALSTACK_VOLUME_DIR:-./tmp/volume}:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - ./localstack-init:/etc/localstack/init/ready.d
-    command: localstack.sh
-    container_name: staffplan-localstack
+#  localstack:
+#    image: localstack/localstack
+#    ports:
+#      - "127.0.0.1:4566:4566"
+#      - "127.0.0.1:4510-4559:4510-4559"
+#    environment:
+#      - SERVICES=s3
+#      - DEBUG=1
+#      - PERSISTENCE=${PERSISTENCE-}
+#      - DOCKER_HOST=unix:///var/run/docker.sock
+#      - BUCKET_NAME=staffplan-redux
+#    volumes:
+#      - "${LOCALSTACK_VOLUME_DIR:-./tmp/volume}:/var/lib/localstack"
+#      - "/var/run/docker.sock:/var/run/docker.sock"
+#      - ./localstack-init:/etc/localstack/init/ready.d/init-s3.sh
+#    command: localstack.sh
+#    container_name: staffplan-localstack
 
 volumes:
   bundle_path:

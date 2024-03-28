@@ -46,3 +46,5 @@ config/credentials/test.key
 config/credentials/development.key
 
 .venv
+tf/*.backup
+tf/.terraform/*
