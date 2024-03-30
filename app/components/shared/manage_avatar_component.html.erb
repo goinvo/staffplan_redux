@@ -23,7 +23,7 @@
     <% if @attachable.avatar.present? %>
       <p class="mt-1">
         <%= link_to "Remove",
-                    avatars_path,
+                    avatars_path(attachable: { redirect_to: request.path, type: @attachable.class.name, id: @attachable.id }),
                     data: {
                       "turbo-method": :delete,
                       "turbo-confirm": "Are you sure?"
