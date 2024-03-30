@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-include ActionController::Helpers
-
 module Types
   module StaffPlan
     class UserType < Types::BaseObject

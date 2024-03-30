@@ -1,6 +1,4 @@
 class AvatarHelper
-  include ActionController::Helpers
-
   attr_accessor :target, :size
 
   def initialize(target:, size: 80, css_classes: "h-8 w-8 rounded-full")
