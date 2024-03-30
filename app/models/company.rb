@@ -9,6 +9,10 @@ class Company < ApplicationRecord
 
   has_paper_trail
 
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+  end
+
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   before_create :build_default_subscription
@@ -25,6 +29,10 @@ class Company < ApplicationRecord
 
   def owners
     memberships.owners.map(&:user)
+  end
+
+  def admin_or_owner?(user:)
+    user.owner?(company: self) || user.admin?(company: self)
   end
 
   def can_access?(user:)

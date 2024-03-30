@@ -17,6 +17,6 @@ class SettingsController < ApplicationController
   private
 
   def update_params
-    params.require(:company).permit(:name)
+    params.require(:company).permit(:name, :avatar)
   end
 end
