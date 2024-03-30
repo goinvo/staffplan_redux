@@ -1,16 +1,18 @@
 # frozen_string_literal: true
 
+include ActionController::Helpers
+
 module Types
   module StaffPlan
     class UserType < Types::BaseObject
       field :id, ID, null: false
       field :name, String, null: false
       field :email, String, null: false
-      field :current_company_id, ID, null: true
+      field :current_company, Types::StaffPlan::CompanyType, null: true
 
       field :avatar_url, String, null: false
       def avatar_url
-        helpers.avatar_image_url(target: object)
+        AvatarHelper.new(target: object).image_url
       end
 
       field :companies, [Types::StaffPlan::CompanyType], null: false, description: "Fetches all companies for the current user."

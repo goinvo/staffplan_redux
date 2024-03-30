@@ -10,7 +10,7 @@ module Types
 
       field :avatar_url, String, null: false
       def avatar_url
-        helpers.avatar_image_url(target: object)
+        AvatarHelper.new(target: object).image_url
       end
 
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
