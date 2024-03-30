@@ -18,7 +18,11 @@ module ApplicationHelper
 
     link_to text, path, class: css_classes
   end
-  def user_gravatar(user:, size: 80, css_classes: "h-8 w-8 rounded-full")
-    image_tag(user.avatar_url(size:), alt: user.name, class: css_classes)
+  def gravatar_url(target:, size: 80, css_classes: "h-8 w-8 rounded-full")
+    if target.has_gravatar?
+      image_tag(target.avatar_url(size:), alt: target.name, class: css_classes)
+    else
+      image_tag("http://www.gravatar.com/avatar")
+    end
   end
 end

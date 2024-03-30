@@ -1,6 +1,6 @@
 <li class="relative flex justify-between gap-x-6 py-5">
   <div class="flex min-w-0 gap-x-4">
-    <%= helpers.user_gravatar(user: @user, css_classes: "h-12 w-12 flex-none rounded-full bg-gray-50") %>
+    <%= helpers.gravatar_url(target: @user, css_classes: "h-12 w-12 flex-none rounded-full bg-gray-50") %>
     <div class="min-w-0 flex-auto">
       <p class="text-sm font-semibold leading-6 text-gray-900">
         <%= link_to settings_user_path(@user) do %>

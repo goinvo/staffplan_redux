@@ -53,4 +53,8 @@ class User < ApplicationRecord
       "http://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     end
   end
+
+  def has_gravatar?
+    true
+  end
 end

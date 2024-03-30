@@ -35,4 +35,8 @@ class Client < ApplicationRecord
       end
     end
   end
+
+  def has_gravatar?
+    false
+  end
 end
