@@ -19,7 +19,7 @@
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <%= link_to root_path do %>
-                  <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
+                  <img class="h-8 w-8 rounded-full" src="<%= AvatarHelper.new(target: current_company).image_url %>" alt="<%= current_company.name %>">
                 <% end %>
               </div>
               <div class="hidden md:block">
