@@ -89,17 +89,4 @@ RSpec.describe User, type: :model do
       user.toggle_status!(company: user.current_company)
     end
   end
-
-  describe "#avatar_url" do
-    it "returns the gravatar URL if the user hasn't set an avatar" do
-      user = create(:user)
-      expect(user.avatar_url).to include("http://secure.gravatar.com/avatar")
-    end
-
-    it "returns the avatar URL if the user has set an avatar" do
-      user = create(:user)
-      user.update(avatar: fixture_file_upload("avatar.jpg", "image/jpg"))
-      expect(user.avatar_url).to be_a(ActiveStorage::VariantWithRecord)
-    end
-  end
 end

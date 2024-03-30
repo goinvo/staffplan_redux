@@ -44,15 +44,6 @@ class User < ApplicationRecord
     SyncCustomerSubscriptionJob.perform_async(current_company.id)
   end
 
-  def avatar_url(size: 80)
-    if avatar.attached?
-      avatar.variant(:thumb)
-    else
-      gravatar_id = Digest::MD5::hexdigest(email.downcase)
-      "http://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
-    end
-  end
-
   def has_gravatar?
     true
   end
