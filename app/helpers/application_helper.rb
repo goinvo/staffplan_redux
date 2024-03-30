@@ -18,21 +18,4 @@ module ApplicationHelper
 
     link_to text, path, class: css_classes
   end
-
-  def avatar_image_url(target:, size: 80)
-    if target.avatar.attached?
-      target.avatar.variant(:thumb)
-    else
-      case target
-      when User
-        gravatar_id = Digest::MD5::hexdigest(target.email.downcase)
-        "http://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
-      else
-        "http://www.gravatar.com/avatar"
-      end
-    end
-  end
-  def avatar_image_tag(target:, size: 80, css_classes: "h-8 w-8 rounded-full")
-    image_tag(avatar_image_url(target:, size:), alt: target.name, class: css_classes)
-  end
 end

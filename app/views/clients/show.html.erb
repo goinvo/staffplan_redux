@@ -36,7 +36,7 @@
     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
       <dt class="text-sm font-medium leading-6 text-gray-900">Avatar</dt>
       <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-        <%= avatar_image_tag(target: @client, css_classes: "h-24 w-24 rounded-full") %>
+        <%= image_tag AvatarHelper.new(target: @client).image_url, class: "h-24 w-24 rounded-full" %>
       </dd>
     </div>
     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
