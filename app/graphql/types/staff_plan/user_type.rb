@@ -9,6 +9,9 @@ module Types
       field :current_company_id, ID, null: true
 
       field :avatar_url, String, null: false
+      def avatar_url
+        helpers.avatar_image_url(target: object)
+      end
 
       field :companies, [Types::StaffPlan::CompanyType], null: false, description: "Fetches all companies for the current user."
 

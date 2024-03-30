@@ -56,6 +56,7 @@ enum AssignmentStatus {
 }
 
 type Client {
+  avatarUrl: String!
   createdAt: ISO8601DateTime!
   description: String
   id: ID!
@@ -78,6 +79,7 @@ enum ClientStatus {
 }
 
 type Company {
+  avatarUrl: String!
   clients: [Client!]!
   createdAt: ISO8601DateTime!
   id: ID!

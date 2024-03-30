@@ -5,6 +5,12 @@ module Types
     class CompanyType < Types::BaseObject
       field :id, ID, null: false
       field :name, String, null: false
+
+      field :avatar_url, String, null: false
+      def avatar_url
+        helpers.avatar_image_url(target: object)
+      end
+
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
