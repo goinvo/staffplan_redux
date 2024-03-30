@@ -4,6 +4,10 @@ class Client < ApplicationRecord
 
   has_paper_trail
 
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+  end
+
   ACTIVE = 'active'.freeze
   ARCHIVED = 'archived'.freeze
 
@@ -34,9 +38,5 @@ class Client < ApplicationRecord
         projects.update_all(status: Project::ARCHIVED)
       end
     end
-  end
-
-  def has_gravatar?
-    false
   end
 end

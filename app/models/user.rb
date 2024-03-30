@@ -43,8 +43,4 @@ class User < ApplicationRecord
 
     SyncCustomerSubscriptionJob.perform_async(current_company.id)
   end
-
-  def has_gravatar?
-    true
-  end
 end

@@ -39,8 +39,4 @@ class Company < ApplicationRecord
     membership = memberships.find_by(user: user)
     membership.present? && membership.active?
   end
-
-  def has_gravatar?
-    false
-  end
 end
