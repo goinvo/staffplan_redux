@@ -50,6 +50,6 @@ class ClientsController < ApplicationController
     end
 
     def update_client_params
-      params.require(:client).permit(:name, :description, :status)
+      params.require(:client).permit(:name, :description, :status, :avatar)
     end
 end
