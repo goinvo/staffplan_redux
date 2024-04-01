@@ -9,6 +9,11 @@ type Assignment {
   The date the assignment ends
   """
   endsOn: ISO8601Date
+
+  """
+  The estimated weekly hours for this assignment
+  """
+  estimatedWeeklyHours: Int
   id: ID!
 
   """
@@ -115,6 +120,11 @@ type Mutation {
     The date this assignment ends.
     """
     endsOn: ISO8601Date
+
+    """
+    The estimated weekly hours for this assignment.
+    """
+    estimatedWeeklyHours: Int
 
     """
     The ID of the assignment to update.

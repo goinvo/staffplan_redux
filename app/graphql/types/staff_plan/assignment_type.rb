@@ -14,6 +14,7 @@ module Types
       field :status, Enums::AssignmentStatus, null: false, description: 'The status of the assignment'
       field :starts_on, GraphQL::Types::ISO8601Date, null: true, description: 'The date the assignment starts'
       field :ends_on, GraphQL::Types::ISO8601Date, null: true, description: 'The date the assignment ends'
+      field :estimated_weekly_hours, Integer, null: true, description: 'The estimated weekly hours for this assignment'
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
