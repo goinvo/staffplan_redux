@@ -122,6 +122,11 @@ type Mutation {
     endsOn: ISO8601Date
 
     """
+    The estimated weekly hours for this assignment.
+    """
+    estimatedWeeklyHours: Int
+
+    """
     The ID of the assignment to update.
     """
     id: ID
