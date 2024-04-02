@@ -7,13 +7,14 @@ module Mutations
     argument :project_id, ID, required: true, description: "The ID of the project this assignment is being created for."
     argument :user_id, ID, required: true, description: "The ID of the user being assigned to the project."
     argument :status, String, required: true, description: "The status of the assignment."
+    argument :estimated_weekly_hours, Integer, required: false, description: "The estimated weekly hours for this assignment."
     argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this assignment starts."
     argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this assignment ends."
 
     # return type from the mutation
     type Types::StaffPlan::AssignmentType
 
-    def resolve(id: nil, project_id:, user_id:, status:, starts_on: nil, ends_on: nil)
+    def resolve(id: nil, project_id:, user_id:, status:, estimated_weekly_hours: nil, starts_on: nil, ends_on: nil)
       current_company = context[:current_company]
 
       # try and find the assignment
@@ -28,6 +29,7 @@ module Mutations
         assignment = project.assignments.new(user_id:, status:)
       end
 
+      assignment.assign_attributes(estimated_weekly_hours: estimated_weekly_hours) if estimated_weekly_hours
       assignment.assign_attributes(starts_on: starts_on) if starts_on
       assignment.assign_attributes(ends_on: ends_on) if ends_on
 
