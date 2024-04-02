@@ -50,8 +50,8 @@ RSpec.describe Mutations::UpsertAssignment do
 
     it "updates the assignment with valid params" do
       query_string = <<-GRAPHQL
-        mutation($id: ID, $projectId: ID!, $userId: ID!, $status: String!, $startsOn: ISO8601Date, $endsOn: ISO8601Date) {
-          upsertAssignment(id: $id, projectId: $projectId, userId: $userId, status: $status, startsOn: $startsOn, endsOn: $endsOn) {
+        mutation($id: ID, $projectId: ID!, $userId: ID!, $status: String!, $estimatedWeeklyHours: Int, $startsOn: ISO8601Date, $endsOn: ISO8601Date) {
+          upsertAssignment(id: $id, projectId: $projectId, userId: $userId, status: $status, estimatedWeeklyHours: $estimatedWeeklyHours, startsOn: $startsOn, endsOn: $endsOn) {
             id
             project {
               id
@@ -60,6 +60,7 @@ RSpec.describe Mutations::UpsertAssignment do
               id
             }  
             status
+            estimatedWeeklyHours
             startsOn
             endsOn
           }
@@ -80,6 +81,7 @@ RSpec.describe Mutations::UpsertAssignment do
           projectId: assignment.project_id,
           userId: assignment.user_id,
           status: Assignment::ACTIVE,
+          estimatedWeeklyHours: estimated_weekly_hours = 40,
           startsOn: starts_on = 2.weeks.from_now.to_date.iso8601,
           endsOn: ends_on = 10.weeks.from_now.to_date.iso8601
         }
@@ -88,6 +90,7 @@ RSpec.describe Mutations::UpsertAssignment do
       post_result = result["data"]["upsertAssignment"]
       expect(result["errors"]).to be_nil
       expect(post_result["status"]).to eq(Assignment::ACTIVE)
+      expect(post_result["estimatedWeeklyHours"]).to eq(estimated_weekly_hours)
       expect(post_result["startsOn"]).to eq(starts_on.to_s)
       expect(post_result["endsOn"]).to eq(ends_on.to_s)
     end
@@ -121,7 +124,7 @@ RSpec.describe Mutations::UpsertAssignment do
         },
         variables: {
           id: assignment.id,
-          # projectId: create(:project).id,
+          projectId: create(:project).id,
           userId: assignment.user_id,
           status: Assignment::ACTIVE,
         }
@@ -129,7 +132,7 @@ RSpec.describe Mutations::UpsertAssignment do
 
       post_result = result["errors"]
       expect(post_result.length).to eq(1)
-      expect(post_result.first["message"]).to eq("Variable $projectId of type ID! was provided invalid value")
+      expect(post_result.first["message"]).to eq("Project and user must belong to the same company")
     end
 
     it "raises a 404 if given an assignment id that doesn't exist on the company" do
