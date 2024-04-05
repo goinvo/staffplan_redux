@@ -8,6 +8,8 @@ RSpec.describe Project, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_inclusion_of(:status).in_array(Project::VALID_STATUSES) }
     it { should validate_numericality_of(:cost).is_greater_than_or_equal_to(0.0) }
+    it { should validate_numericality_of(:fte).is_greater_than_or_equal_to(0.0) }
+    it { should validate_numericality_of(:hours).is_greater_than_or_equal_to(0) }
     it { should validate_inclusion_of(:payment_frequency).in_array(%w(weekly monthly fortnightly quarterly annually)) }
   end
 
