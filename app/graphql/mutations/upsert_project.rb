@@ -9,13 +9,26 @@ module Mutations
     argument :status, String, required: false, description: "The status of the project."
     argument :cost, Float, required: false, description: "The cost of the project."
     argument :payment_frequency, String, required: false, description: "The frequency of payment for the project."
+    argument :fte, Float, required: false, description: "The number of full time employees that will be assigned to this project."
+    argument :hours, Integer, required: false, description: "The expected number of billable hours expected for this project."
     argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project starts."
     argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project ends."
 
     # return type from the mutation
     type Types::StaffPlan::ProjectType, null: true
 
-    def resolve(id: nil, client_id: nil, name: nil, status: nil, cost: nil, payment_frequency: nil, starts_on: nil, ends_on: nil)
+    def resolve(
+      id: nil,
+      client_id: nil,
+      name: nil,
+      status: nil,
+      cost: nil,
+      payment_frequency: nil,
+      fte: nil,
+      hours: nil,
+      starts_on: nil,
+      ends_on: nil
+    )
       current_company = context[:current_company]
 
       # try and find the assignment
@@ -42,6 +55,8 @@ module Mutations
       project.assign_attributes(status:) if status.present?
       project.assign_attributes(cost:) if cost.present?
       project.assign_attributes(payment_frequency:) if payment_frequency.present?
+      project.assign_attributes(fte:) if fte.present?
+      project.assign_attributes(hours:) if hours.present?
       project.assign_attributes(starts_on:) if starts_on.present?
       project.assign_attributes(ends_on:) if ends_on.present?
 

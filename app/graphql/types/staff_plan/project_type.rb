@@ -9,6 +9,8 @@ module Types
       field :status,  Enums::ProjectStatus, null: false
       field :cost, Float, null: false
       field :payment_frequency, Enums::ProjectPaymentFrequency, null: false
+      field :fte, Float, null: true
+      field :hours, Integer, null: true
       field :starts_on, GraphQL::Types::ISO8601Date, null: true
       field :ends_on, GraphQL::Types::ISO8601Date, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false

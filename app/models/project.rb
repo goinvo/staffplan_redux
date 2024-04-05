@@ -28,6 +28,8 @@ class Project < ApplicationRecord
   validates :status, inclusion: { in: VALID_STATUSES }, allow_blank: true
   validates :cost, numericality: { greater_than_or_equal_to: 0.0 }, allow_blank: true
   validates :payment_frequency, inclusion: { in: VALID_PAYMENT_FREQUENCIES }, allow_blank: true
+  validates :fte, numericality: { greater_than_or_equal_to: 0.0 }, allow_blank: true
+  validates :hours, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
 
   def confirmed?
     status == CONFIRMED
