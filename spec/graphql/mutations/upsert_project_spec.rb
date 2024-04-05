@@ -87,8 +87,8 @@ RSpec.describe Mutations::UpsertProject do
 
     it "updates a project with valid params" do
       query_string = <<-GRAPHQL
-        mutation($id: ID, $clientId: ID, $name: String, $status: String, $cost: Float, $paymentFrequency: String, $startsOn: ISO8601Date, $endsOn: ISO8601Date) {
-          upsertProject(id: $id, clientId: $clientId, name: $name, status: $status, cost: $cost, paymentFrequency: $paymentFrequency, startsOn: $startsOn, endsOn: $endsOn) {
+        mutation($id: ID, $clientId: ID, $name: String, $status: String, $cost: Float, $paymentFrequency: String, $fte: Float, $hours: Int, $startsOn: ISO8601Date, $endsOn: ISO8601Date) {
+          upsertProject(id: $id, clientId: $clientId, name: $name, status: $status, cost: $cost, paymentFrequency: $paymentFrequency, fte: $fte, hours: $hours, startsOn: $startsOn, endsOn: $endsOn) {
             id
             client {
               id
@@ -96,6 +96,8 @@ RSpec.describe Mutations::UpsertProject do
             name
             cost
             paymentFrequency
+            fte
+            hours
             status
             startsOn
             endsOn
@@ -119,6 +121,8 @@ RSpec.describe Mutations::UpsertProject do
           status: Project::COMPLETED,
           cost: 1000.00,
           paymentFrequency: Project::ANNUALLY,
+          fte: 1.25,
+          hours: 1_000,
           startsOn: starts_on = 2.weeks.from_now.to_date.iso8601,
           endsOn: ends_on = 10.weeks.from_now.to_date.iso8601
         }
@@ -131,6 +135,8 @@ RSpec.describe Mutations::UpsertProject do
       expect(post_result["status"]).to eq(Project::COMPLETED)
       expect(post_result["cost"]).to eq(1000.00)
       expect(post_result["paymentFrequency"]).to eq(Project::ANNUALLY)
+      expect(post_result["fte"]).to eq(1.25)
+      expect(post_result["hours"]).to eq(1_000)
       expect(post_result["startsOn"]).to eq(starts_on.to_s)
       expect(post_result["endsOn"]).to eq(ends_on.to_s)
     end

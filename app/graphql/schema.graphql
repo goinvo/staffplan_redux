@@ -197,6 +197,16 @@ type Mutation {
     endsOn: ISO8601Date
 
     """
+    The number of full time employees that will be assigned to this project.
+    """
+    fte: Float
+
+    """
+    The expected number of billable hours expected for this project.
+    """
+    hours: Int
+
+    """
     The ID of the project to update.
     """
     id: ID
@@ -259,6 +269,8 @@ type Project {
   cost: Float!
   createdAt: ISO8601DateTime!
   endsOn: ISO8601Date
+  fte: Float
+  hours: Int
   id: ID!
   name: String!
   paymentFrequency: ProjectPaymentFrequency!
