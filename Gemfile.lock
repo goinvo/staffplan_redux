@@ -138,7 +138,7 @@ GEM
     faker (3.3.1)
       i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
-    foreman (0.87.2)
+    foreman (0.88.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
     graphiql-rails (1.10.0)
