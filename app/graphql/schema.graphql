@@ -222,6 +222,11 @@ type Mutation {
     paymentFrequency: String
 
     """
+    The type of rate for this project.
+    """
+    rateType: String
+
+    """
     The date this project starts.
     """
     startsOn: ISO8601Date
@@ -274,6 +279,7 @@ type Project {
   id: ID!
   name: String!
   paymentFrequency: ProjectPaymentFrequency!
+  rateType: String
   startsOn: ISO8601Date
   status: ProjectStatus!
   updatedAt: ISO8601DateTime!
