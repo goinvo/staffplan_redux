@@ -19,8 +19,11 @@ class Project < ApplicationRecord
   FORTNIGHTLY = "fortnightly".freeze
   QUARTERLY = "quarterly".freeze
   ANNUALLY = "annually".freeze
+  FIXED = "fixed".freeze
+  HOURLY = "hourly".freeze
 
   VALID_STATUSES = [UNCONFIRMED, CONFIRMED, ARCHIVED, CANCELLED, COMPLETED].freeze
+  VALID_RATE_TYPES = [FIXED, HOURLY].freeze
   VALID_PAYMENT_FREQUENCIES = [WEEKLY, MONTHLY, FORTNIGHTLY, QUARTERLY, ANNUALLY].freeze
 
   validates :client_id, presence: true
@@ -29,6 +32,7 @@ class Project < ApplicationRecord
   validates :cost, numericality: { greater_than_or_equal_to: 0.0 }, allow_blank: true
   validates :payment_frequency, inclusion: { in: VALID_PAYMENT_FREQUENCIES }, allow_blank: true
   validates :fte, numericality: { greater_than_or_equal_to: 0.0 }, allow_blank: true
+  validates :rate_type, inclusion: { in: VALID_RATE_TYPES }, allow_blank: true
   validates :hours, numericality: { greater_than_or_equal_to: 0 }, allow_blank: true
 
   def confirmed?
