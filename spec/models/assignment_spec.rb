@@ -30,18 +30,6 @@ RSpec.describe Assignment, type: :model do
       expect(assignment).to_not be_valid
       expect(assignment.errors[:ends_on]).to include("can't come before the assignment starts")
     end
-
-    it "does not allow ends_on to be set without starts_on" do
-      assignment = build(:assignment, starts_on: nil, ends_on: Date.today)
-      expect(assignment).to_not be_valid
-      expect(assignment.errors[:starts_on]).to include("is required if an end date is set")
-    end
-
-    it "does not allow starts_on to be set without ends_on" do
-      assignment = build(:assignment, starts_on: Date.today, ends_on: nil)
-      expect(assignment).to_not be_valid
-      expect(assignment.errors[:ends_on]).to include("is required if a start date is set")
-    end
   end
 
   describe "#project_and_user_belong_to_same_company" do

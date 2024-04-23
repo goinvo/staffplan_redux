@@ -33,14 +33,6 @@ class Assignment < ApplicationRecord
   end
 
   def starts_and_ends_on_rules
-    if starts_on.blank? && ends_on.present?
-      errors.add(:starts_on, "is required if an end date is set")
-    end
-
-    if ends_on.blank? && starts_on.present?
-      errors.add(:ends_on, "is required if a start date is set")
-    end
-
     return if starts_on.blank? || ends_on.blank?
 
     if starts_on > ends_on
