@@ -26,15 +26,19 @@
                 <div class="ml-10 flex items-baseline space-x-4">
                   <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                   <% if Rails.env.production? %>
-                    <a href="https://staffplan-ui.fermion.dev/me" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My StaffPlan</a>
+                    <a href="https://staffplan-ui.fermion.dev/people/<%= current_user.id %>" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">My StaffPlan</a>
                   <% else %>
-                    <%= header_link_to "My StaffPlan", "http://localhost:8080/me" %>
+                    <%= header_link_to "My StaffPlan", "http://localhost:8080/people/#{current_user.id}" %>
                   <% end %>
-                  <%= header_link_to "Clients", clients_path %>
                   <% if Rails.env.production? %>
                     <a href="https://staffplan-ui.fermion.dev/projects" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
                   <% else %>
                     <%= header_link_to "Projects", "http://localhost:8080/projects" %>
+                  <% end %>
+                  <% if Rails.env.production? %>
+                    <a href="https://staffplan-ui.fermion.dev/people" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">People</a>
+                  <% else %>
+                    <%= header_link_to "People", "http://localhost:8080/people" %>
                   <% end %>
                   <% if current_user.owner?(company: current_company) || current_user.admin?(company: current_company) %>
                     <%= header_link_to "Settings", settings_path %>
@@ -106,15 +110,19 @@
         <div class="border-b border-gray-700 md:hidden hidden" id="mobile-menu">
           <div class="space-y-1 px-2 py-3 sm:px-3">
             <% if Rails.env.production? %>
-              <a href="https://staffplan-ui.fermion.dev/me" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">My StaffPlan</a>
+              <a href="https://staffplan-ui.fermion.dev/people/<%= current_user.id  %>" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">My StaffPlan</a>
             <% else %>
-              <%= mobile_header_link_to "My StaffPlan", "http://localhost:8080/me" %>
+              <%= mobile_header_link_to "My StaffPlan", "http://localhost:8080/people/#{current_user.id}" %>
             <% end %>
-            <%= mobile_header_link_to "Clients", clients_path %>
             <% if Rails.env.production? %>
               <a href="https://staffplan-ui.fermion.dev/projects" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
             <% else %>
               <%= mobile_header_link_to "Projects", "http://localhost:8080/projects" %>
+            <% end %>
+            <% if Rails.env.production? %>
+              <a href="https://staffplan-ui.fermion.dev/people" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">People</a>
+            <% else %>
+              <%= mobile_header_link_to "People", "http://localhost:8080/people" %>
             <% end %>
             <% if current_user.owner?(company: current_company) || current_user.admin?(company: current_company) %>
               <%= mobile_header_link_to "Settings", settings_path %>
