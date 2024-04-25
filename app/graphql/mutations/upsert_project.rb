@@ -12,6 +12,7 @@ module Mutations
     argument :fte, Float, required: false, description: "The number of full time employees that will be assigned to this project."
     argument :hours, Integer, required: false, description: "The expected number of billable hours expected for this project."
     argument :rate_type, String, required: false, description: "The type of rate for this project."
+    argument :hourly_rate, Integer, required: false, description: "The hourly rate for this project."
     argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project starts."
     argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project ends."
 
@@ -28,6 +29,7 @@ module Mutations
       fte: nil,
       hours: nil,
       rate_type: nil,
+      hourly_rate: nil,
       starts_on: nil,
       ends_on: nil
     )
@@ -60,6 +62,7 @@ module Mutations
       project.assign_attributes(fte:) if fte.present?
       project.assign_attributes(hours:) if hours.present?
       project.assign_attributes(rate_type:) if rate_type.present?
+      project.assign_attributes(hourly_rate:) if hourly_rate.present?
       project.assign_attributes(starts_on:) if starts_on.present?
       project.assign_attributes(ends_on:) if ends_on.present?
 

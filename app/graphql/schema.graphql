@@ -202,6 +202,11 @@ type Mutation {
     fte: Float
 
     """
+    The hourly rate for this project.
+    """
+    hourlyRate: Int
+
+    """
     The expected number of billable hours expected for this project.
     """
     hours: Int
@@ -275,6 +280,7 @@ type Project {
   createdAt: ISO8601DateTime!
   endsOn: ISO8601Date
   fte: Float
+  hourlyRate: Int!
   hours: Int
   id: ID!
   name: String!
