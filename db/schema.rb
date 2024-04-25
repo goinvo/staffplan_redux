@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_23_020204) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_114628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -110,6 +110,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_23_020204) do
     t.decimal "fte", precision: 8, scale: 2
     t.integer "hours"
     t.string "rate_type"
+    t.integer "hourly_rate", default: 0, null: false
     t.index ["client_id", "name"], name: "index_projects_on_client_id_and_name", unique: true
     t.index ["client_id"], name: "index_projects_on_client_id"
   end
