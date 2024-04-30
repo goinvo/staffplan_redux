@@ -190,9 +190,9 @@ GEM
       net-protocol
     net-protocol (0.2.2)
       timeout
-    net-smtp (0.4.0.1)
+    net-smtp (0.5.0)
       net-protocol
-    nio4r (2.7.0)
+    nio4r (2.7.1)
     nokogiri (1.16.4-aarch64-linux)
       racc (~> 1.4)
     nokogiri (1.16.4-arm64-darwin)
@@ -202,7 +202,7 @@ GEM
     paper_trail (15.1.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
-    passwordless (1.5.0)
+    passwordless (1.6.0)
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
     pg (1.5.6)
@@ -261,7 +261,7 @@ GEM
     redis-client (0.22.1)
       connection_pool
     regexp_parser (2.9.0)
-    reline (0.5.3)
+    reline (0.5.4)
       io-console (~> 0.5)
     request_store (1.6.0)
       rack (>= 1.4)
@@ -372,7 +372,7 @@ DEPENDENCIES
   letter_opener
   money
   paper_trail
-  passwordless (~> 1.5)
+  passwordless (~> 1.6)
   pg (~> 1.5)
   puma (>= 5.0)
   rack-cors
