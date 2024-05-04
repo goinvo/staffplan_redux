@@ -9,11 +9,11 @@ RSpec.describe "Authentication", type: :system do
   end
 
   context "when an email does not exist" do
-    it "shows the user an error that their email does not exist" do
+    it "does not show the user that we couldn't find their e-mail address" do
       visit root_path
       fill_in "passwordless[email]", with: Faker::Internet.email
       click_button "Sign in"
-      expect(page).to have_content("We couldn't find a user with that email address")
+      expect(page).to have_content("We've sent you an email with a secret token")
     end
   end
 
