@@ -28,7 +28,7 @@ gem "tailwindcss-rails"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem 'paper_trail'
-gem "passwordless", "~> 1.6"
+gem "passwordless", "~> 1.7"
 gem "graphql", "~> 2.3"
 gem "graphiql-rails"
 gem "view_component"
