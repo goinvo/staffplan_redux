@@ -57,3 +57,19 @@ resource "aws_iam_policy_attachment" "s3_policy_attachment" {
   users      = [aws_iam_user.staffplan_redux_bot.name]
   policy_arn = aws_iam_policy.staffplan_redux_bot_policy.arn
 }
+
+resource "aws_lightsail_instance" "staffplan_redux_database" {
+  name              = "staffplan-redux-database"
+  availability_zone = "us-east-1a"
+  blueprint_id      = "ubuntu_22_04"
+  bundle_id         = "nano_3_0"
+  key_pair_name     = "staffplan-key-pair"
+}
+
+resource "aws_lightsail_instance" "staffplan_redux_web" {
+  name              = "staffplan-redux-web"
+  availability_zone = "us-east-1a"
+  blueprint_id      = "ubuntu_22_04"
+  bundle_id         = "micro_3_0"
+  key_pair_name     = "staffplan-key-pair"
+}
