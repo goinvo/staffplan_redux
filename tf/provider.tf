@@ -59,17 +59,9 @@ resource "aws_iam_policy_attachment" "s3_policy_attachment" {
 }
 
 resource "aws_lightsail_instance" "staffplan_redux_database" {
-  name              = "staffplan-redux-database"
+  name              = "staffplan-redux"
   availability_zone = "us-east-1a"
   blueprint_id      = "ubuntu_22_04"
-  bundle_id         = "nano_3_0"
-  key_pair_name     = "staffplan-key-pair"
-}
-
-resource "aws_lightsail_instance" "staffplan_redux_web" {
-  name              = "staffplan-redux-web"
-  availability_zone = "us-east-1a"
-  blueprint_id      = "ubuntu_22_04"
-  bundle_id         = "micro_3_0"
+  bundle_id         = "small_3_0"
   key_pair_name     = "staffplan-key-pair"
 }

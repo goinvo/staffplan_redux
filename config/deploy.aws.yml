@@ -1,0 +1,53 @@
+servers:
+  web:
+    hosts:
+      - 52.87.186.93
+    cmd: bundle exec puma -C config/puma.rb
+    options:
+      "add-host": host.docker.internal:host-gateway
+  job:
+    hosts:
+      - 52.87.186.93
+    cmd: bundle exec sidekiq -C config/sidekiq.yml
+    options:
+      "add-host": host.docker.internal:host-gateway
+
+ssh:
+  user: ubuntu
+
+# Inject ENV variables into containers (secrets come from .env).
+# Remember to run `kamal env push` after making changes!
+env:
+  clear:
+    DB_HOST: 52.87.186.93
+  secret:
+    - RAILS_MASTER_KEY
+    - POSTGRES_PASSWORD
+    - DOCKER_REGISTRY_TOKEN
+    - STAFF_PLAN_EMAILS
+    - REDIS_URL
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
+
+# Use accessory services (secrets come from .env).
+accessories:
+  db:
+    image: postgres:15
+    host: 52.87.186.93
+    port: 5432
+    env:
+      clear:
+        POSTGRES_USER: 'staffplan_redux'
+        POSTGRES_DB: 'staffplan_redux_production'
+      secret:
+        - POSTGRES_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
+  redis:
+   image: redis:latest
+   roles:
+     - web
+     - job
+   port: 6379
+   volumes:
+     - data:/var/lib/redis/data
