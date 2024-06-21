@@ -91,7 +91,7 @@ RSpec.describe "Projects", type: :request do
       it "returns a 422 for invalid params" do
         project_params = FactoryBot.attributes_for(:project, name: nil)
         post projects_path, params: { project: project_params }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(422)
       end
     end
 
@@ -114,7 +114,7 @@ RSpec.describe "Projects", type: :request do
         project = FactoryBot.create(:project)
         project_params = FactoryBot.attributes_for(:project, name: nil)
         patch project_path(project), params: { project: project_params }
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(422)
       end
     end
   end
