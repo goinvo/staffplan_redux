@@ -80,7 +80,7 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
     :user_name => 'apikey',
     :password => Rails.application.credentials.sendgrid_api_key,
-    :domain => 'prettygood.software',
+    :domain => 'em7128.staffplan.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,
     :authentication => :plain,
@@ -105,6 +105,6 @@ Rails.application.configure do
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-  Rails.application.routes.default_url_options[:host] = 'staffplan.fermion.dev'
+  Rails.application.routes.default_url_options[:host] = 'staffplan.com'
   Rails.application.routes.default_url_options[:protocol] = 'https'
 end
