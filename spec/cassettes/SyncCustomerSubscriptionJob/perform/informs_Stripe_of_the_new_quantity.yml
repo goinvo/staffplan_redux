@@ -5,22 +5,22 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Rempel%2C+Kunze+and+Murphy+24+%7C+Alton+Kozey+23&email=something%40static.com
+      string: name=Koepp-Herzog+32+%7C+Tatum+Feil+32&email=something%40static.com
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/10.12.0
+      - Stripe/v1 RubyBindings/12.0.0
       Authorization:
       - Bearer <BEARER_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_MHYU4QtA0lVssv","request_duration_ms":0}}'
+      - '{"last_request_metrics":{"request_id":"req_iVB9UwfXbk2fm8","request_duration_ms":890}}'
       Stripe-Version:
-      - '2023-10-16'
+      - '2024-06-20'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"10.12.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
-        fwank-2.local 23.4.0 Darwin Kernel Version 23.4.0: Fri Mar 15 00:12:25 PDT
-        2024; root:xnu-10063.101.17~1/RELEASE_ARM64_T6030 arm64","hostname":"fwank-2.local"}'
+      - '{"bindings_version":"12.0.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-2.local 23.5.0 Darwin Kernel Version 23.5.0: Wed May  1 20:13:18 PDT
+        2024; root:xnu-10063.121.3~5/RELEASE_ARM64_T6030 arm64","hostname":"fwank-2.local"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -33,11 +33,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 26 Mar 2024 12:29:13 GMT
+      - Wed, 03 Jul 2024 16:06:52 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '674'
+      - '661'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -60,21 +60,25 @@ http_interactions:
       Cross-Origin-Opener-Policy-Report-Only:
       - same-origin; report-to="coop"
       Idempotency-Key:
-      - e42af461-1f65-4d6b-a17e-c762980816d8
+      - ac0eb9ec-2f95-4914-998c-98073557ae2f
       Original-Request:
-      - req_0KewjT7lVs4HGQ
+      - req_JuQ2PAMD7DKlbh
       Report-To:
-      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report"}],"include_subdomains":true}'
+      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report?s=mono-bapi-srv"}],"include_subdomains":true}'
       Reporting-Endpoints:
-      - coop="https://q.stripe.com/coop-report"
+      - coop="https://q.stripe.com/coop-report?s=mono-bapi-srv"
       Request-Id:
-      - req_0KewjT7lVs4HGQ
+      - req_JuQ2PAMD7DKlbh
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
-      - '2023-10-16'
+      - '2024-06-20'
       Vary:
       - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Stripe-Priority-Routing-Enabled:
+      - 'true'
       X-Stripe-Routing-Context-Priority-Tier:
       - api-testmode
       Strict-Transport-Security:
@@ -83,18 +87,18 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_PoBU8fjDRQDvtx",
+          "id": "cus_QPKMG10xF9Vda3",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1711456153,
+          "created": 1720022812,
           "currency": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
           "email": "something@static.com",
-          "invoice_prefix": "5307B3DB",
+          "invoice_prefix": "E35CD616",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -103,7 +107,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Rempel, Kunze and Murphy 24 | Alton Kozey 23",
+          "name": "Koepp-Herzog 32 | Tatum Feil 32",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -111,28 +115,28 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Tue, 26 Mar 2024 12:29:13 GMT
+  recorded_at: Wed, 03 Jul 2024 16:06:52 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/subscriptions
     body:
       encoding: UTF-8
-      string: customer=cus_PoBU8fjDRQDvtx&items[0][price]=price_1Oo7tQBLjyMcgacQSNLewS9y&items[0][quantity]=1&trial_period_days=30&trial_settings[end_behavior][missing_payment_method]=cancel&payment_settings[save_default_payment_method]=on_subscription
+      string: customer=cus_QPKMG10xF9Vda3&items[0][price]=price_1Oo7tQBLjyMcgacQSNLewS9y&items[0][quantity]=1&trial_period_days=30&trial_settings[end_behavior][missing_payment_method]=cancel&payment_settings[save_default_payment_method]=on_subscription
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/10.12.0
+      - Stripe/v1 RubyBindings/12.0.0
       Authorization:
       - Bearer <BEARER_TOKEN>
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_0KewjT7lVs4HGQ","request_duration_ms":343}}'
+      - '{"last_request_metrics":{"request_id":"req_JuQ2PAMD7DKlbh","request_duration_ms":271}}'
       Stripe-Version:
-      - '2023-10-16'
+      - '2024-06-20'
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"10.12.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
-        fwank-2.local 23.4.0 Darwin Kernel Version 23.4.0: Fri Mar 15 00:12:25 PDT
-        2024; root:xnu-10063.101.17~1/RELEASE_ARM64_T6030 arm64","hostname":"fwank-2.local"}'
+      - '{"bindings_version":"12.0.0","lang":"ruby","lang_version":"3.2.0 p0 (2022-12-25)","platform":"arm64-darwin23","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-2.local 23.5.0 Darwin Kernel Version 23.5.0: Wed May  1 20:13:18 PDT
+        2024; root:xnu-10063.121.3~5/RELEASE_ARM64_T6030 arm64","hostname":"fwank-2.local"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -145,11 +149,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Tue, 26 Mar 2024 12:29:14 GMT
+      - Wed, 03 Jul 2024 16:06:53 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '4222'
+      - '4337'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -172,21 +176,25 @@ http_interactions:
       Cross-Origin-Opener-Policy-Report-Only:
       - same-origin; report-to="coop"
       Idempotency-Key:
-      - c2e27b87-c8dd-4234-ba48-03c4bead370d
+      - 6f98f458-01ad-4a76-a297-0322357f0443
       Original-Request:
-      - req_SpVs2x3Gbtjnc4
+      - req_i213G05QoV24Wr
       Report-To:
-      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report"}],"include_subdomains":true}'
+      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report?s=billing-api-srv"}],"include_subdomains":true}'
       Reporting-Endpoints:
-      - coop="https://q.stripe.com/coop-report"
+      - coop="https://q.stripe.com/coop-report?s=billing-api-srv"
       Request-Id:
-      - req_SpVs2x3Gbtjnc4
+      - req_i213G05QoV24Wr
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
-      - '2023-10-16'
+      - '2024-06-20'
       Vary:
       - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Stripe-Priority-Routing-Enabled:
+      - 'true'
       X-Stripe-Routing-Context-Priority-Tier:
       - api-testmode
       Strict-Transport-Security:
@@ -195,7 +203,7 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "id": "sub_1OyZ7uBLjyMcgacQ97eW5Ti9",
+          "id": "sub_1PYVhoBLjyMcgacQcGcNMLMI",
           "object": "subscription",
           "application": null,
           "application_fee_percent": null,
@@ -203,7 +211,7 @@ http_interactions:
             "enabled": false,
             "liability": null
           },
-          "billing_cycle_anchor": 1714048153,
+          "billing_cycle_anchor": 1722614812,
           "billing_cycle_anchor_config": null,
           "billing_thresholds": null,
           "cancel_at": null,
@@ -215,17 +223,18 @@ http_interactions:
             "reason": null
           },
           "collection_method": "charge_automatically",
-          "created": 1711456153,
+          "created": 1720022812,
           "currency": "usd",
-          "current_period_end": 1714048153,
-          "current_period_start": 1711456153,
-          "customer": "cus_PoBU8fjDRQDvtx",
+          "current_period_end": 1722614812,
+          "current_period_start": 1720022812,
+          "customer": "cus_QPKMG10xF9Vda3",
           "days_until_due": null,
           "default_payment_method": null,
           "default_source": null,
           "default_tax_rates": [],
           "description": null,
           "discount": null,
+          "discounts": [],
           "ended_at": null,
           "invoice_settings": {
             "account_tax_ids": null,
@@ -237,10 +246,11 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "si_PoBUC5cXrjp9Q4",
+                "id": "si_QPKMvSRdzY25RB",
                 "object": "subscription_item",
                 "billing_thresholds": null,
-                "created": 1711456154,
+                "created": 1720022813,
+                "discounts": [],
                 "metadata": {},
                 "plan": {
                   "id": "price_1Oo7tQBLjyMcgacQSNLewS9y",
@@ -256,6 +266,7 @@ http_interactions:
                   "interval_count": 1,
                   "livemode": false,
                   "metadata": {},
+                  "meter": null,
                   "nickname": null,
                   "product": "prod_PdOgBPQqj1Ri1R",
                   "tiers_mode": null,
@@ -280,6 +291,7 @@ http_interactions:
                     "aggregate_usage": null,
                     "interval": "month",
                     "interval_count": 1,
+                    "meter": null,
                     "trial_period_days": null,
                     "usage_type": "licensed"
                   },
@@ -291,15 +303,15 @@ http_interactions:
                   "unit_amount_decimal": "300"
                 },
                 "quantity": 1,
-                "subscription": "sub_1OyZ7uBLjyMcgacQ97eW5Ti9",
+                "subscription": "sub_1PYVhoBLjyMcgacQcGcNMLMI",
                 "tax_rates": []
               }
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/subscription_items?subscription=sub_1OyZ7uBLjyMcgacQ97eW5Ti9"
+            "url": "/v1/subscription_items?subscription=sub_1PYVhoBLjyMcgacQcGcNMLMI"
           },
-          "latest_invoice": "in_1OyZ7uBLjyMcgacQn9JiJrTX",
+          "latest_invoice": "in_1PYVhoBLjyMcgacQu5y73A6D",
           "livemode": false,
           "metadata": {},
           "next_pending_invoice_item_invoice": null,
@@ -311,7 +323,7 @@ http_interactions:
             "save_default_payment_method": "on_subscription"
           },
           "pending_invoice_item_interval": null,
-          "pending_setup_intent": "seti_1OyZ7uBLjyMcgacQRmgRF03V",
+          "pending_setup_intent": "seti_1PYVhpBLjyMcgacQScYzlzhX",
           "pending_update": null,
           "plan": {
             "id": "price_1Oo7tQBLjyMcgacQSNLewS9y",
@@ -327,6 +339,7 @@ http_interactions:
             "interval_count": 1,
             "livemode": false,
             "metadata": {},
+            "meter": null,
             "nickname": null,
             "product": "prod_PdOgBPQqj1Ri1R",
             "tiers_mode": null,
@@ -336,17 +349,17 @@ http_interactions:
           },
           "quantity": 1,
           "schedule": null,
-          "start_date": 1711456153,
+          "start_date": 1720022812,
           "status": "trialing",
           "test_clock": null,
           "transfer_data": null,
-          "trial_end": 1714048153,
+          "trial_end": 1722614812,
           "trial_settings": {
             "end_behavior": {
               "missing_payment_method": "cancel"
             }
           },
-          "trial_start": 1711456153
+          "trial_start": 1720022812
         }
-  recorded_at: Tue, 26 Mar 2024 12:29:14 GMT
+  recorded_at: Wed, 03 Jul 2024 16:06:53 GMT
 recorded_with: VCR 6.2.0
