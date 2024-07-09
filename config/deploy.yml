@@ -8,13 +8,13 @@ image: fermion/staffplan-redux
 servers:
   web:
     hosts:
-      - 159.203.142.226
+      - 34.192.107.71
     cmd: bundle exec puma -C config/puma.rb
     options:
       "add-host": host.docker.internal:host-gateway
   job:
     hosts:
-      - 159.203.142.226
+      - 34.192.107.71
     cmd: bundle exec sidekiq -C config/sidekiq.yml
     options:
       "add-host": host.docker.internal:host-gateway
@@ -29,7 +29,7 @@ registry:
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 159.203.142.226
+    DB_HOST: 34.192.107.71
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -39,9 +39,8 @@ env:
     - AWS_ACCESS_KEY_ID
     - AWS_SECRET_ACCESS_KEY
 
-  # Use a different ssh user than root
-  # ssh:
-  #   user: app
+ssh:
+  user: ubuntu
 
   # Configure builder setup.
   # builder:
@@ -57,7 +56,7 @@ env:
 accessories:
   db:
     image: postgres:15
-    host: 159.203.142.226
+    host: 34.192.107.71
     port: 5432
     env:
       clear:
