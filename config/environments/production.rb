@@ -75,13 +75,15 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+
+  config.x.mail_from = %(StaffPlan No Reply <noreply@staffplan.com>)
 
   ActionMailer::Base.smtp_settings = {
-    :user_name => 'apikey',
-    :password => Rails.application.credentials.sendgrid_api_key,
+    :user_name => ENV.fetch("AWS_SMTP_USER_NAME"),
+    :password => ENV.fetch("AWS_SMTP_PASSWORD"),
     :domain => 'em7128.staffplan.com',
-    :address => 'smtp.sendgrid.net',
+    :address => 'email-smtp.us-east-1.amazonaws.com',
     :port => 587,
     :authentication => :plain,
     :enable_starttls_auto => true
