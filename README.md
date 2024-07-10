@@ -24,8 +24,13 @@ If you don't have any of these things, please install them before continuing. Wh
 
 ```bash
 bundle install
-gem install kamal
+
+##########################################################################
+# only need this for deploying the app, otherwise this should be skipped
+gem install kamal 
 kamal envify --skip-push
+##########################################################################
+
 docker compose up --detach
 bin/rails db:setup
 bin/dev
