@@ -80,8 +80,8 @@ Rails.application.configure do
   config.x.mail_from = %(StaffPlan No Reply <noreply@staffplan.com>)
 
   ActionMailer::Base.smtp_settings = {
-    :user_name => ENV.fetch("AWS_SMTP_USER_NAME"),
-    :password => ENV.fetch("AWS_SMTP_PASSWORD"),
+    :user_name => Rails.application.credentials.aws_smtp_user_name,
+    :password => Rails.application.credentials.aws_smtp_password,
     :domain => 'em7128.staffplan.com',
     :address => 'email-smtp.us-east-1.amazonaws.com',
     :port => 587,
