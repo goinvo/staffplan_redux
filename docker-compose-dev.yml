@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+    env_file: .env
+    container_name: staffplan-postgres-dev
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/var/lib/redis/data
+    env_file: .env
+    container_name: staffplan-redis-dev
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bin/rails server -b 0.0.0.0
+    environment:
+      RAILS_ENV: development
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+      - ./public:/app/public
+    ports:
+      - "3000:3000"
+    container_name: staffplan-web-dev
+
+volumes:
+  bundle_path:
+  redis:
+  data:
