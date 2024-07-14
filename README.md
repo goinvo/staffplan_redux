@@ -10,7 +10,25 @@ So time for an update.
 
 ## Ship date = late Jan-ish 24
 
-## Installation
+## Docker installation
+
+These instructions will create a local environment for running StaffPlan locally for the purposes of developing the UI. This
+is not a great environment for developing the backend (Rails) app as it doesn't have a debugger or other development tools
+set up. It's meant to provide a way for UI developers to work on the front end without needing to install Ruby or Rails on their
+local systems.
+
+```bash
+docker compose -f docker-compose-dev.yml build
+docker compose -f docker-compose-dev.yml up -d
+docker compose -f docker-compose-dev.yml run web bin/rails db:create # ignore any errors here
+docker compose -f docker-compose-dev.yml run web bin/rails db:migrate db:seed
+```
+
+To sign in, you'll need to sign in with `owner@acme.co`, `admin@acme.co`, or `member@acme.co`. These accounts are all on the Acme Co. account
+with the respective role attached. In order to sign in, you'll enter this email into the sign in form. Since Docker can't open the browser on
+your local machine, you'll need to check http://localhost:3000/letter_opener/ for the recent emails sent by the system.
+
+## non-Docker Installation
 
 For local development we'll assume a couple of things:
 

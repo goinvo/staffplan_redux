@@ -5,8 +5,8 @@ services:
       - "5432:5432"
     volumes:
       - data:/var/lib/postgresql/data
-    env_file: .env
-    container_name: staffplan-postgres-dev
+    environment:
+      POSTGRES_PASSWORD: postgres
 
   redis:
     image: redis
@@ -14,8 +14,6 @@ services:
       - "6379:6379"
     volumes:
       - redis:/var/lib/redis/data
-    env_file: .env
-    container_name: staffplan-redis-dev
 
   web:
     build:
@@ -23,18 +21,40 @@ services:
       dockerfile: Dockerfile.dev
     command: bin/rails server -b 0.0.0.0
     environment:
-      RAILS_ENV: development
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
       DB_HOST: db
+      REDIS_URL: redis://redis:6379/0
     stdin_open: true
     tty: true
+    depends_on:
+      - db
+      - redis
+      - sidekiq
     volumes:
-      - .:/app
-      - ./public:/app/public
+      - .:/rails
+      - ./public:/rails/public
     ports:
       - "3000:3000"
-    container_name: staffplan-web-dev
+
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: db
+      REDIS_URL: redis://redis:6379/0
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/rails
+      - ./public:/rails/public
 
 volumes:
   bundle_path:
