@@ -22,9 +22,9 @@ default: &default
 development:
   <<: *default
   database: staffplan_redux_development
-  host: localhost
-  password: <%= ENV["POSTGRES_PASSWORD"] %>
-  username: postgres
+  host: <%= ENV["DB_HOST"] %>
+  password: <%= ENV["DB_PASSWORD"] %>
+  username: <%= ENV["DB_USERNAME"] %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.

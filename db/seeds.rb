@@ -8,29 +8,41 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-goinvo = Company.find_or_create_by(name: "GoInvo")
-emails = ENV["STAFF_PLAN_EMAILS"].split(",").map(&:strip)
+acme = Company.find_or_create_by(name: "Acme Co.")
 
-if goinvo.users.none?
-  emails.each do |email|
-    AddUserToCompany.new(
-      email:,
-      name: Faker::Name.name,
-      company: goinvo
-    ).call
-  end
+if acme.users.none?
+  AddUserToCompany.new(
+    email: "owner@acme.co",
+    name: "Acme Owner",
+    role: "owner",
+    company: acme
+  ).call
 
-  goinvo.save!
+  AddUserToCompany.new(
+    email: "admin@acme.co",
+    name: "Acme Admin",
+    role: "admin",
+    company: acme
+  ).call
+
+  AddUserToCompany.new(
+    email: "member@acme.co",
+    name: "Acme Member",
+    role: "member",
+    company: acme
+  ).call
+
+  acme.save!
 else
-  puts "Found users for GoInvo, skipping..."
+  puts "Found users for Acme Co., skipping..."
 end
 
-if goinvo.clients.none?
+if acme.clients.none?
   5.times do
-    goinvo.clients.create(name: Faker::Company.name)
+    acme.clients.create(name: Faker::Company.name)
   end
 
-  goinvo.clients.each do |client|
+  acme.clients.each do |client|
     next if client.projects.any?
     7.times do
       client.projects.create(
@@ -41,7 +53,7 @@ if goinvo.clients.none?
       )
     end
 
-    goinvo.users.each do |user|
+    acme.users.each do |user|
       client.projects.sample(2).each do |project|
         Assignment.create!(
           user: user,
@@ -52,5 +64,5 @@ if goinvo.clients.none?
     end
   end
 else
-  puts "Found clients for GoInvo, skipping clients and projects..."
+  puts "Found clients for Acme Co., skipping clients and projects..."
 end

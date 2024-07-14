@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # TODO: some kind of auth here
   mount Sidekiq::Web => '/sidekiq'
 
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
     # only allow authenticated users, otherwise 404
     Passwordless::Session.exists?(id: request.session[:"passwordless_session_id--user"])
