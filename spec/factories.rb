@@ -75,8 +75,10 @@ FactoryBot.define do
       if assignment.project.blank?
         assignment.project = create(:project, client: create(:client, company: assignment.user.current_company))
       end
+    end
 
-      foo = 'bar'
+    trait :unassigned do
+      user { nil }
     end
   end
 

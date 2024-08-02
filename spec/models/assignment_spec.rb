@@ -4,16 +4,48 @@ RSpec.describe Assignment, type: :model do
   context "validations" do
     subject { create(:assignment) }
 
-    it { should validate_presence_of(:user_id) }
-    it { should validate_uniqueness_of(:user_id).scoped_to(:project_id) }
     it { should validate_presence_of(:project_id) }
     it { should validate_uniqueness_of(:project_id).scoped_to(:user_id) }
     it { should validate_presence_of(:status) }
     it { should validate_inclusion_of(:status).in_array(%w(proposed active archived completed)) }
+
+    it "does not validates user / project uniqueness if the status is not 'active'" do
+      first_assignment = build(:assignment, status: Assignment::PROPOSED)
+      second_assignment = build(:assignment, project: first_assignment.project, status: Assignment::PROPOSED)
+      first_assignment.update!(user_id: nil)
+      second_assignment.update!(user_id: nil)
+
+      expect(first_assignment).to be_valid
+      expect(second_assignment).to be_valid
+    end
+
+    it "requires a user if the status is active" do
+      assignment = create(:assignment, status: Assignment::ACTIVE)
+      assignment.assign_attributes(user_id: nil)
+
+      expect(assignment).to_not be_valid
+      expect(assignment.save).to be_falsey
+      assignment.reload
+      expect(assignment.user).to_not be_nil
+    end
+
+    it 'disallows saving non-proposed assignments with no assignee' do
+      assignment = Assignment.new(
+        project: create(:project),
+        status: Assignment::ACTIVE,
+        user: nil
+      )
+      expect(assignment).to_not be_valid
+      expect(assignment.save).to be_falsey
+    end
+
+    it "does not require a user if the status is not 'active'" do
+      assignment = build(:assignment, status: Assignment::PROPOSED, user: nil)
+      expect(assignment).to be_valid
+    end
   end
 
   context "associations" do
-    it { should belong_to(:user) }
     it { should belong_to(:project) }
     it { should have_many(:work_weeks) }
   end

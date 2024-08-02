@@ -5,7 +5,7 @@ module Types
     class AssignmentType < Types::BaseObject
       field :id, ID, null: false
 
-      field :assigned_user, Types::StaffPlan::UserType, null: false, description: 'The user assigned to this assignment'
+      field :assigned_user, Types::StaffPlan::UserType, null: true, description: 'The user assigned to this assignment'
       def assigned_user
         object.user
       end

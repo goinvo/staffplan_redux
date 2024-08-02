@@ -1,5 +1,5 @@
 class Assignment < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :project
   has_one :company, through: :user, source: :current_company
   has_many :work_weeks, dependent: :destroy
@@ -12,8 +12,8 @@ class Assignment < ApplicationRecord
   COMPLETED = "completed".freeze
   VALID_STATUSES = [PROPOSED, ACTIVE, ARCHIVED, COMPLETED].freeze
 
-  validates :user_id, presence: true, uniqueness: { scope: :project_id }
-  validates :project_id, presence: true, uniqueness: { scope: :user_id }
+  validates :user_id, presence: true, uniqueness: { scope: :project_id }, if: ->(assignment) { assignment.status != PROPOSED }
+  validates :project_id, presence: true, uniqueness: { scope: :user_id, allow_nil: true }, if: ->(assignment) { assignment.user_id.present? }
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
   validate :starts_and_ends_on_rules
   validate :project_and_user_belong_to_same_company

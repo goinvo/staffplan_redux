@@ -3,18 +3,25 @@ module Mutations
     description "Create or update an assignment."
 
     # arguments passed to the `resolve` method
-    argument :id, ID, required: false, description: "The ID of the assignment to update."
-    argument :project_id, ID, required: true, description: "The ID of the project this assignment is being created for."
-    argument :user_id, ID, required: true, description: "The ID of the user being assigned to the project."
-    argument :status, String, required: true, description: "The status of the assignment."
-    argument :estimated_weekly_hours, Integer, required: false, description: "The estimated weekly hours for this assignment."
-    argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this assignment starts."
-    argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this assignment ends."
+    argument :id, ID, required: false,
+             description: "The ID of the assignment to update."
+    argument :project_id, ID, required: true,
+             description: "The ID of the project this assignment is being created for."
+    argument :user_id, ID, required: false,
+             description: "The ID of the user being assigned to the project. If omitted, the assignment status cannot be 'active'."
+    argument :status, String, required: true,
+             description: "The status of the assignment."
+    argument :estimated_weekly_hours, Integer, required: false,
+             description: "The estimated weekly hours for this assignment."
+    argument :starts_on, GraphQL::Types::ISO8601Date, required: false,
+             description: "The date this assignment starts."
+    argument :ends_on, GraphQL::Types::ISO8601Date, required: false,
+             description: "The date this assignment ends."
 
     # return type from the mutation
     type Types::StaffPlan::AssignmentType
 
-    def resolve(id: nil, project_id:, user_id:, status:, estimated_weekly_hours: nil, starts_on: nil, ends_on: nil)
+    def resolve(id: nil, project_id:, user_id: nil, status:, estimated_weekly_hours: nil, starts_on: nil, ends_on: nil)
       current_company = context[:current_company]
 
       # try and find the assignment
