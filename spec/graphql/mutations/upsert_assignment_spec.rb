@@ -5,9 +5,51 @@ require "rails_helper"
 RSpec.describe Mutations::UpsertAssignment do
 
   context "resolve" do
+    it "creates a new assignment proposed unassigned assignment" do
+      query_string = <<-GRAPHQL
+        mutation($projectId: ID!, $userId: ID, $status: String!) {
+          upsertAssignment(projectId: $projectId, userId: $userId, status: $status) {
+            id
+            project {
+              id
+            }
+            assignedUser {
+              id
+            }  
+            status
+            startsOn
+            endsOn
+          }
+        }
+      GRAPHQL
+
+      user = create(:user)
+      project = create(:project, company: user.current_company)
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: user,
+          current_company: user.current_company
+        },
+        variables: {
+          projectId: project.id,
+          status: Assignment::PROPOSED
+        }
+      )
+
+      post_result = result["data"]["upsertAssignment"]
+      expect(result["errors"]).to be_nil
+      expect(post_result["project"]["id"]).to eq(project.id.to_s)
+      expect(post_result["assignedUser"]).to be_nil
+      expect(post_result["status"]).to eq(Assignment::PROPOSED)
+      expect(post_result["startsOn"]).to be_nil
+      expect(post_result["endsOn"]).to be_nil
+    end
+
     it "creates a new assignment with valid params" do
       query_string = <<-GRAPHQL
-        mutation($projectId: ID!, $userId: ID!, $status: String!) {
+        mutation($projectId: ID!, $userId: ID, $status: String!) {
           upsertAssignment(projectId: $projectId, userId: $userId, status: $status) {
             id
             project {
@@ -50,7 +92,7 @@ RSpec.describe Mutations::UpsertAssignment do
 
     it "updates the assignment with valid params" do
       query_string = <<-GRAPHQL
-        mutation($id: ID, $projectId: ID!, $userId: ID!, $status: String!, $estimatedWeeklyHours: Int, $startsOn: ISO8601Date, $endsOn: ISO8601Date) {
+        mutation($id: ID, $projectId: ID!, $userId: ID, $status: String!, $estimatedWeeklyHours: Int, $startsOn: ISO8601Date, $endsOn: ISO8601Date) {
           upsertAssignment(id: $id, projectId: $projectId, userId: $userId, status: $status, estimatedWeeklyHours: $estimatedWeeklyHours, startsOn: $startsOn, endsOn: $endsOn) {
             id
             project {
@@ -97,7 +139,7 @@ RSpec.describe Mutations::UpsertAssignment do
 
     it "renders validation errors" do
       query_string = <<-GRAPHQL
-        mutation($id: ID, $projectId: ID!, $userId: ID!, $status: String!) {
+        mutation($id: ID, $projectId: ID!, $userId: ID, $status: String!) {
           upsertAssignment(id: $id, projectId: $projectId, userId: $userId, status: $status) {
             id
             project {
@@ -137,7 +179,7 @@ RSpec.describe Mutations::UpsertAssignment do
 
     it "raises a 404 if given an assignment id that doesn't exist on the company" do
       query_string = <<-GRAPHQL
-        mutation($id: ID, $projectId: ID!, $userId: ID!, $status: String!) {
+        mutation($id: ID, $projectId: ID!, $userId: ID, $status: String!) {
           upsertAssignment(id: $id, projectId: $projectId, userId: $userId, status: $status) {
             id
             project {

@@ -2,7 +2,7 @@ type Assignment {
   """
   The user assigned to this assignment
   """
-  assignedUser: User!
+  assignedUser: User
   createdAt: ISO8601DateTime!
 
   """
