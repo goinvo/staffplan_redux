@@ -147,9 +147,9 @@ type Mutation {
     status: String!
 
     """
-    The ID of the user being assigned to the project.
+    The ID of the user being assigned to the project. If omitted, the assignment status cannot be 'active'.
     """
-    userId: ID!
+    userId: ID
   ): Assignment!
 
   """
