@@ -22,6 +22,7 @@ docker compose -f docker-compose-dev.yml build
 docker compose -f docker-compose-dev.yml up -d
 docker compose -f docker-compose-dev.yml run web bin/rails db:create # ignore any errors here
 docker compose -f docker-compose-dev.yml run web bin/rails db:migrate db:seed
+docker compose -f docker-compose-dev.yml run web bin/rails assets:precompile
 ```
 
 To sign in, you'll need to sign in with `owner@acme.co`, `admin@acme.co`, or `member@acme.co`. These accounts are all on the Acme Co. account
