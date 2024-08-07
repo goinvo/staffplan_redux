@@ -10,18 +10,25 @@ So time for an update.
 
 ## Foundational setup
 
-Running the backend for StaffPlan requires an active Stripe account. You'll need to create a free account on Stripe. You'll be editing your credentials file
-with the `rails credentials:edit` command. This should create a new master encryption key and encrypted credentials file for you. Populate it with the 
-contents of development.yml.enc from this repo.
+Running the **full** backend for StaffPlan requires an active Stripe account. If you'll just be doing UI development, **you may not need to set this up**.
+
+You'll need to create a free account on Stripe. You'll be editing your credentials file with the `rails credentials:edit` command. This should create 
+a new master encryption key and encrypted credentials file for you. Populate it with the contents of development.yml.enc from this repo. Note that 
+if you're using the fully dockerized version of the backend, you'll need to prefix these commands like
+
+```
+docker compose -f docker-compose-dev.yml run web bin/rails credentials:edit
+```
 
 First, generate a new secret_key_base via `rails secret`, save its value in your credentials file as the `secret_key_base` key's value.
 
 Next, go to the [developer API keys](https://dashboard.stripe.com/test/apikeys) page and add the secret key (starts with `sk_test_...`) to your credentials
 as the `stripe_api_key` key's value.
 
-Next, run `rake script:bootstrap` locally. This will create the necessary product/price and customer billing portal configuration in your Stripe account. Note
-that the output will provide you two values you'll need to save in your credentials file. If you get stuck, you'll need to grab the `price_id` and the 
-billing portal's `login_page.url` from your Stripe account's UI, and save them as the `stripe_price_id` and `stripe_login_url` keys' values respectively.
+Next, run `rake script:bootstrap` (or `docker compose -f docker-compose-dev.yml run web bin/script:bootstrap`) locally. This will create the 
+necessary product/price and customer billing portal configuration in your Stripe account. Note that the output will provide you two values 
+you'll need to save in your credentials file. If you get stuck, you'll need to grab the `price_id` and the billing portal's `login_page.url` from y
+our Stripe account's UI, and save them as the `stripe_price_id` and `stripe_login_url` keys' values respectively.
 
 Finally, you'll need to ensure that you're able to receive webhooks from Stripe. The recommended way to do this is to
 use [Stripe's local CLI](https://dashboard.stripe.com/test/webhooks/create?endpoint_location=local). You can also configure a webhook to point
