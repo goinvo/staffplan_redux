@@ -15,6 +15,7 @@ module Mutations
     argument :hourly_rate, Integer, required: false, description: "The hourly rate for this project."
     argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project starts."
     argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project ends."
+    argument :assignments, [Types::StaffPlan::AssignmentAttributes], required: false, description: "Assignments for this project. See upsertAssignment to create a single assignment for existing projects."
 
     # return type from the mutation
     type Types::StaffPlan::ProjectType, null: true
@@ -31,7 +32,8 @@ module Mutations
       rate_type: nil,
       hourly_rate: nil,
       starts_on: nil,
-      ends_on: nil
+      ends_on: nil,
+      assignments: []
     )
       current_company = context[:current_company]
 
@@ -68,6 +70,10 @@ module Mutations
 
       if project.valid?
         project.save!
+
+        assignments.map do |assignment|
+          project.assignments << Assignment.new(assignment.to_h)
+        end
       else
         project.errors.group_by_attribute.each do |attribute, errors|
           errors.each do |error|
