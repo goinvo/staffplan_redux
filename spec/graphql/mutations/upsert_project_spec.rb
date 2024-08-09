@@ -5,10 +5,10 @@ require "rails_helper"
 RSpec.describe Mutations::UpsertProject do
 
   context "resolve" do
-    it "creates a new project with valid params" do
+    it "creates a new project with assignments from valid params" do
       query_string = <<-GRAPHQL
-        mutation($clientId: ID, $name: String, $status: String) {
-          upsertProject(clientId: $clientId, name: $name, status: $status) {
+        mutation($clientId: ID, $name: String, $status: String, $assignments: [AssignmentAttributes!]) {
+          upsertProject(clientId: $clientId, name: $name, status: $status, assignments: $assignments) {
             id
             client {
               id
@@ -17,11 +17,17 @@ RSpec.describe Mutations::UpsertProject do
             status
             startsOn
             endsOn
+            assignments {
+              assignedUser {
+                email
+              }             
+            }           
           }
         }
       GRAPHQL
 
       user = create(:user)
+      assignee = create(:membership, company: user.current_company).user
       client = create(:client, company: user.current_company)
 
       result = StaffplanReduxSchema.execute(
@@ -33,7 +39,10 @@ RSpec.describe Mutations::UpsertProject do
         variables: {
           clientId: client.id,
           name: project_name = Faker::Company.buzzword,
-          status: Project::UNCONFIRMED
+          status: Project::UNCONFIRMED,
+          assignments: [{
+            userId: assignee.id,
+          }]
         }
       )
 
@@ -44,6 +53,62 @@ RSpec.describe Mutations::UpsertProject do
       expect(post_result["status"]).to eq(Project::UNCONFIRMED)
       expect(post_result["startsOn"]).to be_nil
       expect(post_result["endsOn"]).to be_nil
+      expect(post_result["assignments"].length).to eq(1)
+      expect(post_result["assignments"].first["assignedUser"]["email"]).to eq(assignee.email)
+    end
+
+    it "creates a new project with unassigned assignments from valid params" do
+      query_string = <<-GRAPHQL
+        mutation($clientId: ID, $name: String, $status: String, $assignments: [AssignmentAttributes!]) {
+          upsertProject(clientId: $clientId, name: $name, status: $status, assignments: $assignments) {
+            id
+            client {
+              id
+            }
+            name
+            status
+            startsOn
+            endsOn
+            assignments {
+              assignedUser {
+                email
+              }
+              startsOn             
+            }           
+          }
+        }
+      GRAPHQL
+
+      user = create(:user)
+      starts_on = Date.tomorrow.iso8601
+      client = create(:client, company: user.current_company)
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: user,
+          current_company: user.current_company
+        },
+        variables: {
+          clientId: client.id,
+          name: project_name = Faker::Company.buzzword,
+          status: Project::UNCONFIRMED,
+          assignments: [{
+            startsOn: starts_on,
+          }]
+        }
+      )
+
+      post_result = result["data"]["upsertProject"]
+      expect(result["errors"]).to be_nil
+      expect(post_result["client"]["id"]).to eq(client.id.to_s)
+      expect(post_result["name"]).to eq(project_name)
+      expect(post_result["status"]).to eq(Project::UNCONFIRMED)
+      expect(post_result["startsOn"]).to be_nil
+      expect(post_result["endsOn"]).to be_nil
+      expect(post_result["assignments"].length).to eq(1)
+      expect(post_result["assignments"].first["assignedUser"]).to be_nil
+      expect(post_result["assignments"].first["startsOn"]).to eq(starts_on)
     end
 
     it "does not allow a client_id from another company to be specified" do

@@ -38,6 +38,41 @@ type Assignment {
   workWeeks: [WorkWeek!]!
 }
 
+"""
+Attributes for creating an assignment
+"""
+input AssignmentAttributes {
+  """
+  The date the assignment ends
+  """
+  endsOn: ISO8601Date
+
+  """
+  The estimated weekly hours for this assignment
+  """
+  estimatedWeeklyHours: Int
+
+  """
+  The project this assignment is for
+  """
+  projectId: ID
+
+  """
+  The date the assignment starts
+  """
+  startsOn: ISO8601Date
+
+  """
+  The status of the assignment
+  """
+  status: String
+
+  """
+  The user assigned to this assignment
+  """
+  userId: ID
+}
+
 enum AssignmentStatus {
   """
   The assignment is currently in progress.
@@ -181,6 +216,11 @@ type Mutation {
   Create or update a project.
   """
   upsertProject(
+    """
+    Assignments for this project. See upsertAssignment to create a single assignment for existing projects.
+    """
+    assignments: [AssignmentAttributes!]
+
     """
     The ID of the client for this project.
     """
