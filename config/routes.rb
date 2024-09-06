@@ -2,7 +2,13 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   # TODO: some kind of auth here
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => '/sidekiq', constraints: lambda { |request|
+    user = Passwordless::Session.find_by(id: request.session[:"passwordless_session_id--user"])&.authenticatable
+
+    Rails.env.development? || (
+      user && %w(goinvo.com prettygood.software).include?(user.email.split('@').last)
+    )
+  }
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
