@@ -8,6 +8,10 @@ Our useful staff planning service (https://github.com/goinvo/StaffPlan) was a bi
 
 So time for an update.
 
+## StaffPlan is...
+![A Project Staffplan](https://github.com/goinvo/staffplan_redux/blob/main/public/StaffPlan_Individual_Project.png)
+![An individual's StaffPlan](https://github.com/goinvo/staffplan_redux/blob/main/public/StaffPlan_Individual.png)
+
 ## Foundational setup
 
 Running the **full** backend for StaffPlan requires an active Stripe account. If you'll just be doing UI development, **you may not need to set this up**.
