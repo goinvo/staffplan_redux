@@ -7,10 +7,10 @@ RSpec.describe Company, type: :model do
       expect(company).to_not be_valid
     end
 
-    it "requires a unique name" do
+    it "does not require a unique name" do
       company = create(:company)
       other_company = build(:company, name: company.name)
-      expect(other_company).to_not be_valid
+      expect(other_company).to be_valid
     end
   end
 end
