@@ -13,7 +13,7 @@ class Company < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validates :name, presence: true
 
   before_create :build_default_subscription
 
