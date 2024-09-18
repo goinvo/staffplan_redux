@@ -15,6 +15,7 @@ class RegistrationsController < ApplicationController
       RegistrationsMailer.create(@registration).deliver_now
       redirect_to auth_sign_in_url, notice: "Thanks for your interest in StaffPlan! Check your e-mail for next steps on how to confirm your account."
     else
+      flash.now[:alert] = "Sorry, please try that again."
       render :new
     end
   end
@@ -37,5 +38,7 @@ class RegistrationsController < ApplicationController
 
   def registration_params
     params.require(:registration).permit(:company_name, :name, :email)
+  rescue ActionController::ParameterMissing
+    {}
   end
 end
