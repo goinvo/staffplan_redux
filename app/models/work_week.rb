@@ -11,4 +11,28 @@ class WorkWeek < ApplicationRecord
   validates :year, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 2000, less_than_or_equal_to: 2200 }
   validates :estimated_hours, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 168 }
   validates :actual_hours, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 168 }
+  validate :no_future_actual_hours
+
+  private
+
+  def no_future_actual_hours
+    return if actual_hours_allowed?
+
+    assign_attributes(actual_hours: 0) if actual_hours > 0
+  end
+
+  def year_zero?
+    year.blank? || year == 0
+  end
+
+  def cweek_zero?
+    cweek.blank? || cweek == 0
+  end
+
+  def actual_hours_allowed?
+    return false if year_zero? || cweek_zero?
+
+    today = Date.today
+    today.year < year || (today.year == year && today.cweek >= cweek)
+  end
 end

@@ -311,6 +311,21 @@ type Mutation {
     """
     year: Int!
   ): WorkWeek!
+
+  """
+  Create or update a work week record for a StaffPlan user.
+  """
+  upsertWorkWeeks(
+    """
+    The ID of the assignment this work week is being created for.
+    """
+    assignmentId: ID!
+
+    """
+    Attributes for creating or updating a work week record for a StaffPlan user.
+    """
+    workWeeks: [WorkWeeksInputObject!]!
+  ): Assignment!
 }
 
 type Project {
@@ -468,5 +483,30 @@ type WorkWeek {
   project: Project!
   updatedAt: ISO8601DateTime!
   user: User!
+  year: Int!
+}
+
+"""
+Attributes for creating or updating a work week record for a StaffPlan user.
+"""
+input WorkWeeksInputObject {
+  """
+  The actual hours for this work week.
+  """
+  actualHours: Int
+
+  """
+  The calendar week number of the work week.
+  """
+  cweek: Int!
+
+  """
+  The estimated hours for this work week.
+  """
+  estimatedHours: Int
+
+  """
+  The calendar year of the work week.
+  """
   year: Int!
 }

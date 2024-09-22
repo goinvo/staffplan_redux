@@ -13,6 +13,14 @@ RSpec.describe WorkWeek, type: :model do
     it { should validate_numericality_of(:estimated_hours).only_integer.is_greater_than_or_equal_to(0).is_less_than_or_equal_to(168) }
     it { should validate_presence_of(:actual_hours) }
     it { should validate_numericality_of(:actual_hours).only_integer.is_greater_than_or_equal_to(0).is_less_than_or_equal_to(168) }
+
+    it 'resets actual_hours values greater than 0 for future assignments' do
+      next_month = Date.today.next_month
+      work_week = create(:work_week, actual_hours: 1, year: next_month.year, cweek: next_month.cweek, assignment: create(:assignment))
+
+      expect(work_week).to be_valid
+      expect(work_week.reload.actual_hours).to eql(0)
+    end
   end
 
   context "associations" do
