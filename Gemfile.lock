@@ -270,8 +270,7 @@ GEM
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
-    rexml (3.3.6)
-      strscan
+    rexml (3.3.7)
     rollbar (3.6.0)
     rspec-core (3.13.1)
       rspec-support (~> 3.13.0)
@@ -295,7 +294,7 @@ GEM
       logger
     rubyzip (2.3.2)
     securerandom (0.3.1)
-    selenium-webdriver (4.24.0)
+    selenium-webdriver (4.25.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
@@ -320,7 +319,6 @@ GEM
       railties (>= 6.0.0)
     stringio (3.1.1)
     stripe (12.6.0)
-    strscan (3.1.0)
     tailwindcss-rails (2.7.5-aarch64-linux)
       railties (>= 7.0.0)
     tailwindcss-rails (2.7.5-arm64-darwin)
