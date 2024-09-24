@@ -18,6 +18,7 @@ gem "stimulus-rails"
 gem "stripe"
 gem "money"
 gem "tailwindcss-rails"
+gem "recaptcha"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
