@@ -5,6 +5,11 @@ class RegistrationsController < ApplicationController
   end
 
   def create
+    if Rails.env.production? && !verify_recaptcha
+      flash.now[:alert] = "Sorry, please try that again."
+      render :new
+    end
+
     create_params = registration_params.merge(
       ip_address: request.remote_ip,
     )
