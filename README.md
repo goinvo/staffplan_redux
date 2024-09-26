@@ -12,7 +12,19 @@ So time for an update.
 ![A Project Staffplan](https://github.com/goinvo/staffplan_redux/blob/main/public/StaffPlan_Individual_Project.png)
 ![An individual's StaffPlan](https://github.com/goinvo/staffplan_redux/blob/main/public/StaffPlan_Individual.png)
 
-## Foundational setup
+## It's also...
+Design Your Work Future with StaffPlan<br>
+Imagine a tool that allows you and your team to shape your own work path. StaffPlan is designed to give you more control over what projects you’re involved in and how you map out your future work. Instead of rigid top-down planning, StaffPlan lets you suggest, discuss, and plan alongside your team leads and department heads.<br>
+
+Have a project idea you’re passionate about? Like working on California health policy design or affordable housing initiatives? Stub in that project, share it with your group lead, and start a conversation about how to make it happen. It’s about taking initiative, not waiting for assignments.<br>
+
+StaffPlan puts the power in the hands of your project teams to self-plan and track their workload, whether you’re entering routine tasks or bigger, long-term projects. Want to see what your workload looks like down the road? StaffPlan helps ensure you and your team are covered for weeks, months, and even a year into the future.<br>
+
+But we know planning isn’t always enough – it’s also about making sure everything gets done. That’s why we’ve built in a simple, brain-dead easy timecard system. You get a quick text or email at the end of the week with your hours pre-filled. All you need to do is confirm with a click. It’s that simple.<br>
+
+Planning doesn’t have to be complicated or rigid. With StaffPlan, you’re part of the conversation about where you’re going and what you’re working on. It’s a cultural shift toward more open, collaborative planning – and we’re here to support that.
+
+## Want to run an instance for yourself? Here's the foundational setup
 
 Running the **full** backend for StaffPlan requires an active Stripe account. If you'll just be doing UI development, **you may not need to set this up**.
 
