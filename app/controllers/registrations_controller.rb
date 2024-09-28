@@ -5,16 +5,16 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    if Rails.env.production? && !verify_recaptcha
-      flash.now[:alert] = "Sorry, please try that again."
-      render :new
-    end
-
     create_params = registration_params.merge(
       ip_address: request.remote_ip,
     )
 
     @registration = Registration.new(create_params)
+
+    if captcha_enabled? && !verify_recaptcha
+      flash.now[:alert] = "Sorry, please try that again."
+      render :new and return
+    end
 
     if @registration.save
       RegistrationsMailer.create(@registration).deliver_now
@@ -40,6 +40,14 @@ class RegistrationsController < ApplicationController
   end
 
   private
+
+  def captcha_enabled?
+    true if Rails.env.production?
+
+    Rails.application.credentials.recaptcha_site_key.present? &&
+      Rails.application.credentials.recaptcha_secret_key.present?
+  end
+  helper_method :captcha_enabled?
 
   def registration_params
     params.require(:registration).permit(:company_name, :name, :email)

@@ -6,6 +6,7 @@ services:
     volumes:
       - data:/var/lib/postgresql/data
     environment:
+      DB_USERNAME: postgres
       POSTGRES_PASSWORD: postgres
 
   redis:
