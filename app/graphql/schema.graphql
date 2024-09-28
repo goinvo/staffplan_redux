@@ -470,6 +470,11 @@ type User {
   Fetches all projects for the current user for the current company.
   """
   projects: [Project!]!
+
+  """
+  The role of the user in the current_company
+  """
+  role: String!
   updatedAt: ISO8601DateTime!
 }
 

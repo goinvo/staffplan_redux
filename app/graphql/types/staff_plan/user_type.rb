@@ -31,6 +31,11 @@ module Types
         object.projects.where(client_id: object.current_company.clients.map(&:id))
       end
 
+      field :role, String, null: false, description: "The role of the user in the current_company"
+      def role
+        object.role(company: object.current_company)
+      end
+
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     end
