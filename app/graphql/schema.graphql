@@ -140,6 +140,15 @@ An ISO 8601-encoded datetime
 scalar ISO8601DateTime @specifiedBy(url: "https://tools.ietf.org/html/rfc3339")
 
 type Mutation {
+  """
+  Create or update an assignment.
+  """
+  deleteAssignment(
+    """
+    The ID of the assignment to delete. Must be a TBD assignment.
+    """
+    assignmentId: ID!
+  ): Assignment!
   setCurrentCompany(
     """
     The ID of the company to set as the current user's current_company_id. User must be an active member of the company.

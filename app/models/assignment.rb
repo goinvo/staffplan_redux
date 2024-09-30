@@ -17,10 +17,19 @@ class Assignment < ApplicationRecord
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
   validate :starts_and_ends_on_rules
   validate :project_and_user_belong_to_same_company
+  before_destroy :cannot_delete_assigned_assignments
 
   scope :for_user, ->(user) { where(user: user) }
 
   private
+
+  def cannot_delete_assigned_assignments
+    return if user_id.blank? || user.blank?
+
+    errors.add(:base, "Cannot delete an assignment that's assigned. Try archiving the assignment instead.")
+
+    throw :abort
+  end
 
   def project_and_user_belong_to_same_company
     # other validations will catch this, so we can return early

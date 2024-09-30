@@ -65,10 +65,13 @@ FactoryBot.define do
   end
 
   factory :assignment do
+    transient do
+      skip_user { false }
+    end
     status { Assignment::ACTIVE }
 
-    after(:build) do |assignment, _options|
-      if assignment.user.blank?
+    after(:build) do |assignment, evaluator|
+      if assignment.user.blank? && evaluator.skip_user.blank?
         assignment.user = create(:user)
       end
 
@@ -78,6 +81,10 @@ FactoryBot.define do
     end
 
     trait :unassigned do
+      transient do
+        skip_user { true }
+      end
+      status { Assignment::PROPOSED }
       user { nil }
     end
   end

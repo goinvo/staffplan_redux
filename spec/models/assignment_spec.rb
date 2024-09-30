@@ -43,6 +43,18 @@ RSpec.describe Assignment, type: :model do
       assignment = build(:assignment, status: Assignment::PROPOSED, user: nil)
       expect(assignment).to be_valid
     end
+
+    it "does not let an assigned assignment be destroyed" do
+      assignment = create(:assignment)
+
+      expect(assignment.persisted?).to eq(true)
+      expect(assignment.status).to eq(Assignment::ACTIVE)
+
+      assignment.destroy
+
+      expect(assignment.persisted?).to eq(true)
+      expect(assignment.errors.full_messages).to eq(["Cannot delete an assignment that's assigned. Try archiving the assignment instead."])
+    end
   end
 
   context "associations" do
