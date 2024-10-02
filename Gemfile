@@ -19,6 +19,7 @@ gem "stripe"
 gem "money"
 gem "tailwindcss-rails"
 gem "recaptcha"
+gem "prefab-cloud-ruby"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
