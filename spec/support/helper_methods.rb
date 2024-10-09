@@ -5,3 +5,9 @@ def assignment_for_user(user:, status: Assignment::ACTIVE)
   project = create(:project, client:)
   create(:assignment, user:, project:, status:)
 end
+
+def tbd_assignment_for_company(company:)
+  client = create(:client, company: company)
+  project = create(:project, client:)
+  create(:assignment, :unassigned, project:, status: Assignment::PROPOSED)
+end
