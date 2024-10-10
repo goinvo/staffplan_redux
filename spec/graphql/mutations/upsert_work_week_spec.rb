@@ -42,6 +42,44 @@ RSpec.describe Mutations::UpsertWorkWeek do
       expect(post_result["estimatedHours"]).to eq(20)
     end
 
+    it "updates the work week on a tbd assignment" do
+      query_string = <<-GRAPHQL
+        mutation($assignmentId: ID!, $cweek: Int!, $year: Int!, $actualHours: Int, $estimatedHours: Int) {
+          upsertWorkWeek(assignmentId: $assignmentId, cweek: $cweek, year: $year, actualHours: $actualHours, estimatedHours: $estimatedHours) {
+            actualHours
+            estimatedHours
+          }
+        }
+      GRAPHQL
+
+      company = create(:company)
+      assignment = tbd_assignment_for_company(company:)
+      user = company.users.first
+      work_week = create(:work_week, :blank, assignment:)
+
+      expect(work_week.estimated_hours).to eq(0)
+      expect(work_week.actual_hours).to eq(0)
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: user,
+          current_company: work_week.company
+        },
+        variables: {
+          assignmentId: work_week.assignment_id,
+          cweek: work_week.cweek,
+          year: work_week.year,
+          actualHours: 10,
+          estimatedHours: 20
+        }
+      )
+
+      post_result = result["data"]["upsertWorkWeek"]
+      expect(post_result["actualHours"]).to eq(10)
+      expect(post_result["estimatedHours"]).to eq(20)
+    end
+
     it "fails if the assignment is not found" do
       query_string = <<-GRAPHQL
         mutation($assignmentId: ID!, $cweek: Int!, $year: Int!) {

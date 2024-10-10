@@ -15,7 +15,7 @@ module Mutations
       # try and find the assignment
       assignment = current_company.assignments.find(assignment_id)
 
-      unless assignment.user.memberships.active.exists?(company: current_company)
+      if assignment.user && !Membership.active.exists?(user: assignment.user, company: current_company)
         # if the assignment isn't for an active user, raise an error
         raise GraphQL::ExecutionError, "User is not an active member of the company"
       end
