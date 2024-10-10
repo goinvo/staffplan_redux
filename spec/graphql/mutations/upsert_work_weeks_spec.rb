@@ -60,6 +60,62 @@ RSpec.describe Mutations::UpsertWorkWeeks do
       end
     end
 
+    it "updates the work weeks for TBD assigments" do
+      query_string = <<-GRAPHQL
+        mutation($assignmentId: ID!, $workWeeks: [WorkWeeksInputObject!]!) {
+          upsertWorkWeeks(assignmentId: $assignmentId, workWeeks: $workWeeks) {
+            workWeeks {
+              cweek
+              year
+              actualHours
+              estimatedHours
+            }          
+          }
+        }
+      GRAPHQL
+
+      company = create(:company)
+      assignment = tbd_assignment_for_company(company:)
+      user = company.users.first
+      work_weeks = 5.times.map do |i|
+        date = Date.today - i.weeks
+        create(:work_week, :blank, assignment:, cweek: date.cweek, year: date.year)
+      end
+
+      updated_work_weeks = work_weeks.map.with_index do |week, i|
+        {
+          cweek: week.cweek,
+          year: week.year,
+          actualHours: i * 5,
+          estimatedHours: i * 6
+        }
+      end
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: user,
+          current_company: company
+        },
+        variables: {
+          assignmentId: assignment.id,
+          workWeeks: updated_work_weeks
+        }
+      )
+
+      post_result = result["data"]["upsertWorkWeeks"]["workWeeks"]
+
+      post_result.each do |result|
+        work_week = updated_work_weeks.detect do |uww|
+          uww[:cweek] == result["cweek"] && uww[:year] == result["year"]
+        end
+
+        expect(work_week).to be_present
+        expect(work_week[:actualHours]).to eq(result["actualHours"])
+        expect(work_week[:estimatedHours]).to eq(result["estimatedHours"])
+      end
+    end
+
     it "fails if the assignment is not found" do
       query_string = <<-GRAPHQL
         mutation($assignmentId: ID!, $workWeeks: [WorkWeeksInputObject!]!) {
