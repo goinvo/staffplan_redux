@@ -19,13 +19,6 @@ Rails.application.routes.draw do
 
   post "/graphql", to: "graphql#execute"
 
-  resources :assignments
-  resources :projects, except: [:destroy]
-  resources :clients, except: [:destroy] do
-    member do
-      post :toggle_archived
-    end
-  end
   resources :registrations, only: [:new, :create] do
     member do
       get :register
