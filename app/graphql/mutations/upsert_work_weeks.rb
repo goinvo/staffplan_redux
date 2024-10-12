@@ -24,7 +24,10 @@ module Mutations
         work_weeks.each do |ww|
           work_week = assignment.work_weeks.find_or_initialize_by(cweek: ww.cweek, year: ww.year)
 
-          if ww.estimated_hours.blank? || ww.estimated_hours.zero?
+          if work_week.is_future_work_week? && (
+            ww.estimated_hours.blank? || ww.estimated_hours.zero?
+          )
+            # the front end will send nil or 0 values for work weeks that should be deleted
             work_week.destroy
           else
             work_week.update(ww.to_h.slice(:estimated_hours, :actual_hours))

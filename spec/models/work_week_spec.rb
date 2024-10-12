@@ -28,4 +28,16 @@ RSpec.describe WorkWeek, type: :model do
     it { should have_one(:user) }
     it { should have_one(:project) }
   end
+
+  context "#is_future_work_week?" do
+    it "returns true if the work week is in the future" do
+      work_week = build(:work_week, year: Date.today.year, cweek: Date.today.cweek + 1)
+      expect(work_week.is_future_work_week?).to be_truthy
+    end
+
+    it "returns false if the work week is in the past" do
+      work_week = build(:work_week, year: Date.today.year, cweek: Date.today.cweek - 1)
+      expect(work_week.is_future_work_week?).to be_falsey
+    end
+  end
 end
