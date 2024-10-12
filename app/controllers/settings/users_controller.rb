@@ -45,7 +45,11 @@ class Settings::UsersController < ApplicationController
     rescue ActiveRecord::RecordInvalid
       @user = @command.user
       @user.valid?
-      render :new
+
+      respond_to do |format|
+        format.html { render :new }
+        format.turbo_stream
+      end
     end
   end
 

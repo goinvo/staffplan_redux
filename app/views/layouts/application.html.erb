@@ -41,7 +41,7 @@
             <div class="hidden md:block">
               <div class="ml-4 flex items-center md:ml-6">
                 <%= header_link_to "Open Source", "https://github.com/goinvo/staffplan-next-app" %>
-                <%= button_to "Your Profile", users_profile_path, class: "px-6 relative rounded-full bg-gray-800 p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800", role: "menuitem" %>
+                <%= link_to "Profile", users_profile_path, class: "px-6 relative rounded-full bg-gray-800 p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800", role: "menuitem" %>
                 <% if current_user.owner?(company: current_company) || current_user.admin?(company: current_company) %>
                   <%= header_link_to "Settings", settings_path %>
                 <% end %>

@@ -39,4 +39,17 @@ class Company < ApplicationRecord
     membership = memberships.find_by(user: user)
     membership.present? && membership.active?
   end
+
+  def restore_avatar
+    if avatar.attached? && avatar.changed?
+      original_picture = avatar.attachment_was
+      if original_picture
+        # Detach the current attachment
+        avatar.detach
+
+        # Reattach the original attachment
+        avatar.attach(original_picture)
+      end
+    end
+  end
 end
