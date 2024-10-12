@@ -33,24 +33,28 @@ resource "aws_iam_policy" "staffplan_redux_bot_policy" {
   name        = "staffplan_redux_bot_policy"
   path        = "/"
   description = "S3 bucket policy for staffplan_redux_bot"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:PutObject",
-        "s3:GetObject",
-        "s3:DeleteObject",
-        "s3:ListBucket"
-      ],
-      "Resource": "${aws_s3_bucket.staffplan_redux_production.arn}/*"
-    }
-  ]
-}
-EOF
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:DeleteObject",
+        ]
+        Resource = "${aws_s3_bucket.staffplan_redux_production.arn}/*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:ListBucket",
+          "s3:ListBucketMultipartUploads",
+        ]
+        Resource = "${aws_s3_bucket.staffplan_redux_production.arn}"
+      }
+    ]
+  })
 }
 
 resource "aws_iam_policy_attachment" "s3_policy_attachment" {
