@@ -20,9 +20,16 @@ module Mutations
         raise GraphQL::ExecutionError, "User is not an active member of the company"
       end
 
-      work_weeks.each do |ww|
-        work_week = assignment.work_weeks.find_or_initialize_by(cweek: ww.cweek, year: ww.year)
-        work_week.update!(ww.to_h.slice(:estimated_hours, :actual_hours))
+      WorkWeek.transaction do
+        work_weeks.each do |ww|
+          work_week = assignment.work_weeks.find_or_initialize_by(cweek: ww.cweek, year: ww.year)
+
+          if ww.estimated_hours.blank? || ww.estimated_hours.zero?
+            work_week.destroy
+          else
+            work_week.update(ww.to_h.slice(:estimated_hours, :actual_hours))
+          end
+        end
       end
 
       assignment

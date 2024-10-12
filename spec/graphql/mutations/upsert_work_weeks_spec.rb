@@ -116,6 +116,60 @@ RSpec.describe Mutations::UpsertWorkWeeks do
       end
     end
 
+    it "prunes existing work weeks when passed null or empty values for estimatedHours" do
+      query_string = <<-GRAPHQL
+        mutation($assignmentId: ID!, $workWeeks: [WorkWeeksInputObject!]!) {
+          upsertWorkWeeks(assignmentId: $assignmentId, workWeeks: $workWeeks) {
+            workWeeks {
+              cweek
+              year
+              actualHours
+              estimatedHours
+            }          
+          }
+        }
+      GRAPHQL
+
+      company = create(:company)
+      assignment = tbd_assignment_for_company(company:)
+      user = company.users.first
+      work_weeks = 5.times.map do |i|
+        date = Date.today - i.weeks
+        create(:work_week, :blank, assignment:, cweek: date.cweek, year: date.year)
+      end
+
+      updated_work_weeks = work_weeks.map.with_index do |week, i|
+        {
+          cweek: week.cweek,
+          year: week.year,
+          actualHours: i * 5,
+          estimatedHours: i * 6
+        }
+      end
+
+      # set the estimated hours to nil for the first work week
+      updated_work_weeks.first[:estimatedHours] = nil
+
+      # set the estimated hours to 0 for the second work week
+      updated_work_weeks.second[:estimatedHours] = 0
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: user,
+          current_company: company
+        },
+        variables: {
+          assignmentId: assignment.id,
+          workWeeks: updated_work_weeks
+        }
+      )
+
+      post_result = result["data"]["upsertWorkWeeks"]["workWeeks"]
+      expect(post_result.length).to eq(3)
+      expect(post_result.map { |pr| pr["cweek"] }).to eq(updated_work_weeks[2..-1].map { |ww| ww[:cweek] })
+    end
+
     it "fails if the assignment is not found" do
       query_string = <<-GRAPHQL
         mutation($assignmentId: ID!, $workWeeks: [WorkWeeksInputObject!]!) {
