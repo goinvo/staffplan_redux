@@ -4,11 +4,24 @@ class Users::ProfileController < ApplicationController
   end
 
   def update
-    if current_user.update(user_params)
-      flash[:notice] = 'Your profile was updated successfully'
+    # handle avatar changes first
+    if user_params[:avatar].present?
+      current_user.assign_attributes(avatar: user_params[:avatar])
+      current_user.attachment_changes.any? && current_user.save
+    end
+
+    current_user.assign_attributes(user_params.except(:avatar))
+
+    if current_user.save
+      flash[:success] = 'Your profile was updated successfully'
       redirect_to users_profile_path
     else
-      render :show
+      flash.now[:error] = 'There was a problem updating your profile'
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { render :show }
+      end
     end
   end
 

@@ -19,7 +19,7 @@ RSpec.describe "Settings Page", type: :system do
       visit settings_url
       fill_in "company[name]", with: "New Company Name"
       click_button "Save"
-      expect(page).to have_text("Company updated successfully")
+      expect(page).to have_text("Updates saved!")
       expect(membership.company.reload).to have_attributes(name: "New Company Name")
     end
   end

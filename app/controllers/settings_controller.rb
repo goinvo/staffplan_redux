@@ -6,11 +6,24 @@ class SettingsController < ApplicationController
   end
 
   def update
-    if current_company.update(update_params)
-      flash[:success] = "Company updated successfully"
+    # handle avatar changes first
+    if update_params[:avatar].present?
+      current_company.assign_attributes(avatar: update_params[:avatar])
+      current_company.attachment_changes.any? && current_company.save
+    end
+
+    current_company.assign_attributes(update_params.except(:avatar))
+
+    if current_company.save
+      flash[:success] = "Updates saved!"
       redirect_to settings_path
     else
-      render :show
+      flash.now[:error] = "Some information couldn't be saved."
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { render :show }
+      end
     end
   end
 
