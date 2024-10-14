@@ -155,7 +155,7 @@ RSpec.describe Mutations::UpsertWorkWeek do
           assignmentId: work_week.assignment_id,
           cweek: work_week.cweek,
           year: work_week.year,
-          actualHours: 0,
+          actualHours: nil,
           estimatedHours: nil
         }
       )

@@ -30,7 +30,12 @@ module Mutations
             # the front end will send nil or 0 values for work weeks that should be deleted
             work_week.destroy
           else
-            work_week.update(ww.to_h.slice(:estimated_hours, :actual_hours))
+            values = ww.to_h.slice(:estimated_hours, :actual_hours).tap do |v|
+              v[:estimated_hours] = v[:estimated_hours].to_i
+              v[:actual_hours] = v[:actual_hours].to_i
+            end
+
+            work_week.update(values)
           end
         end
       end

@@ -176,6 +176,7 @@ RSpec.describe Mutations::UpsertWorkWeeks do
         expect(post_result.map { |pr| pr["cweek"] }).to eq([
           updated_work_weeks[0][:cweek], updated_work_weeks[3][:cweek], updated_work_weeks[4][:cweek]
         ])
+        expect(post_result.find { |pr| pr["cweek"] == updated_work_weeks[0][:cweek] }["estimatedHours"]).to eq(0)
       end
     end
 
