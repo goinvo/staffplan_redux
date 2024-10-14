@@ -27,11 +27,18 @@ module Mutations
       work_week = current_company.work_weeks.find_by(assignment_id:, cweek:, year:)
 
       if work_week.blank?
-        # create it
+        # create it. unable to do this through current_company.work_weeks becaues it goes through more than one other association
         work_week = WorkWeek.create!(assignment_id:, cweek:, year:)
       end
 
-      work_week.update!(estimated_hours:, actual_hours:)
+      if work_week.is_future_work_week? && (
+        estimated_hours.blank? || estimated_hours.zero?
+      )
+        # the front end will send nil or 0 values for work weeks that should be deleted
+        work_week.destroy
+      else
+        work_week.update(estimated_hours: estimated_hours.to_i, actual_hours: actual_hours.to_i)
+      end
 
       work_week
     end
