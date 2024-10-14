@@ -80,6 +80,94 @@ RSpec.describe Mutations::UpsertWorkWeek do
       expect(post_result["estimatedHours"]).to eq(20)
     end
 
+    it "deletes a future work week when passed a null or 0 value for estimatedHours" do
+      query_string = <<-GRAPHQL
+        mutation($assignmentId: ID!, $cweek: Int!, $year: Int!, $actualHours: Int, $estimatedHours: Int) {
+          upsertWorkWeek(assignmentId: $assignmentId, cweek: $cweek, year: $year, actualHours: $actualHours, estimatedHours: $estimatedHours) {
+            actualHours
+            estimatedHours
+          }
+        }
+      GRAPHQL
+
+      company = create(:company)
+      assignment = tbd_assignment_for_company(company:)
+      user = company.users.first
+      work_week = create(:work_week,
+        cweek: (Date.today + 1.month).cweek,
+        year: (Date.today + 1.month).year,
+        estimated_hours: 10,
+        actual_hours: 0,
+        assignment:
+      )
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: user,
+          current_company: work_week.company
+        },
+        variables: {
+          assignmentId: work_week.assignment_id,
+          cweek: work_week.cweek,
+          year: work_week.year,
+          actualHours: 0,
+          estimatedHours: nil
+        }
+      )
+
+      post_result = result["data"]["upsertWorkWeek"]
+      expect(post_result["actualHours"]).to eq(0)
+      expect(post_result["estimatedHours"]).to eq(10)
+      expect {
+        work_week.reload
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "does not delete a future work week when passed a null or 0 value for estimatedHours" do
+      query_string = <<-GRAPHQL
+        mutation($assignmentId: ID!, $cweek: Int!, $year: Int!, $actualHours: Int, $estimatedHours: Int) {
+          upsertWorkWeek(assignmentId: $assignmentId, cweek: $cweek, year: $year, actualHours: $actualHours, estimatedHours: $estimatedHours) {
+            actualHours
+            estimatedHours
+          }
+        }
+      GRAPHQL
+
+      company = create(:company)
+      assignment = tbd_assignment_for_company(company:)
+      user = company.users.first
+      work_week = create(:work_week,
+        cweek: (Date.today - 1.month).cweek,
+        year: (Date.today - 1.month).year,
+        estimated_hours: 10,
+        actual_hours: 10,
+        assignment:
+      )
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: user,
+          current_company: work_week.company
+        },
+        variables: {
+          assignmentId: work_week.assignment_id,
+          cweek: work_week.cweek,
+          year: work_week.year,
+          actualHours: nil,
+          estimatedHours: nil
+        }
+      )
+
+      post_result = result["data"]["upsertWorkWeek"]
+      expect(post_result["actualHours"]).to eq(0)
+      expect(post_result["estimatedHours"]).to eq(0)
+      expect {
+        work_week.reload
+      }.to_not raise_error
+    end
+
     it "fails if the assignment is not found" do
       query_string = <<-GRAPHQL
         mutation($assignmentId: ID!, $cweek: Int!, $year: Int!) {

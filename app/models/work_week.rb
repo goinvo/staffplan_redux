@@ -13,6 +13,12 @@ class WorkWeek < ApplicationRecord
   validates :actual_hours, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 168 }
   validate :no_future_actual_hours
 
+  def is_future_work_week?
+    Date.today.year < year || (
+      year == Date.today.year && cweek > Date.today.cweek
+    )
+  end
+
   private
 
   def no_future_actual_hours
