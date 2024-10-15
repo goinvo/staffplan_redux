@@ -23,8 +23,8 @@ RSpec.describe "Avatars", type: :request do
 
     context "managing avatars" do
       it "handles an attachable that's not found" do
-        delete avatars_path(attachable: { type: 'Company', id: 0, redirect_to: settings_path })
-        expect(response).to redirect_to(settings_path)
+        delete avatars_path(attachable: { type: 'Company', id: 0, redirect_to: settings_company_path })
+        expect(response).to redirect_to(settings_company_path)
         expect(flash[:error]).to eq("Sorry, you can't remove that attachment.")
       end
     end
@@ -123,8 +123,8 @@ RSpec.describe "Avatars", type: :request do
           another_user = create(:user)
           another_user.update(avatar: fixture_file_upload('avatar.jpg', 'image/jpg'))
           expect(another_user.avatar).to be_attached
-          delete avatars_path(attachable_params(attachable: another_user, redirect_to: users_profile_path))
-          expect(response).to redirect_to(users_profile_path)
+          delete avatars_path(attachable_params(attachable: another_user, redirect_to: settings_profile_path))
+          expect(response).to redirect_to(settings_profile_path)
           expect(flash[:error]).to eq("Sorry, you can't remove that attachment.")
           expect(another_user.reload.avatar).to be_attached
         end
@@ -132,15 +132,15 @@ RSpec.describe "Avatars", type: :request do
         it "deletes the avatar and redirects back to the user profile" do
           @user.update(avatar: fixture_file_upload('avatar.jpg', 'image/jpg'))
           expect(@user.avatar).to be_attached
-          delete avatars_path(attachable_params(attachable: @user, redirect_to: users_profile_path))
-          expect(response).to redirect_to(users_profile_path)
+          delete avatars_path(attachable_params(attachable: @user, redirect_to: settings_profile_path))
+          expect(response).to redirect_to(settings_profile_path)
           expect(@user.reload.avatar).to_not be_attached
         end
 
         it "does nothing if the user has no avatar attached" do
           expect(@user.avatar).to_not be_attached
-          delete avatars_path(attachable_params(attachable: @user, redirect_to: users_profile_path))
-          expect(response).to redirect_to(users_profile_path)
+          delete avatars_path(attachable_params(attachable: @user, redirect_to: settings_profile_path))
+          expect(response).to redirect_to(settings_profile_path)
           expect(@user.reload.avatar).to_not be_attached
         end
       end

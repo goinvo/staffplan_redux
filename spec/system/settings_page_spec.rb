@@ -6,7 +6,7 @@ RSpec.describe "Settings Page", type: :system do
       user = create(:membership).user
       passwordless_sign_in(user)
 
-      visit settings_url
+      visit settings_company_url
       expect(page).to have_text("General settings")
     end
   end
@@ -16,7 +16,7 @@ RSpec.describe "Settings Page", type: :system do
       membership = create(:membership)
       passwordless_sign_in(membership.user)
 
-      visit settings_url
+      visit settings_company_url
       fill_in "company[name]", with: "New Company Name"
       click_button "Save"
       expect(page).to have_text("Updates saved!")

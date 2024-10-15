@@ -1,7 +1,5 @@
 <%= render(Settings::TabsComponent.new) %>
 
 <div class="bg-white p-4 mt-4">
-  <%= turbo_frame_tag "settings_company_edit", target: "_top" do %>
-    <%= render partial: "settings/company/edit" %>
-  <% end %>
+  company/show
 </div>

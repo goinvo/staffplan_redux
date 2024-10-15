@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   include Passwordless::ControllerHelpers
 
-  helper_method :current_user
   before_action :check_subscription_status
   before_action :set_access_control_headers
   after_action :set_csrf_header
