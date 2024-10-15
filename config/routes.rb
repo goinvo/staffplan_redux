@@ -37,10 +37,6 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :users do
-    resource :profile, only: [:show, :update], controller: "profile"
-  end
-
   resource :avatars, only: [:destroy]
 
   resource :settings, only: [:show, :update], controller: "settings" do
@@ -51,6 +47,7 @@ Rails.application.routes.draw do
         post :toggle_status
       end
     end
+    resource :profile, only: [:show, :update], controller: "settings/profile"
   end
 
   namespace :webhooks do

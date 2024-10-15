@@ -1,4 +1,4 @@
-class Users::ProfileController < ApplicationController
+class Settings::ProfileController < ApplicationController
   before_action :require_user!
   def show
   end
@@ -14,7 +14,7 @@ class Users::ProfileController < ApplicationController
 
     if current_user.save
       flash[:success] = 'Your profile was updated successfully'
-      redirect_to users_profile_path
+      redirect_to settings_profile_path
     else
       flash.now[:error] = 'There was a problem updating your profile'
 
