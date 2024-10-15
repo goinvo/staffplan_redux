@@ -14,17 +14,23 @@
     <div class="sm:hidden">
       <label for="current-tab" class="sr-only">Select a tab</label>
       <select data-action="change->settings-tabs#handleChange" id="current-tab" name="current-tab" class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
-        <%= settings_option "General", settings_path %>
-        <%= settings_option "User Management", settings_users_path %>
-        <%= settings_option "Billing", settings_billing_information_path %>
+        <%= settings_option "Profile", settings_profile_path %>
+        <% if current_company_admin? %>
+          <%= settings_option "Company", settings_company_path %>
+          <%= settings_option "User Management", settings_users_path %>
+          <%= settings_option "Billing", settings_billing_information_path %>
+        <% end %>
       </select>
     </div>
     <!-- Tabs at small breakpoint and up -->
     <div class="hidden sm:block">
       <nav class="-mb-px flex space-x-8">
-        <%= settings_link "General", settings_path %>
-        <%= settings_link "User Management", settings_users_path %>
-        <%= settings_link "Billing", settings_billing_information_path %>
+        <%= settings_link "Profile", settings_profile_path %>
+        <% if current_company_admin? %>
+          <%= settings_link "Company", settings_company_path %>
+          <%= settings_link "User Management", settings_users_path %>
+          <%= settings_link "Billing", settings_billing_information_path %>
+        <% end %>
       </nav>
     </div>
   </div>

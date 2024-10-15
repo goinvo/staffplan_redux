@@ -1,4 +1,4 @@
-class SettingsController < ApplicationController
+class Settings::CompanyController < ApplicationController
 
   before_action :require_user!
   before_action :require_company_owner_or_admin!

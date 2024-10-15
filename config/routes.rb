@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   resource :avatars, only: [:destroy]
 
   resource :settings, only: [:show, :update], controller: "settings" do
+    resource :company, only: [:show, :update], controller: "settings/company"
     resource :billing_information, only: [:show, :edit, :update], controller: "settings/billing_information"
     resource :subscription, only: [:new], controller: "settings/subscriptions"
     resources :users, controller: "settings/users", except: [:destroy] do

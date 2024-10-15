@@ -1,3 +1,5 @@
+<%= render(Settings::TabsComponent.new) %>
+
 <div class="bg-white p-4 mt-4">
   <%= turbo_frame_tag "users-profile-show", target: "_top" do %>
     <%= render partial: "form" %>
