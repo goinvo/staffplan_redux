@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
     when "production"
       "https://ui.staffplan.com/people/#{current_user.id}"
     else
-      "https://localhost:8080/people/#{current_user.id}"
+      "http://localhost:8080/people/#{current_user.id}"
     end
   end
   helper_method :my_staffplan_url
