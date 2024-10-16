@@ -50,7 +50,7 @@ RSpec.describe "Authentication", type: :system do
       click_button "Sign in"
       fill_in "passwordless[token]", with: token
       click_button "Confirm"
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path("/people/#{user.id}")
     end
 
     it "signs them in after clicking the link in the email" do
@@ -63,7 +63,7 @@ RSpec.describe "Authentication", type: :system do
 
       # click the link in the email
       visit confirm_auth_sign_in_path(user.passwordless_sessions.last.identifier, token)
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path("/people/#{user.id}")
     end
   end
 
@@ -90,7 +90,7 @@ RSpec.describe "Authentication", type: :system do
       click_button "Sign in"
       fill_in "passwordless[token]", with: token
       click_button "Confirm"
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path("/people/#{user.id}")
 
       # sign yourself out
       visit auth_sign_out_path

@@ -8,8 +8,8 @@ Passwordless.configure do |config|
   config.timeout_at = lambda { 10.minutes.from_now } # How long until a token/magic link times out.
 
   config.redirect_back_after_sign_in = true # When enabled the user will be redirected to their previous page, or a page specified by the `destination_path` query parameter, if available.
-  config.redirect_to_response_options = {} # Additional options for redirects.
-  config.success_redirect_path = '/' # After a user successfully signs in
+  config.redirect_to_response_options = {}
+  config.success_redirect_path = "/"
   config.failure_redirect_path = '/' # After a sign in fails
   config.sign_out_redirect_path = '/' # After a user signs out
   config.paranoid = true

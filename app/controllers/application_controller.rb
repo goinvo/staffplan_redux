@@ -62,4 +62,14 @@ class ApplicationController < ActionController::Base
     return unless current_user
     PaperTrail.request.whodunnit = current_user.id
   end
+
+  def my_staffplan_url
+    case Rails.env
+    when "production"
+      "https://ui.staffplan.com/people/#{current_user.id}"
+    else
+      "http://localhost:8080/people/#{current_user.id}"
+    end
+  end
+  helper_method :my_staffplan_url
 end

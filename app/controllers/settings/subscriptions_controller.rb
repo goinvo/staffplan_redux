@@ -34,6 +34,7 @@ class Settings::SubscriptionsController < ApplicationController
       render json: { 'error': { message: e.message } }, status: 400 and return
     end
 
-    redirect_to session.url, status: 303, allow_other_host: true
+    # allow_other_host will be true if redirecting to *stripe.com
+    redirect_to session.url, status: 303, allow_other_host: session.url.match(/https:\/\/.*stripe\.com/)
   end
 end
