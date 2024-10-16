@@ -28,7 +28,7 @@ RSpec.describe "User Management", type: :system do
 
       visit settings_users_url
 
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path("/people/#{membership.user_id}")
     end
   end
 
