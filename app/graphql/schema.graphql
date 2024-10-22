@@ -3,6 +3,11 @@ type Assignment {
   The user assigned to this assignment
   """
   assignedUser: User
+
+  """
+  Whether the assignment can be deleted
+  """
+  canBeDeleted: Boolean!
   createdAt: ISO8601DateTime!
 
   """
@@ -141,7 +146,7 @@ scalar ISO8601DateTime @specifiedBy(url: "https://tools.ietf.org/html/rfc3339")
 
 type Mutation {
   """
-  Create or update an assignment.
+  Delete an assignment.
   """
   deleteAssignment(
     """

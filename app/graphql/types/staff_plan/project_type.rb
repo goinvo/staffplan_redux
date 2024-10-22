@@ -21,7 +21,7 @@ module Types
       field :assignments, [Types::StaffPlan::AssignmentType], null: false
 
       def assigmnents
-        object.assignments
+        object.assignments.include(:work_weeks)
       end
 
       field :users, [Types::StaffPlan::UserType], null: false

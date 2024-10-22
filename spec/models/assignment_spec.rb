@@ -44,8 +44,9 @@ RSpec.describe Assignment, type: :model do
       expect(assignment).to be_valid
     end
 
-    it "does not let an assigned assignment be destroyed" do
+    it "does not let an assigned assignment be destroyed that has hours logged" do
       assignment = create(:assignment)
+      create(:work_week, assignment:, actual_hours: 15)
 
       expect(assignment.persisted?).to eq(true)
       expect(assignment.status).to eq(Assignment::ACTIVE)
@@ -53,7 +54,7 @@ RSpec.describe Assignment, type: :model do
       assignment.destroy
 
       expect(assignment.persisted?).to eq(true)
-      expect(assignment.errors.full_messages).to eq(["Cannot delete an assignment that's assigned. Try archiving the assignment instead."])
+      expect(assignment.errors.full_messages).to eq(["Cannot delete an assignment that's assigned with hours recorded. Try archiving the assignment instead."])
     end
   end
 
