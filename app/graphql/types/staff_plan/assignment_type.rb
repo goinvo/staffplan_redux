@@ -15,6 +15,7 @@ module Types
       field :starts_on, GraphQL::Types::ISO8601Date, null: true, description: 'The date the assignment starts'
       field :ends_on, GraphQL::Types::ISO8601Date, null: true, description: 'The date the assignment ends'
       field :estimated_weekly_hours, Integer, null: true, description: 'The estimated weekly hours for this assignment'
+      field :can_be_deleted, Boolean, null: false, description: 'Whether the assignment can be deleted'
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
@@ -22,6 +23,10 @@ module Types
 
       def work_weeks
         object.work_weeks
+      end
+
+      def can_be_deleted
+        !work_weeks.any? { |ww| ww.actual_hours.to_i.positive? }
       end
     end
   end

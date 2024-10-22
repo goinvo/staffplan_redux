@@ -1,6 +1,6 @@
 module Mutations
   class DeleteAssignment < BaseMutation
-    description "Create or update an assignment."
+    description "Delete an assignment."
 
     # arguments passed to the `resolve` method
     argument :assignment_id, ID, required: true,
