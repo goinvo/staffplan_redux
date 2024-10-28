@@ -210,7 +210,7 @@ GEM
     passwordless (1.8.0)
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
-    pg (1.5.8)
+    pg (1.5.9)
     psych (5.1.2)
       stringio
     public_suffix (6.0.1)
