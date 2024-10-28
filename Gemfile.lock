@@ -207,7 +207,7 @@ GEM
     paper_trail (15.2.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
-    passwordless (1.7.0)
+    passwordless (1.8.0)
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
     pg (1.5.8)
@@ -383,7 +383,7 @@ DEPENDENCIES
   letter_opener_web
   money
   paper_trail
-  passwordless (~> 1.7)
+  passwordless (~> 1.8)
   pg (~> 1.5)
   puma (>= 5.0)
   rack-cors
