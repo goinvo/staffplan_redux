@@ -144,7 +144,7 @@ GEM
       activesupport (>= 6.1)
     graphiql-rails (1.10.1)
       railties
-    graphql (2.3.19)
+    graphql (2.4.0)
       base64
       fiber-storage
     hashdiff (1.1.1)
@@ -378,7 +378,7 @@ DEPENDENCIES
   faker
   foreman
   graphiql-rails
-  graphql (~> 2.3)
+  graphql (~> 2.4)
   image_processing (~> 1.13)
   importmap-rails
   letter_opener

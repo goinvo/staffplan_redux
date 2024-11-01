@@ -30,7 +30,7 @@ gem "recaptcha"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem 'paper_trail'
 gem "passwordless", "~> 1.8"
-gem "graphql", "~> 2.3"
+gem "graphql", "~> 2.4"
 gem "graphiql-rails"
 gem "view_component"
 
