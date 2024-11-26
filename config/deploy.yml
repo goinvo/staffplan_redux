@@ -41,15 +41,9 @@ env:
 ssh:
   user: ubuntu
 
-  # Configure builder setup.
-  # builder:
-  #   args:
-  #     RUBY_VERSION: 3.2.0
-  #   secrets:
-  #     - GITHUB_TOKEN
-  #   remote:
-  #     arch: amd64
-  #     host: ssh://app@192.168.0.1
+# Configure builder setup.
+builder:
+  arch: amd64
 
 # Use accessory services (secrets come from .env).
 accessories:
@@ -73,6 +67,9 @@ accessories:
    port: 6379
    volumes:
      - data:/var/lib/redis/data
+
+proxy:
+  app_port: 3000
 
 # Configure custom arguments for Traefik
 # traefik:
