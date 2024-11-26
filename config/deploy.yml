@@ -2,7 +2,7 @@
 service: staffplan-redux
 
 # Name of the container image.
-image: fermion/staffplan-redux
+image: goinvo/staffplan_redux/main
 
 # Deploy to these servers.
 servers:
@@ -21,6 +21,7 @@ servers:
 
 # Credentials for your image host.
 registry:
+  server: ghcr.io
   username: fermion
   password:
     - DOCKER_REGISTRY_TOKEN
