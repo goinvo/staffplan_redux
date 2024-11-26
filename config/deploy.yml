@@ -69,10 +69,7 @@ accessories:
      - data:/var/lib/redis/data
 
 proxy:
-  host: app.staffplan.com
   app_port: 3000
-  ssl: true
-  forward_headers: true
 
 # Configure custom arguments for Traefik
 # traefik:
