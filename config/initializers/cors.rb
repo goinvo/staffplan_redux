@@ -1,9 +1,9 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "localhost:8080"
-      "ui.staffplan.com"
+    origins "https://localhost:8080"
+      "https://ui.staffplan.com"
 
-    resource "/graphql",
+    resource "*",
              headers: :any,
              methods: [:get, :post, :put, :patch, :delete, :options, :head],
              credentials: true,

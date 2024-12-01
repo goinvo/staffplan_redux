@@ -71,8 +71,8 @@ accessories:
 
 proxy:
   app_port: 3000
-  host: app.staffplan.com
-  ssl: true
+#  host: app.staffplan.com
+#  ssl: true
 #  forward_headers: true
 
 # Configure custom arguments for Traefik
