@@ -9,5 +9,6 @@ module Types
     field :upsert_project, mutation: Mutations::UpsertProject
     field :upsert_client, mutation: Mutations::UpsertClient
     field :delete_assignment, mutation: Mutations::DeleteAssignment
+    field :delete_project, mutation: Mutations::DeleteProject
   end
 end
