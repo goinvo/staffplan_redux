@@ -18,7 +18,7 @@
                   <a href="#">StaffPlan Subscription 🚀</a>
                 </h3>
                 <p class="mt-2 text-sm font-medium text-gray-900">
-                  <%= number_to_currency(Money.from_cents(subscription.plan_amount, "USD")) %> USD / month
+                  <%= number_to_currency(Money.from_cents(subscription.plan_amount, "USD")) %> USD / month per person
                 </p>
                 <p class="mt-2 text-sm font-medium text-gray-900">
                   <%= pluralize(subscription.quantity, "staff member") %>
