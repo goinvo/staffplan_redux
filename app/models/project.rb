@@ -57,12 +57,16 @@ class Project < ApplicationRecord
     status == COMPLETED
   end
 
+  def can_be_deleted?
+    assignments.empty? ||
+      WorkWeek.where(assignment: assignments).where.not(actual_hours: 0).empty?
+  end
+
   private
 
   # a project is destroyable if it has no assignments OR if its assignments have no actual hours recorded
   def ensure_project_is_destroyable
-    return if assignments.empty? ||
-      WorkWeek.where(assignment: assignments).where.not(actual_hours: 0).empty?
+    return if can_be_deleted?
 
     errors.add(:base, "Cannot delete a project that has assignments with hours recorded. Try archiving the project instead.")
     false

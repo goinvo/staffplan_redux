@@ -51,6 +51,26 @@ RSpec.describe Project, type: :model do
     end
   end
 
+  describe 'can_be_deleted?' do
+    it 'allows deletion if there are no assignments with actual hours recorded' do
+      project = create(:project)
+      user = create(:membership, company: project.client.company).user
+      assignment = create(:assignment, project: project, user: user)
+      create(:work_week, assignment: assignment, actual_hours: 0)
+
+      expect(project.can_be_deleted?).to be_truthy
+    end
+
+    it 'blocks deletion if there are assignments with actual hours recorded' do
+      project = create(:project)
+      user = create(:membership, company: project.client.company).user
+      assignment = create(:assignment, project: project, user: user)
+      create(:work_week, assignment: assignment, actual_hours: 8)
+
+      expect(project.can_be_deleted?).to be_falsey
+    end
+  end
+
   describe "#confirmed?" do
     it "returns true if the status is confirmed" do
       project = build(:project, status: "confirmed")

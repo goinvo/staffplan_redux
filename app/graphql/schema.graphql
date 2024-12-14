@@ -355,6 +355,11 @@ type Mutation {
 
 type Project {
   assignments: [Assignment!]!
+
+  """
+  Whether the assignment can be deleted
+  """
+  canBeDeleted: Boolean!
   client: Client!
   cost: Float!
   createdAt: ISO8601DateTime!
