@@ -4,6 +4,7 @@ class SessionsController < Passwordless::SessionsController
   before_action :require_params, only: :create
 
   def confirm
+    Rails.logger.debug "request.session_options[:id]: #{request.session_options[:id]}"
     Rails.logger.debug "request.env\n#{request.env.inspect}"
     Rails.logger.debug "session.keys before super: #{session.keys}"
     super
@@ -11,6 +12,7 @@ class SessionsController < Passwordless::SessionsController
   end
 
   def new
+    Rails.logger.debug "request.session_options[:id]: #{request.session_options[:id]}"
     Rails.logger.debug "request.env\n#{request.env.inspect}"
     Rails.logger.debug "session.keys before super: #{session.keys}"
     super
