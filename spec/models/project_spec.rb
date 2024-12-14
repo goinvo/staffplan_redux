@@ -20,6 +20,37 @@ RSpec.describe Project, type: :model do
     it { should have_many(:users).through(:assignments) }
   end
 
+  describe 'callbacks' do
+    describe 'before_destroy: ensure_project_is_destroyable' do
+      it 'allows project deletion if there are no assignments' do
+        project = create(:project)
+
+        expect { project.destroy }.to change { Project.count }.by(-1)
+        expect { project.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it 'allows project deletion if there are assignments with assignees, but no actual hours' do
+        project = create(:project)
+        user = create(:membership, company: project.client.company).user
+        assignment = create(:assignment, project: project, user: user)
+        create(:work_week, assignment: assignment, actual_hours: 0)
+
+        expect { project.destroy }.to change { Project.count }.by(-1)
+        expect { project.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it 'blocks project deletion if there are assignments with actual hours' do
+        project = create(:project)
+        user = create(:membership, company: project.client.company).user
+        assignment = create(:assignment, project: project, user: user)
+        create(:work_week, assignment: assignment, actual_hours: 8)
+
+        expect { project.destroy }.to_not change { Project.count }
+        expect(project.errors.full_messages).to include("Cannot delete a project that has assignments with hours recorded. Try archiving the project instead.")
+      end
+    end
+  end
+
   describe "#confirmed?" do
     it "returns true if the status is confirmed" do
       project = build(:project, status: "confirmed")
