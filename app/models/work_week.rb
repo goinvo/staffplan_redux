@@ -39,6 +39,6 @@ class WorkWeek < ApplicationRecord
     return false if year_zero? || cweek_zero?
 
     today = Date.today
-    today.year < year || (today.year == year && today.cweek >= cweek)
+    today.year > year || (today.year == year && today.cweek >= cweek)
   end
 end
