@@ -17,7 +17,7 @@ module Types
       field :ends_on, GraphQL::Types::ISO8601Date, null: true
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-
+      field :can_be_deleted, Boolean, null: false, description: 'Whether the assignment can be deleted'
       field :assignments, [Types::StaffPlan::AssignmentType], null: false
 
       def assigmnents
@@ -34,6 +34,10 @@ module Types
 
       def work_weeks
         object.work_weeks
+      end
+
+      def can_be_deleted
+        object.can_be_deleted?
       end
     end
   end
