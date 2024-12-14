@@ -4,5 +4,5 @@ Rails.application.config.session_store(
   domain: :all,
   tld_length: 2,
   secure: Rails.env.production?,
-  same_site: Rails.env.production? ? :strict : :lax
+  same_site: :lax
 )
