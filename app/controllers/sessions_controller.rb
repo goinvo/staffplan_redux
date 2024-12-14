@@ -3,6 +3,10 @@ class SessionsController < Passwordless::SessionsController
   before_action :redirect_to_dashboard_if_authenticated, only: %i(new)
   before_action :require_params, only: :create
 
+  def confirm
+    super
+  end
+
 
   private
 
