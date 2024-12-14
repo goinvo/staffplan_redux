@@ -38,6 +38,7 @@ env:
     - REDIS_URL
     - AWS_ACCESS_KEY_ID
     - AWS_SECRET_ACCESS_KEY
+    - PREFAB_API_KEY
 
 ssh:
   user: ubuntu
