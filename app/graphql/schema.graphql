@@ -154,6 +154,17 @@ type Mutation {
     """
     assignmentId: ID!
   ): Assignment!
+
+  """
+  Delete a project.
+  """
+  deleteProject(
+    """
+    The ID of the project to delete. The project must meet the delete-ability
+    requirements: no assignments, or all assignments having no actual hours recorded.
+    """
+    projectId: ID!
+  ): Project!
   setCurrentCompany(
     """
     The ID of the company to set as the current user's current_company_id. User must be an active member of the company.
