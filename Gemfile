@@ -20,6 +20,10 @@ gem "money"
 gem "tailwindcss-rails"
 gem "recaptcha"
 gem "kamal", "2.3.0"
+gem "prefab-cloud-ruby"
+gem "amazing_print"
+gem "rails_semantic_logger"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
