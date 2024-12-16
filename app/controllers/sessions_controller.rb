@@ -3,23 +3,6 @@ class SessionsController < Passwordless::SessionsController
   before_action :redirect_to_dashboard_if_authenticated, only: %i(new)
   before_action :require_params, only: :create
 
-  def confirm
-    Rails.logger.debug "request.session_options[:id]: #{request.session_options[:id]}"
-    Rails.logger.debug "request.env\n#{request.env.inspect}"
-    Rails.logger.debug "session.keys before super: #{session.keys}"
-    super
-    Rails.logger.debug "session.keys after super: #{session.keys}"
-  end
-
-  def new
-    Rails.logger.debug "request.session_options[:id]: #{request.session_options[:id]}"
-    Rails.logger.debug "request.env\n#{request.env.inspect}"
-    Rails.logger.debug "session.keys before super: #{session.keys}"
-    super
-    Rails.logger.debug "session.keys after super: #{session.keys}"
-  end
-
-
   private
 
   def redirect_to_dashboard_if_authenticated

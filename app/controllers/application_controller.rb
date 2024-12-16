@@ -44,11 +44,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_company
 
   def require_user!
-    Rails.logger.debug "session.keys: #{session.keys}"
-    Rails.logger.debug "current_user: #{current_user.inspect}"
-    Rails.logger.debug "current_company: #{current_company.inspect}"
-    Rails.logger.debug "can access? #{current_company&.can_access?(user: current_user) || 'missing company?'}"
-
     return if current_company && current_company.can_access?(user: current_user)
 
     # user may have their access revoked
