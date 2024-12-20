@@ -23,6 +23,7 @@ jobs:
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://postgres:postgres@localhost:5432/rails_test"
+      PREFAB_DATASOURCES: LOCAL_ONLY
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
