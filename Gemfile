@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "3.2.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "8.0.0.1"
+gem "rails", "8.0.1"
 
 gem "sprockets-rails"
 
@@ -19,7 +19,7 @@ gem "stripe"
 gem "money"
 gem "tailwindcss-rails"
 gem "recaptcha"
-gem "kamal", "2.3.0"
+gem "kamal", "2.4.0"
 gem "prefab-cloud-ruby"
 
 # Use Redis adapter to run Action Cable in production
