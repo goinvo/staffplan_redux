@@ -12,5 +12,5 @@ class Types::ProjectAttributes < Types::BaseInputObject
   argument :hourly_rate, Integer, required: false, description: "The hourly rate for this project."
   argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project starts."
   argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project ends."
-  argument :assignments, [Types::StaffPlan::AssignmentAttributes], required: false, description: "Assignments for this project. See upsertAssignment to create a single assignment for existing projects."
+  argument :assignments, [Types::AssignmentAttributes], required: false, description: "Assignments for this project. See upsertAssignment to create a single assignment for existing projects."
 end

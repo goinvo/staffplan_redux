@@ -44,7 +44,7 @@ type Assignment {
 }
 
 """
-Attributes for creating an assignment
+Attributes for creating or updating an assignment
 """
 input AssignmentAttributes {
   """
@@ -58,6 +58,11 @@ input AssignmentAttributes {
   estimatedWeeklyHours: Int
 
   """
+  The ID of the assignment to update.
+  """
+  id: ID
+
+  """
   The project this assignment is for
   """
   projectId: ID
@@ -68,12 +73,12 @@ input AssignmentAttributes {
   startsOn: ISO8601Date
 
   """
-  The status of the assignment
+  The status of the assignment.
   """
-  status: String
+  status: String!
 
   """
-  The user assigned to this assignment
+  The ID of the user being assigned to the project. If omitted, the assignment status cannot be 'active'.
   """
   userId: ID
 }
@@ -109,6 +114,31 @@ type Client {
   projects: [Project!]!
   status: ClientStatus!
   updatedAt: ISO8601DateTime!
+}
+
+"""
+Attributes for creating or updating a client
+"""
+input ClientAttributes {
+  """
+  The client's description.
+  """
+  description: String
+
+  """
+  The ID of the client to update.
+  """
+  id: ID
+
+  """
+  The name of the client.
+  """
+  name: String
+
+  """
+  The status of the client.
+  """
+  status: String
 }
 
 enum ClientStatus {
@@ -213,6 +243,16 @@ type Mutation {
   ): Assignment!
 
   """
+  Create or update an assignment.
+  """
+  upsertAssignmentWithInput(
+    """
+    Attributes for creating or updating an assignment.
+    """
+    input: AssignmentAttributes!
+  ): Assignment!
+
+  """
   Create or update a client.
   """
   upsertClient(
@@ -235,6 +275,16 @@ type Mutation {
     The status of the client.
     """
     status: String
+  ): Client
+
+  """
+  Create or update a client.
+  """
+  upsertClientWithInput(
+    """
+    Attributes for creating or updating a client.
+    """
+    input: ClientAttributes!
   ): Client
 
   """

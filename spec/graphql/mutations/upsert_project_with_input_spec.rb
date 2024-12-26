@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Mutations::UpsertProject do
+RSpec.describe Mutations::UpsertProjectWithInput do
 
   context "resolve" do
     it "creates a new project with assignments from valid params" do
@@ -43,6 +43,7 @@ RSpec.describe Mutations::UpsertProject do
             status: Project::UNCONFIRMED,
             assignments: [{
               userId: assignee.id,
+              status: Assignment::PROPOSED,
             }]
           }
         }
@@ -98,6 +99,7 @@ RSpec.describe Mutations::UpsertProject do
             status: Project::UNCONFIRMED,
             assignments: [{
               startsOn: starts_on,
+              status: Assignment::PROPOSED
             }]
           }
         }
