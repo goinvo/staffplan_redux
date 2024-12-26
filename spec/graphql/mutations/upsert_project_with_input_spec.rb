@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe Mutations::UpsertProject do
+RSpec.describe Mutations::UpsertProjectWithInput do
 
   context "resolve" do
     it "creates a new project with assignments from valid params" do
