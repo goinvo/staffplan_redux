@@ -7,6 +7,7 @@ module Types
     field :upsert_work_weeks, mutation: Mutations::UpsertWorkWeeks
     field :upsert_assignment, mutation: Mutations::UpsertAssignment
     field :upsert_project, mutation: Mutations::UpsertProject
+    field :upsert_project_with_input, mutation: Mutations::UpsertProjectWithInput
     field :upsert_client, mutation: Mutations::UpsertClient
     field :delete_assignment, mutation: Mutations::DeleteAssignment
     field :delete_project, mutation: Mutations::DeleteProject

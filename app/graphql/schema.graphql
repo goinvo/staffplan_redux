@@ -240,7 +240,77 @@ type Mutation {
   """
   Create or update a project.
   """
-  upsertProject(input: ProjectAttributes!): Project
+  upsertProject(
+    """
+    Assignments for this project. See upsertAssignment to create a single assignment for existing projects.
+    """
+    assignments: [AssignmentAttributes!]
+
+    """
+    The ID of the client for this project.
+    """
+    clientId: ID
+
+    """
+    The cost of the project.
+    """
+    cost: Float
+
+    """
+    The date this project ends.
+    """
+    endsOn: ISO8601Date
+
+    """
+    The number of full time employees that will be assigned to this project.
+    """
+    fte: Float
+
+    """
+    The hourly rate for this project.
+    """
+    hourlyRate: Int
+
+    """
+    The expected number of billable hours expected for this project.
+    """
+    hours: Int
+
+    """
+    The ID of the project to update.
+    """
+    id: ID
+
+    """
+    The name of the project.
+    """
+    name: String
+
+    """
+    The frequency of payment for the project.
+    """
+    paymentFrequency: String
+
+    """
+    The type of rate for this project.
+    """
+    rateType: String
+
+    """
+    The date this project starts.
+    """
+    startsOn: ISO8601Date
+
+    """
+    The status of the project.
+    """
+    status: String
+  ): Project
+
+  """
+  Create or update a project.
+  """
+  upsertProjectWithInput(input: ProjectAttributes!): Project
 
   """
   Create or update a work week record for a StaffPlan user.
