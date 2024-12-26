@@ -7,8 +7,8 @@ RSpec.describe Mutations::UpsertProject do
   context "resolve" do
     it "creates a new project with assignments from valid params" do
       query_string = <<-GRAPHQL
-        mutation($clientId: ID, $name: String, $status: String, $assignments: [AssignmentAttributes!]) {
-          upsertProject(clientId: $clientId, name: $name, status: $status, assignments: $assignments) {
+        mutation($input: ProjectAttributes!) {
+          upsertProject(input: $input) {
             id
             client {
               id
@@ -20,7 +20,7 @@ RSpec.describe Mutations::UpsertProject do
             assignments {
               assignedUser {
                 email
-              }             
+              }
             }           
           }
         }
@@ -37,12 +37,14 @@ RSpec.describe Mutations::UpsertProject do
           current_company: user.current_company
         },
         variables: {
-          clientId: client.id,
-          name: project_name = Faker::Company.buzzword,
-          status: Project::UNCONFIRMED,
-          assignments: [{
-            userId: assignee.id,
-          }]
+          input: {
+            clientId: client.id,
+            name: project_name = Faker::Company.buzzword,
+            status: Project::UNCONFIRMED,
+            assignments: [{
+              userId: assignee.id,
+            }]
+          }
         }
       )
 
@@ -59,8 +61,8 @@ RSpec.describe Mutations::UpsertProject do
 
     it "creates a new project with unassigned assignments from valid params" do
       query_string = <<-GRAPHQL
-        mutation($clientId: ID, $name: String, $status: String, $assignments: [AssignmentAttributes!]) {
-          upsertProject(clientId: $clientId, name: $name, status: $status, assignments: $assignments) {
+        mutation($input: ProjectAttributes!) {
+          upsertProject(input: $input) {
             id
             client {
               id
@@ -90,12 +92,14 @@ RSpec.describe Mutations::UpsertProject do
           current_company: user.current_company
         },
         variables: {
-          clientId: client.id,
-          name: project_name = Faker::Company.buzzword,
-          status: Project::UNCONFIRMED,
-          assignments: [{
-            startsOn: starts_on,
-          }]
+          input: {
+            clientId: client.id,
+            name: project_name = Faker::Company.buzzword,
+            status: Project::UNCONFIRMED,
+            assignments: [{
+              startsOn: starts_on,
+            }]
+          }
         }
       )
 
@@ -113,8 +117,8 @@ RSpec.describe Mutations::UpsertProject do
 
     it "does not allow a client_id from another company to be specified" do
       query_string = <<-GRAPHQL
-        mutation($clientId: ID, $name: String) {
-          upsertProject(clientId: $clientId, name: $name) {
+        mutation($input: ProjectAttributes!) {
+          upsertProject(input: $input) {
             id
             client {
               id
@@ -140,8 +144,10 @@ RSpec.describe Mutations::UpsertProject do
             current_company: user.current_company
           },
           variables: {
-            clientId: other_client.id,
-            name: project_name = Faker::Company.buzzword
+            input: {
+              clientId: other_client.id,
+              name: project_name = Faker::Company.buzzword
+            }
           }
         )
       end.to_not change(Project, :count)
@@ -150,10 +156,62 @@ RSpec.describe Mutations::UpsertProject do
       expect(post_result.first["message"]).to eq("Client not found")
     end
 
+    it "allows optional project fields to be set from a value to a null value" do
+      query_string = <<-GRAPHQL
+        mutation($input: ProjectAttributes!) {
+          upsertProject(input: $input) {
+            id
+            client {
+              id
+            }
+            name
+            cost
+            paymentFrequency
+            fte
+            hours
+            rateType
+            hourlyRate
+            status
+            startsOn
+            endsOn
+          }
+        }
+      GRAPHQL
+
+      project = create(:project,
+        starts_on: starts_on = 2.weeks.from_now,
+        ends_on: ends_on = 10.weeks.from_now
+      )
+      user = User.find_by(current_company_id: project.company.id)
+
+      expect(project.starts_on).to eq(starts_on.to_date)
+      expect(project.ends_on).to eq(ends_on.to_date)
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: user,
+          current_company: user.current_company
+        },
+        variables: {
+          input: {
+            id: project.id,
+            startsOn: nil,
+            endsOn: nil
+          }
+        }
+      )
+
+      expect(result["errors"]).to be_nil
+      post_result = result["data"]["upsertProject"]
+      expect(post_result["startsOn"]).to eq(nil)
+      expect(post_result["endsOn"]).to eq(nil)
+    end
+
     it "updates a project with valid params" do
       query_string = <<-GRAPHQL
-        mutation($id: ID, $clientId: ID, $name: String, $status: String, $cost: Float, $paymentFrequency: String, $fte: Float, $hours: Int, $rateType: String, $hourlyRate: Int, $startsOn: ISO8601Date, $endsOn: ISO8601Date) {
-          upsertProject(id: $id, clientId: $clientId, name: $name, status: $status, cost: $cost, paymentFrequency: $paymentFrequency, fte: $fte, hours: $hours, rateType: $rateType, hourlyRate: $hourlyRate, startsOn: $startsOn, endsOn: $endsOn) {
+        mutation($input: ProjectAttributes!) {
+          upsertProject(input: $input) {
             id
             client {
               id
@@ -182,18 +240,20 @@ RSpec.describe Mutations::UpsertProject do
           current_company: user.current_company
         },
         variables: {
-          id: project.id,
-          clientId: project.client.id,
-          name: project.name + " updated",
-          status: Project::COMPLETED,
-          cost: 1000.00,
-          paymentFrequency: Project::ANNUALLY,
-          fte: 1.25,
-          hours: 1_000,
-          rateType: "hourly",
-          hourlyRate: 1_000,
-          startsOn: starts_on = 2.weeks.from_now.to_date.iso8601,
-          endsOn: ends_on = 10.weeks.from_now.to_date.iso8601
+          input: {
+            id: project.id,
+            clientId: project.client.id,
+            name: project.name + " updated",
+            status: Project::COMPLETED,
+            cost: 1000.00,
+            paymentFrequency: Project::ANNUALLY,
+            fte: 1.25,
+            hours: 1_000,
+            rateType: "hourly",
+            hourlyRate: 1_000,
+            startsOn: starts_on = 2.weeks.from_now.to_date.iso8601,
+            endsOn: ends_on = 10.weeks.from_now.to_date.iso8601
+          }
         }
       )
 
@@ -214,8 +274,8 @@ RSpec.describe Mutations::UpsertProject do
 
     it "does not allow client_id to be overridden" do
       query_string = <<-GRAPHQL
-        mutation($id: ID, $clientId: ID) {
-          upsertProject(id: $id, clientId: $clientId) {
+        mutation($input: ProjectAttributes!) {
+          upsertProject(input: $input) {
             id
             client {
               id
@@ -237,8 +297,10 @@ RSpec.describe Mutations::UpsertProject do
           current_company: user.current_company
         },
         variables: {
-          id: project.id,
-          clientId: other_client.id,
+          input: {
+            id: project.id,
+            clientId: other_client.id,
+          }
         }
       )
 
@@ -248,8 +310,8 @@ RSpec.describe Mutations::UpsertProject do
 
     it "raises a 404 if given an project id that doesn't exist on the company" do
       query_string = <<-GRAPHQL
-        mutation($id: ID, $name: String) {
-          upsertProject(id: $id, name: $name) {
+        mutation($input: ProjectAttributes!) {
+          upsertProject(input: $input) {
             id
             name
           }
@@ -269,8 +331,10 @@ RSpec.describe Mutations::UpsertProject do
           current_company: user.current_company
         },
         variables: {
-          id: second_project.id,
-          name: "new name"
+          input: {
+            id: second_project.id,
+            name: "new name"
+          }
         }
       )
 
