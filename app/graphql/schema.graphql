@@ -111,6 +111,31 @@ type Client {
   updatedAt: ISO8601DateTime!
 }
 
+"""
+Attributes for creating or updating a client
+"""
+input ClientAttributes {
+  """
+  The client's description.
+  """
+  description: String
+
+  """
+  The ID of the client to update.
+  """
+  id: ID
+
+  """
+  The name of the client.
+  """
+  name: String
+
+  """
+  The status of the client.
+  """
+  status: String
+}
+
 enum ClientStatus {
   """
   The client is active.
@@ -235,6 +260,16 @@ type Mutation {
     The status of the client.
     """
     status: String
+  ): Client
+
+  """
+  Create or update a client.
+  """
+  upsertClientWithInput(
+    """
+    Attributes for creating or updating a client.
+    """
+    input: ClientAttributes!
   ): Client
 
   """
