@@ -44,7 +44,7 @@ type Assignment {
 }
 
 """
-Attributes for creating an assignment
+Attributes for creating or updating an assignment
 """
 input AssignmentAttributes {
   """
@@ -58,6 +58,11 @@ input AssignmentAttributes {
   estimatedWeeklyHours: Int
 
   """
+  The ID of the assignment to update.
+  """
+  id: ID
+
+  """
   The project this assignment is for
   """
   projectId: ID
@@ -68,12 +73,12 @@ input AssignmentAttributes {
   startsOn: ISO8601Date
 
   """
-  The status of the assignment
+  The status of the assignment.
   """
-  status: String
+  status: String!
 
   """
-  The user assigned to this assignment
+  The ID of the user being assigned to the project. If omitted, the assignment status cannot be 'active'.
   """
   userId: ID
 }
@@ -235,6 +240,16 @@ type Mutation {
     The ID of the user being assigned to the project. If omitted, the assignment status cannot be 'active'.
     """
     userId: ID
+  ): Assignment!
+
+  """
+  Create or update an assignment.
+  """
+  upsertAssignmentWithInput(
+    """
+    Attributes for creating or updating an assignment.
+    """
+    input: AssignmentAttributes!
   ): Assignment!
 
   """

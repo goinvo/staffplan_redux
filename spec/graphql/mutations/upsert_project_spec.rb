@@ -42,6 +42,7 @@ RSpec.describe Mutations::UpsertProject do
           status: Project::UNCONFIRMED,
           assignments: [{
             userId: assignee.id,
+            status: Assignment::PROPOSED
           }]
         }
       )
@@ -95,6 +96,7 @@ RSpec.describe Mutations::UpsertProject do
           status: Project::UNCONFIRMED,
           assignments: [{
             startsOn: starts_on,
+            status: Assignment::PROPOSED
           }]
         }
       )
