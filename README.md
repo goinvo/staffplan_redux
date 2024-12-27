@@ -74,7 +74,7 @@ your local machine, you'll need to check http://localhost:3000/letter_opener/ fo
 
 For local development we'll assume a couple of things:
 
-1. You have a working Ruby 3.4.1 installation
+1. You have a working Ruby installation
 2. You have bundler installed
 3. You have Docker installed
 
