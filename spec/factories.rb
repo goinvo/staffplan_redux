@@ -92,7 +92,7 @@ FactoryBot.define do
   factory :work_week do
     assignment
     cweek { Date.today.cweek }
-    year { Date.today.year }
+    year { Date.today.cwyear }
     estimated_hours { rand(2..8) }
     actual_hours { rand(2..8) }
 

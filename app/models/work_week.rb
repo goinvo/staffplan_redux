@@ -14,8 +14,8 @@ class WorkWeek < ApplicationRecord
   validate :no_future_actual_hours
 
   def is_future_work_week?
-    Date.today.year < year || (
-      year == Date.today.year && cweek > Date.today.cweek
+    Date.today.cwyear < year || (
+      year == Date.today.cwyear && cweek > Date.today.cweek
     )
   end
 
@@ -39,6 +39,6 @@ class WorkWeek < ApplicationRecord
     return false if year_zero? || cweek_zero?
 
     today = Date.today
-    today.year > year || (today.year == year && today.cweek >= cweek)
+    today.cwyear > year || (today.cwyear == year && today.cweek >= cweek)
   end
 end
