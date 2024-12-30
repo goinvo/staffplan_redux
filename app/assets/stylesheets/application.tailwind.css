@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-open-sans {
+    font-family: "Open Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings: normal;
+}
+
 /*
 
 @layer components {
