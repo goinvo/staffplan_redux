@@ -619,6 +619,11 @@ type User {
   currentCompany: Company
   email: String!
   id: ID!
+
+  """
+  Whether the user is an active member of the current company.
+  """
+  isActive: Boolean!
   name: String!
 
   """

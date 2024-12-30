@@ -36,6 +36,11 @@ module Types
         object.role(company: object.current_company)
       end
 
+      field :is_active, Boolean, null: false, description: "Whether the user is an active member of the current company."
+      def is_active
+        object.status(company: object.current_company) == Membership::ACTIVE
+      end
+
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     end
