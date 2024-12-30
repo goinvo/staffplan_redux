@@ -33,6 +33,10 @@ class User < ApplicationRecord
     memberships.find_by(company:).role
   end
 
+  def status(company:)
+    memberships.find_by(company:).status
+  end
+
   def inactive?(company:)
     memberships.find_by(company:).inactive?
   end
