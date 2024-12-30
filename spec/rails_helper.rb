@@ -11,6 +11,7 @@ require "view_component/system_test_helpers"
 require "capybara/rspec"
 require 'sidekiq/testing'
 require 'vcr'
+require 'pry'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 

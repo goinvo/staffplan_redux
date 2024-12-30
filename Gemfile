@@ -63,6 +63,7 @@ group :development do
   gem "letter_opener"
   gem "letter_opener_web"
   gem "foreman"
+  gem 'pry'
 end
 
 group :test do

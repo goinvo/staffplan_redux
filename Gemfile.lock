@@ -113,6 +113,7 @@ GEM
       xpath (~> 3.2)
     childprocess (5.1.0)
       logger (~> 1.5)
+    coderay (1.1.3)
     concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
     crack (1.0.0)
@@ -230,6 +231,9 @@ GEM
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
     pg (1.5.9)
+    pry (0.15.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     psych (5.2.2)
       date
       stringio
@@ -412,6 +416,7 @@ DEPENDENCIES
   paper_trail
   passwordless (~> 1.8)
   pg (~> 1.5)
+  pry
   puma (>= 5.0)
   rack-cors
   rails (= 8.0.1)

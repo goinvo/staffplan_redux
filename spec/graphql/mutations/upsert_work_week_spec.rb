@@ -124,7 +124,7 @@ RSpec.describe Mutations::UpsertWorkWeek do
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it "does not delete a future work week when passed a null or 0 value for estimatedHours" do
+    it "does not delete a past work week when passed a null or 0 value for estimatedHours if there are actualHours" do
       query_string = <<-GRAPHQL
         mutation($assignmentId: ID!, $cweek: Int!, $year: Int!, $actualHours: Int, $estimatedHours: Int) {
           upsertWorkWeek(assignmentId: $assignmentId, cweek: $cweek, year: $year, actualHours: $actualHours, estimatedHours: $estimatedHours) {
@@ -137,9 +137,11 @@ RSpec.describe Mutations::UpsertWorkWeek do
       company = create(:company)
       assignment = tbd_assignment_for_company(company:)
       user = company.users.first
+
+      past_date = Date.today - 2.months
       work_week = create(:work_week,
-        cweek: (Date.today - 1.month).cweek,
-        year: (Date.today - 1.month).year,
+        cweek: past_date.cweek,
+        year: past_date.year,
         estimated_hours: 10,
         actual_hours: 10,
         assignment:
@@ -155,13 +157,13 @@ RSpec.describe Mutations::UpsertWorkWeek do
           assignmentId: work_week.assignment_id,
           cweek: work_week.cweek,
           year: work_week.year,
-          actualHours: nil,
-          estimatedHours: nil
+          estimatedHours: nil,
+          actualHours: 10
         }
       )
 
       post_result = result["data"]["upsertWorkWeek"]
-      expect(post_result["actualHours"]).to eq(0)
+      expect(post_result["actualHours"]).to eq(10)
       expect(post_result["estimatedHours"]).to eq(0)
       expect {
         work_week.reload
@@ -297,14 +299,14 @@ RSpec.describe Mutations::UpsertWorkWeek do
         variables: {
           assignmentId: assignment.id,
           cweek: today.cweek,
-          year: today.year,
+          year: today.cwyear,
           estimatedHours: 15
         }
       )
 
       post_result = result["data"]["upsertWorkWeek"]
       expect(post_result["cweek"]).to eq(today.cweek)
-      expect(post_result["year"]).to eq(today.year)
+      expect(post_result["year"]).to eq(today.cwyear)
       expect(post_result["actualHours"]).to eq(0)
       expect(post_result["estimatedHours"]).to eq(15)
     end
