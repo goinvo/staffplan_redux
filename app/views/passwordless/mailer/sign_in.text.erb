@@ -1,1 +1,7 @@
-<%= t("passwordless.mailer.sign_in.body", token: @token, magic_link: @magic_link) %>
+Use this token to complete your sign in:
+
+<%= @token %>
+
+Alternatively you can use this link to sign in directly: <%= @magic_link %>
+
+StaffPlan
