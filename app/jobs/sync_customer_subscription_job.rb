@@ -1,5 +1,4 @@
-class SyncCustomerSubscriptionJob
-  include Sidekiq::Job
+class SyncCustomerSubscriptionJob < ApplicationJob
 
   def perform(id)
     company = Company.find_by!(id: id)
