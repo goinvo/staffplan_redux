@@ -1,7 +1,9 @@
 <%= form_for @user, url: settings_users_path do |f| %>
   <div class="space-y-12">
     <div class="pb-12">
-      <h2 class="text-base font-semibold leading-7 text-gray-900">Add a new user</h2>
+      <h2 class="text-base font-semibold leading-7 text-gray-900">
+        New user
+      </h2>
 
       <% if @user.errors.any? %>
         <div class="rounded-md bg-red-50 p-4">
@@ -34,22 +36,31 @@
         </div>
 
         <div class="sm:col-span-6">
-          <%= f.label :email, "E-mail address", class: "block text-sm font-medium leading-6 text-gray-900" %>
+          <%= f.label :email, "Email", class: "block text-sm font-medium leading-6 text-gray-900" %>
           <div class="mt-2">
             <%= f.email_field :email, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
           </div>
         </div>
 
         <div class="sm:col-span-6">
-          <%= label_tag "user_role", "What role should this person have?",  class: "block text-sm font-medium leading-6 text-gray-900" %>
-          <div class="mt-2">
-            <select id="user_role" name="user[role]" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-              <% user_role_param = params.dig(:user, :role) %>
-              <option value="<%= Membership::MEMBER %>"<%= " selected" if user_role_param.blank? || user_role_param == Membership::MEMBER %>>Member</option>
-              <option value="<%= Membership::ADMIN %>"<%= " selected" if user_role_param == Membership::ADMIN %>>Admin</option>
-              <option value="<%= Membership::OWNER %>"<%= " selected" if user_role_param == Membership::OWNER %>>Owner</option>
-            </select>
-          </div>
+          <fieldset>
+            <legend class="text-sm/6 font-semibold text-gray-900">What role should this person have?</legend>
+            <p class="mt-1 text-sm/6 text-gray-600">Only owners and admins can manage company-level settings or manage users.</p>
+            <div class="mt-6 space-y-6">
+              <div class="flex items-center">
+                <input id="role-member" name="user[role]" type="radio" value="<%= Membership::MEMBER %>" checked class="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden">
+                <label for="role-member" class="ml-3 block text-sm/6 font-medium text-gray-900">Member</label>
+              </div>
+              <div class="flex items-center">
+                <input id="role-admin" name="user[role]" type="radio" value="<%= Membership::ADMIN %>" class="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden">
+                <label for="role-admin" class="ml-3 block text-sm/6 font-medium text-gray-900">Admin</label>
+              </div>
+              <div class="flex items-center">
+                <input id="role-owner" name="user[role]" type="radio" value="<%= Membership::OWNER %>" class="relative size-4 appearance-none rounded-full border border-gray-300 bg-white before:absolute before:inset-1 before:rounded-full before:bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:before:bg-gray-400 forced-colors:appearance-auto forced-colors:before:hidden [&:not(:checked)]:before:hidden">
+                <label for="role-owner" class="ml-3 block text-sm/6 font-medium text-gray-900">Owner</label>
+              </div>
+            </div>
+          </fieldset>
         </div>
       </div>
     </div>
