@@ -34,6 +34,6 @@ module StaffplanRedux
 
     config.active_support.to_time_preserves_timezone = :zone
 
-    # Prefab.init
+    Prefab.init
   end
 end
