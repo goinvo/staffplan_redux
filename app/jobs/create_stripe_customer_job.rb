@@ -1,5 +1,4 @@
-class CreateStripeCustomerJob
-  include Sidekiq::Job
+class CreateStripeCustomerJob < ApplicationJob
 
   def perform(id)
     company = Company.find_by!(id: id)
