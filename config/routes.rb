@@ -5,16 +5,16 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: lambda { |request|
     user = Passwordless::Session.find_by(id: request.session[:"passwordless_session_id--user"])&.authenticatable
 
-    Rails.env.development? || (
-      user && %w(goinvo.com prettygood.software).include?(user.email.split('@').last)
-    )
+    user && Prefab.enabled?("super-admin", { user: { email: user&.email }})
   }
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
     # only allow authenticated users, otherwise 404
-    Passwordless::Session.exists?(id: request.session[:"passwordless_session_id--user"])
+    user = Passwordless::Session.exists?(id: request.session[:"passwordless_session_id--user"])&.authenticatable
+
+    user && Prefab.enabled?("graphiql-access", { user: { email: user&.email }})
   }
 
   post "/graphql", to: "graphql#execute"
