@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
-    # only allow authenticated users, otherwise 404
-    user = Passwordless::Session.exists?(id: request.session[:"passwordless_session_id--user"])&.authenticatable
+    # only allow allowed users, otherwise 404
+    user = Passwordless::Session.find_by(id: request.session[:"passwordless_session_id--user"])&.authenticatable
 
     user && Prefab.enabled?("graphiql-access", { user: { email: user&.email }})
   }
