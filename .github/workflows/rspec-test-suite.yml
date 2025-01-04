@@ -35,7 +35,7 @@ jobs:
           DATABASE_URL: ${{ env.DATABASE_URL }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
           POSTGRES_PASSWORD: postgres
-        run: bin/rails db:reset
+        run: bin/rails db:test:prepare
       - name: Precompile Rails assets
         env:
           DATABASE_URL: ${{ env.DATABASE_URL }}
