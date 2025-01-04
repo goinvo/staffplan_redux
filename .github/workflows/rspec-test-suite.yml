@@ -17,7 +17,6 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          POSTGRES_DB: staffplan_redux_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
     env:
@@ -35,14 +34,17 @@ jobs:
         env:
           DATABASE_URL: ${{ env.DATABASE_URL }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: bin/rails db:create db:schema:load
+          POSTGRES_PASSWORD: postgres
+        run: bin/rails db:test:prepare
       - name: Precompile Rails assets
         env:
           DATABASE_URL: ${{ env.DATABASE_URL }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          POSTGRES_PASSWORD: postgres
         run: bin/rails assets:precompile
       - name: Run tests
         env:
           DATABASE_URL: ${{ env.DATABASE_URL }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          POSTGRES_PASSWORD: postgres
         run: bundle exec rspec
