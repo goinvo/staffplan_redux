@@ -1,8 +1,47 @@
-<h1><%= @greeting %></h1>
-
-<p>
-  Your StaffPlan account is growing! We've updated your account based on the <%= pluralize(@new_subscription_count, 'user') %> in your account.
-</p>
-<p>
-  Happy Planning!
-</p>
+<body style="margin: 0; width: 100%; background-color: #f8fafc; padding: 0; -webkit-font-smoothing: antialiased; word-break: break-word">
+<div role="article" aria-roledescription="email" aria-label lang="en">
+  <div class="sm-px-4" style="background-color: #f8fafc; font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
+    <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">
+      <tr>
+        <td style="width: 552px; max-width: 100%">
+          <div role="separator" style="line-height: 24px">&zwj;</div>
+          <table style="width: 100%" cellpadding="0" cellspacing="0" role="none">
+            <tr>
+              <td class="sm-p-6" style="border-radius: 8px; background-color: #fffffe; padding: 24px 36px; border: 1px solid #e2e8f0">
+                <a href="https://app.staffplan.com">
+                  <img src="https://app.staffplan.com/assets/staffplan-logo-notext-568affe9b8becd2bc88fd2fed64d0c42075d02916b900ec4a04ac651b5788431.png" width="70" alt="StaffPlan" style="max-width: 100%; vertical-align: middle">
+                </a>
+                <div role="separator" style="line-height: 24px">&zwj;</div>
+                <h1 style="margin: 0 0 24px; font-size: 24px; line-height: 32px; font-weight: 600; color: #0f172a">
+                  <%= @greeting %>
+                </h1>
+                <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
+                  Your StaffPlan account is growing! We've updated your account based on the <%= pluralize(@new_subscription_count, 'user') %> in your account.
+                </p>
+                <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
+                  Happy Planning!
+                </p>
+                <div role="separator" style="line-height: 24px">&zwj;</div>
+                <p style="margin: 0; font-size: 16px; line-height: 24px; color: #475569">
+                  Thanks,
+                  <br>
+                  <span style="font-weight: 600">StaffPlan</span>
+                </p>
+              </td>
+            </tr>
+          </table>
+          <table style="width: 100%" cellpadding="0" cellspacing="0" role="none">
+            <tr>
+              <td class="sm-px-6" style="padding: 24px 36px">
+                <p style="margin: 0; font-size: 12px; color: #64748b">
+                  &copy; <%= Date.today.year %> StaffPlan. All rights reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
