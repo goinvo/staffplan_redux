@@ -22,13 +22,13 @@ module Types
       field :assignments, [Types::StaffPlan::AssignmentType], null: false, description: "Fetches all of the user's assignments for the current company."
 
       def assignments
-        object.assignments.where(project_id: object.current_company.projects.map(&:id))
+        object.assignments.includes(:work_weeks, project: :client).where(project_id: object.current_company.projects.map(&:id))
       end
 
       field :projects, [Types::StaffPlan::ProjectType], null: false, description: "Fetches all projects for the current user for the current company."
 
       def projects
-        object.projects.where(client_id: object.current_company.clients.map(&:id))
+        object.projects.includes(assignments: [:work_weeks, project: :client]).where(client_id: object.current_company.clients.map(&:id))
       end
 
       field :role, String, null: false, description: "The role of the user in the current_company"

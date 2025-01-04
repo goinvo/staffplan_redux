@@ -25,7 +25,7 @@ module Types
 
     field :current_company, Types::StaffPlan::CompanyType, null: true, description: "The company in scope for all other company-related queries."
     def current_company
-      context[:current_company]
+      Company.includes(:projects, users: :avatar_attachment).find(context[:current_company].id)
     end
 
     field :clients, [Types::StaffPlan::ClientType], null: false, description: "Fetches all clients for the current company."
@@ -35,7 +35,9 @@ module Types
 
     field :projects, [Types::StaffPlan::ProjectType], null: false, description: "Fetches all projects for the current company."
     def projects
-      context[:current_company].projects.all
+      context[:current_company]
+      .projects
+      .all
     end
 
     field :project_assignments, [Types::StaffPlan::AssignmentType], null: false, description: "Fetches all assignments for the company's projects."do
@@ -66,7 +68,10 @@ module Types
 
     field :users, [Types::StaffPlan::UserType], null: false, description: "Fetches all users for the current company."
     def users
-      context[:current_user].current_company.users.all
+      context[:current_user]
+      .current_company
+      .users
+      .all
     end
   end
 end
