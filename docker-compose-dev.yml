@@ -49,6 +49,7 @@ services:
       POSTGRES_PASSWORD: postgres
       DB_HOST: db
       REDIS_URL: redis://redis:6379/0
+      PREFAB_DATASOURCES: LOCAL_ONLY
     stdin_open: true
     tty: true
     depends_on:
