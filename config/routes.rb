@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     # only allow allowed users, otherwise 404
     user = Passwordless::Session.find_by(id: request.session[:"passwordless_session_id--user"])&.authenticatable
 
-    user && Prefab.enabled?("graphiql-access", { user: { email: user&.email }})
+    Rails.env.development? ||
+      # (user && Prefab.enabled?("graphiql-access", { user: { email: user&.email }}))
+      false
   }
 
   post "/graphql", to: "graphql#execute"
