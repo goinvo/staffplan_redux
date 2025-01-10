@@ -237,37 +237,6 @@ RSpec.describe Mutations::UpsertWorkWeek do
       expect(post_result.length).to eq(1)
       expect(post_result.first["message"]).to eq("WorkWeek not found")
     end
-
-    it "fails if the user is not an active member of the company" do
-      query_string = <<-GRAPHQL
-        mutation($assignmentId: ID!, $cweek: Int!, $year: Int!) {
-          upsertWorkWeek(assignmentId: $assignmentId, cweek: $cweek, year: $year) {
-            actualHours
-            estimatedHours
-          }
-        }
-      GRAPHQL
-
-      work_week = create(:work_week, :blank)
-      work_week.user.memberships.update_all(status: "inactive")
-
-      result = StaffplanReduxSchema.execute(
-        query_string,
-        context: {
-          current_user: work_week.user,
-          current_company: work_week.company
-        },
-        variables: {
-          assignmentId: work_week.assignment_id,
-          cweek: work_week.cweek,
-          year: work_week.year
-        }
-      )
-
-      post_result = result["errors"]
-      expect(post_result.length).to eq(1)
-      expect(post_result.first["message"]).to eq("User is not an active member of the company")
-    end
   end
 
   context "when creating a new work week" do
