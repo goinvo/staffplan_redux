@@ -15,11 +15,6 @@ module Mutations
       # try and find the assignment
       assignment = current_company.assignments.find(assignment_id)
 
-      if assignment.user && !Membership.active.exists?(user: assignment.user, company: current_company)
-        # if the assignment isn't for an active user, raise an error
-        raise GraphQL::ExecutionError, "User is not an active member of the company"
-      end
-
       WorkWeek.transaction do
         work_weeks.each do |ww|
           work_week = assignment.work_weeks.find_or_initialize_by(cweek: ww.cweek, year: ww.year)
