@@ -45,6 +45,6 @@ class User < ApplicationRecord
     membership = memberships.find_by!(company:)
     membership.update!(status: membership.active? ? Membership::INACTIVE : Membership::ACTIVE)
 
-    SyncCustomerSubscriptionJob.perform_async(current_company.id)
+    SyncCustomerSubscriptionJob.perform_async(company.id)
   end
 end
