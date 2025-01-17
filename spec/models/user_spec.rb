@@ -70,23 +70,42 @@ RSpec.describe User, type: :model do
 
   describe "#toggle_status!" do
     it "toggles the user's status from active to inactive" do
-      user = create(:membership, status: Membership::ACTIVE).user
-      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(user.current_company.id)
-      user.toggle_status!(company: user.current_company)
-      expect(user.inactive?(company: user.current_company)).to be_truthy
+      membership = create(:membership, status: Membership::ACTIVE)
+      company = membership.company
+      user = membership.user
+
+      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(company.id)
+      user.toggle_status!(company:)
+      expect(user.inactive?(company:)).to be_truthy
     end
 
     it "toggles the user's status from inactive to active" do
-      user = create(:membership, status: Membership::INACTIVE).user
-      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(user.current_company.id)
-      user.toggle_status!(company: user.current_company)
-      expect(user.inactive?(company: user.current_company)).to be_falsey
+      membership = create(:membership, status: Membership::INACTIVE)
+      company = membership.company
+      user = membership.user
+
+      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(company.id)
+      user.toggle_status!(company:)
+      expect(user.inactive?(company:)).to be_falsey
+    end
+
+    it "toggles the company passed as an argument, not the user's current company" do
+      first_membership = create(:membership, status: Membership::ACTIVE)
+      user = first_membership.user
+      second_membership = create(:membership, status: Membership::INACTIVE, user:)
+      expect(user.current_company).to eq(second_membership.company)
+
+      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(first_membership.company.id)
+      user.toggle_status!(company: first_membership.company)
     end
 
     it "syncs the customer subscription" do
-      user = create(:membership, status: Membership::ACTIVE).user
-      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(user.current_company.id)
-      user.toggle_status!(company: user.current_company)
+      membership = create(:membership, status: Membership::ACTIVE)
+      company = membership.company
+      user = membership.user
+
+      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(company.id)
+      user.toggle_status!(company:)
     end
   end
 end
