@@ -258,5 +258,83 @@ RSpec.describe Mutations::UpsertWorkWeeks do
       expect(post_result.length).to eq(1)
       expect(post_result.first["message"]).to eq("Assignment not found")
     end
+
+    it "succeeds if the work weeks being edited are from the past" do
+      query_string = <<-GRAPHQL
+         mutation($assignmentId: ID!, $workWeeks: [WorkWeeksInputObject!]!) {
+           upsertWorkWeeks(assignmentId: $assignmentId, workWeeks: $workWeeks) {
+             workWeeks {
+               actualHours
+               estimatedHours
+             }
+           }
+         }
+       GRAPHQL
+
+      work_week = create(:work_week, :blank)
+      work_week.user.memberships.update_all(status: "inactive")
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: work_week.user,
+          current_company: work_week.company
+        },
+        variables: {
+          assignmentId: work_week.assignment_id,
+          workWeeks: [{
+            cweek: 14,
+            year: 2023,
+            actualHours: 5,
+            estimatedHours: 12
+          }]
+        }
+      )
+
+      post_result = result["data"]["upsertWorkWeeks"]["workWeeks"]
+      expect(post_result.length).to eq(2)
+      expect(post_result.map { |pr| pr["actualHours"] }).to eq([0, 5])
+    end
+
+    it "fails if the work weeks being edited are in the future" do
+      query_string = <<-GRAPHQL
+         mutation($assignmentId: ID!, $workWeeks: [WorkWeeksInputObject!]!) {
+           upsertWorkWeeks(assignmentId: $assignmentId, workWeeks: $workWeeks) {
+             workWeeks {
+               actualHours
+               estimatedHours
+             }
+           }
+         }
+       GRAPHQL
+
+      date = 1.month.from_now.to_date
+      work_week = create(:work_week, :blank, cweek: date.cweek, year: date.cwyear)
+      work_week.user.memberships.update_all(status: "inactive")
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: work_week.user,
+          current_company: work_week.company
+        },
+        variables: {
+          assignmentId: work_week.assignment_id,
+          workWeeks: [{
+            cweek: work_week.cweek,
+            year: work_week.year,
+            actualHours: 5,
+            estimatedHours: 12
+          }]
+        }
+      )
+
+      post_result = result["data"]["upsertWorkWeeks"]["workWeeks"]
+      errors = result["errors"]
+      expect(post_result.length).to eq(1)
+      expect(post_result.map { |pr| pr["actualHours"] }).to eq([0])
+      expect(errors.length).to eq(1)
+      expect(errors.first["message"]).to eq("Unable to update 1 future work week(s) for an inactive user")
+    end
   end
 end
