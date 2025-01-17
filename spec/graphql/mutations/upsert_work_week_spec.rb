@@ -237,37 +237,72 @@ RSpec.describe Mutations::UpsertWorkWeek do
       expect(post_result.length).to eq(1)
       expect(post_result.first["message"]).to eq("WorkWeek not found")
     end
+  end
 
-    it "fails if the user is not an active member of the company" do
-      query_string = <<-GRAPHQL
-        mutation($assignmentId: ID!, $cweek: Int!, $year: Int!) {
-          upsertWorkWeek(assignmentId: $assignmentId, cweek: $cweek, year: $year) {
-            actualHours
-            estimatedHours
-          }
-        }
-      GRAPHQL
+  it "fails if a future work week and the user is not an active member of the company" do
+    query_string = <<-GRAPHQL
+         mutation($assignmentId: ID!, $cweek: Int!, $year: Int!) {
+           upsertWorkWeek(assignmentId: $assignmentId, cweek: $cweek, year: $year) {
+             actualHours
+             estimatedHours
+           }
+         }
+       GRAPHQL
 
-      work_week = create(:work_week, :blank)
-      work_week.user.memberships.update_all(status: "inactive")
+    date = 1.month.from_now.to_date
+    work_week = create(:work_week, :blank, cweek: date.cweek, year: date.cwyear)
+    work_week.user.memberships.update_all(status: "inactive")
 
-      result = StaffplanReduxSchema.execute(
-        query_string,
-        context: {
-          current_user: work_week.user,
-          current_company: work_week.company
-        },
-        variables: {
-          assignmentId: work_week.assignment_id,
-          cweek: work_week.cweek,
-          year: work_week.year
-        }
-      )
+    result = StaffplanReduxSchema.execute(
+      query_string,
+      context: {
+        current_user: work_week.user,
+        current_company: work_week.company
+      },
+      variables: {
+        assignmentId: work_week.assignment_id,
+        cweek: work_week.cweek,
+        year: work_week.year
+      }
+    )
 
-      post_result = result["errors"]
-      expect(post_result.length).to eq(1)
-      expect(post_result.first["message"]).to eq("User is not an active member of the company")
-    end
+    post_result = result["errors"]
+    expect(post_result.length).to eq(1)
+    expect(post_result.first["message"]).to eq("Unable to edit future work weeks for inactive users")
+  end
+
+  it "succeeds if a past work week and the user is not an active member of the company" do
+    query_string = <<-GRAPHQL
+         mutation($assignmentId: ID!, $cweek: Int!, $year: Int!, $actualHours: Int!, $estimatedHours: Int!) {
+           upsertWorkWeek(assignmentId: $assignmentId, cweek: $cweek, year: $year, actualHours: $actualHours, estimatedHours: $estimatedHours) {
+             actualHours
+             estimatedHours
+           }
+         }
+       GRAPHQL
+
+    date = 1.month.ago.to_date
+    work_week = create(:work_week, :blank, cweek: date.cweek, year: date.cwyear)
+    work_week.user.memberships.update_all(status: "inactive")
+
+    result = StaffplanReduxSchema.execute(
+      query_string,
+      context: {
+        current_user: work_week.user,
+        current_company: work_week.company
+      },
+      variables: {
+        assignmentId: work_week.assignment_id,
+        cweek: work_week.cweek,
+        year: work_week.year,
+        actualHours: 5,
+        estimatedHours: 5
+      }
+    )
+
+    post_result = result["data"]["upsertWorkWeek"]
+    expect(post_result["actualHours"]).to eq(5)
+    expect(post_result["estimatedHours"]).to eq(5)
   end
 
   context "when creating a new work week" do

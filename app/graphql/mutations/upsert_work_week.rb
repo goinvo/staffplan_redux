@@ -18,13 +18,18 @@ module Mutations
       # try and find the assignment
       assignment = current_company.assignments.find(assignment_id)
 
-      if assignment.user && !Membership.active.exists?(user: assignment.user, company: current_company)
-        # if the assignment isn't for an active user, raise an error
-        raise GraphQL::ExecutionError, "User is not an active member of the company"
-      end
-
       # otherwise, try and find a work week for the current company by assignment, cweek, and year
       work_week = current_company.work_weeks.find_by(assignment_id:, cweek:, year:)
+
+      if assignment.user
+        # a non TBD assignment will have a user
+        membership = Membership.find_by(user: assignment.user, company: current_company)
+
+        if membership.inactive? && work_week.is_future_work_week?(relative_to_date: membership.updated_at.to_date)
+          # edits are allowed to the user's work weeks prior to their deactivation week, inclusive
+          raise GraphQL::ExecutionError, "Unable to edit future work weeks for inactive users"
+        end
+      end
 
       if work_week.blank?
         # create it. unable to do this through current_company.work_weeks becaues it goes through more than one other association
