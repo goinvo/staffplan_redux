@@ -9,7 +9,6 @@ require "passwordless/test_helpers"
 require "view_component/test_helpers"
 require "view_component/system_test_helpers"
 require "capybara/rspec"
-require 'sidekiq/testing'
 require 'vcr'
 require 'pry'
 
@@ -35,8 +34,6 @@ VCR.configure do |config|
   }
 end
 
-Sidekiq::Testing.fake!
-
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
@@ -46,10 +43,6 @@ end
 
 RSpec.configure do |config|
   config.raise_errors_for_deprecations!
-
-  config.before(:each) do
-    Sidekiq::Worker.clear_all
-  end
 
   config.around(:each, type: :system) do |ex|
     previous_host = Rails.application.default_url_options[:host]

@@ -1,5 +1,4 @@
 web: env RUBY_DEBUG_OPEN=true bin/rails server -p 3000
 css: bin/rails tailwindcss:watch
-sidekiq: bundle exec sidekiq -C config/sidekiq.yml
 jobs: bundle exec rake solid_queue:start
 stripe: stripe listen --forward-to localhost:3000/webhooks/stripe
