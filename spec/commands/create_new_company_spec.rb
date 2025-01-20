@@ -4,7 +4,7 @@ RSpec.describe CreateNewCompany do
   describe "#call" do
     it "creates a company" do
       registration = create(:registration)
-      expect(CreateStripeCustomerJob).to receive(:perform_async)
+      expect(Stripe::CreateCustomerJob).to receive(:perform_later)
       expect {
         CreateNewCompany.new(
           company_name: registration.company_name,
@@ -17,7 +17,7 @@ RSpec.describe CreateNewCompany do
 
     it "creates a user" do
       registration = create(:registration)
-      expect(CreateStripeCustomerJob).to receive(:perform_async)
+      expect(Stripe::CreateCustomerJob).to receive(:perform_later)
       expect {
         CreateNewCompany.new(
           company_name: registration.company_name,
@@ -30,7 +30,7 @@ RSpec.describe CreateNewCompany do
 
     it "associates the user with the company" do
       registration = create(:registration)
-      expect(CreateStripeCustomerJob).to receive(:perform_async)
+      expect(Stripe::CreateCustomerJob).to receive(:perform_later)
       CreateNewCompany.new(
         company_name: registration.company_name,
         email: registration.email,
@@ -44,7 +44,7 @@ RSpec.describe CreateNewCompany do
 
     it "sets the user's name and email from the registration" do
       registration = create(:registration)
-      expect(CreateStripeCustomerJob).to receive(:perform_async)
+      expect(Stripe::CreateCustomerJob).to receive(:perform_later)
       CreateNewCompany.new(
         company_name: registration.company_name,
         email: registration.email,
@@ -57,7 +57,7 @@ RSpec.describe CreateNewCompany do
 
     it "sets the user's role to owner" do
       registration = create(:registration)
-      expect(CreateStripeCustomerJob).to receive(:perform_async)
+      expect(Stripe::CreateCustomerJob).to receive(:perform_later)
       CreateNewCompany.new(
         company_name: registration.company_name,
         email: registration.email,
@@ -69,7 +69,7 @@ RSpec.describe CreateNewCompany do
 
     it "sets the user's status to active" do
       registration = create(:registration)
-      expect(CreateStripeCustomerJob).to receive(:perform_async)
+      expect(Stripe::CreateCustomerJob).to receive(:perform_later)
       CreateNewCompany.new(
         company_name: registration.company_name,
         email: registration.email,
@@ -81,7 +81,7 @@ RSpec.describe CreateNewCompany do
 
     it "sets the registration's registered_at timestamp" do
       registration = create(:registration)
-      expect(CreateStripeCustomerJob).to receive(:perform_async)
+      expect(Stripe::CreateCustomerJob).to receive(:perform_later)
       CreateNewCompany.new(
         company_name: registration.company_name,
         email: registration.email,
@@ -93,7 +93,7 @@ RSpec.describe CreateNewCompany do
 
     it "creates a subscription" do
       registration = create(:registration)
-      expect(CreateStripeCustomerJob).to receive(:perform_async)
+      expect(Stripe::CreateCustomerJob).to receive(:perform_later)
       CreateNewCompany.new(
         company_name: registration.company_name,
         email: registration.email,
@@ -106,7 +106,7 @@ RSpec.describe CreateNewCompany do
 
     it "enqueues a job to create a stripe customer" do
       registration = create(:registration)
-      expect(CreateStripeCustomerJob).to receive(:perform_async)
+      expect(Stripe::CreateCustomerJob).to receive(:perform_later)
 
       command = CreateNewCompany.new(
         company_name: registration.company_name,

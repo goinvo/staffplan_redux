@@ -12,6 +12,13 @@ servers:
     cmd: bundle exec puma -C config/puma.rb
     options:
       "add-host": host.docker.internal:host-gateway
+
+  solid_queue:
+    hosts:
+      - 34.192.107.71
+    cmd: bundle exec rake solid_queue:start
+    options:
+      "add-host": host.docker.internal:host-gateway
   job:
     hosts:
       - 34.192.107.71

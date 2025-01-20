@@ -39,6 +39,24 @@ services:
     ports:
       - "3000:3000"
 
+  solid_queue:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: bundle exec rake solid_queue:start
+    environment:
+      DB_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres
+      DB_HOST: db
+      PREFAB_DATASOURCES: LOCAL_ONLY
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    volumes:
+      - .:/rails
+      - ./public:/rails/public
+
   sidekiq:
     build:
       context: .

@@ -1,20 +1,20 @@
 require "rails_helper"
 
-RSpec.describe CreateStripeCustomerJob, type: :job, vcr: true do
+RSpec.describe Stripe::CreateCustomerJob, type: :job, vcr: true do
   describe "perform" do
     before do
       expect(Company.count).to eq(0)
     end
 
     it "fails if it cannot find the company" do
-      expect { CreateStripeCustomerJob.perform_inline(1) }.to raise_error(ActiveRecord::RecordNotFound)
+      expect { Stripe::CreateCustomerJob.perform_now(Company.new) }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it "creates a stripe customer" do
       registration = create(:registration, email: "something@static.com")
       registration.register!
 
-      CreateStripeCustomerJob.perform_inline(Company.first.id)
+      Stripe::CreateCustomerJob.perform_now(Company.first)
 
       user = registration.reload.user
       expect(Company.count).to eq(1)
@@ -28,7 +28,7 @@ RSpec.describe CreateStripeCustomerJob, type: :job, vcr: true do
       registration = create(:registration, email: "something@static.com")
       registration.register!
 
-      CreateStripeCustomerJob.perform_inline(Company.first.id)
+      Stripe::CreateCustomerJob.perform_now(Company.first)
 
       expect(Company.count).to eq(1)
       company = Company.first
@@ -43,7 +43,7 @@ RSpec.describe CreateStripeCustomerJob, type: :job, vcr: true do
         registration = create(:registration, email: "something@static.com")
         registration.register!
 
-        CreateStripeCustomerJob.perform_inline(Company.first.id)
+        Stripe::CreateCustomerJob.perform_now(Company.first)
 
         expect(Company.count).to eq(1)
         company = Company.first
@@ -55,7 +55,7 @@ RSpec.describe CreateStripeCustomerJob, type: :job, vcr: true do
         registration = create(:registration, email: "something@static.com")
         registration.register!
 
-        CreateStripeCustomerJob.perform_inline(Company.first.id)
+        Stripe::CreateCustomerJob.perform_now(Company.first)
 
         company = Company.first
         subscription = company.subscription
@@ -74,7 +74,7 @@ RSpec.describe CreateStripeCustomerJob, type: :job, vcr: true do
         )
         registration.register!
 
-        CreateStripeCustomerJob.perform_inline(Company.first.id)
+        Stripe::CreateCustomerJob.perform_now(Company.first)
 
         company = Company.first
         subscription = company.subscription

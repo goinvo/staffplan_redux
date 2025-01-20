@@ -74,7 +74,7 @@ RSpec.describe User, type: :model do
       company = membership.company
       user = membership.user
 
-      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(company.id)
+      expect(Stripe::SyncCustomerSubscriptionJob).to receive(:perform_later).with(company)
       user.toggle_status!(company:)
       expect(user.inactive?(company:)).to be_truthy
     end
@@ -84,7 +84,7 @@ RSpec.describe User, type: :model do
       company = membership.company
       user = membership.user
 
-      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(company.id)
+      expect(Stripe::SyncCustomerSubscriptionJob).to receive(:perform_later).with(company)
       user.toggle_status!(company:)
       expect(user.inactive?(company:)).to be_falsey
     end
@@ -95,7 +95,7 @@ RSpec.describe User, type: :model do
       second_membership = create(:membership, status: Membership::INACTIVE, user:)
       expect(user.current_company).to eq(second_membership.company)
 
-      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(first_membership.company.id)
+      expect(Stripe::SyncCustomerSubscriptionJob).to receive(:perform_later).with(first_membership.company)
       user.toggle_status!(company: first_membership.company)
     end
 
@@ -104,7 +104,7 @@ RSpec.describe User, type: :model do
       company = membership.company
       user = membership.user
 
-      expect(SyncCustomerSubscriptionJob).to receive(:perform_async).with(company.id)
+      expect(Stripe::SyncCustomerSubscriptionJob).to receive(:perform_later).with(company)
       user.toggle_status!(company:)
     end
   end

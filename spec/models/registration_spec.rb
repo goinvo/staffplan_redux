@@ -34,7 +34,7 @@ RSpec.describe Registration, type: :model do
     describe "register!" do
       it "raises RegistrationNotAvailableError if claimed?" do
         registration = create(:registration)
-        expect(CreateStripeCustomerJob).to receive(:perform_async)
+        expect(Stripe::CreateCustomerJob).to receive(:perform_later)
 
         registration.register!
 

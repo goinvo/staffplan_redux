@@ -34,6 +34,8 @@ module StaffplanRedux
 
     config.active_support.to_time_preserves_timezone = :zone
 
+    config.mission_control.jobs.adapters = [:solid_queue]
+
     Prefab.init
   end
 end

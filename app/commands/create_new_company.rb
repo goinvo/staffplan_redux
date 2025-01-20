@@ -35,7 +35,7 @@ class CreateNewCompany
   end
 
   def enqueue_create_stripe_customer_job
-    CreateStripeCustomerJob.perform_async(@company.id)
+    Stripe::CreateCustomerJob.perform_later(@company)
   end
 
   def claim_registration

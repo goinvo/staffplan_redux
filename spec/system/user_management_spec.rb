@@ -43,7 +43,7 @@ RSpec.describe "User Management", type: :system do
       fill_in "Full name", with: Faker::Name.name
       fill_in "Email", with: Faker::Internet.email
 
-      expect(SyncCustomerSubscriptionJob).to receive(:perform_async)
+      expect(Stripe::SyncCustomerSubscriptionJob).to receive(:perform_later)
 
       expect do
         click_button "Create"

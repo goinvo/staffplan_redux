@@ -239,6 +239,16 @@ GEM
     mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.25.4)
+    mission_control-jobs (1.0.1)
+      actioncable (>= 7.1)
+      actionpack (>= 7.1)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      importmap-rails (>= 1.2.1)
+      irb (~> 1.13)
+      railties (>= 7.1)
+      stimulus-rails
+      turbo-rails
     money (6.19.0)
       i18n (>= 0.6.4, <= 2)
     msgpack (1.7.5)
@@ -475,6 +485,7 @@ DEPENDENCIES
   kamal (= 2.4.0)
   letter_opener
   letter_opener_web
+  mission_control-jobs
   money
   paper_trail
   passwordless (~> 1.8)
