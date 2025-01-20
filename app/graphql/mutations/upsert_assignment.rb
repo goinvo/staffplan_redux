@@ -33,12 +33,13 @@ module Mutations
       end
 
       if assignment
-        assignment.assign_attributes(project_id:, user_id:, status:)
+        assignment.assign_attributes(project_id:, status:)
       else
         project = current_company.projects.find(project_id)
         assignment = project.assignments.new(user_id:, status:)
       end
 
+      assignment.assign_attributes(user_id:) if user_id
       assignment.assign_attributes(focused:) if !focused.nil? && current_user == assignment.user
       assignment.assign_attributes(estimated_weekly_hours: estimated_weekly_hours) if estimated_weekly_hours
       assignment.assign_attributes(starts_on: starts_on) if starts_on
