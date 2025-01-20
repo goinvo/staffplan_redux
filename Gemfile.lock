@@ -350,8 +350,6 @@ GEM
     rdoc (6.11.0)
       psych (>= 4.0.0)
     recaptcha (5.19.0)
-    redis-client (0.23.0)
-      connection_pool
     regexp_parser (2.10.0)
     reline (0.6.0)
       io-console (~> 0.5)
@@ -391,11 +389,6 @@ GEM
       concurrent-ruby (~> 1.0)
     shoulda-matchers (6.4.0)
       activesupport (>= 5.2.0)
-    sidekiq (7.3.7)
-      connection_pool (>= 2.3.0)
-      logger
-      rack (>= 2.2.4)
-      redis-client (>= 0.22.2)
     solid_queue (1.1.2)
       activejob (>= 7.1)
       activerecord (>= 7.1)
@@ -501,7 +494,6 @@ DEPENDENCIES
   rspec-rails
   selenium-webdriver
   shoulda-matchers (~> 6.4)
-  sidekiq (~> 7.3)
   solid_queue
   sprockets-rails
   stimulus-rails

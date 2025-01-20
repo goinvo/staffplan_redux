@@ -1,13 +1,4 @@
-require 'sidekiq/web'
-
 Rails.application.routes.draw do
-  # TODO: some kind of auth here
-  mount Sidekiq::Web => '/sidekiq', constraints: lambda { |request|
-    user = Passwordless::Session.find_by(id: request.session[:"passwordless_session_id--user"])&.authenticatable
-
-    user && Prefab.enabled?("super-admin", { user: { email: user&.email }})
-  }
-
   mount MissionControl::Jobs::Engine, at: "/jobs", constraints: lambda { |request|
     if Rails.env.development?
       true

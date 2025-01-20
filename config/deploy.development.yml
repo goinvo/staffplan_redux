@@ -1,7 +1,0 @@
-# kamal needs to know what environment variables it should be trying to inject
-env:
-  secret:
-    - RAILS_MASTER_KEY
-    - POSTGRES_PASSWORD
-    - DOCKER_REGISTRY_TOKEN
-    - REDIS_URL

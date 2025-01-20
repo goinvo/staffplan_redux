@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Subscription Management", type: :system, vcr: true, headless: true do
-  before do
-    Sidekiq::Testing.inline!
-  end
-
   # TODO: these tests are great, but the individual components should have their own tests
   describe "when trialing" do
     it "shows a page with some content and a link to go set up payment for a subscription" do

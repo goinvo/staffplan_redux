@@ -19,12 +19,6 @@ servers:
     cmd: bundle exec rake solid_queue:start
     options:
       "add-host": host.docker.internal:host-gateway
-  job:
-    hosts:
-      - 34.192.107.71
-    cmd: bundle exec sidekiq -C config/sidekiq.yml
-    options:
-      "add-host": host.docker.internal:host-gateway
 
 # Credentials for your image host.
 registry:
@@ -42,7 +36,6 @@ env:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
     - DOCKER_REGISTRY_TOKEN
-    - REDIS_URL
     - AWS_ACCESS_KEY_ID
     - AWS_SECRET_ACCESS_KEY
     - PREFAB_API_KEY
@@ -68,14 +61,6 @@ accessories:
         - POSTGRES_PASSWORD
     directories:
       - data:/var/lib/postgresql/data
-  redis:
-   image: redis:latest
-   roles:
-     - web
-     - job
-   port: 6379
-   volumes:
-     - data:/var/lib/redis/data
 
 proxy:
   app_port: 3000
