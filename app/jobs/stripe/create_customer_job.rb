@@ -3,7 +3,6 @@ module Stripe
     queue_as :default
     self.queue_adapter = :solid_queue
 
-
     def perform(company)
       owner = company.memberships.find_by!(role: 'owner').user
 
