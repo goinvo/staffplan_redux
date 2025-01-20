@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_09_08_194832) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_20_190255) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,6 +51,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_09_08_194832) do
     t.date "starts_on"
     t.date "ends_on"
     t.integer "estimated_weekly_hours"
+    t.boolean "focused", default: true, null: false
     t.index ["project_id"], name: "index_assignments_on_project_id"
     t.index ["user_id"], name: "index_assignments_on_user_id"
   end
