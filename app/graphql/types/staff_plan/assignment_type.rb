@@ -16,6 +16,7 @@ module Types
       field :ends_on, GraphQL::Types::ISO8601Date, null: true, description: 'The date the assignment ends'
       field :estimated_weekly_hours, Integer, null: true, description: 'The estimated weekly hours for this assignment'
       field :can_be_deleted, Boolean, null: false, description: 'Whether the assignment can be deleted'
+      field :focused, Boolean, null: false, description: "Should this assignemnt be rendered by default on the assignee's StaffPlan"
       field :created_at, GraphQL::Types::ISO8601DateTime, null: false
       field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 

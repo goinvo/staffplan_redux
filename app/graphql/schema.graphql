@@ -19,6 +19,11 @@ type Assignment {
   The estimated weekly hours for this assignment
   """
   estimatedWeeklyHours: Int
+
+  """
+  Should this assignemnt be rendered by default on the assignee's StaffPlan
+  """
+  focused: Boolean!
   id: ID!
 
   """
@@ -215,6 +220,11 @@ type Mutation {
     The estimated weekly hours for this assignment.
     """
     estimatedWeeklyHours: Int
+
+    """
+    Should this assignment be rendered by default on the assignee's StaffPlan. Can only be updated by the assignee.
+    """
+    focused: Boolean
 
     """
     The ID of the assignment to update.
