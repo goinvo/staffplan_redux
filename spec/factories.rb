@@ -69,6 +69,7 @@ FactoryBot.define do
       skip_user { false }
     end
     status { Assignment::ACTIVE }
+    focused { true }
 
     after(:build) do |assignment, evaluator|
       if assignment.user.blank? && evaluator.skip_user.blank?
