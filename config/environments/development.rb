@@ -9,6 +9,8 @@ Rails.application.configure do
     Bullet.add_footer    = true
   end
 
+  config.solid_queue.connects_to = { database: { writing: :queue } }
+
   # Settings specified here will take precedence over those in config/application.rb.
   config.view_component.capture_compatibility_patch_enabled = true
 
