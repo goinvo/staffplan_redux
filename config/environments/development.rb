@@ -11,8 +11,6 @@ Rails.application.configure do
 
   config.solid_queue.connects_to = { database: { writing: :queue } }
 
-  config.mission_control.jobs.http_basic_auth_enabled = false
-
   # Settings specified here will take precedence over those in config/application.rb.
   config.view_component.capture_compatibility_patch_enabled = true
 

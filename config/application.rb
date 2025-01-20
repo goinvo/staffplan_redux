@@ -35,6 +35,7 @@ module StaffplanRedux
     config.active_support.to_time_preserves_timezone = :zone
 
     config.mission_control.jobs.adapters = [:solid_queue]
+    config.mission_control.jobs.http_basic_auth_enabled = false
 
     Prefab.init
   end
