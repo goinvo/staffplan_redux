@@ -22,6 +22,7 @@ gem "recaptcha"
 gem "kamal", "2.4.0"
 gem "prefab-cloud-ruby"
 gem "solid_queue"
+gem "mission_control-jobs"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"

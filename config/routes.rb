@@ -8,6 +8,16 @@ Rails.application.routes.draw do
     user && Prefab.enabled?("super-admin", { user: { email: user&.email }})
   }
 
+  mount MissionControl::Jobs::Engine, at: "/jobs", constraints: lambda { |request|
+    if Rails.env.development?
+      true
+    else
+      user = Passwordless::Session.find_by(id: request.session[:"passwordless_session_id--user"])&.authenticatable
+
+      user && Prefab.enabled?("super-admin", { user: { email: user&.email }})
+    end
+  }
+
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql", constraints: lambda { |request|
