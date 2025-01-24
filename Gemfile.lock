@@ -190,7 +190,8 @@ GEM
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.8.0)
-    irb (1.14.3)
+    irb (1.15.1)
+      pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jmespath (1.6.2)
@@ -283,6 +284,8 @@ GEM
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
     pg (1.5.9)
+    pp (0.6.2)
+      prettyprint
     prefab-cloud-ruby (1.8.7)
       activesupport (>= 4)
       concurrent-ruby (~> 1.0, >= 1.0.5)
@@ -292,6 +295,7 @@ GEM
       ld-eventsource
       semantic_logger (!= 4.16.0)
       uuid
+    prettyprint (0.2.0)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -414,9 +418,9 @@ GEM
     stringio (3.1.2)
     stripe (13.3.1)
     systemu (2.6.5)
-    tailwindcss-rails (3.3.0)
+    tailwindcss-rails (3.3.1)
       railties (>= 7.0.0)
-      tailwindcss-ruby
+      tailwindcss-ruby (~> 3.0)
     tailwindcss-ruby (3.4.17-aarch64-linux)
     tailwindcss-ruby (3.4.17-arm64-darwin)
     tailwindcss-ruby (3.4.17-x86_64-linux)
