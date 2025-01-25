@@ -24,6 +24,10 @@ But we know planning isn’t always enough – it’s also about making sure eve
 
 Planning doesn’t have to be complicated or rigid. With StaffPlan, you’re part of the conversation about where you’re going and what you’re working on. It’s a cultural shift toward more open, collaborative planning – and we’re here to support that.
 
+## 160 second Walkthru
+
+See Eric [put together a project in StaffPlan](https://www.loom.com/share/14608a1e032d490898d98ecfb043082e?sid=29d4a4c8-fd2c-4528-a0c0-f3d0cdb33aa5) in a handful of seconds...
+
 ## Want to run an instance for yourself? Here's the foundational setup
 
 Running the **full** backend for StaffPlan requires an active Stripe account. If you'll just be doing UI development, **you may not need to set this up**.
