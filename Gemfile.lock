@@ -167,9 +167,10 @@ GEM
       google-protobuf (>= 3.18, < 5.a)
     graphiql-rails (1.10.1)
       railties
-    graphql (2.4.8)
+    graphql (2.4.9)
       base64
       fiber-storage
+      logger
     hashdiff (1.1.2)
     http (5.2.0)
       addressable (~> 2.8)
