@@ -40,4 +40,24 @@ RSpec.describe WorkWeek, type: :model do
       expect(work_week.is_future_work_week?).to be_falsey
     end
   end
+
+  context "callbacks" do
+    it "updates the assignment focused attribute if the work week is in the future" do
+      work_week = create(:work_week, year: 1.year.from_now.to_date.cwyear, cweek: 4.weeks.from_now.to_date.cweek)
+      work_week.assignment.update(focused: false)
+
+      work_week.update(estimated_hours: 1)
+
+      expect(work_week.assignment.focused).to be_truthy
+    end
+
+    it "does not update the assignment focused attribute if the work week is in the past" do
+      work_week = create(:work_week, year: 1.year.ago.to_date.cwyear, cweek: 4.weeks.ago.to_date.cweek)
+      work_week.assignment.update(focused: false)
+
+      work_week.update(estimated_hours: 1)
+
+      expect(work_week.assignment.focused).to be_falsey
+    end
+  end
 end
