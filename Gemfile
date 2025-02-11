@@ -44,7 +44,7 @@ gem "faker"
 gem 'rollbar'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.13"
+gem "image_processing", "~> 1.14"
 gem "aws-sdk-s3", require: false
 
 group :development, :test do
