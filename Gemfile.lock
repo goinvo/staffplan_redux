@@ -169,7 +169,7 @@ GEM
       google-protobuf (>= 3.18, < 5.a)
     graphiql-rails (1.10.1)
       railties
-    graphql (2.4.9)
+    graphql (2.4.10)
       base64
       fiber-storage
       logger
@@ -226,7 +226,7 @@ GEM
     llhttp-ffi (0.5.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
-    logger (1.6.5)
+    logger (1.6.6)
     loofah (2.24.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
