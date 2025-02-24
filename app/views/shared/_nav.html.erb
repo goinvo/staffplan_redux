@@ -11,12 +11,12 @@
               <%= header_link_to "My StaffPlan", "http://localhost:8080/people/#{current_user.id}" %>
             <% end %>
             <% if Rails.env.production? %>
-              <a href="https://ui.staffplan.com/people" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">People</a>
+              <a href="https://ui.staffplan.com/people" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-md font-medium">People</a>
             <% else %>
               <%= header_link_to "People", "http://localhost:8080/people" %>
             <% end %>
             <% if Rails.env.production? %>
-              <a href="https://ui.staffplan.com/projects" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Projects</a>
+              <a href="https://ui.staffplan.com/projects" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-md font-medium">Projects</a>
             <% else %>
               <%= header_link_to "Projects", "http://localhost:8080/projects" %>
             <% end %>
@@ -25,7 +25,7 @@
       </div>
       <div class="hidden md:block">
         <div data-controller="desktop-nav" class="ml-4 flex items-center md:ml-6 relative">
-          <%= link_to "Feedback", "mailto:staffplan@goinvo.com", class: 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
+          <%= link_to "Feedback", "mailto:staffplan@goinvo.com", class: 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-md font-medium' %>
           <!-- desktop three dot menu -->
           <div data-action="click->desktop-nav#toggle">
             <button data-mobile-nav-target="button" type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:text-white" aria-controls="mobile-menu" aria-expanded="false">
