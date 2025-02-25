@@ -17,7 +17,6 @@ Rails.application.routes.draw do
 
     Rails.env.development? ||
       (user && Prefab.enabled?("graphiql-access", { user: { email: user&.email }}))
-      false
   }
 
   post "/graphql", to: "graphql#execute"
