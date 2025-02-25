@@ -16,8 +16,7 @@ Rails.application.routes.draw do
     user = Passwordless::Session.find_by(id: request.session[:"passwordless_session_id--user"])&.authenticatable
 
     Rails.env.development? ||
-      # (user && Prefab.enabled?("graphiql-access", { user: { email: user&.email }}))
-      false
+      (user && Prefab.enabled?("graphiql-access", { user: { email: user&.email }}))
   }
 
   post "/graphql", to: "graphql#execute"
