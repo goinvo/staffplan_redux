@@ -5,6 +5,47 @@ require "rails_helper"
 RSpec.describe Mutations::UpsertWorkWeeks do
 
   context "when updating work weeks" do
+    it 'allows a user to zero out estimated hours' do
+      query_string = <<-GRAPHQL
+        mutation($assignmentId: ID!, $workWeeks: [WorkWeeksInputObject!]!) {
+          upsertWorkWeeks(assignmentId: $assignmentId, workWeeks: $workWeeks) {
+            workWeeks {
+              cweek
+              year
+              actualHours
+              estimatedHours
+            }          
+          }
+        }
+      GRAPHQL
+
+      user = create(:user)
+      assignment = assignment_for_user(user:)
+      work_week = create(:work_week, :blank, assignment:, cweek: [1, Date.today.cweek - 1].max, year: Date.today.year - 1)
+
+      result = StaffplanReduxSchema.execute(
+        query_string,
+        context: {
+          current_user: user,
+          current_company: assignment.company
+        },
+        variables: {
+          assignmentId: assignment.id,
+          workWeeks: [{
+            cweek: work_week.cweek,
+            year: work_week.year,
+            actualHours: 5,
+            estimatedHours: 0
+          }]
+        }
+      )
+
+      post_result = result["data"]["upsertWorkWeeks"]["workWeeks"].first
+
+      expect(5).to eq(post_result["actualHours"])
+      expect(0).to eq(post_result["estimatedHours"])
+    end
+
     it "updates the work weeks with valid params" do
       query_string = <<-GRAPHQL
         mutation($assignmentId: ID!, $workWeeks: [WorkWeeksInputObject!]!) {
@@ -269,7 +310,7 @@ RSpec.describe Mutations::UpsertWorkWeeks do
              }
            }
          }
-       GRAPHQL
+      GRAPHQL
 
       work_week = create(:work_week, :blank)
       work_week.user.memberships.update_all(status: "inactive")
@@ -306,7 +347,7 @@ RSpec.describe Mutations::UpsertWorkWeeks do
              }
            }
          }
-       GRAPHQL
+      GRAPHQL
 
       date = 1.month.from_now.to_date
       work_week = create(:work_week, :blank, cweek: date.cweek, year: date.cwyear)
