@@ -174,7 +174,7 @@ GEM
       rake (>= 13)
     googleapis-common-protos-types (1.18.0)
       google-protobuf (>= 3.18, < 5.a)
-    graphiql-rails (1.10.3)
+    graphiql-rails (1.10.4)
       railties
     graphql (2.4.10)
       base64
