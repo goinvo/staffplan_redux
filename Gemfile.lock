@@ -206,7 +206,7 @@ GEM
       reline (>= 0.4.2)
     jmespath (1.6.2)
     json (2.10.1)
-    kamal (2.5.2)
+    kamal (2.5.3)
       activesupport (>= 7.0)
       base64 (~> 0.2)
       bcrypt_pbkdf (~> 1.0)
@@ -493,7 +493,7 @@ DEPENDENCIES
   graphql (~> 2.4)
   image_processing (~> 1.14)
   importmap-rails
-  kamal (= 2.5.2)
+  kamal (= 2.5.3)
   letter_opener
   letter_opener_web
   mission_control-jobs
