@@ -109,6 +109,7 @@ production_defaults: &production_default
 
 production:
   primary:
+    <<: *default
     url: <%= ENV["DATABASE_URL"] %>
   queue:
     <<: *production_default
