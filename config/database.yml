@@ -109,8 +109,7 @@ production_defaults: &production_default
 
 production:
   primary:
-    <<: *production_default
-    database: staffplan_redux_production
+    url: <%= ENV["DATABASE_URL"] %>
   queue:
     <<: *production_default
     database: staffplan_redux_production_queue
