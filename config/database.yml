@@ -113,5 +113,5 @@ production:
     url: <%= ENV["DATABASE_URL"] %>
   queue:
     <<: *production_default
-    database: staffplan_redux_production_queue
+    url: <%= ENV["HEROKU_POSTGRESQL_RED_URL"] %>
     migrations_paths: db/queue_migrate

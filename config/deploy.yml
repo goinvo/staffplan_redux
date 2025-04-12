@@ -39,6 +39,8 @@ env:
     - AWS_ACCESS_KEY_ID
     - AWS_SECRET_ACCESS_KEY
     - PREFAB_API_KEY
+    - DATABASE_URL
+    - HEROKU_POSTGRESQL_RED_URL
 
 ssh:
   user: ubuntu
