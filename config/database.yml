@@ -115,3 +115,4 @@ production:
     <<: *production_default
     url: <%= ENV["HEROKU_POSTGRESQL_RED_URL"] %>
     migrations_paths: db/queue_migrate
+    pool: 2
