@@ -1,1 +1,0 @@
-CREATE DATABASE staffplan_redux_production;
