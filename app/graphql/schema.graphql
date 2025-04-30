@@ -655,6 +655,7 @@ type WorkWeek {
   cweek: Int!
   estimatedHours: Int!
   id: ID!
+  isDeleted: Boolean!
   project: Project!
   updatedAt: ISO8601DateTime!
   user: User!
