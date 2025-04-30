@@ -18,9 +18,14 @@ module Types
       end
 
       field :project, Types::StaffPlan::ProjectType, null: false
+      field :is_deleted, Boolean, null: false
 
       def project
         object.project
+      end
+
+      def is_deleted
+        object.persisted?
       end
     end
   end
