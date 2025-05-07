@@ -25,7 +25,7 @@ module Types
       end
 
       def is_deleted
-        object.persisted?
+        !object.persisted?
       end
     end
   end
