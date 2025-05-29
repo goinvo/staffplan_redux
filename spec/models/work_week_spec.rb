@@ -59,5 +59,15 @@ RSpec.describe WorkWeek, type: :model do
 
       expect(work_week.assignment.focused).to be_falsey
     end
+
+    it 'does not try to update the assignment focused attribute if the work week is being deleted' do
+      work_week = create(:work_week, year: 1.year.from_now.to_date.cwyear, cweek: 4.weeks.from_now.to_date.cweek)
+
+      expect {
+        expect {
+          work_week.assignment.destroy
+        }.to change { WorkWeek.count }.by(-1)
+      }.to_not raise_error
+    end
   end
 end
