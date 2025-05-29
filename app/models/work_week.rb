@@ -13,7 +13,7 @@ class WorkWeek < ApplicationRecord
   validates :actual_hours, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 168 }
   validate :no_future_actual_hours
 
-  before_commit :update_assignment_focused_if_future_work_week
+  before_commit :update_assignment_focused_if_future_work_week, on: [:create, :update]
 
   def is_future_work_week?(relative_to_date: Date.today)
     relative_to_date.cwyear < year || (
