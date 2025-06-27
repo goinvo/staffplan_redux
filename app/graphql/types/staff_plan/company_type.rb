@@ -26,10 +26,18 @@ module Types
         object.clients
       end
 
-      field :users, [Types::StaffPlan::UserType], null: false
+      field :users, [Types::StaffPlan::UserType], null: false do
+        argument :user_id, ID, required: false, description: "Filter users by ID"
+      end
 
-      def users
-        object.users
+      def users(user_id: nil)
+        scope = object.users
+
+        if user_id.present?
+          scope = scope.where(id: user_id)
+        end
+
+        scope
       end
     end
   end

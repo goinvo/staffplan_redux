@@ -66,12 +66,18 @@ module Types
       target.assignments.all
     end
 
-    field :users, [Types::StaffPlan::UserType], null: false, description: "Fetches all users for the current company."
-    def users
-      context[:current_user]
-      .current_company
-      .users
-      .all
+    field :users, [Types::StaffPlan::UserType], null: false, description: "Fetches all users for the current company." do
+      argument :user_id, ID, required: false, description: "Optional: ID of the user to fetch."
+    end
+    def users(user_id: nil)
+      scope = context[:current_user]
+              .current_company
+              .users
+      if user_id.present?
+        scope = scope.where(id: user_id)
+      end
+
+      scope.all
     end
   end
 end
