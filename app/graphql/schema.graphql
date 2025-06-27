@@ -45,7 +45,7 @@ type Assignment {
   """
   The work weeks for this assignment
   """
-  workWeeks: [WorkWeek!]!
+  workWeeks(endDate: ISO8601Date, startDate: ISO8601Date): [WorkWeek!]!
 }
 
 """
@@ -445,7 +445,17 @@ type Project {
   status: ProjectStatus!
   updatedAt: ISO8601DateTime!
   users: [User!]!
-  workWeeks: [WorkWeek!]!
+  workWeeks(
+    """
+    Optional end date to filter work weeks
+    """
+    endDate: ISO8601Date
+
+    """
+    Optional start date to filter work weeks
+    """
+    startDate: ISO8601Date
+  ): [WorkWeek!]!
 }
 
 """
