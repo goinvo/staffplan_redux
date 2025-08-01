@@ -1,6 +1,5 @@
 module Settings
   class TabsComponent < ViewComponent::Base
-    use_helpers :current_company, :current_user
 
     LINK_CSS_CLASS = "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium"
     SELECTED_LINK_CSS_CLASS = "border-indigo-500 text-indigo-600 whitespace-nowrap border-b-2 px-1 pb-4 text-sm font-medium"
@@ -26,8 +25,8 @@ module Settings
     end
 
     def current_company_admin?
-      current_user.owner?(company: current_company) ||
-        current_user.admin?(company: current_company)
+      helpers.current_user.owner?(company:  helpers.current_company) ||
+        helpers.current_user.admin?(company:  helpers.current_company)
     end
 
     private
