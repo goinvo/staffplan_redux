@@ -277,7 +277,9 @@ GEM
     passwordless (1.8.1)
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
-    pg (1.5.9)
+    pg (1.6.0-aarch64-linux)
+    pg (1.6.0-arm64-darwin)
+    pg (1.6.0-x86_64-linux)
     pp (0.6.2)
       prettyprint
     prefab-cloud-ruby (1.8.9)
@@ -476,7 +478,7 @@ DEPENDENCIES
   money
   paper_trail
   passwordless (~> 1.8)
-  pg (~> 1.5)
+  pg (~> 1.6)
   prefab-cloud-ruby
   pry
   puma (>= 5.0)
