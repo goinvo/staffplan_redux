@@ -432,7 +432,7 @@ GEM
       macaddr (~> 1.0)
     vcr (6.3.1)
       base64
-    view_component (4.0.0)
+    view_component (4.0.1)
       activesupport (>= 7.1.0, < 8.1)
       concurrent-ruby (~> 1)
     web-console (4.2.1)
