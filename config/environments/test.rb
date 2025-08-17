@@ -72,4 +72,7 @@ Rails.application.configure do
 
   Rails.application.routes.default_url_options[:host] = 'localhost'
   Rails.application.routes.default_url_options[:port] = 3000
+
+  # Enable minitest-spec-rails
+  config.minitest_spec_rails.mini_shoulda = true
 end
