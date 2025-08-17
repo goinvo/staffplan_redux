@@ -1,0 +1,484 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/customers
+    body:
+      encoding: UTF-8
+      string: name=Nolan%2C+Zemlak+and+Bartoletti+2+%7C+Rev.+Vicenta+Mayert+2&email=something%40static.com
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/13.3.1
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_HBkqidihaLrHYX","request_duration_ms":0}}'
+      Idempotency-Key:
+      - 4237a557-f5b5-48fd-a6c7-2356be439f4c
+      Stripe-Version:
+      - 2024-12-18.acacia
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"13.3.1","lang":"ruby","lang_version":"3.4.1 p0 (2024-12-25)","platform":"arm64-darwin24","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-4.local 24.2.0 Darwin Kernel Version 24.2.0: Fri Dec  6 19:02:41 PST
+        2024; root:xnu-11215.61.5~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank-4.local"}'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 20 Jan 2025 20:27:54 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '684'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, HEAD, PUT, PATCH, POST, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required,
+        X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Content-Security-Policy:
+      - base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none';
+        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'; upgrade-insecure-requests;
+        report-uri https://q.stripe.com/csp-violation?q=wRZzT4ZhadxvMXAFfxU-evsfbT9QlZCoTUa56sM9XXkP27LtDHYSHWZQyAwQ5i8vs66dz7PU985xsSGM
+      Cross-Origin-Opener-Policy-Report-Only:
+      - same-origin; report-to="coop"
+      Idempotency-Key:
+      - 4237a557-f5b5-48fd-a6c7-2356be439f4c
+      Original-Request:
+      - req_XtySh0QQsidBrE
+      Report-To:
+      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report"}],"include_subdomains":true}'
+      Reporting-Endpoints:
+      - coop="https://q.stripe.com/coop-report"
+      Request-Id:
+      - req_XtySh0QQsidBrE
+      Stripe-Should-Retry:
+      - 'false'
+      Stripe-Version:
+      - 2024-12-18.acacia
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Stripe-Priority-Routing-Enabled:
+      - 'true'
+      X-Stripe-Routing-Context-Priority-Tier:
+      - api-testmode
+      X-Wc:
+      - ABC
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "cus_Rcgx5PCN5fuzU6",
+          "object": "customer",
+          "address": null,
+          "balance": 0,
+          "created": 1737404874,
+          "currency": null,
+          "default_source": null,
+          "delinquent": false,
+          "description": null,
+          "discount": null,
+          "email": "something@static.com",
+          "invoice_prefix": "DB517A48",
+          "invoice_settings": {
+            "custom_fields": null,
+            "default_payment_method": null,
+            "footer": null,
+            "rendering_options": null
+          },
+          "livemode": false,
+          "metadata": {},
+          "name": "Nolan, Zemlak and Bartoletti 2 | Rev. Vicenta Mayert 2",
+          "next_invoice_sequence": 1,
+          "phone": null,
+          "preferred_locales": [],
+          "shipping": null,
+          "tax_exempt": "none",
+          "test_clock": null
+        }
+  recorded_at: Mon, 20 Jan 2025 20:27:54 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/subscriptions
+    body:
+      encoding: UTF-8
+      string: customer=cus_Rcgx5PCN5fuzU6&items[0][price]=price_1Oo7tQBLjyMcgacQSNLewS9y&items[0][quantity]=1&trial_period_days=30&trial_settings[end_behavior][missing_payment_method]=cancel&payment_settings[save_default_payment_method]=on_subscription
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/13.3.1
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_XtySh0QQsidBrE","request_duration_ms":312}}'
+      Idempotency-Key:
+      - 46bf973c-70de-4071-baca-d46cccbb9207
+      Stripe-Version:
+      - 2024-12-18.acacia
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"13.3.1","lang":"ruby","lang_version":"3.4.1 p0 (2024-12-25)","platform":"arm64-darwin24","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-4.local 24.2.0 Darwin Kernel Version 24.2.0: Fri Dec  6 19:02:41 PST
+        2024; root:xnu-11215.61.5~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank-4.local"}'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 20 Jan 2025 20:27:55 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '4366'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, HEAD, PUT, PATCH, POST, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required,
+        X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Content-Security-Policy:
+      - base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none';
+        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'; upgrade-insecure-requests;
+        report-uri https://q.stripe.com/csp-violation?q=wRZzT4ZhadxvMXAFfxU-evsfbT9QlZCoTUa56sM9XXkP27LtDHYSHWZQyAwQ5i8vs66dz7PU985xsSGM
+      Cross-Origin-Opener-Policy-Report-Only:
+      - same-origin; report-to="coop"
+      Idempotency-Key:
+      - 46bf973c-70de-4071-baca-d46cccbb9207
+      Original-Request:
+      - req_09wvQGn6dgdovD
+      Report-To:
+      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report"}],"include_subdomains":true}'
+      Reporting-Endpoints:
+      - coop="https://q.stripe.com/coop-report"
+      Request-Id:
+      - req_09wvQGn6dgdovD
+      Stripe-Should-Retry:
+      - 'false'
+      Stripe-Version:
+      - 2024-12-18.acacia
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Stripe-Priority-Routing-Enabled:
+      - 'true'
+      X-Stripe-Routing-Context-Priority-Tier:
+      - api-testmode
+      X-Wc:
+      - ABC
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "sub_1QjRZeBLjyMcgacQiHSCqEvP",
+          "object": "subscription",
+          "application": null,
+          "application_fee_percent": null,
+          "automatic_tax": {
+            "disabled_reason": null,
+            "enabled": false,
+            "liability": null
+          },
+          "billing_cycle_anchor": 1739996874,
+          "billing_cycle_anchor_config": null,
+          "billing_thresholds": null,
+          "cancel_at": null,
+          "cancel_at_period_end": false,
+          "canceled_at": null,
+          "cancellation_details": {
+            "comment": null,
+            "feedback": null,
+            "reason": null
+          },
+          "collection_method": "charge_automatically",
+          "created": 1737404874,
+          "currency": "usd",
+          "current_period_end": 1739996874,
+          "current_period_start": 1737404874,
+          "customer": "cus_Rcgx5PCN5fuzU6",
+          "days_until_due": null,
+          "default_payment_method": null,
+          "default_source": null,
+          "default_tax_rates": [],
+          "description": null,
+          "discount": null,
+          "discounts": [],
+          "ended_at": null,
+          "invoice_settings": {
+            "account_tax_ids": null,
+            "issuer": {
+              "type": "self"
+            }
+          },
+          "items": {
+            "object": "list",
+            "data": [
+              {
+                "id": "si_Rcgx2qMh0obRXv",
+                "object": "subscription_item",
+                "billing_thresholds": null,
+                "created": 1737404874,
+                "discounts": [],
+                "metadata": {},
+                "plan": {
+                  "id": "price_1Oo7tQBLjyMcgacQSNLewS9y",
+                  "object": "plan",
+                  "active": true,
+                  "aggregate_usage": null,
+                  "amount": 300,
+                  "amount_decimal": "300",
+                  "billing_scheme": "per_unit",
+                  "created": 1708968188,
+                  "currency": "usd",
+                  "interval": "month",
+                  "interval_count": 1,
+                  "livemode": false,
+                  "metadata": {},
+                  "meter": null,
+                  "nickname": null,
+                  "product": "prod_PdOgBPQqj1Ri1R",
+                  "tiers_mode": null,
+                  "transform_usage": null,
+                  "trial_period_days": null,
+                  "usage_type": "licensed"
+                },
+                "price": {
+                  "id": "price_1Oo7tQBLjyMcgacQSNLewS9y",
+                  "object": "price",
+                  "active": true,
+                  "billing_scheme": "per_unit",
+                  "created": 1708968188,
+                  "currency": "usd",
+                  "custom_unit_amount": null,
+                  "livemode": false,
+                  "lookup_key": null,
+                  "metadata": {},
+                  "nickname": null,
+                  "product": "prod_PdOgBPQqj1Ri1R",
+                  "recurring": {
+                    "aggregate_usage": null,
+                    "interval": "month",
+                    "interval_count": 1,
+                    "meter": null,
+                    "trial_period_days": null,
+                    "usage_type": "licensed"
+                  },
+                  "tax_behavior": "unspecified",
+                  "tiers_mode": null,
+                  "transform_quantity": null,
+                  "type": "recurring",
+                  "unit_amount": 300,
+                  "unit_amount_decimal": "300"
+                },
+                "quantity": 1,
+                "subscription": "sub_1QjRZeBLjyMcgacQiHSCqEvP",
+                "tax_rates": []
+              }
+            ],
+            "has_more": false,
+            "total_count": 1,
+            "url": "/v1/subscription_items?subscription=sub_1QjRZeBLjyMcgacQiHSCqEvP"
+          },
+          "latest_invoice": "in_1QjRZeBLjyMcgacQeLj0IEc2",
+          "livemode": false,
+          "metadata": {},
+          "next_pending_invoice_item_invoice": null,
+          "on_behalf_of": null,
+          "pause_collection": null,
+          "payment_settings": {
+            "payment_method_options": null,
+            "payment_method_types": null,
+            "save_default_payment_method": "on_subscription"
+          },
+          "pending_invoice_item_interval": null,
+          "pending_setup_intent": "seti_1QjRZeBLjyMcgacQfxa7pGdZ",
+          "pending_update": null,
+          "plan": {
+            "id": "price_1Oo7tQBLjyMcgacQSNLewS9y",
+            "object": "plan",
+            "active": true,
+            "aggregate_usage": null,
+            "amount": 300,
+            "amount_decimal": "300",
+            "billing_scheme": "per_unit",
+            "created": 1708968188,
+            "currency": "usd",
+            "interval": "month",
+            "interval_count": 1,
+            "livemode": false,
+            "metadata": {},
+            "meter": null,
+            "nickname": null,
+            "product": "prod_PdOgBPQqj1Ri1R",
+            "tiers_mode": null,
+            "transform_usage": null,
+            "trial_period_days": null,
+            "usage_type": "licensed"
+          },
+          "quantity": 1,
+          "schedule": null,
+          "start_date": 1737404874,
+          "status": "trialing",
+          "test_clock": null,
+          "transfer_data": null,
+          "trial_end": 1739996874,
+          "trial_settings": {
+            "end_behavior": {
+              "missing_payment_method": "cancel"
+            }
+          },
+          "trial_start": 1737404874
+        }
+  recorded_at: Mon, 20 Jan 2025 20:27:55 GMT
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/customers/cus_Rcgx5PCN5fuzU6
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/13.3.1
+      Authorization:
+      - Bearer <BEARER_TOKEN>
+      X-Stripe-Client-Telemetry:
+      - '{"last_request_metrics":{"request_id":"req_09wvQGn6dgdovD","request_duration_ms":942}}'
+      Stripe-Version:
+      - 2024-12-18.acacia
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"13.3.1","lang":"ruby","lang_version":"3.4.1 p0 (2024-12-25)","platform":"arm64-darwin24","engine":"ruby","publisher":"stripe","uname":"Darwin
+        fwank-4.local 24.2.0 Darwin Kernel Version 24.2.0: Fri Dec  6 19:02:41 PST
+        2024; root:xnu-11215.61.5~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank-4.local"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Mon, 20 Jan 2025 20:27:55 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '685'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, HEAD, PUT, PATCH, POST, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, Stripe-Should-Retry, X-Stripe-External-Auth-Required,
+        X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Content-Security-Policy:
+      - base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none';
+        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'; upgrade-insecure-requests;
+        report-uri https://q.stripe.com/csp-violation?q=wRZzT4ZhadxvMXAFfxU-evsfbT9QlZCoTUa56sM9XXkP27LtDHYSHWZQyAwQ5i8vs66dz7PU985xsSGM
+      Cross-Origin-Opener-Policy-Report-Only:
+      - same-origin; report-to="coop"
+      Report-To:
+      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report"}],"include_subdomains":true}'
+      Reporting-Endpoints:
+      - coop="https://q.stripe.com/coop-report"
+      Request-Id:
+      - req_hAlhmuvPVvvLdo
+      Stripe-Version:
+      - 2024-12-18.acacia
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      X-Stripe-Priority-Routing-Enabled:
+      - 'true'
+      X-Stripe-Routing-Context-Priority-Tier:
+      - api-testmode
+      X-Wc:
+      - ABC
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains; preload
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "id": "cus_Rcgx5PCN5fuzU6",
+          "object": "customer",
+          "address": null,
+          "balance": 0,
+          "created": 1737404874,
+          "currency": "usd",
+          "default_source": null,
+          "delinquent": false,
+          "description": null,
+          "discount": null,
+          "email": "something@static.com",
+          "invoice_prefix": "DB517A48",
+          "invoice_settings": {
+            "custom_fields": null,
+            "default_payment_method": null,
+            "footer": null,
+            "rendering_options": null
+          },
+          "livemode": false,
+          "metadata": {},
+          "name": "Nolan, Zemlak and Bartoletti 2 | Rev. Vicenta Mayert 2",
+          "next_invoice_sequence": 2,
+          "phone": null,
+          "preferred_locales": [],
+          "shipping": null,
+          "tax_exempt": "none",
+          "test_clock": null
+        }
+  recorded_at: Mon, 20 Jan 2025 20:27:55 GMT
+recorded_with: VCR 6.3.1

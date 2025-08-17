@@ -64,6 +64,7 @@ group :development do
   gem "letter_opener_web"
   gem "foreman"
   gem 'pry'
+  gem "rbs"
 end
 
 group :test do
@@ -71,7 +72,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 
-  gem "rspec-rails"
+  gem "minitest"
+  gem "minitest-spec-rails"
+  gem "minitest-reporters"
   gem "factory_bot_rails"
   gem 'shoulda-matchers', '~> 6.5'
   gem "timecop"
