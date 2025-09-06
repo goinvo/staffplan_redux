@@ -19,7 +19,7 @@ class SessionsController < Passwordless::SessionsController
     end
   end
 
-  def redirect_to_dashboardRunninb_if_authenticated
+  def redirect_to_dashboard_if_authenticated
     if current_user.present?
       redirect_to my_staffplan_url(current_user), allow_other_host: true
     end
