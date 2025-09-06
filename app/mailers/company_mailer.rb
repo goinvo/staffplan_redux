@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CompanyMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -9,6 +11,6 @@ class CompanyMailer < ApplicationMailer
     @company = company
     @user = user
 
-    mail to: user.email, subject: "You have been invited to StaffPlan!"
+    mail to: user.email, subject: 'You have been invited to StaffPlan!'
   end
 end

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CreateProjects < ActiveRecord::Migration[7.1]
   def change
     create_table :projects do |t|
-      t.references :client,         null: false
+      t.references :client, null: false
       t.string :name,                     null: false
       t.string :status,                   null: false, default: 'proposed'
       t.decimal :cost,                    null: false, precision: 12, scale: 2, default: 0.0
@@ -10,6 +12,6 @@ class CreateProjects < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :projects, [:client_id, :name], unique: true
+    add_index :projects, %i[client_id name], unique: true
   end
 end

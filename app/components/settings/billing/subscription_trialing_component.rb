@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Settings
   module Billing
     class SubscriptionTrialingComponent < ViewComponent::Base
@@ -5,9 +7,7 @@ module Settings
         @company = company
       end
 
-      def subscription
-        @company.subscription
-      end
+      delegate :subscription, to: :@company
     end
   end
 end

@@ -1,9 +1,7 @@
+# frozen_string_literal: true
+
 class RegistrationsController < ApplicationController
   include Passwordless::ControllerHelpers
-  def new
-    @registration = Registration.new
-  end
-
   def create
     create_params = registration_params.merge(
       ip_address: request.remote_ip,
@@ -12,17 +10,21 @@ class RegistrationsController < ApplicationController
     @registration = Registration.new(create_params)
 
     if captcha_enabled? && !verify_recaptcha
-      flash.now[:alert] = "Sorry, please try that again."
+      flash.now[:alert] = 'Sorry, please try that again.'
       render :new and return
     end
 
     if @registration.save
       RegistrationsMailer.create(@registration).deliver_now
-      redirect_to auth_sign_in_url, notice: "Thanks for your interest in StaffPlan! Check your e-mail for next steps on how to confirm your account."
+      redirect_to auth_sign_in_url, notice: 'Thanks for your interest in StaffPlan! Check your e-mail for next steps on how to confirm your account.'
     else
-      flash.now[:alert] = "Sorry, please try that again."
+      flash.now[:alert] = 'Sorry, please try that again.'
       render :new
     end
+  end
+
+  def new
+    @registration = Registration.new
   end
 
   def register
@@ -33,10 +35,10 @@ class RegistrationsController < ApplicationController
       sign_in(create_passwordless_session(registration.user))
       redirect_to root_url, notice: "Thanks for registering! You're now signed in."
     else
-      redirect_to auth_sign_in_url, notice: "Sorry, that link is invalid."
+      redirect_to auth_sign_in_url, notice: 'Sorry, that link is invalid.'
     end
   rescue Registration::RegistrationNotAvailableError
-    redirect_to auth_sign_in_url, notice: "Sorry, that link is invalid."
+    redirect_to auth_sign_in_url, notice: 'Sorry, that link is invalid.'
   end
 
   private
@@ -50,7 +52,7 @@ class RegistrationsController < ApplicationController
   helper_method :captcha_enabled?
 
   def registration_params
-    params.require(:registration).permit(:company_name, :name, :email)
+    params.expect(registration: %i[company_name name email])
   rescue ActionController::ParameterMissing
     {}
   end

@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
-require "minitest/spec"
-require "minitest/autorun"
-require "minitest/reporters"
-require "passwordless/test_helpers"
-require "view_component/test_helpers"
-require "view_component/system_test_helpers"
-require "capybara/rails"
+require 'minitest/spec'
+require 'minitest/autorun'
+require 'minitest/reporters'
+require 'passwordless/test_helpers'
+require 'view_component/test_helpers'
+require 'view_component/system_test_helpers'
+require 'capybara/rails'
 require 'vcr'
 require 'pry'
 
 # Configure Minitest reporters
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
-Dir[Rails.root.join('test', 'support', '**', '*.rb')].sort.each { |f| require f }
+Rails.root.glob('test/support/**/*.rb').each { |f| require f }
 
 # Check for pending migrations and apply them before tests are run
 begin
@@ -25,15 +27,15 @@ end
 
 # VCR configuration
 VCR.configure do |config|
-  config.cassette_library_dir = "#{::Rails.root}/test/cassettes"
+  config.cassette_library_dir = Rails.root.join('test/cassettes').to_s
   config.ignore_localhost = true
   config.hook_into :webmock
-  config.filter_sensitive_data('<BEARER_TOKEN>') { |interaction|
+  config.filter_sensitive_data('<BEARER_TOKEN>') do |interaction|
     auths = interaction.request.headers['Authorization'].first
-    if (match = auths.match /^Bearer\s+([^,\s]+)/ )
+    if (match = auths.match(/^Bearer\s+([^,\s]+)/))
       match.captures.first
     end
-  }
+  end
 end
 
 # Module to add VCR support to Minitest
@@ -68,8 +70,8 @@ module VCRSupport
   private
 
   def default_vcr_cassette_name
-    class_name = self.class.name.underscore.gsub(/_test$/, "")
-    method_name = @NAME || self.name.tr(" ", "_")
+    class_name = self.class.name.underscore.gsub(/_test$/, '')
+    method_name = @NAME || name.tr(' ', '_')
     "#{class_name}/#{method_name}"
   end
 end
@@ -82,49 +84,57 @@ Shoulda::Matchers.configure do |config|
   end
 end
 
-class ActiveSupport::TestCase
-  # Run tests in parallel with specified workers
-  parallelize(workers: :number_of_processors)
+module ActiveSupport
+  class TestCase
+    # Run tests in parallel with specified workers
+    parallelize(workers: :number_of_processors)
 
-  # Use fixtures for all tests
-  fixtures :all
+    # Use fixtures for all tests
+    fixtures :all
 
-  # Setup all ActiveSupport::TestCase subclasses to include FactoryBot methods
-  include FactoryBot::Syntax::Methods
-  include VCRSupport
+    # Setup all ActiveSupport::TestCase subclasses to include FactoryBot methods
+    include FactoryBot::Syntax::Methods
+    include VCRSupport
 
-  # Include shoulda matchers
-  extend Shoulda::Matchers::ActiveModel
-  extend Shoulda::Matchers::ActiveRecord
+    # Include shoulda matchers
+    extend Shoulda::Matchers::ActiveModel
+    extend Shoulda::Matchers::ActiveRecord
 
-  # Add more helper methods to be used by all tests here...
-end
-
-class ActionDispatch::IntegrationTest
-  # Make the Capybara DSL available in all integration tests
-  include Capybara::DSL
-  include Capybara::Minitest::Assertions
-
-  # Reset sessions and driver between tests
-  teardown do
-    Capybara.reset_sessions!
-    Capybara.use_default_driver
+    # Add more helper methods to be used by all tests here...
   end
 end
 
-class ActionController::TestCase
-  include Devise::Test::ControllerHelpers if defined?(Devise)
+module ActionDispatch
+  class IntegrationTest
+    # Make the Capybara DSL available in all integration tests
+    include Capybara::DSL
+    include Capybara::Minitest::Assertions
+
+    # Reset sessions and driver between tests
+    teardown do
+      Capybara.reset_sessions!
+      Capybara.use_default_driver
+    end
+  end
 end
 
-class ActionView::TestCase
-  include ViewComponent::TestHelpers
-  include Capybara::Minitest::Assertions
+module ActionController
+  class TestCase
+    include Devise::Test::ControllerHelpers if defined?(Devise)
+  end
+end
+
+module ActionView
+  class TestCase
+    include ViewComponent::TestHelpers
+    include Capybara::Minitest::Assertions
+  end
 end
 
 # Setup for system tests
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include ViewComponent::SystemTestHelpers
-  
+
   driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
 
   setup do

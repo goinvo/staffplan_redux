@@ -75,6 +75,7 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ansi (1.5.0)
+    ast (2.4.3)
     aws-eventstream (1.4.0)
     aws-partitions (1.1142.0)
     aws-sdk-core (3.229.0)
@@ -207,6 +208,7 @@ GEM
       reline (>= 0.4.2)
     jmespath (1.6.2)
     json (2.10.2)
+    language_server-protocol (3.17.0.5)
     launchy (3.0.1)
       addressable (~> 2.8)
       childprocess (~> 5.0)
@@ -220,6 +222,7 @@ GEM
       letter_opener (~> 1.9)
       railties (>= 6.1)
       rexml
+    lint_roller (1.1.0)
     llhttp-ffi (0.5.1)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
@@ -284,6 +287,10 @@ GEM
     paper_trail (16.0.0)
       activerecord (>= 6.1)
       request_store (~> 1.4)
+    parallel (1.27.0)
+    parser (3.3.8.0)
+      ast (~> 2.4.1)
+      racc
     passwordless (1.8.1)
       bcrypt (>= 3.1.11)
       rails (>= 5.1.4)
@@ -302,6 +309,7 @@ GEM
       semantic_logger (!= 4.16.0)
       uuid
     prettyprint (0.2.0)
+    prism (1.4.0)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -357,6 +365,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
+    rainbow (3.1.1)
     rake (13.3.0)
     rbs (3.9.4)
       logger
@@ -371,6 +380,49 @@ GEM
       rack (>= 1.4)
     rexml (3.4.1)
     rollbar (3.6.2)
+    rubocop (1.77.0)
+      json (~> 2.3)
+      language_server-protocol (~> 3.17.0.2)
+      lint_roller (~> 1.1.0)
+      parallel (~> 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.9.3, < 3.0)
+      rubocop-ast (>= 1.45.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 4.0)
+    rubocop-ast (1.45.1)
+      parser (>= 3.3.7.2)
+      prism (~> 1.4)
+    rubocop-capybara (2.22.1)
+      lint_roller (~> 1.1)
+      rubocop (~> 1.72, >= 1.72.1)
+    rubocop-factory_bot (2.27.1)
+      lint_roller (~> 1.1)
+      rubocop (~> 1.72, >= 1.72.1)
+    rubocop-graphql (1.5.6)
+      lint_roller (~> 1.1)
+      rubocop (>= 1.72.1, < 2)
+    rubocop-minitest (0.38.1)
+      lint_roller (~> 1.1)
+      rubocop (>= 1.75.0, < 2.0)
+      rubocop-ast (>= 1.38.0, < 2.0)
+    rubocop-ordered_methods (0.14)
+      rubocop (>= 1.0)
+    rubocop-performance (1.25.0)
+      lint_roller (~> 1.1)
+      rubocop (>= 1.75.0, < 2.0)
+      rubocop-ast (>= 1.38.0, < 2.0)
+    rubocop-rails (2.32.0)
+      activesupport (>= 4.2.0)
+      lint_roller (~> 1.1)
+      rack (>= 1.1)
+      rubocop (>= 1.75.0, < 2.0)
+      rubocop-ast (>= 1.44.0, < 2.0)
+    rubocop-rails-omakase (1.1.0)
+      rubocop (>= 1.72)
+      rubocop-performance (>= 1.24)
+      rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     ruby-vips (2.2.3)
       ffi (~> 1.12)
@@ -420,6 +472,9 @@ GEM
       railties (>= 7.1.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (3.1.4)
+      unicode-emoji (~> 4.0, >= 4.0.4)
+    unicode-emoji (4.0.4)
     uniform_notifier (1.17.0)
     uri (1.0.3)
     useragent (0.16.11)
@@ -486,6 +541,14 @@ DEPENDENCIES
   rbs
   recaptcha
   rollbar
+  rubocop-capybara
+  rubocop-factory_bot
+  rubocop-graphql
+  rubocop-minitest
+  rubocop-ordered_methods
+  rubocop-performance
+  rubocop-rails
+  rubocop-rails-omakase
   selenium-webdriver
   shoulda-matchers (~> 6.5)
   solid_queue

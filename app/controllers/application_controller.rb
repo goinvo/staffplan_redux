@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include Passwordless::ControllerHelpers
 
@@ -8,14 +10,6 @@ class ApplicationController < ActionController::Base
   layout :choose_layout
 
   private
-
-  def set_access_control_headers
-    response.set_header('Access-Control-Expose-Headers', 'x-csrf-token')
-  end
-
-  def set_csrf_header
-    response.headers['X-CSRF-Token'] = form_authenticity_token
-  end
 
   def check_subscription_status
     return if current_company.blank?
@@ -30,21 +24,42 @@ class ApplicationController < ActionController::Base
     current_user.blank? ? 'public' : 'application'
   end
 
-  def current_user
-    return @current_user if defined?(@current_user)
-    @current_user = authenticate_by_session(User)
-  end
-  helper_method :current_user
-
   def current_company
     return @current_company if defined?(@current_company)
     return if current_user.blank?
+
     @current_company = current_user.current_company
+  end
+
+  def current_user
+    return @current_user if defined?(@current_user)
+
+    @current_user = authenticate_by_session(User)
+  end
+
+  def my_staffplan_url
+    if Prefab.enabled?('rails-views')
+      staffplan_path(current_user)
+    else
+      case Rails.env
+      when 'production'
+        "https://ui.staffplan.com/people/#{current_user.id}"
+      else
+        "http://localhost:8080/people/#{current_user.id}"
+      end
+    end
+  end
+  helper_method :current_user
+
+  def require_company_owner_or_admin!
+    return if current_user.owner?(company: current_company) || current_user.admin?(company: current_company)
+
+    redirect_to root_url, flash: { error: 'You are not authorized to access this page.' }
   end
   helper_method :current_company
 
   def require_user!
-    return if current_company && current_company.can_access?(user: current_user)
+    return if current_company&.can_access?(user: current_user)
 
     # user may have their access revoked
     reset_session
@@ -53,23 +68,18 @@ class ApplicationController < ActionController::Base
     redirect_to auth_sign_in_url
   end
 
-  def require_company_owner_or_admin!
-    return if current_user.owner?(company: current_company) || current_user.admin?(company: current_company)
-    redirect_to root_url, flash: { error: 'You are not authorized to access this page.' }
+  def set_access_control_headers
+    response.set_header('Access-Control-Expose-Headers', 'x-csrf-token')
+  end
+
+  def set_csrf_header
+    response.headers['X-CSRF-Token'] = form_authenticity_token
   end
 
   def set_paper_trail_whodunnit
     return unless current_user
-    PaperTrail.request.whodunnit = current_user.id
-  end
 
-  def my_staffplan_url
-    case Rails.env
-    when "production"
-      "https://ui.staffplan.com/people/#{current_user.id}"
-    else
-      "http://localhost:8080/people/#{current_user.id}"
-    end
+    PaperTrail.request.whodunnit = current_user.id
   end
   helper_method :my_staffplan_url
 end

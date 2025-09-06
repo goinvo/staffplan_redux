@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 module Mutations
   class SetCurrentCompany < BaseMutation
-    argument :company_id, ID,
+    argument :company_id,
+             ID,
              required: true,
              description: "The ID of the company to set as the current user's current_company_id. User must be an active member of the company."
 
@@ -10,14 +13,14 @@ module Mutations
     def resolve(company_id:)
       user = context[:current_user]
 
-      membership = user.
-        memberships.
-        active.
-        find_by(company_id:)
+      membership = user
+        .memberships
+        .active
+        .find_by(company_id:)
 
       # user is not an active member of the company
       if membership.blank? || !membership.active?
-        raise GraphQL::ExecutionError, "Company not found."
+        raise GraphQL::ExecutionError, 'Company not found.'
       end
 
       user.update!(current_company: membership.company)

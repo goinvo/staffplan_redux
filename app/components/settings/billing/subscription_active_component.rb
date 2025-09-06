@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Settings
   module Billing
     class SubscriptionActiveComponent < ViewComponent::Base
@@ -5,47 +7,33 @@ module Settings
         @company = company
       end
 
-      def subscription
-        @company.subscription
-      end
+      delegate :subscription, to: :@company
 
       def subscription_percentage
         time_today = Time.now.at_beginning_of_day.to_i
         start_time = subscription.current_period_start.at_beginning_of_day.to_i
         end_time = subscription.current_period_end.at_beginning_of_day.to_i
-        numerator =  time_today - start_time
+        numerator = time_today - start_time
         denominator = end_time - start_time
 
-        "#{((numerator.to_f / denominator.to_f) * 100).round}%"
+        "#{((numerator.to_f / denominator) * 100).round}%"
       end
 
-      def credit_card_brand
-        subscription.credit_card_brand
-      end
+      delegate :credit_card_brand, to: :subscription
 
-      def credit_card_last_four
-        subscription.credit_card_last_four
-      end
+      delegate :credit_card_last_four, to: :subscription
 
-      def credit_card_exp_month
-        subscription.credit_card_exp_month
-      end
+      delegate :credit_card_exp_month, to: :subscription
 
-      def credit_card_exp_year
-        subscription.credit_card_exp_year
-      end
+      delegate :credit_card_exp_year, to: :subscription
 
-      def customer_name
-        subscription.customer_name
-      end
+      delegate :customer_name, to: :subscription
 
-      def customer_email
-        subscription.customer_email
-      end
+      delegate :customer_email, to: :subscription
 
       def subtotal
-        amount = Money.new(subscription.plan_amount, "USD") * subscription.quantity
-        Money.new(amount, "USD")
+        amount = Money.new(subscription.plan_amount, 'USD') * subscription.quantity
+        Money.new(amount, 'USD')
       end
     end
   end

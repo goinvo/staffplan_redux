@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ExampleController < ApplicationController
@@ -6,7 +8,7 @@ class ExampleController < ApplicationController
   end
 end
 
-class ExampleControllerTest < ActionController::TestCase
+class ExampleControllerTest < ActionDispatch::IntegrationTest
   tests ExampleController
 
   describe 'any controller action in the app' do
@@ -18,8 +20,9 @@ class ExampleControllerTest < ActionController::TestCase
         @routes.draw do
           get '/test', to: 'example#index'
         end
-        
+
         get :index
+
         assert_equal token, response.headers['X-CSRF-Token']
       end
     end

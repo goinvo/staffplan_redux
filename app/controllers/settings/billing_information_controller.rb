@@ -1,13 +1,14 @@
-class Settings::BillingInformationController < ApplicationController
-  before_action :require_user!
-  before_action :require_company_owner_or_admin!
+# frozen_string_literal: true
 
-  def show
-  end
+module Settings
+  class BillingInformationController < ApplicationController
+    before_action :require_user!
+    before_action :require_company_owner_or_admin!
 
-  def edit
-  end
+    def edit; end
 
-  def update
+    def show; end
+
+    def update; end
   end
 end

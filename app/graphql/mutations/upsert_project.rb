@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 module Mutations
   class UpsertProject < BaseMutation
-    description "Create or update a project."
+    description 'Create or update a project.'
 
     # arguments passed to the `resolve` method
-    argument :id, ID, required: false, description: "The ID of the project to update."
-    argument :client_id, ID, required: false, description: "The ID of the client for this project."
-    argument :name, String, required: false, description: "The name of the project."
-    argument :status, String, required: false, description: "The status of the project."
-    argument :cost, Float, required: false, description: "The cost of the project."
-    argument :payment_frequency, String, required: false, description: "The frequency of payment for the project."
-    argument :fte, Float, required: false, description: "The number of full time employees that will be assigned to this project."
-    argument :hours, Integer, required: false, description: "The expected number of billable hours expected for this project."
-    argument :rate_type, String, required: false, description: "The type of rate for this project."
-    argument :hourly_rate, Integer, required: false, description: "The hourly rate for this project."
-    argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project starts."
-    argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: "The date this project ends."
-    argument :assignments, [Types::AssignmentAttributes], required: false, description: "Assignments for this project. See upsertAssignment to create a single assignment for existing projects."
+    argument :assignments, [Types::AssignmentAttributes], required: false, description: 'Assignments for this project. See upsertAssignment to create a single assignment for existing projects.'
+    argument :client_id, ID, required: false, description: 'The ID of the client for this project.'
+    argument :cost, Float, required: false, description: 'The cost of the project.'
+    argument :ends_on, GraphQL::Types::ISO8601Date, required: false, description: 'The date this project ends.'
+    argument :fte, Float, required: false, description: 'The number of full time employees that will be assigned to this project.'
+    argument :hourly_rate, Integer, required: false, description: 'The hourly rate for this project.'
+    argument :hours, Integer, required: false, description: 'The expected number of billable hours expected for this project.'
+    argument :id, ID, required: false, description: 'The ID of the project to update.'
+    argument :name, String, required: false, description: 'The name of the project.'
+    argument :payment_frequency, String, required: false, description: 'The frequency of payment for the project.'
+    argument :rate_type, String, required: false, description: 'The type of rate for this project.'
+    argument :starts_on, GraphQL::Types::ISO8601Date, required: false, description: 'The date this project starts.'
+    argument :status, String, required: false, description: 'The status of the project.'
 
     # return type from the mutation
     type Types::StaffPlan::ProjectType, null: true
@@ -39,8 +41,8 @@ module Mutations
 
       # try and find the assignment
       project = if id.present?
-        current_company.projects.find(id)
-      end
+                  current_company.projects.find(id)
+                end
 
       if project.blank?
         client = current_company.clients.find_by(id: client_id)
@@ -48,7 +50,7 @@ module Mutations
         # client must belong to the current company
         if client.nil?
           context.add_error(
-            GraphQL::ExecutionError.new("Client not found", extensions: { attribute: "client_id" })
+            GraphQL::ExecutionError.new('Client not found', extensions: { attribute: 'client_id' }),
           )
 
           return {}
@@ -82,8 +84,8 @@ module Mutations
                 error.full_message,
                 extensions: {
                   attribute: attribute.to_s,
-                }
-              )
+                },
+              ),
             )
           end
         end

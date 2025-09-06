@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module Settings
   class BreadcrumbComponent < ViewComponent::Base
-
     renders_one :svg
 
     def initialize(title:, link: nil, first: false, last: false)

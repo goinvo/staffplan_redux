@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Mutations
   class UpsertWorkWeeks < BaseMutation
-    description "Create or update a work week record for a StaffPlan user."
+    description 'Create or update a work week record for a StaffPlan user.'
 
     # arguments passed to the `resolve` method
-    argument :assignment_id, ID, required: true, description: "The ID of the assignment this work week is being created for."
-    argument :work_weeks, [Types::StaffPlan::WorkWeeksInputObject], required: true, description: "Attributes for creating or updating a work week record for a StaffPlan user."
+    argument :assignment_id, ID, required: true, description: 'The ID of the assignment this work week is being created for.'
+    argument :work_weeks, [Types::StaffPlan::WorkWeeksInputObject], required: true, description: 'Attributes for creating or updating a work week record for a StaffPlan user.'
 
     # return type from the mutation
     type Types::StaffPlan::AssignmentType
@@ -24,7 +26,7 @@ module Mutations
 
           if assignment.user && membership.inactive? && work_week.is_future_work_week?(relative_to_date: membership.updated_at.to_date)
             # edits are allowed to the user's work weeks prior to their deactivation week, inclusive
-            skip_count = skip_count + 1
+            skip_count += 1
             next
           end
 
@@ -44,11 +46,11 @@ module Mutations
         end
       end
 
-      if skip_count > 0
+      if skip_count.positive?
         context.add_error(
           GraphQL::ExecutionError.new(
             "Unable to update #{skip_count} future work week(s) for an inactive user",
-          )
+          ),
         )
       end
 

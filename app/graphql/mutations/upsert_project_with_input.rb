@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module Mutations
   class UpsertProjectWithInput < BaseMutation
-    description "Create or update a project."
+    description 'Create or update a project.'
 
     argument :input, Types::ProjectAttributes, required: true
 
@@ -11,18 +13,18 @@ module Mutations
       current_company = context[:current_company]
 
       # try and find the assignment
-      id = input.dig(:id)
+      id = input[:id]
       project = if id.present?
-        current_company.projects.find(id)
-      end
+                  current_company.projects.find(id)
+                end
 
       if project.blank?
-        client = current_company.clients.find_by(id: input.dig(:client_id))
+        client = current_company.clients.find_by(id: input[:client_id])
 
         # client must belong to the current company
         if client.nil?
           context.add_error(
-            GraphQL::ExecutionError.new("Client not found", extensions: { attribute: "client_id" })
+            GraphQL::ExecutionError.new('Client not found', extensions: { attribute: 'client_id' }),
           )
 
           return {}
@@ -32,7 +34,7 @@ module Mutations
       end
 
       project.assign_attributes(
-        input.to_h.slice(:name, :status, :cost, :payment_frequency, :fte, :hours, :rate_type, :hourly_rate, :starts_on, :ends_on)
+        input.to_h.slice(:name, :status, :cost, :payment_frequency, :fte, :hours, :rate_type, :hourly_rate, :starts_on, :ends_on),
       )
 
       if project.valid?
@@ -49,8 +51,8 @@ module Mutations
                 error.full_message,
                 extensions: {
                   attribute: attribute.to_s,
-                }
-              )
+                },
+              ),
             )
           end
         end

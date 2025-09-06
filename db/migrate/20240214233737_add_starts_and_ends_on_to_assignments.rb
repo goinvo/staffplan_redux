@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddStartsAndEndsOnToAssignments < ActiveRecord::Migration[7.1]
   def change
     add_column :assignments, :starts_on, :date

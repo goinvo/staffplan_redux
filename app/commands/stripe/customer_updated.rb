@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Stripe
   class CustomerUpdated
     def initialize(customer)
@@ -22,24 +24,24 @@ module Stripe
         payment_method = Stripe::PaymentMethod.retrieve(@customer.invoice_settings.default_payment_method)
         updates = updates.merge(
           default_payment_method: @customer.invoice_settings.default_payment_method,
-          payment_method_type: payment_method.type
+          payment_method_type: payment_method.type,
         )
 
         case payment_method.type
-        when "card"
+        when 'card'
           updates = updates.merge(
             payment_metadata: {
               credit_card_brand: payment_method.card.brand,
               credit_card_last_four: payment_method.card.last4,
               credit_card_exp_month: payment_method.card.exp_month,
-              credit_card_exp_year: payment_method.card.exp_year
-            }
+              credit_card_exp_year: payment_method.card.exp_year,
+            },
           )
-        when "link"
+        when 'link'
           updates = updates.merge(
             payment_metadata: {
-              email: payment_method.link.email
-            }
+              email: payment_method.link.email,
+            },
           )
         end
       end

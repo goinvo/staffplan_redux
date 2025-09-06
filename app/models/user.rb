@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
-  belongs_to :current_company, class_name: 'Company', foreign_key: :current_company_id
+  belongs_to :current_company, class_name: 'Company'
   has_many :memberships, dependent: :destroy
   has_many :companies, through: :memberships
   has_many :assignments, dependent: :destroy
@@ -11,22 +13,25 @@ class User < ApplicationRecord
   end
 
   validates :name, presence: true
-  validates :current_company, presence: true
   validates :email,
-    presence: true,
-    uniqueness: { case_sensitive: false },
-    format: { with: URI::MailTo::EMAIL_REGEXP }
+            presence: true,
+            uniqueness: { case_sensitive: false },
+            format: { with: URI::MailTo::EMAIL_REGEXP }
 
   passwordless_with :email
 
   has_paper_trail
 
-  def owner?(company:)
-    memberships.find_by(company:).role == Membership::OWNER
-  end
-
   def admin?(company:)
     memberships.find_by(company:).role == Membership::ADMIN
+  end
+
+  def inactive?(company:)
+    memberships.find_by(company:).inactive?
+  end
+
+  def owner?(company:)
+    memberships.find_by(company:).role == Membership::OWNER
   end
 
   def role(company:)
@@ -35,10 +40,6 @@ class User < ApplicationRecord
 
   def status(company:)
     memberships.find_by(company:).status
-  end
-
-  def inactive?(company:)
-    memberships.find_by(company:).inactive?
   end
 
   def toggle_status!(company:)

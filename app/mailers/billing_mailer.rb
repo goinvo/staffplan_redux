@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BillingMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -9,6 +11,6 @@ class BillingMailer < ApplicationMailer
     @company = company
     @new_subscription_count = new_subscription_count
 
-    mail to: @company.owners.map(&:email), subject: "StaffPlan Subscription Updated"
+    mail to: @company.owners.map(&:email), subject: 'StaffPlan Subscription Updated'
   end
 end

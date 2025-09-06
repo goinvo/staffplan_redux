@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Stripe
   class CreateCustomerJob < ApplicationJob
     queue_as :default
@@ -11,7 +13,7 @@ module Stripe
           {
             name: "#{company.name} | #{owner.name}",
             email: owner.email,
-          }
+          },
         )
 
         company.update(stripe_id: stripe_customer.id)
@@ -24,21 +26,21 @@ module Stripe
             customer: company.stripe_id,
             items: [{
               price: Rails.application.credentials.stripe_price_id,
-              quantity: company.memberships.active.count
+              quantity: company.memberships.active.count,
             }],
             trial_period_days: 30,
             trial_settings: {
               end_behavior: {
-                missing_payment_method: "cancel"
-              }
+                missing_payment_method: 'cancel',
+              },
             },
             payment_settings: {
               save_default_payment_method: 'on_subscription',
-            }
-          })
+            },
+          },
+        )
         company.subscription.update(stripe_id: stripe_subscription.id)
       end
     end
   end
-
 end

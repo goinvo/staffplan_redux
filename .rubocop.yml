@@ -1,0 +1,189 @@
+# The behavior of RuboCop can be controlled via the .rubocop.yml
+# configuration file. It makes it possible to enable/disable
+# certain cops (checks) and to alter their behavior if they accept
+# any parameters. The file can be placed either in your home
+# directory or in some project directory.
+#
+# RuboCop will start looking for the configuration file in the directory
+# where the inspected file is and continue its way up to the root directory.
+#
+# See https://docs.rubocop.org/rubocop/configuration
+
+require:
+  - rubocop-ordered_methods
+
+plugins:
+  - rubocop-factory_bot
+  - rubocop-graphql
+  - rubocop-minitest
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-capybara
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  Exclude:
+    - 'lib/generators/**/templates/*'
+    # Generated files
+    - 'app/services/tracking_client.rb'
+    - 'test/services/tracking_client_test.rb'
+  NewCops: enable
+
+GraphQL/ExtractInputType:
+  Enabled: false
+
+GraphQL/ExtractType:
+  Enabled: false
+
+GraphQL/MaxComplexitySchema:
+  Enabled: false
+
+GraphQL/MaxDepthSchema:
+  Enabled: false
+
+GraphQL/ObjectDescription:
+  Enabled: true
+  Exclude:
+    - 'app/graphql/sources/*.rb'
+    - 'app/graphql/types/mutation_type.rb'
+    - 'app/graphql/types/node_type.rb'
+    - 'app/graphql/types/query_type.rb'
+
+Layout/LineLength:
+  Enabled: false
+
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Layout/OrderedMethods:
+  Exclude:
+    - '**/db/migrate/*.rb'
+
+Layout/SpaceBeforeBrackets:
+  Enabled: false
+
+Lint/EmptyBlock:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: true
+  Exclude:
+    - 'app/components/**/*.rb'
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Exclude:
+    - 'app/graphql/mutations/*.rb'
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Minitest/MultipleAssertions:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Performance/TimesMap:
+  Enabled: false
+
+Rails/ActionOrder:
+  Enabled: false # We alphabetize methods
+
+Rails/DefaultScope:
+  Enabled: true
+
+Rails/EnvironmentVariableAccess:
+  Enabled: true
+  Exclude:
+    - '**/config/initializers/*.rb'
+
+Rails/Output:
+  Exclude:
+    - 'db/seeds.rb'
+    - 'db/seeds/**/*'
+
+Rails/RequireDependency:
+  Enabled: true
+
+Rails/ReversibleMigrationMethodDefinition:
+  Enabled: true
+
+Rails/SquishedSQLHeredocs:
+  Enabled: false
+
+Rails/TableNameAssignment:
+  Enabled: true
+
+Rails/ThreeStateBooleanColumn:
+  Enabled: false
+
+Style/CombinableLoops:
+  Enabled: false
+
+Style/DateTime:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+# This cop conflicts with `Performance/RedundantBlockCall`
+Style/ExplicitBlockArgument:
+  Enabled: false
+
+Style/GlobalVars:
+  AllowedVariables:
+    - $elastic
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/MixinGrouping:
+  Enabled: false
+
+Style/NumericLiterals:
+  Exclude:
+    - '**/test/**/*_test.rb'
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma

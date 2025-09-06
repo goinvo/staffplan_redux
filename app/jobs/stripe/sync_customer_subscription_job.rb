@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Stripe
   class SyncCustomerSubscriptionJob < ApplicationJob
     queue_as :default
@@ -9,8 +11,8 @@ module Stripe
       Stripe::Subscription.update(
         company.subscription.stripe_id,
         { items: [
-          {id: company.subscription.item_id,  quantity: subscription_count }
-        ]}
+          { id: company.subscription.item_id, quantity: subscription_count },
+        ] },
       )
     end
   end

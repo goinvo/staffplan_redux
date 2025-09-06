@@ -1,41 +1,16 @@
-class Settings::UsersController < ApplicationController
-  before_action :require_user!
-  before_action :require_company_owner_or_admin!
+# frozen_string_literal: true
 
-  def index
-    @users = current_company.users.all
-  end
+module Settings
+  class UsersController < ApplicationController
+    before_action :require_user!
+    before_action :require_company_owner_or_admin!
 
-  def show
-    @user = current_company.users.find(params[:id])
-  end
-
-  def edit
-    @user = current_company.users.find(params[:id])
-  end
-
-  def update
-    @user = current_company.users.find(params[:id])
-
-    if @user.memberships.find_by(company: current_company).update(role: params[:user][:role])
-      flash[:notice] = 'User updated successfully'
-      redirect_to settings_user_path(@user)
-    else
-      render :edit
-    end
-  end
-
-  def new
-    @user = User.new
-  end
-
-  def create
-    begin
+    def create
       @command = AddUserToCompany.new(
-          email: create_params[:email],
-          name: create_params[:name],
-          role: create_params[:role],
-          company: current_company
+        email: create_params[:email],
+        name: create_params[:name],
+        role: create_params[:role],
+        company: current_company,
       )
 
       @command.call
@@ -51,24 +26,50 @@ class Settings::UsersController < ApplicationController
         format.turbo_stream
       end
     end
-  end
 
-  def toggle_status
-    @user = current_company.users.find(params[:id])
+    def edit
+      @user = current_company.users.find(params[:id])
+    end
 
-    if @user == current_user
-      flash[:error] = 'You cannot deactivate yourself'
-      redirect_to settings_user_path(@user)
-    else
-      @user.toggle_status!(company: current_company)
-      flash[:notice] = 'User status updated successfully. StaffPlan subscription should be updated within 5 minutes.'
+    def index
+      @users = current_company.users.all
+    end
+
+    def new
+      @user = User.new
+    end
+
+    def show
+      @user = current_company.users.find(params[:id])
+    end
+
+    def toggle_status
+      @user = current_company.users.find(params[:id])
+
+      if @user == current_user
+        flash[:error] = 'You cannot deactivate yourself'
+      else
+        @user.toggle_status!(company: current_company)
+        flash[:notice] = 'User status updated successfully. StaffPlan subscription should be updated within 5 minutes.'
+      end
       redirect_to settings_user_path(@user)
     end
-  end
 
-  private
+    def update
+      @user = current_company.users.find(params[:id])
 
-  def create_params
-    params.require(:user).permit(:email, :name, :role)
+      if @user.memberships.find_by(company: current_company).update(role: params[:user][:role])
+        flash[:notice] = 'User updated successfully'
+        redirect_to settings_user_path(@user)
+      else
+        render :edit
+      end
+    end
+
+    private
+
+    def create_params
+      params.expect(user: %i[email name role])
+    end
   end
 end
