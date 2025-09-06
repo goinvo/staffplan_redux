@@ -27,7 +27,7 @@ class SessionsController < Passwordless::SessionsController
 
   def require_params
     if params[:passwordless].blank?
-      redirect_to auth_sign_in_url, alert: 'Sorry, please try that again.'
+      redirect_to auth_sign_in_url, alert: 'Sorry, please try that again.' # rubocop:disable Rails/I18nLocaleTexts
     end
   end
   helper_method :my_staffplan_url

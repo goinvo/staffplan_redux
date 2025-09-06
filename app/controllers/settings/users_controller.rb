@@ -15,7 +15,7 @@ module Settings
 
       @command.call
 
-      flash[:notice] = 'User added successfully'
+      flash[:notice] = 'User added successfully' # rubocop:disable Rails/I18nLocaleTexts
       redirect_to settings_users_path
     rescue ActiveRecord::RecordInvalid
       @user = @command.user
@@ -47,10 +47,10 @@ module Settings
       @user = current_company.users.find(params[:id])
 
       if @user == current_user
-        flash[:error] = 'You cannot deactivate yourself'
+        flash[:error] = 'You cannot deactivate yourself' # rubocop:disable Rails/I18nLocaleTexts
       else
         @user.toggle_status!(company: current_company)
-        flash[:notice] = 'User status updated successfully. StaffPlan subscription should be updated within 5 minutes.'
+        flash[:notice] = 'User status updated successfully. StaffPlan subscription should be updated within 5 minutes.' # rubocop:disable Rails/I18nLocaleTexts
       end
       redirect_to settings_user_path(@user)
     end
@@ -59,7 +59,7 @@ module Settings
       @user = current_company.users.find(params[:id])
 
       if @user.memberships.find_by(company: current_company).update(role: params[:user][:role])
-        flash[:notice] = 'User updated successfully'
+        flash[:notice] = 'User updated successfully' # rubocop:disable Rails/I18nLocaleTexts
         redirect_to settings_user_path(@user)
       else
         render :edit

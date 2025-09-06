@@ -33,12 +33,12 @@ class RegistrationsController < ApplicationController
     if registration.valid_token_digest?(params[:token])
       registration.register!
       sign_in(create_passwordless_session(registration.user))
-      redirect_to root_url, notice: "Thanks for registering! You're now signed in."
+      redirect_to root_url, notice: "Thanks for registering! You're now signed in." # rubocop:disable Rails/I18nLocaleTexts
     else
-      redirect_to auth_sign_in_url, notice: 'Sorry, that link is invalid.'
+      redirect_to auth_sign_in_url, notice: 'Sorry, that link is invalid.' # rubocop:disable Rails/I18nLocaleTexts
     end
   rescue Registration::RegistrationNotAvailableError
-    redirect_to auth_sign_in_url, notice: 'Sorry, that link is invalid.'
+    redirect_to auth_sign_in_url, notice: 'Sorry, that link is invalid.' # rubocop:disable Rails/I18nLocaleTexts
   end
 
   private

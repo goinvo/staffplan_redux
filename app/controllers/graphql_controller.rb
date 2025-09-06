@@ -32,7 +32,7 @@ class GraphqlController < ApplicationController
     head :forbidden and return if current_user.blank?
   end
 
-  def handle_error_in_development(e)
+  def handle_error_in_development(e) # rubocop:disable Naming/MethodParameterName
     logger.error e.message
     logger.error e.backtrace.join("\n")
 

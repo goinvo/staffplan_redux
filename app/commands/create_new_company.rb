@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CreateNewCompany
-  attr_reader :company_name, :email, :user, :registration_id, :company, :user
+  attr_reader :company_name, :email, :user, :registration_id, :company, :user # rubocop:disable Lint/DuplicateMethods
 
   def initialize(company_name:, email:, name:, registration_id:)
     @company_name = company_name

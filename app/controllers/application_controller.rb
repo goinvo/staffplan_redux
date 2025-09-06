@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
 
     # user may have their access revoked
     reset_session
-    flash[:error] = 'Please sign in to continue using StaffPlan.'
+    flash[:error] = 'Please sign in to continue using StaffPlan.' # rubocop:disable Rails/I18nLocaleTexts
     save_passwordless_redirect_location!(User) if request.get?
     redirect_to auth_sign_in_url
   end

@@ -5,7 +5,7 @@ class AvatarsController < ApplicationController
   before_action :find_attachable
   def destroy
     @attachable.avatar.purge if @attachable.avatar.attached?
-    flash[:success] = 'Custom avatar deleted successfully.'
+    flash[:success] = 'Custom avatar deleted successfully.' # rubocop:disable Rails/I18nLocaleTexts
     redirect_to attachable_params[:redirect_to] || root_path
   end
 
@@ -18,7 +18,7 @@ class AvatarsController < ApplicationController
   # TODO: extract this to a command object
   def find_attachable
     unless %w[User Company Client].include?(attachable_params[:type])
-      flash[:error] = 'No attachment found.'
+      flash[:error] = 'No attachment found.' # rubocop:disable Rails/I18nLocaleTexts
     end
 
     attachable = attachable_params[:type].constantize.find(attachable_params[:id])
@@ -29,7 +29,7 @@ class AvatarsController < ApplicationController
       if attachable == current_user
         @attachable = current_user
       else
-        flash[:error] = "Sorry, you can't remove that attachment."
+        flash[:error] = "Sorry, you can't remove that attachment." # rubocop:disable Rails/I18nLocaleTexts
         redirect_to attachable_params[:redirect_to] || root_path and return
       end
     when 'Company'
@@ -38,7 +38,7 @@ class AvatarsController < ApplicationController
           current_company.admin_or_owner?(user: current_user)
         @attachable = current_company
       else
-        flash[:error] = "Sorry, you can't remove that attachment."
+        flash[:error] = "Sorry, you can't remove that attachment." # rubocop:disable Rails/I18nLocaleTexts
         redirect_to attachable_params[:redirect_to] || root_path and return
       end
     when 'Client'
@@ -46,7 +46,7 @@ class AvatarsController < ApplicationController
       @attachable = current_company.clients.find(attachable_params[:id])
     end
   rescue ActiveRecord::RecordNotFound
-    flash[:error] = "Sorry, you can't remove that attachment."
+    flash[:error] = "Sorry, you can't remove that attachment." # rubocop:disable Rails/I18nLocaleTexts
     redirect_to attachable_params[:redirect_to] || root_path
   end
 end

@@ -10,7 +10,7 @@ class Registration < ApplicationRecord
   validates :token_digest, presence: true
   validates :ip_address, presence: true
 
-  before_validation :set_defaults
+  before_validation :set_defaults # rubocop:disable Layout/OrderedMethods
 
   scope(
     :available,

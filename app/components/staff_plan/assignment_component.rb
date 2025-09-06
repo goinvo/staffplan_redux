@@ -22,11 +22,11 @@ module StaffPlan
       client.name
     end
 
-    def project
+    def project # rubocop:disable Rails/Delegate
       assignment.project
     end
 
-    def planned_hours_sum
+    def planned_hours_sum # rubocop:disable Layout/OrderedMethods
       assignment
         .work_weeks
         .where('(year < ?) OR (year = ? AND cweek <= ?)', today.cwyear, today.cwyear, today.cweek)
