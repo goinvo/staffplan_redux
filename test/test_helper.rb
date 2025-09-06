@@ -13,9 +13,6 @@ require 'capybara/rails'
 require 'vcr'
 require 'pry'
 
-# Configure Minitest reporters
-Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
-
 Rails.root.glob('test/support/**/*.rb').each { |f| require f }
 
 # Check for pending migrations and apply them before tests are run

@@ -8,23 +8,27 @@ class ExampleController < ApplicationController
   end
 end
 
-class ExampleControllerTest < ActionDispatch::IntegrationTest
+class ExampleControllerTest < ActionController::TestCase
   tests ExampleController
 
-  describe 'any controller action in the app' do
-    it 'sets an X-CSRF-Token header value' do
-      token = 'a csrf token'
-      @controller.stub :form_authenticity_token, token do
-        # Add route directly in test
-        @routes = ActionDispatch::Routing::RouteSet.new
-        @routes.draw do
-          get '/test', to: 'example#index'
-        end
+  setup do
+    # Add route for the test controller
+    Rails.application.routes.draw do
+      get '/test' => 'example#index'
+    end
+  end
 
-        get :index
+  teardown do
+    # Reload original routes after test
+    Rails.application.reload_routes!
+  end
 
-        assert_equal token, response.headers['X-CSRF-Token']
-      end
+  test 'sets an X-CSRF-Token header value' do
+    token = 'a csrf token'
+    @controller.stub :form_authenticity_token, token do
+      get :index
+
+      assert_equal token, response.headers['X-CSRF-Token']
     end
   end
 end

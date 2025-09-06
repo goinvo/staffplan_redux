@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
       staffplan_path(current_user)
     else
       case Rails.env
-      when 'production'
+      when :production
         "https://ui.staffplan.com/people/#{current_user.id}"
       else
         "http://localhost:8080/people/#{current_user.id}"

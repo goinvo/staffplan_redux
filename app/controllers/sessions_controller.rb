@@ -11,7 +11,7 @@ class SessionsController < Passwordless::SessionsController
       staffplan_path(current_user)
     else
       case Rails.env
-      when 'production'
+      when :production
         "https://ui.staffplan.com/people/#{current_user.id}"
       else
         "http://localhost:8080/people/#{current_user.id}"
@@ -19,7 +19,7 @@ class SessionsController < Passwordless::SessionsController
     end
   end
 
-  def redirect_to_dashboard_if_authenticated
+  def redirect_to_dashboardRunninb_if_authenticated
     if current_user.present?
       redirect_to my_staffplan_url(current_user), allow_other_host: true
     end
