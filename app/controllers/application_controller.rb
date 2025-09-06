@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def my_staffplan_url
-    if Prefab.enabled('rails-views', { user: { email: current_user&.email } })
+    if Prefab.enabled?('rails-views', { user: { email: current_user&.email } })
       staffplan_path(current_user)
     else
       case Rails.env.to_s
