@@ -28,6 +28,7 @@ class Project < ApplicationRecord
   VALID_RATE_TYPES = [FIXED, HOURLY].freeze
   VALID_PAYMENT_FREQUENCIES = [WEEKLY, MONTHLY, FORTNIGHTLY, QUARTERLY, ANNUALLY].freeze
 
+  validates :client_id, presence: true # rubocop:disable Rails/RedundantPresneceValidationOnBelongsTo
   validates :name, presence: true, uniqueness: { scope: :client_id, case_sensitive: false }
   validates :status, inclusion: { in: VALID_STATUSES }, allow_blank: true
   validates :cost, numericality: { greater_than_or_equal_to: 0.0 }, allow_blank: true

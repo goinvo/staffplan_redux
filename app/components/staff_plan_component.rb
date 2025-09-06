@@ -7,7 +7,7 @@ class StaffPlanComponent < ViewComponent::Base
   attr_reader :user
 
   def react_staffplan_url
-    case Rails.env
+    case Rails.env.to_s
     when 'production'
       "https://ui.staffplan.com/people/#{helpers.current_user.id}"
     else

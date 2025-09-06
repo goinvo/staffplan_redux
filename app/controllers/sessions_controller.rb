@@ -10,8 +10,8 @@ class SessionsController < Passwordless::SessionsController
     if Prefab.enabled('rails-views')
       staffplan_path(current_user)
     else
-      case Rails.env
-      when :production
+      case Rails.env.to_s
+      when 'production'
         "https://ui.staffplan.com/people/#{current_user.id}"
       else
         "http://localhost:8080/people/#{current_user.id}"
