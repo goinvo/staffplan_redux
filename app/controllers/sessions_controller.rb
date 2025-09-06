@@ -7,7 +7,7 @@ class SessionsController < Passwordless::SessionsController
   private
 
   def my_staffplan_url(current_user)
-    if Prefab.enabled('rails-views')
+    if Prefab.enabled('rails-views', { user: { email: current_user&.email } })
       staffplan_path(current_user)
     else
       case Rails.env.to_s
