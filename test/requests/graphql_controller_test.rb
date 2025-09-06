@@ -1,8 +1,10 @@
-require "test_helper"
+# frozen_string_literal: true
+
+require 'test_helper'
 
 class GraphqlControllerTest < ActionDispatch::IntegrationTest
-  describe "when the user is not signed in" do
-    it "returns a 404" do
+  describe 'when the user is not signed in' do
+    it 'returns a 404' do
       query = <<~GQL
         mutation {
           setCurrentCompany(companyId: #{create(:company).id}) {

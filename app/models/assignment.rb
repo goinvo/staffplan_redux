@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Assignment < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :project
@@ -6,10 +8,10 @@ class Assignment < ApplicationRecord
 
   has_paper_trail
 
-  PROPOSED = "proposed".freeze
-  ACTIVE = "active".freeze
-  ARCHIVED = "archived".freeze
-  COMPLETED = "completed".freeze
+  PROPOSED = 'proposed'
+  ACTIVE = 'w'
+  ARCHIVED = 'archived'
+  COMPLETED = 'completed'
   VALID_STATUSES = [PROPOSED, ACTIVE, ARCHIVED, COMPLETED].freeze
 
   validates :user_id, presence: true, uniqueness: { scope: :project_id }, if: ->(assignment) { assignment.status != PROPOSED }
@@ -40,7 +42,7 @@ class Assignment < ApplicationRecord
     project_company_users = project.company.active_users
     return if project_company_users.include?(user)
 
-    errors.add(:project, "and user must belong to the same company")
+    errors.add(:project, 'and user must belong to the same company')
   end
 
   def starts_and_ends_on_rules

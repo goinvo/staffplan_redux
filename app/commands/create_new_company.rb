@@ -1,6 +1,7 @@
-class CreateNewCompany
+# frozen_string_literal: true
 
-  attr_reader :company_name, :email, :user, :registration_id, :company, :user
+class CreateNewCompany
+  attr_reader :company_name, :email, :user, :registration_id, :company, :user # rubocop:disable Lint/DuplicateMethods
 
   def initialize(company_name:, email:, name:, registration_id:)
     @company_name = company_name
@@ -20,28 +21,28 @@ class CreateNewCompany
 
   private
 
-  def create_company_record
-    @company = Company.create(name: @company_name)
-  end
-
   def add_initial_owner
     @user = AddUserToCompany.new(
       email: @email,
       name: @name,
       company: @company,
-      role: "owner",
-      creating_new_company: true
+      role: 'owner',
+      creating_new_company: true,
     ).call
+  end
+
+  def claim_registration
+    Registration.find(@registration_id).update!(
+      user: @user,
+      registered_at: Time.current,
+    )
+  end
+
+  def create_company_record
+    @company = Company.create(name: @company_name)
   end
 
   def enqueue_create_stripe_customer_job
     Stripe::CreateCustomerJob.perform_later(@company)
-  end
-
-  def claim_registration
-    Registration.find_by!(id: @registration_id).update!(
-      user: @user,
-      registered_at: Time.current
-    )
   end
 end

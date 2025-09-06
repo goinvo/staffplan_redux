@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddProjectsStartsOnAndEndsOn < ActiveRecord::Migration[7.1]
   def change
     add_column :projects, :starts_on, :date

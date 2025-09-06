@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Mutations
   class UpsertAssignmentWithInput < BaseMutation
-    description "Create or update an assignment."
+    description 'Create or update an assignment.'
 
-    argument :input, Types::AssignmentAttributes, required: true, description: "Attributes for creating or updating an assignment."
+    argument :input, Types::AssignmentAttributes, required: true, description: 'Attributes for creating or updating an assignment.'
 
     # return type from the mutation
     type Types::StaffPlan::AssignmentType
@@ -12,8 +14,8 @@ module Mutations
 
       # try and find the assignment
       assignment = if input.id.present?
-        current_company.assignments.find(input.id)
-      end
+                     current_company.assignments.find(input.id)
+                   end
 
       if assignment
         assignment.assign_attributes(input.to_h.slice(:project_id, :user_id, :status))
@@ -34,8 +36,8 @@ module Mutations
                 error.full_message,
                 extensions: {
                   attribute: attribute.to_s,
-                }
-              )
+                },
+              ),
             )
           end
         end

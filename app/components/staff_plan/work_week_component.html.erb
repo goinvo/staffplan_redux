@@ -1,0 +1,67 @@
+<td class="relative px-1 py-1 font-normal bg-selectedColumnBg">
+  <div
+    class="flex flex-col sm:justify-normal justify-center h-full sm:space-y-3 font-bold pt-5 sm:pt-0"
+  >
+    <div class="relative my-1 sm:block hidden">
+      <input
+        id="estHours-21-36-2025"
+        class="bg-white shadow-top-input-shadow text-center sm:text-base text-2xl rounded-sm sm:w-[34px] w-[68px] sm:h-[25px] h-[50px] focus:border-tiffany focus:ring-1 focus:ring-tiffany border-none outlined-none mb-0 px-0 py-0"
+        autocomplete="off"
+        value="<%= estimated_hours_display %>"
+        name="estimatedHours"
+        /><button
+      type="button"
+      class="sm:flex absolute left-0 top-full h-[12px] sm:w-[34px] w-[68px] border-2 flex items-center justify-center bg-transparent border-transparent rounded-b-sm opacity-0 pointer-events-none transition-opacity duration-200"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        aria-hidden="true"
+        data-slot="icon"
+        class="w-6 text-white"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+        ></path>
+      </svg>
+    </button>
+    </div>
+    <% if show_actual_input? %>
+    <div class="relative my-1 pt-2">
+      <input
+        id="actHours-21-36-2025"
+        class="bg-white shadow-top-input-shadow text-center sm:text-base text-2xl rounded-sm sm:w-[34px] w-[68px] sm:h-[25px] h-[50px] focus:border-tiffany focus:ring-1 focus:ring-tiffany border-none outlined-none mb-0 px-0 py-0"
+        autocomplete="off"
+        value="<%= actual_hours_display %>"
+        name="actualHours"
+        />
+      <button
+        type="button"
+        class="hidden absolute left-0 top-full h-[12px] sm:w-[34px] w-[68px] border-2 flex items-center justify-center bg-transparent border-transparent rounded-b-sm opacity-0 pointer-events-none transition-opacity duration-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+          data-slot="icon"
+          class="w-6 text-white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+          ></path>
+        </svg>
+      </button>
+    </div>
+    <% end %>
+  </div>
+</td>

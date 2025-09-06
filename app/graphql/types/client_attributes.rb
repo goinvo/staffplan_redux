@@ -1,7 +1,11 @@
-class Types::ClientAttributes < Types::BaseInputObject
-  description "Attributes for creating or updating a client"
-  argument :id, ID, required: false, description: "The ID of the client to update."
-  argument :name, String, required: false, description: "The name of the client."
-  argument :description, String, required: false, description: "The client's description."
-  argument :status, String, required: false, description: "The status of the client."
+# frozen_string_literal: true
+
+module Types
+  class ClientAttributes < Types::BaseInputObject
+    description 'Attributes for creating or updating a client'
+    argument :description, String, required: false, description: "The client's description."
+    argument :id, ID, required: false, description: 'The ID of the client to update.'
+    argument :name, String, required: false, description: 'The name of the client.'
+    argument :status, String, required: false, description: 'The status of the client.'
+  end
 end

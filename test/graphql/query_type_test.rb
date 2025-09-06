@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-require "test_helper"
+require 'test_helper'
 
 class QueryTypeTest < ActiveSupport::TestCase
-
-  describe "assignments#canBeDeleted" do
-    it "is false if the assignment is unassigned or is assigned with no actual hours" do
+  describe 'assignments#canBeDeleted' do
+    it 'is false if the assignment is unassigned or is assigned with no actual hours' do
       query_string = <<-GRAPHQL
         query {
           projects {
@@ -25,16 +24,17 @@ class QueryTypeTest < ActiveSupport::TestCase
         query_string,
         context: {
           current_user: user,
-          current_company: company
-        }
+          current_company: company,
+        },
       )
 
-      assignment_result = result["data"]["projects"].first["assignments"].first
-      assert_nil result["errors"]
-      assert_equal false, assignment_result["canBeDeleted"]
+      assignment_result = result['data']['projects'].first['assignments'].first
+
+      assert_nil result['errors']
+      assert_not assignment_result['canBeDeleted']
     end
 
-    it "is true if the assignment is unassigned or is assigned with no actual hours" do
+    it 'is true if the assignment is unassigned or is assigned with no actual hours' do
       query_string = <<-GRAPHQL
         query {
           projects {
@@ -54,18 +54,19 @@ class QueryTypeTest < ActiveSupport::TestCase
         query_string,
         context: {
           current_user: user,
-          current_company: company
-        }
+          current_company: company,
+        },
       )
 
-      assignment_result = result["data"]["projects"].first["assignments"].first
-      assert_nil result["errors"]
-      assert_equal true, assignment_result["canBeDeleted"]
+      assignment_result = result['data']['projects'].first['assignments'].first
+
+      assert_nil result['errors']
+      assert assignment_result['canBeDeleted']
     end
   end
 
-  describe "user#isActive" do
-    it "is true if the user is an active member of the company" do
+  describe 'user#isActive' do
+    it 'is true if the user is an active member of the company' do
       query_string = <<-GRAPHQL
         query {
           viewer {
@@ -81,16 +82,17 @@ class QueryTypeTest < ActiveSupport::TestCase
         query_string,
         context: {
           current_user: user,
-          current_company: company
-        }
+          current_company: company,
+        },
       )
 
-      user_result = result["data"]["viewer"]
-      assert_nil result["errors"]
-      assert_equal true, user_result["isActive"]
+      user_result = result['data']['viewer']
+
+      assert_nil result['errors']
+      assert user_result['isActive']
     end
 
-    it "is false if the user is not an active member of the company" do
+    it 'is false if the user is not an active member of the company' do
       query_string = <<-GRAPHQL
         query {
           viewer {
@@ -106,13 +108,14 @@ class QueryTypeTest < ActiveSupport::TestCase
         query_string,
         context: {
           current_user: user,
-          current_company: company
-        }
+          current_company: company,
+        },
       )
 
-      user_result = result["data"]["viewer"]
-      assert_nil result["errors"]
-      assert_equal false, user_result["isActive"]
+      user_result = result['data']['viewer']
+
+      assert_nil result['errors']
+      assert_not user_result['isActive']
     end
 
     it "considers membership status for the request's current company" do
@@ -135,17 +138,18 @@ class QueryTypeTest < ActiveSupport::TestCase
         query_string,
         context: {
           current_user: user,
-          current_company: inactive_membership.company
-        }
+          current_company: inactive_membership.company,
+        },
       )
 
-      user_result = result["data"]["viewer"]
-      assert_nil result["errors"]
-      assert_equal false, user_result["isActive"]
+      user_result = result['data']['viewer']
+
+      assert_nil result['errors']
+      assert_not user_result['isActive']
     end
   end
 
-  describe "user#role" do
+  describe 'user#role' do
     it "it returns the role of the owner in the request's company" do
       query_string = <<-GRAPHQL
         query {
@@ -162,13 +166,14 @@ class QueryTypeTest < ActiveSupport::TestCase
         query_string,
         context: {
           current_user: user,
-          current_company: company
-        }
+          current_company: company,
+        },
       )
 
-      user_result = result["data"]["viewer"]
-      assert_nil result["errors"]
-      assert_equal Membership::OWNER, user_result["role"]
+      user_result = result['data']['viewer']
+
+      assert_nil result['errors']
+      assert_equal Membership::OWNER, user_result['role']
     end
 
     it "it considers the request's company only" do
@@ -191,13 +196,14 @@ class QueryTypeTest < ActiveSupport::TestCase
         query_string,
         context: {
           current_user: user,
-          current_company: active_membership.company
-        }
+          current_company: active_membership.company,
+        },
       )
 
-      user_result = result["data"]["viewer"]
-      assert_nil result["errors"]
-      assert_equal Membership::MEMBER, user_result["role"]
+      user_result = result['data']['viewer']
+
+      assert_nil result['errors']
+      assert_equal Membership::MEMBER, user_result['role']
     end
   end
 end

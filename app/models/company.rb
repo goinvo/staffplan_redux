@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Company < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
@@ -17,27 +19,27 @@ class Company < ApplicationRecord
 
   before_create :build_default_subscription
 
-  def build_default_subscription
-    # these values will be overwritten by the webhook, but set them here so the page
-    # can render before the webhook is received
-    build_subscription(status: "trialing", trial_end: 30.days.from_now)
-  end
-
   def active_users
     users.joins(:memberships).where(memberships: { status: Membership::ACTIVE })
-  end
-
-  def owners
-    memberships.owners.map(&:user)
   end
 
   def admin_or_owner?(user:)
     user.owner?(company: self) || user.admin?(company: self)
   end
 
+  def build_default_subscription
+    # these values will be overwritten by the webhook, but set them here so the page
+    # can render before the webhook is received
+    build_subscription(status: 'trialing', trial_end: 30.days.from_now)
+  end
+
   def can_access?(user:)
     membership = memberships.find_by(user: user)
     membership.present? && membership.active?
+  end
+
+  def owners
+    memberships.owners.map(&:user)
   end
 
   def restore_avatar

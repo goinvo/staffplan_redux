@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Project < ApplicationRecord
   belongs_to :client
   has_one :company, through: :client
@@ -9,24 +11,24 @@ class Project < ApplicationRecord
 
   scope :active, -> { where(status: 'active') }
 
-  UNCONFIRMED = "unconfirmed".freeze
-  CONFIRMED = "confirmed".freeze
-  ARCHIVED = "archived".freeze
-  CANCELLED = "cancelled".freeze
-  COMPLETED = "completed".freeze
-  WEEKLY = "weekly".freeze
-  MONTHLY = "monthly".freeze
-  FORTNIGHTLY = "fortnightly".freeze
-  QUARTERLY = "quarterly".freeze
-  ANNUALLY = "annually".freeze
-  FIXED = "fixed".freeze
-  HOURLY = "hourly".freeze
+  UNCONFIRMED = 'unconfirmed'
+  CONFIRMED = 'confirmed'
+  ARCHIVED = 'archived'
+  CANCELLED = 'cancelled'
+  COMPLETED = 'completed'
+  WEEKLY = 'weekly'
+  MONTHLY = 'monthly'
+  FORTNIGHTLY = 'fortnightly'
+  QUARTERLY = 'quarterly'
+  ANNUALLY = 'annually'
+  FIXED = 'fixed'
+  HOURLY = 'hourly'
 
   VALID_STATUSES = [UNCONFIRMED, CONFIRMED, ARCHIVED, CANCELLED, COMPLETED].freeze
   VALID_RATE_TYPES = [FIXED, HOURLY].freeze
   VALID_PAYMENT_FREQUENCIES = [WEEKLY, MONTHLY, FORTNIGHTLY, QUARTERLY, ANNUALLY].freeze
 
-  validates :client_id, presence: true
+  validates :client_id, presence: true # rubocop:disable Rails/RedundantPresneceValidationOnBelongsTo
   validates :name, presence: true, uniqueness: { scope: :client_id, case_sensitive: false }
   validates :status, inclusion: { in: VALID_STATUSES }, allow_blank: true
   validates :cost, numericality: { greater_than_or_equal_to: 0.0 }, allow_blank: true
@@ -37,16 +39,13 @@ class Project < ApplicationRecord
 
   before_destroy :ensure_project_is_destroyable, prepend: true
 
-  def confirmed?
-    status == CONFIRMED
-  end
-
   def archived?
     status == ARCHIVED
   end
 
-  def unconfirmed?
-    status == UNCONFIRMED
+  def can_be_deleted?
+    assignments.empty? ||
+      WorkWeek.where(assignment: assignments).where.not(actual_hours: 0).empty?
   end
 
   def cancelled?
@@ -57,9 +56,12 @@ class Project < ApplicationRecord
     status == COMPLETED
   end
 
-  def can_be_deleted?
-    assignments.empty? ||
-      WorkWeek.where(assignment: assignments).where.not(actual_hours: 0).empty?
+  def confirmed?
+    status == CONFIRMED
+  end
+
+  def unconfirmed?
+    status == UNCONFIRMED
   end
 
   private
@@ -68,7 +70,7 @@ class Project < ApplicationRecord
   def ensure_project_is_destroyable
     return if can_be_deleted?
 
-    errors.add(:base, "Cannot delete a project that has assignments with hours recorded. Try archiving the project instead.")
+    errors.add(:base, 'Cannot delete a project that has assignments with hours recorded. Try archiving the project instead.')
     false
   end
 end

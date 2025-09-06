@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 module Mutations
   class DeleteAssignment < BaseMutation
-    description "Delete an assignment."
+    description 'Delete an assignment.'
 
     # arguments passed to the `resolve` method
-    argument :assignment_id, ID, required: true,
-             description: "The ID of the assignment to delete. Must be a TBD assignment."
+    argument :assignment_id,
+             ID,
+             required: true,
+             description: 'The ID of the assignment to delete. Must be a TBD assignment.'
 
     # return type from the mutation
     type Types::StaffPlan::AssignmentType
@@ -21,8 +25,8 @@ module Mutations
               error.full_message,
               extensions: {
                 attribute: error.attribute.to_s,
-              }
-            )
+              },
+            ),
           )
         end
       end

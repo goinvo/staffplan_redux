@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Client < ApplicationRecord
   belongs_to :company
   has_many :projects, dependent: :destroy
@@ -8,12 +10,12 @@ class Client < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [100, 100]
   end
 
-  ACTIVE = 'active'.freeze
-  ARCHIVED = 'archived'.freeze
+  ACTIVE = 'active'
+  ARCHIVED = 'archived'
 
   VALID_STATUSES = [ACTIVE, ARCHIVED].freeze
 
-  validates :company_id, presence: true, uniqueness: { scope: :name }
+  validates :company_id, uniqueness: { scope: :name }, presence: true # rubocop:disable Rails/RedundantPresneceValidationOnBelongsTo
   validates :name, presence: true, uniqueness: { scope: :company_id }
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
 
@@ -27,6 +29,7 @@ class Client < ApplicationRecord
   def archived?
     status == ARCHIVED
   end
+
   def toggle_archived!
     new_status = active? ? Client::ARCHIVED : Client::ACTIVE
 

@@ -1,0 +1,88 @@
+<tr
+  class="flex sm:justify-normal justify-between bg-white-300 hover:bg-hoverGrey pl-5"
+>
+  <td
+    class="pl-3 sm:px-0 py-1 sm:pt-1 sm:pb-2 font-normal align-top pt-5 w-1/2 sm:w-2/5"
+  >
+    <div class="flex sm:flex-row flex-col w-full justify-between items-start">
+      <div
+        class="sm:max-w-[70px] md:max-w-[110px] lg:max-w-[130px] w-full pl-0 sm:pl-[2px] sm:mr-1 md:mr-0 mb-1"
+      >
+        <div
+          class="text-contrastBlue sm:flex hidden items-center justify-start sm:pt-2 pl-0 text-start transform -translate-x-0.5 cursor-pointer"
+        >
+          <%= client_name %>
+        </div>
+        <div class="sm:hidden flex items-center relative"><span><%= client_name %></span></div>
+      </div>
+      <div class="flex justify-between sm:max-w-[280px] w-full">
+        <div class="flex items-start pt-2 relative">
+          <div class="w-8"></div>
+        </div>
+        <div
+          class="w-full sm:max-w-[205px] w-full md:pl-1 lg:pl-2 sm:mr-0 mr-2 flex items-start mb-4 sm:mb-0"
+        >
+          <div>
+            <button
+              class="pt-0 sm:pt-2 font-bold flex items-center justify-start text-contrastBlue text-start cursor-pointer"
+            >
+              <%= project.name %>
+            </button>
+          </div>
+          <div
+            class="relative inline-block text-left z-15"
+            data-headlessui-state=""
+          >
+            <button
+              class="cursor-pointer flex items-center text-2xl actionbar-text-accent hover:text-gray-900 rounded-full ellipsismenu focus:outline-none undefined ml-2 -mt-[5px] sm:mt-[3px]"
+              id="headlessui-menu-button-«r2»"
+              type="button"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-headlessui-state=""
+            ></button>
+          </div>
+        </div>
+        <div
+          class="text-contrastBlue sm:flex hidden pr-2 sm:pr-1 md:pr-2 flex-col items-end max-w-[55px] w-full"
+        >
+          <button class="pt-2 underline cursor-pointer">Plan</button>
+          <div class="pt-5">Actual</div>
+        </div>
+      </div>
+    </div>
+  </td>
+  <% work_weeks.each do |work_week| %>
+    <%= render StaffPlan::WorkWeekComponent.new(work_week:) %>
+  <% end %>
+  <td class="font-normal py-2 sm:pl-4 pl-0 pr-0 ml-1 sm:ml-0 w-1/2 sm:w-1/6">
+    <div
+      class="pl-6 sm:flex hidden flex-col max-w-fit space-y-5 cursor-pointer"
+    >
+      <div
+        class="sm:flex justify-between space-x-1 cursor-pointer relative pt-1"
+      >
+        <label
+          class="cursor-pointer text-sm leading-[18px] whitespace-nowrap text-right flex-shrink-0 min-w-10"
+        >Plan</label
+        ><span class="font-bold text-sm text-right min-w-20"
+      >
+        <%= planned_hours_sum %>
+        <span class="text-sm font-normal pl-1">hrs</span></span
+      >
+      </div>
+      <div
+        class="sm:flex justify-between space-x-1 cursor-pointer relative mt-[-7px]"
+      >
+        <label
+          class="cursor-pointer text-sm leading-[18px] whitespace-nowrap text-right flex-shrink-0 min-w-10"
+        >Actual</label
+        ><span class="font-bold text-sm text-right min-w-20"
+      >
+        <%= actual_hours_sum %>
+        <span class="text-sm font-normal pl-1">hrs</span></span
+      >
+      </div>
+    </div>
+  </td>
+</tr>

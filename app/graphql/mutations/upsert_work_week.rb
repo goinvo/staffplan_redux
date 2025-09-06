@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Mutations
   class UpsertWorkWeek < BaseMutation
-    description "Create or update a work week record for a StaffPlan user."
+    description 'Create or update a work week record for a StaffPlan user.'
 
     # arguments passed to the `resolve` method
-    argument :assignment_id, ID, required: true, description: "The ID of the assignment this work week is being created for."
-    argument :cweek, Int, required: true, description: "The calendar week number of the work week."
-    argument :year, Int, required: true, description: "The calendar year of the work week."
-    argument :estimated_hours, Int, required: false, description: "The hours the user is expecting to work on this project during this week."
-    argument :actual_hours, Int, required: false, description: "The hours the user actually worked on this project during this week."
+    argument :actual_hours, Int, required: false, description: 'The hours the user actually worked on this project during this week.'
+    argument :assignment_id, ID, required: true, description: 'The ID of the assignment this work week is being created for.'
+    argument :cweek, Int, required: true, description: 'The calendar week number of the work week.'
+    argument :estimated_hours, Int, required: false, description: 'The hours the user is expecting to work on this project during this week.'
+    argument :year, Int, required: true, description: 'The calendar year of the work week.'
 
     # return type from the mutation
     type Types::StaffPlan::WorkWeekType
@@ -32,7 +34,7 @@ module Mutations
 
         if membership.inactive? && work_week.is_future_work_week?(relative_to_date: membership.updated_at.to_date)
           # edits are allowed to the user's work weeks prior to their deactivation week, inclusive
-          raise GraphQL::ExecutionError, "Unable to edit future work weeks for inactive users"
+          raise GraphQL::ExecutionError, 'Unable to edit future work weeks for inactive users'
         end
       end
 

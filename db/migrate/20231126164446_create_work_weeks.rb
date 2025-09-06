@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class CreateWorkWeeks < ActiveRecord::Migration[7.1]
   def change
     create_table :work_weeks do |t|
-      t.references :assignment,   null: false
+      t.references :assignment, null: false
       t.integer :cweek,                 null: false
       t.integer :year,                  null: false
       t.decimal :beginning_of_week,     null: false, precision: 15, scale: 0
@@ -11,6 +13,6 @@ class CreateWorkWeeks < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    add_index :work_weeks, [:assignment_id, :beginning_of_week], unique: true
+    add_index :work_weeks, %i[assignment_id beginning_of_week], unique: true
   end
 end

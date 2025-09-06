@@ -1,26 +1,28 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-ruby "3.4.4"
+source 'https://rubygems.org'
+
+ruby '3.4.4'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "8.0.2.1"
 
-gem "sprockets-rails"
+gem 'sprockets-rails'
 
-gem "pg", "~> 1.6"
+gem 'pg', '~> 1.6'
 
-gem "puma", ">= 5.0"
+gem 'importmap-rails'
+gem 'mission_control-jobs'
+gem 'money'
+gem 'prefab-cloud-ruby'
+gem 'puma', '>= 5.0'
 gem 'rack-cors'
-gem "importmap-rails"
-gem "turbo-rails"
-gem "stimulus-rails"
-gem "stripe"
-gem "money"
-gem "tailwindcss-rails"
-gem "recaptcha"
-gem "prefab-cloud-ruby"
-gem "solid_queue"
-gem "mission_control-jobs"
+gem 'recaptcha'
+gem 'solid_queue'
+gem 'stimulus-rails'
+gem 'stripe'
+gem 'tailwindcss-rails'
+gem 'turbo-rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -29,56 +31,66 @@ gem "mission_control-jobs"
 # gem "kredis"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem 'graphiql-rails'
+gem 'graphql', '~> 2.5'
 gem 'paper_trail'
-gem "passwordless", "~> 1.8"
-gem "graphql", "~> 2.5"
-gem "graphiql-rails"
-gem "view_component"
+gem 'passwordless', '~> 1.8'
+gem 'tzinfo-data', platforms: %i[windows jruby]
+gem 'view_component'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
-gem "faker"
+gem 'bootsnap', require: false
+gem 'faker'
 
 gem 'rollbar'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.14"
-gem "aws-sdk-s3", require: false
+gem 'aws-sdk-s3', require: false
+gem 'image_processing', '~> 1.14'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
-  gem "bullet"
+  gem 'bullet'
+  gem 'debug', platforms: %i[mri windows]
   gem 'dotenv-rails'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
+  gem 'web-console'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
-  gem "letter_opener"
-  gem "letter_opener_web"
-  gem "foreman"
+  gem 'foreman'
+  gem 'letter_opener'
+  gem 'letter_opener_web'
   gem 'pry'
-  gem "rbs"
+  gem 'rbs'
+
+  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+  gem 'rubocop-capybara'
+  gem 'rubocop-factory_bot'
+  gem 'rubocop-graphql'
+  gem 'rubocop-minitest'
+  gem 'rubocop-ordered_methods'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rails-omakase', require: false
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'capybara'
+  gem 'selenium-webdriver'
 
-  gem "minitest"
-  gem "minitest-spec-rails"
-  gem "minitest-reporters"
-  gem "factory_bot_rails"
-  gem 'shoulda-matchers', '~> 6.5'
-  gem "timecop"
-  gem "webmock"
-  gem "vcr"
+  gem 'factory_bot_rails'
+  gem 'minitest'
+  gem 'minitest-reporters'
+  gem 'minitest-spec-rails'
   gem 'rails-controller-testing'
+  gem 'shoulda-matchers', '~> 6.5'
+  gem 'timecop'
+  gem 'vcr'
+  gem 'webmock'
 end

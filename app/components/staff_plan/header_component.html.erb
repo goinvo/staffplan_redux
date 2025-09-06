@@ -1,0 +1,1191 @@
+<thead class="relative">
+<tr
+  class="pl-5 border-bottom bg-contrastBlue min-h-28 text-white sm:flex hidden flex"
+>
+  <th class="flex w-1/2 sm:w-2/5 px-0 py-5 lg:mr-1">
+    <div class="flex text-white items-center pr-3">
+      <div
+        class="px-2 py-2 relative overflow-hidden w-[92px] h-[67px] aspect-[92/67] mr-4"
+      >
+        <%= image_tag AvatarHelper.new(target: user).image_url %>
+      </div>
+      <div class="flex flex-col items-start">
+        <div class="flex items-center">
+          <div
+            class="text-huge text-left overflow-wrap break-word leading-snug"
+          >
+            Juhan Sonin
+          </div>
+          <button class="py-1 pl-4" type="button">
+            <div class="flex self-start py-0.5">
+              <svg
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                class="w-4 h-4"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M964.256 49.664C929.392 16.256 890.933-.672 849.877-.672c-64.192 0-111.024 41.472-123.841 54.176-18.032 17.856-633.152 633.2-633.152 633.2a33.011 33.011 0 0 0-8.447 14.592C70.565 752.559 1.077 980.016.387 982.304c-3.567 11.648-.384 24.337 8.208 32.928a32.336 32.336 0 0 0 22.831 9.44c3.312 0 6.655-.496 9.919-1.569 2.352-.767 237.136-76.655 275.775-88.19a32.736 32.736 0 0 0 13.536-8.033c24.416-24.128 598.128-591.456 636.208-630.784 39.392-40.592 58.96-82.864 58.208-125.616-.784-42.208-21.248-82.848-60.816-120.816zM715.845 155.84c16.304 3.952 54.753 16.862 94.017 56.479 39.68 40.032 50.416 85.792 52.416 96.208-125.824 125.168-415.456 411.728-529.632 524.672-10.544-24.56-27.584-54.144-54.993-81.76-33.471-33.728-67.536-52.783-93.808-63.503 112.992-113.008 408.08-408.224 532-532.096zM140.39 741.95c17.584 4.672 54.111 18.224 91.344 55.76 28.672 28.912 42.208 60.8 48.288 80.24-44.48 14.304-141.872 47.92-203.76 67.872 18.336-60.336 49.311-154.304 64.128-203.872zm780.031-491.584a1748.764 1748.764 0 0 1-6.065 6.16c-10.113-26.049-27.857-59.52-58.577-90.496-31.391-31.648-63.231-50.32-88.75-61.36 2.175-2.16 3.855-3.857 4.511-4.496 3.664-3.617 36.897-35.376 78.32-35.376 23.84 0 47.248 10.88 69.617 32.32 26.511 25.424 40.175 50.512 40.624 74.592.431 24.576-12.913 51.04-39.68 78.656z"
+                ></path>
+              </svg>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >30</span
+          ><svg
+        height="34.88372093023256"
+        viewBox="0 0 34 34.88372093023256"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V34.88372093023256H0V3Z"
+          fill="#AEB3C0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 navbar font-bold">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >35</span
+          ><svg
+        height="40.697674418604656"
+        viewBox="0 0 34 40.697674418604656"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V40.697674418604656H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >35</span
+          ><svg
+        height="40.697674418604656"
+        viewBox="0 0 34 40.697674418604656"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V40.697674418604656H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >35</span
+          ><svg
+        height="40.697674418604656"
+        viewBox="0 0 34 40.697674418604656"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V40.697674418604656H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >35</span
+          ><svg
+        height="40.697674418604656"
+        viewBox="0 0 34 40.697674418604656"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V40.697674418604656H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >35</span
+          ><svg
+        height="40.697674418604656"
+        viewBox="0 0 34 40.697674418604656"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V40.697674418604656H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >35</span
+          ><svg
+        height="40.697674418604656"
+        viewBox="0 0 34 40.697674418604656"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V40.697674418604656H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >35</span
+          ><svg
+        height="40.697674418604656"
+        viewBox="0 0 34 40.697674418604656"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V40.697674418604656H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >35</span
+          ><svg
+        height="40.697674418604656"
+        viewBox="0 0 34 40.697674418604656"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V40.697674418604656H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >35</span
+          ><svg
+        height="40.697674418604656"
+        viewBox="0 0 34 40.697674418604656"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V40.697674418604656H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >33</span
+          ><svg
+        height="38.372093023255815"
+        viewBox="0 0 34 38.372093023255815"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V38.372093023255815H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >33</span
+          ><svg
+        height="38.372093023255815"
+        viewBox="0 0 34 38.372093023255815"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V38.372093023255815H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >33</span
+          ><svg
+        height="38.372093023255815"
+        viewBox="0 0 34 38.372093023255815"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V38.372093023255815H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >33</span
+          ><svg
+        height="38.372093023255815"
+        viewBox="0 0 34 38.372093023255815"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V38.372093023255815H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >33</span
+          ><svg
+        height="38.372093023255815"
+        viewBox="0 0 34 38.372093023255815"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V38.372093023255815H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >33</span
+          ><svg
+        height="38.372093023255815"
+        viewBox="0 0 34 38.372093023255815"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V38.372093023255815H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >33</span
+          ><svg
+        height="38.372093023255815"
+        viewBox="0 0 34 38.372093023255815"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V38.372093023255815H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >33</span
+          ><svg
+        height="38.372093023255815"
+        viewBox="0 0 34 38.372093023255815"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V38.372093023255815H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >33</span
+          ><svg
+        height="38.372093023255815"
+        viewBox="0 0 34 38.372093023255815"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V38.372093023255815H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >31</span
+          ><svg
+        height="36.04651162790698"
+        viewBox="0 0 34 36.04651162790698"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V36.04651162790698H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >31</span
+          ><svg
+        height="36.04651162790698"
+        viewBox="0 0 34 36.04651162790698"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V36.04651162790698H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >31</span
+          ><svg
+        height="36.04651162790698"
+        viewBox="0 0 34 36.04651162790698"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V36.04651162790698H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >31</span
+          ><svg
+        height="36.04651162790698"
+        viewBox="0 0 34 36.04651162790698"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V36.04651162790698H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >2</span
+          ><svg
+        height="2.3255813953488373"
+        viewBox="0 0 34 2.3255813953488373"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V2.3255813953488373H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >2</span
+          ><svg
+        height="2.3255813953488373"
+        viewBox="0 0 34 2.3255813953488373"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V2.3255813953488373H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >2</span
+          ><svg
+        height="2.3255813953488373"
+        viewBox="0 0 34 2.3255813953488373"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V2.3255813953488373H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="sm:block hidden relative px-1 font-normal">
+    <div class="sm:w-[34px] w-[68px]">
+      <div
+        class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1"
+      >
+          <span
+            class="flex justify-center text-center sm:w-[34px] w-[68px] text-white"
+          >2</span
+          ><svg
+        height="2.3255813953488373"
+        viewBox="0 0 34 2.3255813953488373"
+        xmlns="http://www.w3.org/2000/svg"
+        class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+      >
+        <path
+          d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V2.3255813953488373H0V3Z"
+          fill="#27B5B0"
+        ></path>
+      </svg>
+      </div>
+    </div>
+  </th>
+  <th class="pr-2 pl-2 py-2 w-1/2 sm:w-1/6"></th>
+</tr>
+<tr
+  class="flex sm:justify-normal justify-between border-b border-gray-300 pl-5"
+>
+  <th
+    class="px-0 pt-[10px] pb-2 font-normal align-top text-transparentGrey w-1/2 sm:w-2/5"
+  >
+    <div class="flex sm:hidden pl-3 content-center">
+      <div
+        class="block sm:hidden pr-2 text-contrastBlue font-bold text-2xl text-left overflow-wrap break-word leading-snug"
+      >
+        Juhan Sonin
+      </div>
+      <button class="py-1 px-2" type="button">
+        <div class="flex self-start py-0.5">
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            stroke-width="0"
+            viewBox="0 0 1024 1024"
+            class="w-4 h-4 text-contrastBlue"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M964.256 49.664C929.392 16.256 890.933-.672 849.877-.672c-64.192 0-111.024 41.472-123.841 54.176-18.032 17.856-633.152 633.2-633.152 633.2a33.011 33.011 0 0 0-8.447 14.592C70.565 752.559 1.077 980.016.387 982.304c-3.567 11.648-.384 24.337 8.208 32.928a32.336 32.336 0 0 0 22.831 9.44c3.312 0 6.655-.496 9.919-1.569 2.352-.767 237.136-76.655 275.775-88.19a32.736 32.736 0 0 0 13.536-8.033c24.416-24.128 598.128-591.456 636.208-630.784 39.392-40.592 58.96-82.864 58.208-125.616-.784-42.208-21.248-82.848-60.816-120.816zM715.845 155.84c16.304 3.952 54.753 16.862 94.017 56.479 39.68 40.032 50.416 85.792 52.416 96.208-125.824 125.168-415.456 411.728-529.632 524.672-10.544-24.56-27.584-54.144-54.993-81.76-33.471-33.728-67.536-52.783-93.808-63.503 112.992-113.008 408.08-408.224 532-532.096zM140.39 741.95c17.584 4.672 54.111 18.224 91.344 55.76 28.672 28.912 42.208 60.8 48.288 80.24-44.48 14.304-141.872 47.92-203.76 67.872 18.336-60.336 49.311-154.304 64.128-203.872zm780.031-491.584a1748.764 1748.764 0 0 1-6.065 6.16c-10.113-26.049-27.857-59.52-58.577-90.496-31.391-31.648-63.231-50.32-88.75-61.36 2.175-2.16 3.855-3.857 4.511-4.496 3.664-3.617 36.897-35.376 78.32-35.376 23.84 0 47.248 10.88 69.617 32.32 26.511 25.424 40.175 50.512 40.624 74.592.431 24.576-12.913 51.04-39.68 78.656z"
+            ></path>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <div class="sm:flex hidden flex-row justify-between items-start">
+      <div
+        class="flex items-center justify-between text-start sm:w-full sm:max-w-[67px] md:max-w-[85px] lg:max-w-[110px] sm:w-full"
+      >
+        <div class="flex items-center">
+          <div
+            class="flex items-center justify-start text-start cursor-pointer"
+          >
+            <span>Client</span>
+            <div
+              class="transform opacity-100 -rotate-90 [transition:transform_0.3s_ease-in-out,opacity_0.2s_ease-in-out]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+                class="w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 19.5 8.25 12l7.5-7.5"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex items-center justify-between text-start sm:w-full sm:max-w-[230px] md:max-w-[285px] lg:max-w-[280px] sm:w-full md:pl-[8px] ml-8"
+      >
+        <div class="flex items-center">
+          <div class="mr-1 transform -translate-x-0.5 cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+              class="w-4 h-4"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+              ></path>
+            </svg>
+          </div>
+          <div
+            class="flex items-center justify-start text-start cursor-pointer"
+          >
+            <span>Projects</span>
+            <div
+              class="transform opacity-0 -rotate-90 [transition:transform_0.3s_ease-in-out,opacity_0.2s_ease-in-out]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+                class="w-4 h-4"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15.75 19.5 8.25 12l7.5-7.5"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <button
+          class="-m-1 sm:ml-0 lg:ml-0 text-black flex items-center justify-center hover:text-contrastGrey"
+          type="button"
+        >
+          <div class="flex self-start py-0.5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+              class="h6 w-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5 8.25 12l7.5-7.5"
+              ></path>
+            </svg>
+          </div>
+        </button>
+      </div>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >25<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >25.Aug to 31.Aug
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th
+    class="relative py-2 px-1 font-normal text-contrastBlue bg-selectedColumnBg"
+  >
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-bold"
+    >
+        <span
+        >1<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >01.Sep to 07.Sep
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="">Sep</span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >8<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >08.Sep to 14.Sep
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class=""></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >15<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >15.Sep to 21.Sep
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >22<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >22.Sep to 28.Sep
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >29<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >29.Sep to 05.Oct
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >6<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >06.Oct to 12.Oct
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="">Oct</span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >13<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >13.Oct to 19.Oct
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class=""></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >20<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >20.Oct to 26.Oct
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >27<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >27.Oct to 02.Nov
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >3<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >03.Nov to 09.Nov
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="">Nov</span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >10<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >10.Nov to 16.Nov
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class=""></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >17<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >17.Nov to 23.Nov
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >24<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >24.Nov to 30.Nov
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >1<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >01.Dec to 07.Dec
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="">Dec</span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >8<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >08.Dec to 14.Dec
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class=""></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >15<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >15.Dec to 21.Dec
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >22<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >22.Dec to 28.Dec
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >29<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >29.Dec to 04.Jan
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >5<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >05.Jan to 11.Jan
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="">Jan</span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >12<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >12.Jan to 18.Jan
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="">2026</span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >19<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >19.Jan to 25.Jan
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >26<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >26.Jan to 01.Feb
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >2<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >02.Feb to 08.Feb
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="">Feb</span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >9<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >09.Feb to 15.Feb
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class=""></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >16<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >16.Feb to 22.Feb
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="relative py-2 px-1 font-normal text-contrastBlue">
+    <div
+      class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
+    >
+        <span
+        >23<span
+          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
+        >23.Feb to 01.Mar
+            <div
+              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
+            ></div></span></span
+        ><span class="sm:hidden"></span>
+    </div>
+  </th>
+  <th class="pl-0 pr-4 pt-1 pb-2 font-normal align-top w-1/2 sm:w-1/6">
+    <div class="flex flex-row items-start">
+      <button
+        class="sm:flex hidden pt-[2px] text-contrastBlue items-center justify-center hover:text-contrastGrey"
+        type="button"
+      >
+        <div class="flex self-start py-0.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+            class="h6 w-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+            ></path>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </th>
+</tr>
+<tr>
+  <th>
+    <button
+      class="absolute -top-[12px] left-1/2 transform -translate-x-1/2 bg-[#AFB3BF] text-[#151F33] font-normal rounded-[3px] px-[10px] py-[2px] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] opacity-0 transition-opacity duration-300"
+    >
+      Today
+    </button>
+  </th>
+</tr>
+</thead>

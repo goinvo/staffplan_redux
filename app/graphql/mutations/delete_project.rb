@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 module Mutations
   class DeleteProject < BaseMutation
-    description "Delete a project."
+    description 'Delete a project.'
 
     # arguments passed to the `resolve` method
-    argument :project_id, ID, required: true,
-             description: "The ID of the project to delete. The project must meet the delete-ability requirements: no assignments, or all assignments having no actual hours recorded."
+    argument :project_id,
+             ID,
+             required: true,
+             description: 'The ID of the project to delete. The project must meet the delete-ability requirements: no assignments, or all assignments having no actual hours recorded.'
 
     # return type from the mutation
     type Types::StaffPlan::ProjectType
@@ -21,8 +25,8 @@ module Mutations
               error.full_message,
               extensions: {
                 attribute: error.attribute.to_s,
-              }
-            )
+              },
+            ),
           )
         end
       end

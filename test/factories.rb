@@ -1,10 +1,11 @@
-FactoryBot.define do
+# frozen_string_literal: true
 
+FactoryBot.define do
   sequence(:email) { |n| "#{n}#{Faker::Internet.email}#{n}" }
 
   factory :user do
-    name { Faker::Name.name + " #{rand(1..100).to_s}" }
-    email { generate :email }
+    name { Faker::Name.name + " #{rand(1..100)}" }
+    email { generate(:email) }
 
     after(:build) do |user, _options|
       # a current company is required for the user to be valid
@@ -20,7 +21,7 @@ FactoryBot.define do
       end
     end
 
-    after(:create) do |user, options|
+    after(:create) do |user, _options|
       create(:membership, user: user, company: user.current_company)
     end
   end
@@ -58,7 +59,7 @@ FactoryBot.define do
 
   factory :project do
     client
-    name { Faker::Company.name + " #{rand(1..100).to_s}"}
+    name { Faker::Company.name + " #{rand(1..100)}" }
     status { Project::CONFIRMED }
     cost { Faker::Number.decimal(l_digits: 2) }
     payment_frequency { Project::MONTHLY }
@@ -92,8 +93,8 @@ FactoryBot.define do
 
   factory :work_week do
     assignment
-    cweek { Date.today.cweek }
-    year { Date.today.cwyear }
+    cweek { Time.zone.today.cweek }
+    year { Time.zone.today.cwyear }
     estimated_hours { rand(2..8) }
     actual_hours { rand(2..8) }
 
@@ -106,7 +107,7 @@ FactoryBot.define do
   factory :registration do
     sequence(:company_name) { |n| "#{Faker::Company.name} #{n}" }
     sequence(:name) { |n| "#{Faker::Name.name} #{n}" }
-    email { generate :email }
+    email { generate(:email) }
     expires_at { 1.week.from_now }
     ip_address { Faker::Internet.ip_v4_address }
     token { Faker::Internet.password(min_length: 10, max_length: 20) }

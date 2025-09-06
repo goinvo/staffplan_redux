@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddFteAndHoursToProjects < ActiveRecord::Migration[7.1]
   def change
     add_column :projects, :fte, :decimal, precision: 8, scale: 2

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Registration < ApplicationRecord
   belongs_to :user, optional: true
 
@@ -8,28 +10,23 @@ class Registration < ApplicationRecord
   validates :token_digest, presence: true
   validates :ip_address, presence: true
 
-  before_validation :set_defaults
+  before_validation :set_defaults # rubocop:disable Layout/OrderedMethods
 
   scope(
     :available,
-    lambda { where("expires_at > ?", Time.current) }
+    -> { where('expires_at > ?', Time.current) },
   )
 
   class RegistrationNotAvailableError < StandardError; end
 
   attr_reader :token
 
-  def token=(plaintext)
-    self.token_digest = Registration.digest(plaintext)
-    @token = (plaintext)
+  def available?
+    !expired?
   end
 
   def expired?
     expires_at <= Time.current
-  end
-
-  def available?
-    !expired?
   end
 
   def register!
@@ -39,18 +36,23 @@ class Registration < ApplicationRecord
       company_name:,
       email:,
       name:,
-      registration_id: id
+      registration_id: id,
     ).call
 
     reload
   end
 
   def registered?
-    !registered_at.blank?
+    registered_at.present?
   end
 
   def to_param
     identifier
+  end
+
+  def token=(plaintext)
+    self.token_digest = Registration.digest(plaintext)
+    @token = plaintext
   end
 
   def valid_token_digest?(token_param)
@@ -59,34 +61,32 @@ class Registration < ApplicationRecord
 
   def self.digest(string)
     key = ActiveSupport::KeyGenerator.new(
-      Rails.application.secret_key_base
+      Rails.application.secret_key_base,
     ).generate_key(
-      Rails.application.credentials.registration_salt
+      Rails.application.credentials.registration_salt,
     )
-    OpenSSL::HMAC.hexdigest("SHA256", key, string)
+    OpenSSL::HMAC.hexdigest('SHA256', key, string)
   end
 
   private
 
-  def token_digest_available?(token_digest)
-    Registration.available.where(token_digest: token_digest).none?
-  end
-
   def generate_token
-    token = SecureRandom.hex(16)
+    SecureRandom.hex(16)
   end
 
   def set_defaults
     self.expires_at ||= 1.day.from_now
 
-    return if self.token_digest
+    return if token_digest
 
-    self.token, self.token_digest = loop {
+    self.token, self.token_digest = loop do
       token = generate_token
       digest = Registration.digest(token)
       break [token, digest] if token_digest_available?(digest)
-    }
+    end
   end
 
-
+  def token_digest_available?(token_digest)
+    Registration.available.where(token_digest: token_digest).none?
+  end
 end

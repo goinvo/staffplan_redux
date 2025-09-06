@@ -4,6 +4,19 @@ module Types
   module StaffPlan
     class CompanyType < Types::BaseObject
       field :id, ID, null: false
+
+      field :created_at, GraphQL::Types::ISO8601DateTime, null: false
+
+      field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+      field :projects, [Types::StaffPlan::ProjectType], null: false
+
+      field :clients, [Types::StaffPlan::ClientType], null: false
+
+      field :users, [Types::StaffPlan::UserType], null: false do
+        argument :user_id, ID, required: false, description: 'Filter users by ID'
+      end
+
       field :name, String, null: false
 
       field :avatar_url, String, null: false
@@ -11,24 +24,9 @@ module Types
         AvatarHelper.new(target: object).image_url
       end
 
-      field :created_at, GraphQL::Types::ISO8601DateTime, null: false
-      field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+      delegate :clients, to: :object
 
-      field :projects, [Types::StaffPlan::ProjectType], null: false
-
-      def projects
-        object.projects
-      end
-
-      field :clients, [Types::StaffPlan::ClientType], null: false
-
-      def clients
-        object.clients
-      end
-
-      field :users, [Types::StaffPlan::UserType], null: false do
-        argument :user_id, ID, required: false, description: "Filter users by ID"
-      end
+      delegate :projects, to: :object
 
       def users(user_id: nil)
         scope = object.users

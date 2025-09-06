@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Settings
   module Users
     class ListItemComponent < ViewComponent::Base
@@ -6,25 +8,25 @@ module Settings
         @user = user
       end
 
-      def user_name
-        @user.name
-      end
-
       def user_email
         @user.email
       end
 
-      def user_status
-        current_company_membership.status
+      def user_job_title
+        # TODO: add a field for users to set this.
+        ''
+      end
+
+      def user_name
+        @user.name
       end
 
       def user_role
         @user.role(company: current_company)
       end
 
-      def user_job_title
-        # TODO: add a field for users to set this.
-        ""
+      def user_status
+        current_company_membership.status
       end
 
       private

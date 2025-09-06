@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Mutations
   class UpsertClientWithInput < BaseMutation
-    description "Create or update a client."
+    description 'Create or update a client.'
 
-    argument :input, Types::ClientAttributes, required: true, description: "Attributes for creating or updating a client."
+    argument :input, Types::ClientAttributes, required: true, description: 'Attributes for creating or updating a client.'
 
     # return type from the mutation
     type Types::StaffPlan::ClientType, null: true
@@ -12,8 +14,8 @@ module Mutations
 
       # try and find the client
       client = if input.id.present?
-        current_company.clients.find(input.id)
-      end
+                 current_company.clients.find(input.id)
+               end
 
       if client.blank?
         client = current_company.clients.new
@@ -31,8 +33,8 @@ module Mutations
                 error.full_message,
                 extensions: {
                   attribute: attribute.to_s,
-                }
-              )
+                },
+              ),
             )
           end
         end

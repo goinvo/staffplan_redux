@@ -16,16 +16,28 @@ class GraphqlController < ApplicationController
     context = {
       # Query context goes here, for example:
       current_user: current_user,
-      current_company: current_company
+      current_company: current_company,
     }
     result = StaffplanReduxSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   rescue StandardError => e
     raise e unless Rails.env.development?
+
     handle_error_in_development(e)
   end
 
   private
+
+  def ensure_current_user
+    head :forbidden and return if current_user.blank?
+  end
+
+  def handle_error_in_development(e) # rubocop:disable Naming/MethodParameterName
+    logger.error e.message
+    logger.error e.backtrace.join("\n")
+
+    render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: :internal_server_error
+  end
 
   # Handle variables in form data, JSON body, or a blank value
   def prepare_variables(variables_param)
@@ -45,16 +57,5 @@ class GraphqlController < ApplicationController
     else
       raise ArgumentError, "Unexpected parameter: #{variables_param}"
     end
-  end
-
-  def handle_error_in_development(e)
-    logger.error e.message
-    logger.error e.backtrace.join("\n")
-
-    render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} }, status: 500
-  end
-
-  def ensure_current_user
-    head :forbidden and return if current_user.blank?
   end
 end

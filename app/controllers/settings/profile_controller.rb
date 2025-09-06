@@ -1,33 +1,36 @@
-class Settings::ProfileController < ApplicationController
-  before_action :require_user!
-  def show
-  end
+# frozen_string_literal: true
 
-  def update
-    # handle avatar changes first
-    if user_params[:avatar].present?
-      current_user.assign_attributes(avatar: user_params[:avatar])
-      current_user.attachment_changes.any? && current_user.save
-    end
+module Settings
+  class ProfileController < ApplicationController
+    before_action :require_user!
+    def show; end
 
-    current_user.assign_attributes(user_params.except(:avatar))
+    def update
+      # handle avatar changes first
+      if user_params[:avatar].present?
+        current_user.assign_attributes(avatar: user_params[:avatar])
+        current_user.attachment_changes.any? && current_user.save
+      end
 
-    if current_user.save
-      flash[:success] = 'Your profile was updated successfully'
-      redirect_to settings_profile_path
-    else
-      flash.now[:error] = 'There was a problem updating your profile'
+      current_user.assign_attributes(user_params.except(:avatar))
 
-      respond_to do |format|
-        format.turbo_stream
-        format.html { render :show }
+      if current_user.save
+        flash[:success] = 'Your profile was updated successfully'
+        redirect_to settings_profile_path
+      else
+        flash.now[:error] = 'There was a problem updating your profile'
+
+        respond_to do |format|
+          format.turbo_stream
+          format.html { render :show }
+        end
       end
     end
-  end
 
-  private
+    private
 
-  def user_params
-    params.require(:user).permit(:name, :avatar)
+    def user_params
+      params.expect(user: %i[name avatar])
+    end
   end
 end
