@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :assignments, dependent: :destroy
   has_many :projects, through: :assignments
   has_many :work_weeks, through: :assignments
+  has_many :clients, through: :projects
 
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-100 font-open-sans">
+  <head>
+    <title>staffplan.com</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= favicon_link_tag image_path("favicon.ico") %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="h-full">
+    <div class="min-h-full">
+      <%= render "shared/nav" %>
+
+      <% if content_for(:header) %>
+        <header class="bg-white shadow">
+          <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+            <h1 class="text-3xl font-bold tracking-tight text-gray-900"><%= yield(:header) %></h1>
+          </div>
+        </header>
+      <% end %>
+
+      <main class="flex-1 timeline-grid-bg">
+        <div class="animate-fadeInPage">
+          <div class="min-h-full timeline-grid-bg">
+            <%= render("shared/flash") %>
+            <table class="min-w-full timeline-grid-bg text-contrastBlue text-sm border-none">
+              <%= yield %>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<tbody>
+  <% user.clients.distinct.each do |client| %>
+    <% user.projects.where(client:).each_with_index do |assignment, index| %>
+      <%= render StaffPlan::AssignmentComponent.new(user:, assignment:, index:) %>
+    <% end %>
+  <% end %>
+</tbody>
