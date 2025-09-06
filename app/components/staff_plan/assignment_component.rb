@@ -2,13 +2,13 @@
 
 module StaffPlan
   class AssignmentComponent < ViewComponent::Base
-    def initialize(user:, assignment:, project:, index:)
+    def initialize(user:, assignment:, client:, index:)
       @user = user
       @assignment = assignment
-      @project = project
+      @client = client
       @index = index
     end
-    attr_reader :user, :assignment, :project, :index
+    attr_reader :user, :assignment, :client, :index
 
     def actual_hours_sum
       assignment
@@ -19,13 +19,17 @@ module StaffPlan
     def client_name
       return '' if index.positive?
 
-      project.client.name
+      client.name
+    end
+
+    def project
+      assignment.project
     end
 
     def planned_hours_sum
       assignment
         .work_weeks
-        # .where('(year < ?) OR (year = ? AND cweek <= ?)', today.cwyear, today.cwyear, today.cweek)
+        .where('(year < ?) OR (year = ? AND cweek <= ?)', today.cwyear, today.cwyear, today.cweek)
         .sum(:estimated_hours)
     end
 

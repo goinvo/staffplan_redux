@@ -1,8 +1,7 @@
 <tbody>
   <% user.clients.distinct.each do |client| %>
-    <% user.projects.where(client:).each_with_index do |project, index| %>
-      <% assignment = user.assignments.find_by(project: project) %>
-      <%= render StaffPlan::AssignmentComponent.new(user:, assignment:, project:, index:) %>
+    <% user.assignments.joins(:project).where(status: 'active', project: { client_id: client.id }).each_with_index do |assignment, index| %>
+      <%= render StaffPlan::AssignmentComponent.new(user:, client:, assignment:, index:) %>
     <% end %>
   <% end %>
 </tbody>
