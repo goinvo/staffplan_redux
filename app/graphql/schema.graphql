@@ -90,6 +90,11 @@ input AssignmentAttributes {
 
 enum AssignmentStatus {
   """
+  The assignment is currently in progress.
+  """
+  active
+
+  """
   The assignment has been archived and is no longer in progress.
   """
   archived
@@ -103,11 +108,6 @@ enum AssignmentStatus {
   The assignment has been proposed, but not yet started.
   """
   proposed
-
-  """
-  The assignment is currently in progress.
-  """
-  w
 }
 
 type Client {

@@ -2,6 +2,7 @@
 
 class RegistrationsController < ApplicationController
   include Passwordless::ControllerHelpers
+
   def create
     create_params = registration_params.merge(
       ip_address: request.remote_ip,

@@ -8,7 +8,7 @@ class ProjectTest < ActiveSupport::TestCase
       project = build(:project, client_id: nil)
 
       assert_not_predicate project, :valid?
-      assert_includes project.errors[:client_id], "can't be blank"
+      assert_includes project.errors.full_messages, "Client must exist"
     end
 
     it 'validates presence of name' do

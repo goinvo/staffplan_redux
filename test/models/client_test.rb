@@ -8,7 +8,7 @@ class ClientTest < ActiveSupport::TestCase
       client = build(:client, company_id: nil)
 
       assert_not_predicate client, :valid?
-      assert_includes client.errors[:company_id], "can't be blank"
+      assert_includes client.errors.full_messages, "Company must exist"
     end
 
     it 'validates presence of name' do

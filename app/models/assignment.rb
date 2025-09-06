@@ -9,7 +9,7 @@ class Assignment < ApplicationRecord
   has_paper_trail
 
   PROPOSED = 'proposed'
-  ACTIVE = 'w'
+  ACTIVE = 'active'
   ARCHIVED = 'archived'
   COMPLETED = 'completed'
   VALID_STATUSES = [PROPOSED, ACTIVE, ARCHIVED, COMPLETED].freeze

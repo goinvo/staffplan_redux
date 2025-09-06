@@ -15,7 +15,7 @@ class Client < ApplicationRecord
 
   VALID_STATUSES = [ACTIVE, ARCHIVED].freeze
 
-  validates :company_id, uniqueness: { scope: :name }, presence: true # rubocop:disable Rails/RedundantPresneceValidationOnBelongsTo
+  validates :company_id, uniqueness: { scope: :name }
   validates :name, presence: true, uniqueness: { scope: :company_id }
   validates :status, presence: true, inclusion: { in: VALID_STATUSES }
 
