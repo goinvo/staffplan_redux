@@ -39,7 +39,7 @@
     </div>
   </th>
   <% work_weeks_per_week.each do |work_weeks| %>
-    <%= render StaffPlan::ChartSvgComponent.new(work_weeks:) %>
+    <%= render StaffPlan::ChartSvgComponent.new(work_weeks:, max_value: max_hours_value) %>
   <% end %>
   <th class="pr-2 pl-2 py-2 w-1/2 sm:w-1/6"></th>
 </tr>

@@ -10,14 +10,65 @@ module StaffPlan
 
     def before_render
       @target_date = if params[:ts]
-        (Time.zone.at(params[:ts].to_i) + 2.hours).to_date
-      else
-        Time.zone.today
+                       (Time.zone.at(params[:ts].to_i) + 2.hours).to_date
+                     else
+                       Time.zone.today
+                     end
+    end
+
+    def max_hours_value
+      return @max_hours_value if defined?(@max_hours_value)
+
+      max_actual_hours = 0
+      max_estimated_hours = 0
+      max_proposed_actual_hours = 0
+      max_proposed_estimated_hours = 0
+
+      work_weeks_per_week.each do |work_weeks_array|
+        # Calculate totals for this week
+        total_actual = 0
+        total_estimated = 0
+        proposed_actual = 0
+        proposed_estimated = 0
+
+        work_weeks_array.each do |work_week|
+          # Add actual hours
+          actual = work_week.actual_hours || 0
+          total_actual += actual
+
+          # Add estimated hours
+          estimated = work_week.estimated_hours || 0
+          total_estimated += estimated
+
+          # Add proposed hours if assignment is proposed
+          if work_week.assignment&.status == 'proposed'
+            proposed_actual += actual
+            proposed_estimated += estimated
+          end
+        end
+
+        # Track maximums
+        max_actual_hours = total_actual if total_actual > max_actual_hours
+        max_estimated_hours = total_estimated if total_estimated > max_estimated_hours
+        max_proposed_actual_hours = proposed_actual if proposed_actual > max_proposed_actual_hours
+        max_proposed_estimated_hours = proposed_estimated if proposed_estimated > max_proposed_estimated_hours
       end
+
+      # Return the maximum of all types of hours
+      @max_hours_value = [
+        max_actual_hours,
+        max_estimated_hours,
+        max_proposed_actual_hours,
+        max_proposed_estimated_hours,
+        50, # Minimum max value to prevent division issues
+      ].max
     end
 
     def work_weeks_per_week
       return @work_weeks_per_week if defined?(@work_weeks_per_week)
+
+      # Ensure target_date is set (for console testing)
+      @target_date ||= Time.zone.today
 
       # hard code to 26 weeks
       start_date = target_date - 1.week
@@ -28,7 +79,7 @@ module StaffPlan
         .work_weeks
         .includes(:assignment)
         .joins(:assignment)
-        .where(assignment: { status: 'active' })
+        .where(assignment: { status: %w[active proposed] })
         .where('(cweek >= ? AND year = ?) OR (cweek <= ? AND year = ?)',
                start_date.cweek,
                start_date.cwyear,
