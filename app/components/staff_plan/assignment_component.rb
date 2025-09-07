@@ -2,13 +2,14 @@
 
 module StaffPlan
   class AssignmentComponent < ViewComponent::Base
-    def initialize(user:, assignment:, client:, index:)
+    def initialize(user:, assignment:, client:, index:, target_date:)
       @user = user
       @assignment = assignment
       @client = client
       @index = index
+      @target_date = target_date
     end
-    attr_reader :user, :assignment, :client, :index
+    attr_reader :user, :assignment, :client, :index, :target_date
 
     def actual_hours_sum
       assignment
@@ -29,18 +30,14 @@ module StaffPlan
     def planned_hours_sum # rubocop:disable Layout/OrderedMethods
       assignment
         .work_weeks
-        .where('(year < ?) OR (year = ? AND cweek <= ?)', today.cwyear, today.cwyear, today.cweek)
+        .where('(year < ?) OR (year = ? AND cweek <= ?)', target_date.cwyear, target_date.cwyear, target_date.cweek)
         .sum(:estimated_hours)
-    end
-
-    def today
-      Time.zone.today.beginning_of_week
     end
 
     def work_weeks
       # hard code to 26 weeks
-      start_date = today - 1.week
-      end_date = Time.zone.today.beginning_of_week + 24.weeks
+      start_date = target_date - 1.week
+      end_date = target_date + 24.weeks
 
       weeks = assignment
         .work_weeks
