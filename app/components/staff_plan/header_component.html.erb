@@ -182,20 +182,7 @@
   </th>
   <% work_weeks_per_week.each do |work_weeks| %>
     <% work_week = work_weeks.first %>
-    <th class="relative py-2 px-1 font-normal text-contrastBlue">
-      <div
-        class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal"
-      >
-        <span
-        ><%= work_week.day %><span
-          class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200"
-        >25.Aug to 31.Aug
-            <div
-              class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"
-            ></div></span></span
-        ><span class="sm:hidden"></span>
-      </div>
-    </th>
+    <%= render StaffPlan::WeekHeaderCellComponent.new(work_week: work_week) %>
   <% end %>
   <th class="pl-0 pr-4 pt-1 pb-2 font-normal align-top w-1/2 sm:w-1/6">
     <div class="flex flex-row items-start">

@@ -1,0 +1,12 @@
+<th class="<%= th_classes %>">
+  <div class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] font-normal">
+    <span class="<%= text_classes %>">
+      <%= day_number %>
+      <span class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200">
+        <%= date_range_text %>
+        <div class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 transform rotate-[135deg] clip-triangle rounded-bl-[0.5em]"></div>
+      </span>
+    </span>
+    <span class="<%= text_classes %>"><%= month_abbreviation %></span>
+  </div>
+</th>

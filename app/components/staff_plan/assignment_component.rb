@@ -34,6 +34,21 @@ module StaffPlan
         .sum(:estimated_hours)
     end
 
+    def is_current_week_in_range?
+      today = Time.zone.today
+      start_date = target_date - 1.week
+      end_date = target_date + 24.weeks
+      
+      # Check if current week falls within the displayed range
+      (today >= start_date && today <= end_date)
+    end
+
+    def sum_classes
+      classes = ['text-sm text-right min-w-20']
+      classes.unshift('font-bold') if is_current_week_in_range?
+      classes.join(' ')
+    end
+
     def work_weeks
       # hard code to 26 weeks
       start_date = target_date - 1.week

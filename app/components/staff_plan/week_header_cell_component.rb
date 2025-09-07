@@ -1,0 +1,63 @@
+# frozen_string_literal: true
+
+module StaffPlan
+  class WeekHeaderCellComponent < ViewComponent::Base
+    def initialize(work_week:)
+      @work_week = work_week
+    end
+
+    attr_reader :work_week
+
+    def start_date
+      @start_date ||= Date.commercial(work_week.year, work_week.cweek, 1)
+    end
+
+    def end_date
+      @end_date ||= start_date + 6.days
+    end
+
+    def previous_week_date
+      @previous_week_date ||= start_date - 1.week
+    end
+
+    def current_month
+      start_date.month
+    end
+
+    def previous_month
+      previous_week_date.month
+    end
+
+    def is_first_week_of_month?
+      # Check if this week starts in a different month than the previous week
+      current_month != previous_month
+    end
+
+    def day_number
+      work_week.day
+    end
+
+    def date_range_text
+      "#{start_date.strftime('%-d.%b')} to #{end_date.strftime('%-d.%b')}"
+    end
+
+    def month_abbreviation
+      is_first_week_of_month? ? start_date.strftime('%b') : ''
+    end
+
+    def is_current_week?
+      today = Time.zone.today
+      today.cwyear == work_week.year && today.cweek == work_week.cweek
+    end
+
+    def text_classes
+      is_current_week? ? 'font-bold' : ''
+    end
+
+    def th_classes
+      classes = ['relative py-2 px-1 font-normal text-contrastBlue']
+      classes << 'bg-selectedColumnBg' if is_current_week?
+      classes.join(' ')
+    end
+  end
+end
