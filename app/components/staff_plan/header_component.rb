@@ -8,6 +8,14 @@ module StaffPlan
     end
     attr_reader :user, :target_date
 
+    def previous_staffplan_date_ts
+      ((target_date - 26.weeks).at_beginning_of_day + 2.hours).to_i
+    end
+
+    def next_staffplan_date_ts
+      ((target_date + 26.weeks).at_beginning_of_day + 2.hours).to_i
+    end
+
     def work_weeks_per_week
       return @work_weeks_per_week if defined?(@work_weeks_per_week)
 
@@ -36,17 +44,12 @@ module StaffPlan
       26.times do
         key = [current_date.cweek, current_date.cwyear]
         # Return array of work weeks for this week, or a single unsaved WorkWeek if none exist
-        result << if weeks_grouped[key]
-                    weeks_grouped[key]
-                  else
-                    # Create unsaved WorkWeek with correct cweek/year for UI rendering
-                    [WorkWeek.new(
-                      cweek: current_date.cweek,
-                      year: current_date.cwyear,
-                      estimated_hours: 0,
-                      actual_hours: 0,
-                    )]
-                  end
+        result << (weeks_grouped[key] || [WorkWeek.new(
+          cweek: current_date.cweek,
+          year: current_date.cwyear,
+          estimated_hours: 0,
+          actual_hours: 0,
+        )])
         current_date += 1.week
       end
 
