@@ -27,6 +27,10 @@ class WorkWeek < ApplicationRecord
     )
   end
 
+  def is_current_week?(relative_to_date: Time.zone.today)
+    relative_to_date.cwyear == year && relative_to_date.cweek == cweek
+  end
+
   private
 
   def actual_hours_allowed?

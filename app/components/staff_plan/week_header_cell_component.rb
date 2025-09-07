@@ -45,18 +45,13 @@ module StaffPlan
       is_first_week_of_month? ? start_date.strftime('%b') : ''
     end
 
-    def is_current_week?
-      today = Time.zone.today
-      today.cwyear == work_week.year && today.cweek == work_week.cweek
-    end
-
     def text_classes
-      is_current_week? ? 'font-bold' : ''
+      work_week.is_current_week? ? 'font-bold' : ''
     end
 
     def th_classes
       classes = ['relative py-2 px-1 font-normal text-contrastBlue']
-      classes << 'bg-selectedColumnBg' if is_current_week?
+      classes << 'bg-selectedColumnBg' if work_week.is_current_week?
       classes.join(' ')
     end
   end
