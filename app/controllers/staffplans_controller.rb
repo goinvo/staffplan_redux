@@ -2,7 +2,7 @@
 
 class StaffplansController < ApplicationController
   before_action :require_user!
-  
+
   layout 'staffplan'
 
   def index; end
