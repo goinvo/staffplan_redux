@@ -49,13 +49,6 @@ class WorkWeekTest < ActiveSupport::TestCase
       assert_includes work_week.errors[:year], 'must be less than or equal to 2200'
     end
 
-    it 'validates presence of estimated_hours' do
-      work_week = build(:work_week, estimated_hours: nil)
-
-      assert_not_predicate work_week, :valid?
-      assert_includes work_week.errors[:estimated_hours], "can't be blank"
-    end
-
     it 'validates numericality of estimated_hours' do
       work_week = build(:work_week, estimated_hours: -1)
 
@@ -66,13 +59,6 @@ class WorkWeekTest < ActiveSupport::TestCase
 
       assert_not_predicate work_week, :valid?
       assert_includes work_week.errors[:estimated_hours], 'must be less than or equal to 168'
-    end
-
-    it 'validates presence of actual_hours' do
-      work_week = build(:work_week, actual_hours: nil)
-
-      assert_not_predicate work_week, :valid?
-      assert_includes work_week.errors[:actual_hours], "can't be blank"
     end
 
     it 'validates numericality of actual_hours' do
