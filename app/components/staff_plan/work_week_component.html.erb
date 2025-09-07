@@ -10,8 +10,7 @@
     class="<%= div_classes %>"
   >
     <div class="relative my-1 sm:block hidden" 
-         data-controller="input-focus-arrow <%= 'error-popover' if errors.any? %>"
-         data-input-focus-arrow-fill-forward-value="true"
+         data-controller="<%= 'error-popover' if errors.any? %>"
          <%= "data-error-popover-errors-value='#{errors.to_json}'" if errors.any? %>>
       <% if errors.any? %>
         <!-- Error Popover -->
@@ -34,15 +33,12 @@
         autocomplete: "off",
         value: estimated_hours_display,
         data: {
-          input_focus_arrow_target: "input",
-          action: "focus->input-focus-arrow#handleFocus blur->input-focus-arrow#handleBlur input->work-week-form#handleInput",
+          action: "input->work-week-form#handleInput",
           work_week_form_target: "estimatedInput"
         } %>
       <button
         type="button"
         class="sm:flex absolute left-0 top-full h-[12px] sm:w-[34px] w-[68px] border-2 flex items-center justify-center bg-transparent border-transparent rounded-b-sm opacity-0 pointer-events-none transition-opacity duration-200"
-        data-input-focus-arrow-target="arrow"
-        data-action="click->input-focus-arrow#arrowClick"
       >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -64,8 +60,7 @@
     </div>
     <% if show_actual_input? %>
     <div class="relative my-1 pt-2"
-         data-controller="input-focus-arrow <%= 'error-popover' if errors.any? %>"
-         data-input-focus-arrow-fill-forward-value="true"
+         data-controller="<%= 'error-popover' if errors.any? %>"
          <%= "data-error-popover-errors-value='#{errors.to_json}'" if errors.any? %>>
       <% if errors.any? %>
         <!-- Error Popover for Actual Hours -->
@@ -86,15 +81,12 @@
         autocomplete: "off",
         value: actual_hours_display,
         data: {
-          input_focus_arrow_target: "input",
-          action: "focus->input-focus-arrow#handleFocus blur->input-focus-arrow#handleBlur input->work-week-form#handleInput",
+          action: "input->work-week-form#handleInput",
           work_week_form_target: "actualInput"
         } %>
       <button
         type="button"
         class="sm:flex absolute left-0 top-full h-[12px] sm:w-[34px] w-[68px] border-2 flex items-center justify-center bg-transparent border-transparent rounded-b-sm opacity-0 pointer-events-none transition-opacity duration-200"
-        data-input-focus-arrow-target="arrow"
-        data-action="click->input-focus-arrow#arrowClick"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
