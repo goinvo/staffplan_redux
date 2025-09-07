@@ -35,6 +35,14 @@ class WorkWeek < ApplicationRecord
     relative_to_date.cwyear == year && relative_to_date.cweek == cweek
   end
 
+  def actual_hours=(new_value)
+    super(actual_hours_allowed? ? new_value.to_i : 0)
+  end
+
+  def estimated_hours=(new_value)
+    super(new_value.to_i)
+  end
+
   private
 
   def actual_hours_allowed?

@@ -11,12 +11,6 @@ module StaffPlan
     end
     attr_reader :user, :assignment, :client, :index, :target_date
 
-    def actual_hours_sum
-      assignment
-        .work_weeks
-        .sum(:actual_hours)
-    end
-
     def client_name
       return '' if index.positive?
 
@@ -25,28 +19,6 @@ module StaffPlan
 
     def project # rubocop:disable Rails/Delegate
       assignment.project
-    end
-
-    def planned_hours_sum # rubocop:disable Layout/OrderedMethods
-      assignment
-        .work_weeks
-        .where('(year < ?) OR (year = ? AND cweek <= ?)', target_date.cwyear, target_date.cwyear, target_date.cweek)
-        .sum(:estimated_hours)
-    end
-
-    def is_current_week_in_range?
-      today = Time.zone.today
-      start_date = target_date - 1.week
-      end_date = target_date + 24.weeks
-      
-      # Check if current week falls within the displayed range
-      (today >= start_date && today <= end_date)
-    end
-
-    def sum_classes
-      classes = ['text-sm text-right min-w-20']
-      classes.unshift('font-bold') if is_current_week_in_range?
-      classes.join(' ')
     end
 
     def work_weeks

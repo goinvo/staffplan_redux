@@ -1,1 +1,2 @@
 <%= turbo_stream.replace @work_week.dom_id, StaffPlan::WorkWeekComponent.new(work_week: @work_week, errors: @work_week.errors.full_messages) %>
+<%= turbo_stream.replace dom_id(@work_week.assignment, 'totals'), StaffPlan::AssignmentTotalsComponent.new(assignment: @work_week.assignment) %>
