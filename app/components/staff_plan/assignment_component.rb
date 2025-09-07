@@ -72,7 +72,7 @@ module StaffPlan
       26.times do
         key = [current_date.cweek, current_date.cwyear]
         result << (weeks_by_date[key] || WorkWeek.new(
-          assignment: assignment,
+          assignment_id: assignment.id,
           cweek: current_date.cweek,
           year: current_date.cwyear,
         ))

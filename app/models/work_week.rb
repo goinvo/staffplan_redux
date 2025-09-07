@@ -21,6 +21,10 @@ class WorkWeek < ApplicationRecord
     Date.commercial(year, cweek, 1).day
   end
 
+  def dom_id
+    "work_week_#{assignment_id}-#{cweek}-#{year}"
+  end
+
   def is_future_work_week?(relative_to_date: Time.zone.today)
     relative_to_date.cwyear < year || (
       year == relative_to_date.cwyear && cweek > relative_to_date.cweek

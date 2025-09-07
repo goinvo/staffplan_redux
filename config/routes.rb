@@ -28,7 +28,10 @@ Rails.application.routes.draw do
 
   post '/graphql', to: 'graphql#execute'
 
-  resources :staffplans, only: %i[index show]
+  resources :staffplans, only: %i[index show] do
+    resources :work_weeks, only: %i[update create]
+  end
+
   resources :registrations, only: %i[new create] do
     member do
       get :register
