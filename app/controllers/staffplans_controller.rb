@@ -8,7 +8,7 @@ class StaffplansController < ApplicationController
   def index; end
 
   def show
-    @target_date = params[:ts] ? Time.at(params[:ts].to_i).to_date : Time.zone.today
+    @target_date = params[:ts] ? Time.zone.at(params[:ts].to_i).to_date : Time.zone.today
     @user = current_company.users.find(params[:id])
   end
 end

@@ -8,24 +8,20 @@ module StaffPlan
 
     attr_reader :work_week
 
-    def start_date
-      @start_date ||= Date.commercial(work_week.year, work_week.cweek, 1)
-    end
-
-    def end_date
-      @end_date ||= start_date + 6.days
-    end
-
-    def previous_week_date
-      @previous_week_date ||= start_date - 1.week
-    end
-
     def current_month
       start_date.month
     end
 
-    def previous_month
-      previous_week_date.month
+    def date_range_text
+      "#{start_date.strftime('%-d.%b')} to #{end_date.strftime('%-d.%b')}"
+    end
+
+    def day_number
+      work_week.day
+    end
+
+    def end_date
+      @end_date ||= start_date + 6.days
     end
 
     def is_first_week_of_month?
@@ -33,16 +29,20 @@ module StaffPlan
       current_month != previous_month
     end
 
-    def day_number
-      work_week.day
-    end
-
-    def date_range_text
-      "#{start_date.strftime('%-d.%b')} to #{end_date.strftime('%-d.%b')}"
-    end
-
     def month_abbreviation
       is_first_week_of_month? ? start_date.strftime('%b') : ''
+    end
+
+    def previous_month
+      previous_week_date.month
+    end
+
+    def previous_week_date
+      @previous_week_date ||= start_date - 1.week
+    end
+
+    def start_date
+      @start_date ||= Date.commercial(work_week.year, work_week.cweek, 1)
     end
 
     def text_classes

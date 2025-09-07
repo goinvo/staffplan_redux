@@ -41,15 +41,15 @@ export default class extends Controller {
       // Shift+Tab: go backwards
       nextIndex = currentIndex - 1
       if (nextIndex < 0) {
-        // At the beginning, wrap to the end or let default behavior
-        return // Let default tab behavior take over to leave the component
+        // At the beginning, let default behavior take over
+        return
       }
     } else {
       // Tab: go forwards
       nextIndex = currentIndex + 1
       if (nextIndex >= this.allInputs.length) {
         // At the end, let default behavior take over
-        return // Let default tab behavior take over to leave the component
+        return
       }
     }
     

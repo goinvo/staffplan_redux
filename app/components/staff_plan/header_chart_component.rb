@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 module StaffPlan
-  class HeaderComponent < ViewComponent::Base
-    def initialize(user:, target_date:)
+  class HeaderChartComponent < ViewComponent::Base
+    def initialize(user:)
       @user = user
-      @target_date = target_date
+      @target_date = nil
     end
     attr_reader :user, :target_date
 
-    def next_staffplan_date_ts
-      ((target_date + 26.weeks).at_beginning_of_day + 2.hours).to_i
-    end
-
-    def previous_staffplan_date_ts
-      ((target_date - 26.weeks).at_beginning_of_day + 2.hours).to_i
+    def before_render
+      @target_date = if params[:ts]
+        (Time.zone.at(params[:ts].to_i) + 2.hours).to_date
+      else
+        Time.zone.today
+      end
     end
 
     def work_weeks_per_week
@@ -25,15 +25,15 @@ module StaffPlan
 
       # Get all work weeks for the user in the date range
       weeks = user
-              .work_weeks
-              .includes(:assignment)
-              .joins(:assignment)
-              .where(assignment: { status: 'active' })
-              .where('(cweek >= ? AND year = ?) OR (cweek <= ? AND year = ?)',
-                start_date.cweek,
-                start_date.cwyear,
-                end_date.cweek,
-                end_date.cwyear,)
+        .work_weeks
+        .includes(:assignment)
+        .joins(:assignment)
+        .where(assignment: { status: 'active' })
+        .where('(cweek >= ? AND year = ?) OR (cweek <= ? AND year = ?)',
+               start_date.cweek,
+               start_date.cwyear,
+               end_date.cweek,
+               end_date.cwyear,)
 
       # Group work weeks by cweek/year
       weeks_grouped = weeks.group_by { |w| [w.cweek, w.year] }

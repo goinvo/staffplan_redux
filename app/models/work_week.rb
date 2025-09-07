@@ -17,6 +17,10 @@ class WorkWeek < ApplicationRecord
 
   before_commit :update_assignment_focused_if_future_work_week, on: %i[create update]
 
+  def actual_hours=(new_value)
+    super(actual_hours_allowed? ? new_value.to_i : 0)
+  end
+
   def day
     Date.commercial(year, cweek, 1).day
   end
@@ -25,22 +29,18 @@ class WorkWeek < ApplicationRecord
     "work_week_#{assignment_id}-#{cweek}-#{year}"
   end
 
-  def is_future_work_week?(relative_to_date: Time.zone.today)
-    relative_to_date.cwyear < year || (
-      year == relative_to_date.cwyear && cweek > relative_to_date.cweek
-    )
+  def estimated_hours=(new_value)
+    super(new_value.to_i)
   end
 
   def is_current_week?(relative_to_date: Time.zone.today)
     relative_to_date.cwyear == year && relative_to_date.cweek == cweek
   end
 
-  def actual_hours=(new_value)
-    super(actual_hours_allowed? ? new_value.to_i : 0)
-  end
-
-  def estimated_hours=(new_value)
-    super(new_value.to_i)
+  def is_future_work_week?(relative_to_date: Time.zone.today)
+    relative_to_date.cwyear < year || (
+      year == relative_to_date.cwyear && cweek > relative_to_date.cweek
+    )
   end
 
   private
