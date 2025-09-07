@@ -1,0 +1,34 @@
+<th class="sm:block hidden relative px-1 font-normal">
+  <div class="sm:w-[34px] w-[68px]">
+    <div class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1">
+      <span class="flex justify-center text-center sm:w-[34px] w-[68px] text-white">
+        <%= format_hours %>
+      </span>
+      <% if should_render_svg? %>
+        <svg
+          height="<%= svg_height %>"
+          viewBox="0 0 34 <%= svg_height %>"
+          xmlns="http://www.w3.org/2000/svg"
+          class="transition-height duration-200 ease sm:w-[34px] w-[68px]"
+        >
+          <path
+            d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V<%= svg_height %>H0V3Z"
+            fill="<%= main_path_color %>"
+          />
+          <% if should_render_only_proposed_path? %>
+            <path
+              d="M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V<%= svg_height %>H0V3Z"
+              fill="<%= proposed_fill_color %>"
+            />
+          <% end %>
+          <% if should_render_estimated_with_proposed_path? %>
+            <path
+              d="M0 <%= svg_height %>L0 <%= svg_height - proposed_svg_height %>L34 <%= svg_height - proposed_svg_height %>L34 <%= svg_height %>H0V3Z"
+              fill="<%= proposed_fill_color %>"
+            />
+          <% end %>
+        </svg>
+      <% end %>
+    </div>
+  </div>
+</th>

@@ -8,7 +8,7 @@ class ExampleController < ApplicationController
   end
 end
 
-class ExampleControllerTest < ActionController::TestCase
+class ExampleControllerTest < ActionController::TestCase # rubocop:disable Rails/ActionControllerTestCase
   tests ExampleController
 
   setup do

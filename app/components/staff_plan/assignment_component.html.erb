@@ -1,5 +1,7 @@
 <tr
   class="flex sm:justify-normal justify-between bg-white-300 hover:bg-hoverGrey pl-5"
+  data-controller="horizontal-tab-navigation similar-input-navigation"
+  data-action="keydown->horizontal-tab-navigation#handleKeydown"
 >
   <td
     class="pl-3 sm:px-0 py-1 sm:pt-1 sm:pb-2 font-normal align-top pt-5 w-1/2 sm:w-2/5"
@@ -55,34 +57,5 @@
   <% work_weeks.each do |work_week| %>
     <%= render StaffPlan::WorkWeekComponent.new(work_week:) %>
   <% end %>
-  <td class="font-normal py-2 sm:pl-4 pl-0 pr-0 ml-1 sm:ml-0 w-1/2 sm:w-1/6">
-    <div
-      class="pl-6 sm:flex hidden flex-col max-w-fit space-y-5 cursor-pointer"
-    >
-      <div
-        class="sm:flex justify-between space-x-1 cursor-pointer relative pt-1"
-      >
-        <label
-          class="cursor-pointer text-sm leading-[18px] whitespace-nowrap text-right flex-shrink-0 min-w-10"
-        >Plan</label
-        ><span class="font-bold text-sm text-right min-w-20"
-      >
-        <%= planned_hours_sum %>
-        <span class="text-sm font-normal pl-1">hrs</span></span
-      >
-      </div>
-      <div
-        class="sm:flex justify-between space-x-1 cursor-pointer relative mt-[-7px]"
-      >
-        <label
-          class="cursor-pointer text-sm leading-[18px] whitespace-nowrap text-right flex-shrink-0 min-w-10"
-        >Actual</label
-        ><span class="font-bold text-sm text-right min-w-20"
-      >
-        <%= actual_hours_sum %>
-        <span class="text-sm font-normal pl-1">hrs</span></span
-      >
-      </div>
-    </div>
-  </td>
+  <%= render StaffPlan::AssignmentTotalsComponent.new(assignment:) %>
 </tr>

@@ -4,6 +4,6 @@
 <table
   class="min-w-full timeline-grid-bg text-contrastBlue text-sm border-none"
 >
-  <%= render StaffPlan::HeaderComponent.new(user:) %>
-  <%= render StaffPlan::ClientsComponent.new(user:) %>
+  <%= render StaffPlan::HeaderComponent.new(user:, target_date:) %>
+  <%= render StaffPlan::ClientsComponent.new(user:, target_date:) %>
 </table>

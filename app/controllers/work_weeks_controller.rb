@@ -7,14 +7,7 @@ class WorkWeeksController < ApplicationController
   # POST /work_weeks or /work_weeks.json
   def create
     @work_week = WorkWeek.new(work_week_params)
-
-    respond_to do |format|
-      if @work_week.save
-        format.html { redirect_to work_week_url(@work_week), notice: 'Work week was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
-    end
+    @work_week.save
   end
 
   # DELETE /work_weeks/1 or /work_weeks/1.json
@@ -45,13 +38,7 @@ class WorkWeeksController < ApplicationController
 
   # PATCH/PUT /work_weeks/1 or /work_weeks/1.json
   def update
-    respond_to do |format|
-      if @work_week.update(work_week_params)
-        format.html { redirect_to work_week_url(@work_week), notice: 'Work week was successfully updated.' }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
-    end
+    @work_week.update(work_week_params)
   end
 
   private

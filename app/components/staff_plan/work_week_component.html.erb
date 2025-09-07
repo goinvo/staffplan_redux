@@ -1,18 +1,45 @@
-<td class="relative px-1 py-1 font-normal bg-selectedColumnBg">
+<td class="<%= td_classes %>" id="<%= work_week.dom_id %>">
+  <%= form_with model: work_week, 
+                url: form_url,
+                method: form_method,
+                data: { 
+                  controller: "work-week-form",
+                  turbo_frame: "_top"
+                } do |form| %>
   <div
-    class="flex flex-col sm:justify-normal justify-center h-full sm:space-y-3 font-bold pt-5 sm:pt-0"
+    class="<%= div_classes %>"
   >
-    <div class="relative my-1 sm:block hidden">
-      <input
-        id="estHours-21-36-2025"
-        class="bg-white shadow-top-input-shadow text-center sm:text-base text-2xl rounded-sm sm:w-[34px] w-[68px] sm:h-[25px] h-[50px] focus:border-tiffany focus:ring-1 focus:ring-tiffany border-none outlined-none mb-0 px-0 py-0"
-        autocomplete="off"
-        value="<%= estimated_hours_display %>"
-        name="estimatedHours"
-        /><button
-      type="button"
-      class="sm:flex absolute left-0 top-full h-[12px] sm:w-[34px] w-[68px] border-2 flex items-center justify-center bg-transparent border-transparent rounded-b-sm opacity-0 pointer-events-none transition-opacity duration-200"
-    >
+    <div class="relative my-1 sm:block hidden" 
+         data-controller="<%= 'error-popover' if errors.any? %>"
+         <%= "data-error-popover-errors-value='#{errors.to_json}'" if errors.any? %>>
+      <% if errors.any? %>
+        <!-- Error Popover -->
+        <div data-error-popover-target="popover" 
+             class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 z-[100] flex-col items-center">
+          <div class="bg-red-500 text-white text-xs rounded px-2 py-1 sm:max-w-[150px] max-w-[200px] shadow-lg whitespace-normal">
+            <% errors.each do |error| %>
+              <div class="py-0.5"><%= error %></div>
+            <% end %>
+          </div>
+          <!-- Arrow pointing down -->
+          <div class="ml-[34px] w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[4px] border-t-red-500"></div>
+        </div>
+      <% end %>
+      <%= form.hidden_field :assignment_id, value: work_week.assignment_id if work_week.assignment_id %>
+      <%= form.hidden_field :cweek, value: work_week.cweek %>
+      <%= form.hidden_field :year, value: work_week.year %>
+      <%= form.number_field :estimated_hours,
+        class: "bg-white shadow-top-input-shadow text-center sm:text-base text-2xl rounded-sm sm:w-[34px] w-[68px] sm:h-[25px] h-[50px] border-none outlined-none mb-0 px-1 py-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+        autocomplete: "off",
+        value: estimated_hours_display,
+        data: {
+          action: "input->work-week-form#handleInput",
+          work_week_form_target: "estimatedInput"
+        } %>
+      <button
+        type="button"
+        class="sm:flex absolute left-0 top-full h-[12px] sm:w-[34px] w-[68px] border-2 flex items-center justify-center bg-transparent border-transparent rounded-b-sm opacity-0 pointer-events-none transition-opacity duration-200"
+      >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -32,17 +59,34 @@
     </button>
     </div>
     <% if show_actual_input? %>
-    <div class="relative my-1 pt-2">
-      <input
-        id="actHours-21-36-2025"
-        class="bg-white shadow-top-input-shadow text-center sm:text-base text-2xl rounded-sm sm:w-[34px] w-[68px] sm:h-[25px] h-[50px] focus:border-tiffany focus:ring-1 focus:ring-tiffany border-none outlined-none mb-0 px-0 py-0"
-        autocomplete="off"
-        value="<%= actual_hours_display %>"
-        name="actualHours"
-        />
+    <div class="relative my-1 pt-2"
+         data-controller="<%= 'error-popover' if errors.any? %>"
+         <%= "data-error-popover-errors-value='#{errors.to_json}'" if errors.any? %>>
+      <% if errors.any? %>
+        <!-- Error Popover for Actual Hours -->
+        <div data-error-popover-target="popover" 
+             class="hidden absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 z-[100] flex-col items-center"
+             style="display: none;">
+          <div class="bg-red-500 text-white text-xs rounded px-2 py-1 sm:max-w-[150px] max-w-[200px] shadow-lg whitespace-normal">
+            <% errors.each do |error| %>
+              <div class="py-0.5"><%= error %></div>
+            <% end %>
+          </div>
+          <!-- Arrow pointing down -->
+          <div class="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[4px] border-t-red-500"></div>
+        </div>
+      <% end %>
+      <%= form.number_field :actual_hours,
+        class: "bg-white shadow-top-input-shadow text-center sm:text-base text-2xl rounded-sm sm:w-[34px] w-[68px] sm:h-[25px] h-[50px] border-none outlined-none mb-0 px-1 py-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+        autocomplete: "off",
+        value: actual_hours_display,
+        data: {
+          action: "input->work-week-form#handleInput",
+          work_week_form_target: "actualInput"
+        } %>
       <button
         type="button"
-        class="hidden absolute left-0 top-full h-[12px] sm:w-[34px] w-[68px] border-2 flex items-center justify-center bg-transparent border-transparent rounded-b-sm opacity-0 pointer-events-none transition-opacity duration-200"
+        class="sm:flex absolute left-0 top-full h-[12px] sm:w-[34px] w-[68px] border-2 flex items-center justify-center bg-transparent border-transparent rounded-b-sm opacity-0 pointer-events-none transition-opacity duration-200"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -64,4 +108,5 @@
     </div>
     <% end %>
   </div>
+  <% end %>
 </td>
