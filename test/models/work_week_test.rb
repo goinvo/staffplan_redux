@@ -8,7 +8,7 @@ class WorkWeekTest < ActiveSupport::TestCase
       work_week = build(:work_week, assignment_id: nil)
 
       assert_not_predicate work_week, :valid?
-      assert_includes work_week.errors.full_messages, "Assignment must exist"
+      assert_includes work_week.errors.full_messages, 'Assignment must exist'
     end
 
     it 'validates presence of cweek' do

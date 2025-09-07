@@ -23,6 +23,10 @@ class WorkWeek < ApplicationRecord
     )
   end
 
+  def day
+    Date.commercial(year, cweek, 1).day
+  end
+
   private
 
   def actual_hours_allowed?
