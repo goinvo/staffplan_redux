@@ -18,6 +18,8 @@ module StaffPlan
       # Get all work weeks for the user in the date range
       weeks = user
         .work_weeks
+        .joins(:assignment)
+        .where(assignment: { status: 'active' })
         .where('(cweek >= ? AND year = ?) OR (cweek <= ? AND year = ?)',
                start_date.cweek,
                start_date.cwyear,
