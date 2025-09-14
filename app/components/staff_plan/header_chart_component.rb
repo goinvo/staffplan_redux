@@ -78,8 +78,10 @@ module StaffPlan
       weeks = user
         .work_weeks
         .includes(:assignment)
+        .joins(:project)
         .joins(:assignment)
         .where(assignment: { status: %w[active proposed] })
+        .where(project: { status: %w[confirmed unconfirmed] })
         .where('(cweek >= ? AND year = ?) OR (cweek <= ? AND year = ?)',
                start_date.cweek,
                start_date.cwyear,

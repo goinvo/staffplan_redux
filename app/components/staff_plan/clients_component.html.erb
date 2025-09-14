@@ -1,6 +1,6 @@
 <tbody>
   <% user.clients.distinct.each do |client| %>
-    <% user.assignments.includes(:project).joins(:project).where(status: 'active', project: { client_id: client.id }).each_with_index do |assignment, index| %>
+    <% user.assignments.includes(:project).joins(:project).where(project: {status: ['confirmed', 'unconfirmed']}).where.not(status: ['archived', 'completed']).where(project: { client_id: client.id }).each_with_index do |assignment, index| %>
       <%= render StaffPlan::AssignmentComponent.new(user:, client:, assignment:, index:, target_date:) %>
     <% end %>
   <% end %>

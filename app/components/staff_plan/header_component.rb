@@ -25,15 +25,15 @@ module StaffPlan
 
       # Get all work weeks for the user in the date range
       weeks = user
-              .work_weeks
-              .includes(:assignment)
-              .joins(:assignment)
-              .where(assignment: { status: 'active' })
-              .where('(cweek >= ? AND year = ?) OR (cweek <= ? AND year = ?)',
-                start_date.cweek,
-                start_date.cwyear,
-                end_date.cweek,
-                end_date.cwyear,)
+        .work_weeks
+        .includes(:assignment)
+        .joins(:assignment)
+        .where(assignment: { status: 'active' })
+        .where('(cweek >= ? AND year = ?) OR (cweek <= ? AND year = ?)',
+               start_date.cweek,
+               start_date.cwyear,
+               end_date.cweek,
+               end_date.cwyear,)
 
       # Group work weeks by cweek/year
       weeks_grouped = weeks.group_by { |w| [w.cweek, w.year] }

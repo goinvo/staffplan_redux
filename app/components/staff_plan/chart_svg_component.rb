@@ -43,7 +43,7 @@ module StaffPlan
     def proposed_hours
       @proposed_hours ||= work_weeks
         .select { |ww| ww.assignment&.status == Assignment::PROPOSED }
-        .sum { |ww| is_before_week? ? ww.actual_hours : ww.estimated_hours }
+        .sum { |ww| ww.is_future_work_week? ? ww.estimated_hours : ww.actual_hours }
     end
 
     def proposed_svg_height
