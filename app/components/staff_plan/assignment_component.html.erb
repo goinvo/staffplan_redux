@@ -1,5 +1,5 @@
 <tr
-  class="flex sm:justify-normal justify-between bg-white-300 hover:bg-hoverGrey pl-5"
+  class="flex sm:justify-normal justify-between bg-white-300 hover:bg-hoverGrey pl-5<%= ' bg-diagonal-stripes border-y border-gray-300' if assignment.status == Assignment::PROPOSED %>"
   data-controller="horizontal-tab-navigation similar-input-navigation"
   data-action="keydown->horizontal-tab-navigation#handleKeydown"
 >
