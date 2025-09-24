@@ -195,7 +195,7 @@ GEM
       google-protobuf (~> 4.26)
     graphiql-rails (1.10.5)
       railties
-    graphql (2.5.12)
+    graphql (2.5.13)
       base64
       fiber-storage
       logger
