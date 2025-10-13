@@ -6,13 +6,7 @@
   tabindex="-1"
 >
   <div class="py-1" role="none">
-    <button
-      class="block w-full px-4 py-2 text-sm text-left text-gray-900 hover:bg-gray-100 cursor-pointer"
-      role="menuitem"
-      tabindex="-1"
-    >
-      Edit project
-    </button>
+    <%= link_to "Edit project", edit_project_path(assignment.project), data: { turbo_stream: true }, class: "block w-full px-4 py-2 text-sm text-left text-gray-900 hover:bg-gray-100 cursor-pointer" %>
     <button
       class="block w-full px-4 py-2 text-sm text-left text-gray-900 hover:bg-gray-100 cursor-pointer"
       role="menuitem"

@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     resources :work_weeks, only: %i[update create]
   end
 
+  resources :projects, only: %i[edit update new create]
+
   resources :registrations, only: %i[new create] do
     member do
       get :register
