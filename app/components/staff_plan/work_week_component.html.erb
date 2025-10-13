@@ -29,6 +29,7 @@
       <%= form.hidden_field :cweek, value: work_week.cweek %>
       <%= form.hidden_field :year, value: work_week.year %>
       <%= form.number_field :estimated_hours,
+        id: estimated_hours_input_id,
         class: "bg-white shadow-top-input-shadow text-center sm:text-base text-2xl rounded-sm sm:w-[34px] w-[68px] sm:h-[25px] h-[50px] border-none outlined-none mb-0 px-1 py-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
         autocomplete: "off",
         value: estimated_hours_display,
@@ -77,6 +78,7 @@
         </div>
       <% end %>
       <%= form.number_field :actual_hours,
+        id: actual_hours_input_id,
         class: "bg-white shadow-top-input-shadow text-center sm:text-base text-2xl rounded-sm sm:w-[34px] w-[68px] sm:h-[25px] h-[50px] border-none outlined-none mb-0 px-1 py-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
         autocomplete: "off",
         value: actual_hours_display,

@@ -49,5 +49,13 @@ module StaffPlan
       classes << 'bg-selectedColumnBg' if work_week.is_current_week?
       classes.join(' ')
     end
+
+    def estimated_hours_input_id
+      "work_week_#{work_week.assignment_id}_#{work_week.cweek}_#{work_week.year}_estimated"
+    end
+
+    def actual_hours_input_id
+      "work_week_#{work_week.assignment_id}_#{work_week.cweek}_#{work_week.year}_actual"
+    end
   end
 end
