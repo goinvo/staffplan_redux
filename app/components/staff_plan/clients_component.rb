@@ -8,12 +8,19 @@ module StaffPlan
     end
     attr_reader :user, :target_date
 
-    def visible_clients
-      user.clients.distinct.order(:name)
+    def user_assignments(client)
+      user
+        .assignments
+        .includes(:project)
+        .joins(:project)
+        .where(project: { client_id: client.id })
+        .where(project: { status: %w[confirmed unconfirmed] })
+        .where.not(status: %w[archived completed cancelled])
+        .order('project.name')
     end
 
-    def user_assignments(client)
-      user.assignments.includes(:project).joins(:project).where(project: {status: ['confirmed', 'unconfirmed']}).where.not(status: ['archived', 'completed']).where(project: { client_id: client.id }).order('project.name')
+    def visible_clients
+      user.clients.distinct.order(:name)
     end
   end
 end
