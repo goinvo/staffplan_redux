@@ -100,7 +100,7 @@ Prefab is used extensively for feature flags. Check with `Prefab.enabled?('featu
 - Avoid RSpec-style syntax (describe/it) - use Minitest's `test` blocks
 
 ### Rails-specific Considerations
-- Using Rails 8.0.2 with Ruby 3.4.4
+- Using Rails 8.0.2 with Ruby 3.4.7
 - PostgreSQL database
 - Tailwind CSS for styling
 - ImportMaps for JavaScript (no Webpack/Node build step)
