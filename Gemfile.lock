@@ -223,7 +223,7 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     jmespath (1.6.2)
-    json (2.15.0)
+    json (2.13.2)
     language_server-protocol (3.17.0.5)
     launchy (3.1.1)
       addressable (~> 2.8)
@@ -339,7 +339,7 @@ GEM
       semantic_logger (!= 4.16.0)
       uuid
     prettyprint (0.2.0)
-    prism (1.5.1)
+    prism (1.4.0)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -593,7 +593,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rails-omakase
-  selenium-webdriver
+  selenium-webdriver (= 4.36.0)
   shoulda-matchers (~> 6.5)
   solid_queue
   sprockets-rails
