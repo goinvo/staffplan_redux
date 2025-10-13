@@ -26,20 +26,24 @@
         >
           <div>
             <button
-              class="pt-0 sm:pt-2 font-bold flex items-center justify-start text-contrastBlue text-start cursor-pointer"
+              class="pt-0 sm:pt-2 font-bold flex items-center justify-start text-contrastBlue text-start cursor-pointer z-0"
             >
               <%= project.name %>
             </button>
           </div>
           <div
-            class="relative inline-block text-left z-15"
+            class="relative inline-block text-left"
+            data-controller="menu"
           >
             <button
+              data-menu-target="button"
+              data-action="click->menu#toggle"
               class="cursor-pointer flex items-center text-2xl actionbar-text-accent hover:text-gray-900 rounded-full ellipsismenu focus:outline-none undefined ml-2 -mt-[5px] sm:mt-[3px]"
               type="button"
               aria-haspopup="menu"
               aria-expanded="false"
             ></button>
+            <%= render StaffPlan::ProjectActionsComponent.new(assignment: assignment) %>
           </div>
         </div>
         <div
