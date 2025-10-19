@@ -1,28 +1,31 @@
+# frozen_string_literal: true
+
 class ProjectsController < ApplicationController
   before_action :require_user!
 
+  def create; end
+
   def edit
     @project = current_company.projects.find(params[:id])
-
-    respond_to do |format|
-      format.html # Regular HTML response
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update("modal-container",
-          StaffPlan::ModalComponent.new(title: "Edit Project", show: true) do
-            render partial: "form", locals: { project: @project }
-          end
-        )
-      end
-    end
-
   end
+
+  def new; end
 
   def update
+    @project = current_company.projects.find(params[:id])
+
+    if @project.update(project_params)
+      # Success - will render update.turbo_stream.erb if it exists
+      render :edit
+    else
+      # Validation failed - re-render the form with errors
+      render :edit, status: :unprocessable_entity
+    end
   end
 
-  def new
-  end
+  private
 
-  def create
+  def project_params
+    params.expect(project: %i[name description hours starts_on ends_on])
   end
 end

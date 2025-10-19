@@ -1,53 +1,42 @@
-<div
-  class="timeline-grid-bg rounded-2xl p-4 text-contrastBlue max-w-md mx-auto"
-  id="headlessui-dialog-panel-«r2t»"
-  data-headlessui-state="open"
-  data-open=""
->
-  <form class="flex flex-col">
-    <div class="flex flex-col mt-2 mb-2">
-      <label class="py-1 text-tiny">Project Name</label
-      ><input
-      class="h-10 px-2 rounded-sm shadow-top-input-shadow font-bold focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none focus:border-tiffany outlined-none text-huge text-contrastBlue min-w-[370px]"
-      placeholder="Project Name"
-      type="text"
-      value="Marketing"
-      name="projectName"
-      />
+<%= form_with model: project, class: "flex flex-col", data: { turbo_stream: true } do |f| %>
+  <div class="flex flex-col mt-2 mb-2">
+    <%= f.label :name, "Project Name", class: "py-1 text-tiny" %>
+    <%= f.text_field :name,
+      class: "h-10 px-2 rounded-sm shadow-top-input-shadow font-bold focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none focus:border-tiffany outlined-none text-huge text-contrastBlue min-w-[370px]",
+      placeholder: "Project Name" %>
+    <% if f.object.errors[:name].any? %>
+      <p class="text-red-500 text-xs mt-1"><%= f.object.errors[:name].first %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-col mt-1 mb-1">
+    <%= label_tag :client_name, "Client", class: "py-1 text-tiny" %>
+    <div class="relative flex flex-col w-full">
+      <%= text_field_tag :client_name, project.client&.name,
+        autocomplete: "off",
+        class: "px-2 text-tiny shadow-top-input-shadow rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none focus:border-tiffany outlined-none text-contrastBlue appearance-none h-8 px-2 rounded-sm max-w-[370px]",
+        placeholder: "Client" %>
     </div>
-    <div class="flex flex-col mt-1 mb-1">
-      <label class="py-1 text-tiny">Client</label>
-      <div class="relative flex flex-col w-full">
-        <input
-          autocomplete="off"
-          class="px-2 text-tiny shadow-top-input-shadow rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none focus:border-tiffany outlined-none text-contrastBlue appearance-none h-8 px-2 rounded-sm max-w-[370px]"
-          placeholder="Client"
-          type="text"
-          value="GoInvo"
-          name="clientName"
-          />
-      </div>
-    </div>
-    <div class="flex flex-col mt-1 mb-1">
-      <label class="py-1 text-tiny">Target Hours (optional)</label
-      ><input
-      class="h-8 px-2 text-tiny shadow-top-input-shadow font-normal rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none focus:border-tiffany outlined-none text-contrastBlue max-w-[370px] [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
-      placeholder="Hours"
-      type="number"
-      name="hours"
-      />
-    </div>
-    <div class="flex flex-row justify-between">
-      <div class="flex flex-col mt-1 mb-2 mr-2 w-full">
-        <label class="py-1 text-tiny">Start Date (optional)</label>
-        <div class="relative flex items-center w-full px-0">
-          <input
-            placeholder="dd/Mon/yr"
-            class="h-6 w-full pl-1 shadow-top-input-shadow text-tiny font-normal rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-r-0 border-gray-300 outline-none h-8"
-            type="text"
-            value=""
-            name="startsOn"
-            /><svg
+  </div>
+
+  <div class="flex flex-col mt-1 mb-1">
+    <%= f.label :hours, "Target Hours (optional)", class: "py-1 text-tiny" %>
+    <%= f.number_field :hours,
+      class: "h-8 px-2 text-tiny shadow-top-input-shadow font-normal rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none focus:border-tiffany outlined-none text-contrastBlue max-w-[370px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+      placeholder: "Hours" %>
+    <% if f.object.errors[:hours].any? %>
+      <p class="text-red-500 text-xs mt-1"><%= f.object.errors[:hours].first %></p>
+    <% end %>
+  </div>
+
+  <div class="flex flex-row justify-between">
+    <div class="flex flex-col mt-1 mb-2 mr-2 w-full">
+      <%= f.label :starts_on, "Start Date (optional)", class: "py-1 text-tiny" %>
+      <div class="relative flex items-center w-full px-0">
+        <%= text_field_tag "#{f.object_name}[starts_on_display]", (project.starts_on&.strftime("%d/%b/%y") || ""),
+          placeholder: "dd/Mon/yr",
+          class: "h-6 w-full pl-1 shadow-top-input-shadow text-tiny font-normal rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-r-0 border-gray-300 outline-none h-8" %>
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
@@ -59,24 +48,23 @@
             fill-rule="evenodd"
             d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z"
             clip-rule="evenodd"
-          ></path></svg
-        ><input
-          class="absolute top-0 pr-0 pl-0 opacity-0 right-0 w-1/4 h-full"
-          type="date"
-          value=""
-          />
-        </div>
+          ></path>
+        </svg>
+        <%= f.date_field :starts_on,
+          class: "absolute top-0 pr-0 pl-0 opacity-0 right-0 w-1/4 h-full" %>
       </div>
-      <div class="flex flex-col mt-1 mb-2 w-full ml-2">
-        <label class="py-1 text-tiny">Ends Date (optional)</label>
-        <div class="relative flex items-center w-full px-0">
-          <input
-            placeholder="dd/Mon/yr"
-            class="h-6 w-full pl-1 shadow-top-input-shadow text-tiny font-normal rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-r-0 border-gray-300 outline-none h-8"
-            type="text"
-            value=""
-            name="endsOn"
-            /><svg
+      <% if f.object.errors[:starts_on].any? %>
+        <p class="text-red-500 text-xs mt-1"><%= f.object.errors[:starts_on].first %></p>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col mt-1 mb-2 w-full ml-2">
+      <%= f.label :ends_on, "Ends Date (optional)", class: "py-1 text-tiny" %>
+      <div class="relative flex items-center w-full px-0">
+        <%= text_field_tag "#{f.object_name}[ends_on_display]", (project.ends_on&.strftime("%d/%b/%y") || ""),
+          placeholder: "dd/Mon/yr",
+          class: "h-6 w-full pl-1 shadow-top-input-shadow text-tiny font-normal rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-r-0 border-gray-300 outline-none h-8" %>
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
@@ -88,32 +76,32 @@
             fill-rule="evenodd"
             d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z"
             clip-rule="evenodd"
-          ></path></svg
-        ><input
-          class="absolute top-0 pr-0 pl-0 opacity-0 right-0 w-1/4 h-full"
-          type="date"
-          value=""
-          />
-        </div>
+          ></path>
+        </svg>
+        <%= f.date_field :ends_on,
+          class: "absolute top-0 pr-0 pl-0 opacity-0 right-0 w-1/4 h-full" %>
       </div>
+      <% if f.object.errors[:ends_on].any? %>
+        <p class="text-red-500 text-xs mt-1"><%= f.object.errors[:ends_on].first %></p>
+      <% end %>
     </div>
-    <label
-      class="flex items-center justify-between space-x-0.5 cursor-pointer w-[208px]"
-    ><input
-      class="border-none form-checkbox h-[11px] w-[11px] rounded-sm text-tiffany !ring-0 !ring-offset-0 shadow-top-input-shadow"
-      type="checkbox"
-      /><span class="mt-2 mb-3 text-sm leading-[18px] font-normal"
-    >Archive project for everyone?</span
-    ></label
-    ><button
-    type="submit"
-    class="w-full h-10 text-tiny font-bold bg-tiffany rounded-sm text-white pt-1 mb-4 mt-2 hover:bg-accentgreen"
-  >
-    Save</button
-  ><button
+  </div>
+
+  <%= label_tag :archive_for_all, class: "flex items-center justify-between space-x-0.5 cursor-pointer w-[208px]" do %>
+    <%= check_box_tag :archive_for_all, "1", project.archived?,
+      class: "border-none form-checkbox h-[11px] w-[11px] rounded-sm text-tiffany !ring-0 !ring-offset-0 shadow-top-input-shadow" %>
+    <span class="mt-2 mb-3 text-sm leading-[18px] font-normal">Archive project for everyone?</span>
+  <% end %>
+
+  <%= f.submit "Save",
+    class: "w-full h-10 text-tiny font-bold bg-tiffany rounded-sm text-white pt-1 mb-4 mt-2 hover:bg-accentgreen",
+    data: { turbo_submits_with: "Saving..." } %>
+
+  <button
+    type="button"
+    data-action="click->modal#close"
     class="w-full h-10 text-tiny font-bold bg-contrastGrey hover:bg-contrastBlue rounded-sm text-white py-1 mb-1"
   >
     Cancel
   </button>
-  </form>
-</div>
+<% end %>
