@@ -12,6 +12,10 @@ module StaffPlan
       work_week.actual_hours.positive? ? work_week.actual_hours : ''
     end
 
+    def actual_hours_input_id
+      "work_week_#{work_week.assignment_id}_#{work_week.cweek}_#{work_week.year}_actual"
+    end
+
     def component_id
       work_week.dom_id
     end
@@ -24,6 +28,10 @@ module StaffPlan
 
     def estimated_hours_display
       work_week.estimated_hours.positive? ? work_week.estimated_hours : ''
+    end
+
+    def estimated_hours_input_id
+      "work_week_#{work_week.assignment_id}_#{work_week.cweek}_#{work_week.year}_estimated"
     end
 
     def form_method

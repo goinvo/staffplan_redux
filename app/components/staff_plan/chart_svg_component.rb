@@ -27,9 +27,9 @@ module StaffPlan
       return false unless first_week.year && first_week.cweek
 
       today = Time.zone.today
-      # Treat current week as past week (use >= instead of >)
+      # Treat current week as future week (use > instead of >=)
       today.cwyear > first_week.year ||
-        (today.cwyear == first_week.year && today.cweek >= first_week.cweek)
+        (today.cwyear == first_week.year && today.cweek > first_week.cweek)
     end
 
     def main_path_color

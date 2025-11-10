@@ -1,0 +1,9 @@
+<% if @project.valid? %>
+  <%= turbo_stream.update 'modal-container' %>
+<% else %>
+  <%= turbo_stream.update 'modal-container' do %>
+    <%= render StaffPlan::ModalComponent.new(title: 'Edit Project', show: true) do
+      render partial: 'form', locals: { project: @project }
+    end %>
+  <% end %>
+<% end %>
