@@ -38,15 +38,11 @@ class ApplicationController < ActionController::Base
   end
 
   def my_staffplan_url
-    if Prefab.enabled?('rails-views', { user: { email: current_user&.email } })
-      staffplan_path(current_user)
+    case Rails.env.to_s
+    when 'production'
+      "https://ui.staffplan.com/people/#{current_user.id}"
     else
-      case Rails.env.to_s
-      when 'production'
-        "https://ui.staffplan.com/people/#{current_user.id}"
-      else
-        "http://localhost:8080/people/#{current_user.id}"
-      end
+      "http://localhost:8080/people/#{current_user.id}"
     end
   end
   helper_method :current_user

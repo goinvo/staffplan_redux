@@ -43,7 +43,6 @@ bin/rails assets:precompile    # Precompile all assets
 ### Authentication & Authorization
 - Uses **Passwordless** gem for authentication (no passwords, email-based login)
 - SessionsController extends Passwordless::SessionsController
-- Feature flags via **Prefab** for controlling access and UI variations
 - Test users: owner@acme.co, admin@acme.co, member@acme.co
 
 ### Core Domain Models
@@ -90,9 +89,6 @@ Located in `app/components/`, using ViewComponent gem:
 
 ### Null Object Pattern
 WorkWeek objects are created but not persisted when displaying empty weeks in the timeline, allowing uniform handling of existing and non-existing data.
-
-### Feature Flags
-Prefab is used extensively for feature flags. Check with `Prefab.enabled?('feature-name', context)` before assuming features are available.
 
 ### Testing Gotchas
 - Use `ActionController::TestCase` for controller tests that need the `tests` method

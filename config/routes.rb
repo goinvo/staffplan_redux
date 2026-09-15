@@ -1,30 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  mount MissionControl::Jobs::Engine,
-        at: '/jobs',
-        constraints: lambda { |request|
-          if Rails.env.development?
-            true
-          else
-            user = Passwordless::Session.find_by(id: request.session[:'passwordless_session_id--user'])&.authenticatable
-
-            user && Prefab.enabled?('super-admin', { user: { email: user&.email } })
-          end
-        }
+  mount MissionControl::Jobs::Engine, at: '/jobs' if Rails.env.development?
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
-  mount GraphiQL::Rails::Engine,
-        at: '/graphiql',
-        graphql_path: '/graphql',
-        constraints: lambda { |request|
-          # only allow allowed users, otherwise 404
-          user = Passwordless::Session.find_by(id: request.session[:'passwordless_session_id--user'])&.authenticatable
-
-          Rails.env.development? ||
-            (user && Prefab.enabled?('graphiql-access', { user: { email: user&.email } }))
-        }
+  mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
 
   post '/graphql', to: 'graphql#execute'
 
