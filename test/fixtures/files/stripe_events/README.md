@@ -14,7 +14,7 @@ only on subscription items.
 | `customer.subscription.updated.cancel_at_period_end.json` | Owner cancels from the billing portal; active until period end |
 | `customer.subscription.updated.renewal.json` | Monthly renewal; modeled on a real production event with ids replaced |
 | `customer.subscription.deleted.json` | Subscription ends |
-| `customer.updated.json` | Customer gets a default card payment method |
+| `customer.updated.json` | Customer gets a default card payment method; fields match a real production event |
 
 ## Re-capturing from Stripe test mode
 
