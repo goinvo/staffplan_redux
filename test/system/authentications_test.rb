@@ -30,9 +30,9 @@ class AuthenticationsTest < ApplicationSystemTestCase
 
         assert_difference('ActionMailer::Base.deliveries.count', 1) do
           click_button 'Sign in'
-        end
 
-        assert_text "We've sent you an email with a secret token"
+          assert_text "We've sent you an email with a secret token"
+        end
       end
 
       it 'redirects the user to the token entry page' do
@@ -40,6 +40,8 @@ class AuthenticationsTest < ApplicationSystemTestCase
         visit root_path
         fill_in 'passwordless[email]', with: user.email
         click_button 'Sign in'
+
+        assert_text "We've sent you an email with a secret token"
 
         assert_current_path verify_auth_sign_in_path(user.passwordless_sessions.last.identifier)
       end
@@ -65,6 +67,8 @@ class AuthenticationsTest < ApplicationSystemTestCase
           visit root_path
           fill_in 'passwordless[email]', with: user.email
           click_button 'Sign in'
+
+          assert_text "We've sent you an email with a secret token"
 
           # click the link in the email
           visit confirm_auth_sign_in_path(user.passwordless_sessions.last.identifier, token)

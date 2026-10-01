@@ -70,6 +70,8 @@ test_default: &test_default
   host: localhost
   password: <%= ENV["POSTGRES_PASSWORD"] %>
   username: postgres
+  # libpq's GSSAPI negotiation isn't fork-safe on macOS and hangs parallel test workers
+  gssencmode: disable
 
 test:
   primary:
