@@ -1,0 +1,49 @@
+{
+  "id": "evt_TestEvent0005",
+  "object": "event",
+  "api_version": "2025-10-29.clover",
+  "created": 1759276800,
+  "data": {
+    "object": {
+      "id": "cus_TestStaffPlan01",
+      "object": "customer",
+      "address": null,
+      "balance": 0,
+      "created": 1759276800,
+      "currency": "usd",
+      "default_source": null,
+      "delinquent": false,
+      "description": null,
+      "discount": null,
+      "email": "billing@acme.co",
+      "invoice_prefix": "TEST0001",
+      "invoice_settings": {
+        "custom_fields": null,
+        "default_payment_method": "pm_TestCard00001",
+        "footer": null,
+        "rendering_options": null
+      },
+      "livemode": false,
+      "metadata": {},
+      "name": "Acme Co | Owner Person",
+      "next_invoice_sequence": 2,
+      "phone": null,
+      "preferred_locales": [],
+      "shipping": null,
+      "tax_exempt": "none",
+      "test_clock": null
+    },
+    "previous_attributes": {
+      "invoice_settings": {
+        "default_payment_method": null
+      }
+    }
+  },
+  "livemode": false,
+  "pending_webhooks": 1,
+  "request": {
+    "id": null,
+    "idempotency_key": null
+  },
+  "type": "customer.updated"
+}
