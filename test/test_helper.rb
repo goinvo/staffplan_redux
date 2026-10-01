@@ -131,11 +131,19 @@ end
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :selenium, using: ENV['HEADFUL'] ? :chrome : :headless_chrome, screen_size: [1400, 1400]
 
+  # point *_url helpers at the running test server, including its random port
   setup do
     Rails.application.default_url_options[:host] = Capybara.server_host
+    Rails.application.default_url_options[:port] = Capybara.current_session.server.port
   end
 
   teardown do
-    Rails.application.default_url_options[:host] = nil
+    Rails.application.default_url_options.except!(:host, :port)
+  end
+
+  # Passwordless builds an absolute magic link without Capybara's port; a path
+  # lets Capybara resolve it against the running test server
+  def passwordless_sign_in(resource)
+    super(resource, only_path: true)
   end
 end
