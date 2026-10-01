@@ -54,6 +54,9 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
+  # Enqueue jobs in memory so tests can assert on them
+  config.active_job.queue_adapter = :test
+
   # Keep post-sign-in redirects to the React UI on the test server
   config.x.react_ui_url = ''
 
