@@ -7,12 +7,7 @@ class SessionsController < Passwordless::SessionsController
   private
 
   def my_staffplan_url(current_user)
-    case Rails.env.to_s
-    when 'production'
-      "https://ui.staffplan.com/people/#{current_user.id}"
-    else
-      "http://localhost:8080/people/#{current_user.id}"
-    end
+    "#{Rails.configuration.x.react_ui_url}/people/#{current_user.id}"
   end
 
   def redirect_to_dashboard_if_authenticated

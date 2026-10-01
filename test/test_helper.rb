@@ -8,7 +8,6 @@ require 'minitest/autorun'
 require 'minitest/reporters'
 require 'passwordless/test_helpers'
 require 'view_component/test_helpers'
-require 'view_component/system_test_helpers'
 require 'capybara/rails'
 require 'vcr'
 require 'pry'
@@ -130,9 +129,7 @@ end
 
 # Setup for system tests
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  include ViewComponent::SystemTestHelpers
-
-  driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
+  driven_by :selenium, using: ENV['HEADFUL'] ? :chrome : :headless_chrome, screen_size: [1400, 1400]
 
   setup do
     Rails.application.default_url_options[:host] = Capybara.server_host

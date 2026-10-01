@@ -103,5 +103,10 @@ bin/dev
 Ensure that the test suite runs and is green:
 
 ```bash
-rspec
+bin/rails tailwindcss:build   # system tests render the real layouts
+bin/rails test                # unit, model, request, and GraphQL tests
+bin/rails test:system         # browser tests in headless Chrome (HEADFUL=1 to watch them)
+bundle exec rubocop
 ```
+
+The tests need the test credentials key. Get `config/credentials/test.key` from 1Password (or export `RAILS_MASTER_KEY`); without it, tests touching registrations fail with `no implicit conversion of nil into String`.

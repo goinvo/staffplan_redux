@@ -17,6 +17,7 @@ bin/rails server        # Start just the Rails server on port 3000
 ### Testing
 ```bash
 bin/rails test                              # Run all Minitest tests
+bin/rails test:system                       # Run browser tests (headless Chrome; HEADFUL=1 to watch)
 bin/rails test test/controllers/file.rb    # Run specific test file
 bin/rails test test/controllers/file.rb:8  # Run test at specific line
 bundle exec rubocop                         # Run Rubocop linter
@@ -94,6 +95,9 @@ WorkWeek objects are created but not persisted when displaying empty weeks in th
 - Use `ActionController::TestCase` for controller tests that need the `tests` method
 - Integration tests should use path helpers (e.g., `registrations_path`) not symbols
 - Avoid RSpec-style syntax (describe/it) - use Minitest's `test` blocks
+- System tests need built CSS: run `bin/rails tailwindcss:build` first
+- Tests need `config/credentials/test.key` (or `RAILS_MASTER_KEY`); without it registration-related tests error
+- Don't include `ViewComponent::SystemTestHelpers` in system tests: it overrides Capybara's `page`
 
 ### Rails-specific Considerations
 - Using Rails 8.0.2 with Ruby 3.4.7

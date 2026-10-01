@@ -89,6 +89,8 @@ Rails.application.configure do
 
   config.x.mail_from = %(StaffPlan No Reply <noreply@staffplan.com>)
 
+  config.x.react_ui_url = ENV.fetch('REACT_UI_URL', 'https://ui.staffplan.com')
+
   ActionMailer::Base.smtp_settings = {
     user_name: Rails.application.credentials.aws_smtp_user_name,
     password: Rails.application.credentials.aws_smtp_password,
