@@ -3,10 +3,16 @@
 require 'test_helper'
 
 class SubscriptionManagementTest < ApplicationSystemTestCase
-  def registered_user
-    registration = create(:registration)
-    registration.register!
-    registration.reload.user
+  include ActiveJob::TestHelper
+
+  # Registers a company end to end: Stripe::CreateCustomerJob runs against the
+  # recorded Stripe responses and stores the customer and subscription ids
+  def registered_user(cassette)
+    VCR.use_cassette("Subscription_Management/#{cassette}") do
+      registration = create(:registration)
+      perform_enqueued_jobs { registration.register! }
+      registration.reload.user
+    end
   end
 
   def subscription_attributes(company:, user:, status:)
@@ -34,7 +40,14 @@ class SubscriptionManagementTest < ApplicationSystemTestCase
   end
 
   test 'shows a trialing company how to set up payment' do
-    passwordless_sign_in(registered_user)
+    user = registered_user('when_trialing/shows_a_page_with_some_content_and_a_link_to_go_set_up_payment_for_a_subscription')
+    company = user.current_company
+
+    assert_equal 'cus_QPKMNRvCZxnZt4', company.stripe_id
+    assert_equal 'sub_1PYVhTBLjyMcgacQZpFGmCtm', company.subscription.stripe_id
+    assert_predicate company.subscription, :trialing?
+
+    passwordless_sign_in(user)
 
     visit settings_billing_information_url
 
@@ -43,7 +56,7 @@ class SubscriptionManagementTest < ApplicationSystemTestCase
   end
 
   test 'shows subscription details during a trial with a payment method' do
-    user = registered_user
+    user = registered_user('with_an_active_subscription/shows_information_about_the_subscription_when_in_a_trial_period')
     passwordless_sign_in(user)
 
     assert_equal 1, user.companies.length
@@ -57,7 +70,7 @@ class SubscriptionManagementTest < ApplicationSystemTestCase
   end
 
   test 'shows subscription details for an active, paying subscription' do
-    user = registered_user
+    user = registered_user('with_an_active_subscription/shows_information_about_the_subscription_when_an_active_paying_subscription')
     passwordless_sign_in(user)
 
     assert_equal 1, user.companies.length
