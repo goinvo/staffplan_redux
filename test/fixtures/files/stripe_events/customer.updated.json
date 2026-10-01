@@ -1,7 +1,7 @@
 {
   "id": "evt_TestEvent0005",
   "object": "event",
-  "api_version": "2025-10-29.clover",
+  "api_version": "2023-10-16",
   "created": 1759276800,
   "data": {
     "object": {

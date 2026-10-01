@@ -25,25 +25,52 @@ module Webhooks
       assert_equal 'price_TestMonthly01', subscription.stripe_price_id
       assert_equal 300, subscription.plan_amount
       assert_equal 3, subscription.quantity
-      assert_equal Time.zone.at(1_759_276_800), subscription.current_period_start
-      assert_equal Time.zone.at(1_761_868_800), subscription.current_period_end
+      assert_equal Time.zone.at(1_759_276_800).to_date, subscription.current_period_start
+      assert_equal Time.zone.at(1_761_868_800).to_date, subscription.current_period_end
       assert_equal Time.zone.at(1_761_868_800), subscription.trial_end
       assert_nil subscription.canceled_at
       assert_no_enqueued_emails
     end
 
-    test 'customer.subscription.created reads the billing period from pre-basil payloads' do
+    test 'customer.subscription.created reads quantity and billing period from items in basil and later payloads' do
       event = stripe_event('customer.subscription.created')
-      subscription = event['data']['object']
-      item = subscription['items']['data'].first
-      subscription['current_period_start'] = item.delete('current_period_start')
-      subscription['current_period_end'] = item.delete('current_period_end')
+      event['api_version'] = '2025-10-29.clover'
+      event['data']['object'].except!('quantity', 'plan', 'current_period_start', 'current_period_end')
 
       post_event event
 
       assert_response :ok
-      assert_equal Time.zone.at(1_759_276_800), @company.subscription.reload.current_period_start
-      assert_equal Time.zone.at(1_761_868_800), @company.subscription.current_period_end
+      subscription = @company.subscription.reload
+
+      assert_equal 3, subscription.quantity
+      assert_equal Time.zone.at(1_759_276_800).to_date, subscription.current_period_start
+      assert_equal Time.zone.at(1_761_868_800).to_date, subscription.current_period_end
+    end
+
+    test 'customer.subscription.created reads the billing period from the subscription when items have none' do
+      event = stripe_event('customer.subscription.created')
+      event['data']['object']['items']['data'].first.except!('current_period_start', 'current_period_end')
+
+      post_event event
+
+      assert_response :ok
+      assert_equal Time.zone.at(1_759_276_800).to_date, @company.subscription.reload.current_period_start
+      assert_equal Time.zone.at(1_761_868_800).to_date, @company.subscription.current_period_end
+    end
+
+    test 'customer.subscription.updated on renewal moves the billing period without emailing owners' do
+      @company.subscription.update!(quantity: 3)
+
+      post_event stripe_event('customer.subscription.updated.renewal')
+
+      assert_response :ok
+      subscription = @company.subscription.reload
+
+      assert_equal 'active', subscription.status
+      assert_equal 3, subscription.quantity
+      assert_equal Time.zone.at(1_789_586_477).to_date, subscription.current_period_start
+      assert_equal Time.zone.at(1_792_178_477).to_date, subscription.current_period_end
+      assert_no_enqueued_emails
     end
 
     test 'customer.subscription.updated saves the active subscription and emails owners about the new quantity' do
@@ -58,8 +85,8 @@ module Webhooks
 
       assert_equal 'active', subscription.status
       assert_equal 4, subscription.quantity
-      assert_equal Time.zone.at(1_761_868_800), subscription.current_period_start
-      assert_equal Time.zone.at(1_764_547_200), subscription.current_period_end
+      assert_equal Time.zone.at(1_761_868_800).to_date, subscription.current_period_start
+      assert_equal Time.zone.at(1_764_547_200).to_date, subscription.current_period_end
       assert_nil subscription.canceled_at
     end
 
@@ -85,7 +112,7 @@ module Webhooks
 
       assert_equal 'canceled', subscription.status
       assert_equal Time.zone.at(1_761_868_800), subscription.canceled_at
-      assert_equal Time.zone.at(1_761_868_800), subscription.current_period_end
+      assert_equal Time.zone.at(1_761_868_800).to_date, subscription.current_period_end
       assert_no_enqueued_emails
     end
 

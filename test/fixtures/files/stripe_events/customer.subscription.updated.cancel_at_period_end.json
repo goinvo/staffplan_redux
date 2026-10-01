@@ -1,45 +1,57 @@
 {
   "id": "evt_TestEvent0003",
   "object": "event",
-  "api_version": "2025-10-29.clover",
+  "api_version": "2023-10-16",
   "created": 1759276800,
   "data": {
     "object": {
-      "id": "sub_TestStaffPlan01",
-      "object": "subscription",
       "application": null,
+      "application_fee_percent": null,
       "automatic_tax": {
         "disabled_reason": null,
         "enabled": false,
         "liability": null
       },
       "billing_cycle_anchor": 1764547200,
+      "billing_cycle_anchor_config": null,
       "billing_mode": {
         "flexible": null,
         "type": "classic"
       },
+      "billing_thresholds": null,
       "cancel_at": 1764547200,
       "cancel_at_period_end": true,
       "canceled_at": 1762300800,
       "cancellation_details": {
         "comment": null,
         "feedback": null,
-        "reason": "cancellation_requested"
+        "reason": "cancellation_requested",
+        "feedback_option": null
       },
       "collection_method": "charge_automatically",
       "created": 1759276800,
       "currency": "usd",
+      "current_period_end": 1764547200,
+      "current_period_start": 1761868800,
       "customer": "cus_TestStaffPlan01",
+      "customer_account": null,
       "days_until_due": null,
       "default_payment_method": null,
+      "default_source": null,
+      "default_tax_rates": [],
       "description": null,
+      "discount": null,
       "discounts": [],
       "ended_at": null,
+      "id": "sub_TestStaffPlan01",
       "invoice_settings": {
         "account_tax_ids": null,
         "issuer": {
           "type": "self"
-        }
+        },
+        "custom_fields": null,
+        "description": null,
+        "footer": null
       },
       "items": {
         "object": "list",
@@ -70,7 +82,9 @@
               "tiers_mode": null,
               "transform_usage": null,
               "trial_period_days": null,
-              "usage_type": "licensed"
+              "usage_type": "licensed",
+              "aggregate_usage": null,
+              "meter": null
             },
             "price": {
               "id": "price_TestMonthly01",
@@ -89,9 +103,11 @@
                 "interval": "month",
                 "interval_count": 1,
                 "meter": null,
-                "usage_type": "licensed"
+                "usage_type": "licensed",
+                "aggregate_usage": null,
+                "trial_period_days": null
               },
-              "tax_behavior": "unspecified",
+              "tax_behavior": "inclusive",
               "tiers_mode": null,
               "transform_quantity": null,
               "type": "recurring",
@@ -100,7 +116,9 @@
             },
             "quantity": 3,
             "subscription": "sub_TestStaffPlan01",
-            "tax_rates": []
+            "tax_rates": [],
+            "billing_thresholds": null,
+            "current_trial": null
           }
         ],
         "has_more": false,
@@ -109,20 +127,55 @@
       },
       "latest_invoice": "in_TestInvoice001",
       "livemode": false,
+      "managed_payments": {
+        "enabled": false
+      },
       "metadata": {},
-      "pending_update": null,
+      "next_pending_invoice_item_invoice": null,
+      "object": "subscription",
+      "on_behalf_of": null,
+      "pause_collection": null,
       "payment_settings": {
         "payment_method_options": null,
         "payment_method_types": null,
         "save_default_payment_method": "on_subscription"
       },
+      "pending_invoice_item_interval": null,
+      "pending_setup_intent": null,
+      "pending_update": null,
+      "plan": {
+        "id": "price_TestMonthly01",
+        "object": "plan",
+        "active": true,
+        "amount": 300,
+        "amount_decimal": "300",
+        "billing_scheme": "per_unit",
+        "created": 1759276800,
+        "currency": "usd",
+        "interval": "month",
+        "interval_count": 1,
+        "livemode": false,
+        "metadata": {},
+        "nickname": null,
+        "product": "prod_TestStaffPlan",
+        "tiers_mode": null,
+        "transform_usage": null,
+        "trial_period_days": null,
+        "usage_type": "licensed",
+        "aggregate_usage": null,
+        "meter": null
+      },
+      "quantity": 3,
+      "schedule": null,
       "start_date": 1759276800,
       "status": "active",
       "test_clock": null,
+      "transfer_data": null,
       "trial_end": 1761868800,
       "trial_settings": {
         "end_behavior": {
-          "missing_payment_method": "cancel"
+          "missing_payment_method": "cancel",
+          "billing_cycle_anchor": null
         }
       },
       "trial_start": 1759276800

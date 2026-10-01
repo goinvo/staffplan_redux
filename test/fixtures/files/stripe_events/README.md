@@ -3,13 +3,16 @@
 `test/requests/webhooks/stripe_test.rb` signs these events with a test secret and posts them to `/webhooks/stripe`.
 Each file is one complete Stripe `Event`. Its `api_version` must match the API version of the production webhook
 endpoint (Dashboard → Developers → Webhooks → the endpoint → API version), because Stripe renders webhook payloads in
-the endpoint's version, not the version the `stripe` gem pins.
+the endpoint's version, not the version the `stripe` gem pins. As of October 2026 the production endpoint is on
+`2023-10-16`; the tests also cover the `2025-03-31.basil`-and-later shape, where `quantity` and the billing period live
+only on subscription items.
 
 | File | Scenario |
 | --- | --- |
 | `customer.subscription.created.json` | `Stripe::CreateCustomerJob` creates a 30-day trial for 3 seats |
 | `customer.subscription.updated.json` | Trial converts to active with a card on file; seats go 3 → 4 |
 | `customer.subscription.updated.cancel_at_period_end.json` | Owner cancels from the billing portal; active until period end |
+| `customer.subscription.updated.renewal.json` | Monthly renewal; modeled on a real production event with ids replaced |
 | `customer.subscription.deleted.json` | Subscription ends |
 | `customer.updated.json` | Customer gets a default card payment method |
 
