@@ -9,12 +9,17 @@ module Stripe
     end
 
     test 'informs Stripe of the new quantity' do
-      registration = create(:registration, email: 'something@static.com')
-      registration.register!
+      # registration runs Stripe::CreateCustomerJob against the recorded Stripe responses
+      VCR.use_cassette('SyncCustomerSubscriptionJob/perform/informs_Stripe_of_the_new_quantity') do
+        registration = create(:registration, email: 'something@static.com')
+        perform_enqueued_jobs { registration.register! }
+      end
 
       assert_equal 1, Company.count
 
       company = Company.first
+
+      assert_equal 'sub_1PYVhoBLjyMcgacQcGcNMLMI', company.subscription.stripe_id
 
       assert_equal 1, company.memberships.active.count
 

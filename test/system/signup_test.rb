@@ -3,6 +3,27 @@
 require 'test_helper'
 
 class SignupTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
+
+  def assert_stripe_ids(registration, customer:, subscription:)
+    company = registration.reload.user.current_company
+
+    assert_equal customer, company.stripe_id
+    assert_equal subscription, company.subscription.stripe_id
+  end
+
+  # Confirms a registration end to end: the request runs Stripe::CreateCustomerJob
+  # against the recorded Stripe responses, then lands on the new user's StaffPlan
+  def confirm_registration(registration, cassette:)
+    VCR.use_cassette("Signing_up_for_StaffPlan/when_confirming_a_registration/when_registration_is_successful/#{cassette}") do
+      perform_enqueued_jobs do
+        visit register_registration_path(registration, token: registration.token)
+
+        assert_current_path(%r{\A/people/\d+\z})
+      end
+    end
+  end
+
   def fill_in_registration(company_name: Faker::Company.name, name: Faker::Name.name, email: Faker::Internet.email)
     visit new_registration_path
     fill_in 'registration[company_name]', with: company_name
@@ -91,30 +112,30 @@ class SignupTest < ApplicationSystemTestCase
   test 'confirming a registration signs the user in' do
     registration = create(:registration)
 
-    visit register_registration_path(registration.reload, token: registration.token)
+    confirm_registration(registration, cassette: 'should_confirm_the_registration_and_sign_the_user_in')
 
-    assert_current_path(%r{\A/people/\d+\z})
     assert_equal "/people/#{User.find_by!(email: registration.email).id}", page.current_path
+    assert_stripe_ids(registration, customer: 'cus_QPKMUb8pdM5mIu', subscription: 'sub_1PYVhbBLjyMcgacQhKU9xWAP')
   end
 
   test 'confirming a registration marks it as registered' do
     registration = create(:registration)
 
-    visit register_registration_path(registration, token: registration.token)
+    confirm_registration(registration, cassette: 'should_mark_the_registration_as_having_registered_')
 
-    assert_current_path(%r{\A/people/\d+\z})
     assert_predicate registration.reload, :registered?
+    assert_stripe_ids(registration, customer: 'cus_QPKMvwQ9Rl8PfG', subscription: 'sub_1PYVhYBLjyMcgacQJqLtp6zM')
   end
 
   test 'confirming a registration creates a user for it' do
     registration = create(:registration)
 
-    visit register_registration_path(registration, token: registration.token)
+    confirm_registration(registration, cassette: 'should_create_a_new_User_record_for_the_registration')
 
-    assert_current_path(%r{\A/people/\d+\z})
     assert_equal 1, User.count
     assert_equal registration.name, User.last.name
     assert_equal registration.email, User.last.email
+    assert_stripe_ids(registration, customer: 'cus_QPKMxlZG2yIPrP', subscription: 'sub_1PYVhZBLjyMcgacQVlcvYrpl')
   end
 
   test 'an invalid registration token redirects to sign in' do
