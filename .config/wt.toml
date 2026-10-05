@@ -1,0 +1,5 @@
+[[pre-start]]
+copy = "wt step copy-ignored"
+
+[[pre-start]]
+direnv = "if [ -f .envrc ] && command -v direnv >/dev/null; then direnv allow; fi"
