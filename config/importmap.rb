@@ -8,5 +8,5 @@ pin '@hotwired/stimulus', to: 'https://ga.jspm.io/npm:@hotwired/stimulus@3.2.2/d
 pin '@hotwired/stimulus-loading', to: 'stimulus-loading.js', preload: true
 pin_all_from 'app/javascript/controllers', under: 'controllers'
 pin 'tailwindcss-stimulus-components', to: 'https://ga.jspm.io/npm:tailwindcss-stimulus-components@4.0.4/dist/tailwindcss-stimulus-components.module.js'
-pin 'lodash' # @4.17.21
+pin 'lodash' # @4.18.1
 pin 'stimulus-use', to: 'https://ga.jspm.io/npm:stimulus-use@0.52.1/dist/index.js'
