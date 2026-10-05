@@ -178,7 +178,8 @@ module Mutations
       post_result = result['data']['upsertWorkWeeks']['workWeeks']
 
       assert_equal 2, post_result.length
-      assert_equal [0, 5], post_result.pluck('actualHours')
+      assert_equal [0, 5], post_result.pluck('actualHours').sort
+      assert_equal 5, post_result.find { |ww| ww['cweek'] == 14 && ww['year'] == 2023 }['actualHours']
     end
 
     test 'fails for future work weeks when the user is not an active member of the company' do

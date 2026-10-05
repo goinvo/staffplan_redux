@@ -100,7 +100,18 @@ bin/rails db:setup
 bin/dev
 ```
 
-Ensure that the test suite runs and is green:
+Ensure that the test suite runs and is green. `bin/ci` runs the same steps as GitHub CI (`config/ci.rb`): `bin/setup --skip-server`, rubocop, the importmap audit, a Tailwind build, `bin/rails test`, and `bin/rails test:system`.
+
+```bash
+bin/ci
+```
+
+`bin/ci` needs:
+- the test credentials key (see below)
+- a Postgres it can reach: tests connect to `localhost` as `postgres` with `POSTGRES_PASSWORD` (set `PGPORT` if it isn't on 5432), and `bin/setup` also prepares the development database using `DB_HOST`, `DB_USERNAME` and `POSTGRES_PASSWORD`
+- Chrome, for the system tests
+
+Or run the steps individually:
 
 ```bash
 bin/rails tailwindcss:build   # system tests render the real layouts

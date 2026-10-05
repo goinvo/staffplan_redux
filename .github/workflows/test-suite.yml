@@ -9,18 +9,6 @@ on:
   pull_request:
     branches: '**'
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Rubocop
-        run: bundle exec rubocop
-
   test:
     runs-on: ubuntu-latest
     services:
@@ -43,14 +31,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name: Set up database schema
-        run: bin/rails db:test:prepare
-      - name: Precompile Rails assets
-        run: bin/rails assets:precompile
-      - name: Run tests
-        run: bin/rails test
-      - name: Run system tests
-        run: bin/rails test:system
+      - name: Run bin/ci (setup, rubocop, importmap audit, tests, system tests)
+        run: bin/ci
       - name: Upload system test screenshots
         if: failure()
         uses: actions/upload-artifact@v7

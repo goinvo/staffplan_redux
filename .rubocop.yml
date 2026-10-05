@@ -11,10 +11,8 @@ inherit_from: .rubocop_todo.yml
 #
 # See https://docs.rubocop.org/rubocop/configuration
 
-require:
-  - rubocop-ordered_methods
-
 plugins:
+  - rubocop-ordered_methods
   - rubocop-factory_bot
   - rubocop-graphql
   - rubocop-minitest
