@@ -145,6 +145,9 @@ Rails/ReversibleMigrationMethodDefinition:
 Rails/SquishedSQLHeredocs:
   Enabled: false
 
+Rails/StrongParametersExpect:
+  Enabled: false # Flags scalar route params like params[:id]
+
 Rails/TableNameAssignment:
   Enabled: true
 
