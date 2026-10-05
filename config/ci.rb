@@ -9,6 +9,7 @@ CI.run do
 
   step 'Security: Importmap vulnerability audit', 'bin/importmap audit'
 
+  step 'Database: Reset test database', 'bin/rails db:test:prepare'
   step 'Assets: Build Tailwind CSS', 'bin/rails tailwindcss:build'
   step 'Tests: Rails', 'bin/rails test'
   step 'Tests: System', 'bin/rails test:system'
