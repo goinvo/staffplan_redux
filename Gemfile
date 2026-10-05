@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 ruby '3.4.7'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '8.0.3'
+gem 'rails', '8.0.5.1'
 
 gem 'sprockets-rails'
 
