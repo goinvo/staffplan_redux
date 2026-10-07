@@ -46,7 +46,7 @@ gem 'rollbar'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'aws-sdk-s3', require: false
 gem 'image_processing', '~> 2.2'
-gem 'ruby-vips'
+gem 'ruby-vips', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
