@@ -134,12 +134,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   # point *_url helpers at the running test server, including its random port
   setup do
+    @original_default_url_options = Rails.application.default_url_options.dup
     Rails.application.default_url_options[:host] = Capybara.server_host
     Rails.application.default_url_options[:port] = Capybara.current_session.server.port
   end
 
   teardown do
-    Rails.application.default_url_options.except!(:host, :port)
+    Rails.application.default_url_options.replace(@original_default_url_options)
   end
 
   # Passwordless builds an absolute magic link without Capybara's port; a path
