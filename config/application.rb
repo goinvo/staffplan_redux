@@ -39,5 +39,7 @@ module StaffplanRedux
     config.mission_control.jobs.http_basic_auth_enabled = false
 
     config.x.react_ui_url = ENV.fetch('REACT_UI_URL', 'http://localhost:8080')
+    config.x.rails_ui_enabled = ENV.fetch('RAILS_UI_ENABLED', '')
+    config.x.rails_ui_emails = ENV.fetch('RAILS_UI_EMAILS', '')
   end
 end

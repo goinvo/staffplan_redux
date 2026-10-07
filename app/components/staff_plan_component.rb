@@ -8,11 +8,6 @@ class StaffPlanComponent < ViewComponent::Base
   attr_reader :user, :target_date
 
   def react_staffplan_url
-    case Rails.env.to_s
-    when 'production'
-      "https://ui.staffplan.com/people/#{helpers.current_user.id}"
-    else
-      "http://localhost:8080/people/#{helpers.current_user.id}"
-    end
+    RailsUi.react_url("/people/#{helpers.current_user.id}")
   end
 end
