@@ -85,10 +85,11 @@ group :test do
 
   gem 'factory_bot_rails'
   gem 'minitest'
+  gem 'minitest-mock'
   gem 'minitest-reporters'
   gem 'minitest-spec-rails'
   gem 'rails-controller-testing'
-  gem 'shoulda-matchers', '~> 6.5'
+  gem 'shoulda-matchers', '~> 8.0'
   gem 'timecop'
   gem 'vcr'
   gem 'webmock'
