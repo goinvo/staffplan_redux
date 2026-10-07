@@ -5,22 +5,18 @@ http_interactions:
     uri: https://api.stripe.com/v1/customers
     body:
       encoding: UTF-8
-      string: name=Nolan%2C+Zemlak+and+Bartoletti+2+%7C+Rev.+Vicenta+Mayert+2&email=something%40static.com
+      string: name=Bins+Group+1+%7C+Brady+Wiegand+DDS+1&email=something%40static.com
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/13.3.1
+      - Stripe/v1 RubyBindings/20.0.0 AIAgent/claude_code
       Authorization:
       - Bearer <BEARER_TOKEN>
-      X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_HBkqidihaLrHYX","request_duration_ms":0}}'
       Idempotency-Key:
-      - 4237a557-f5b5-48fd-a6c7-2356be439f4c
+      - 14d829f4-088a-4baf-b374-cea8d59035e7
       Stripe-Version:
-      - 2024-12-18.acacia
+      - 2026-09-30.endive
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"13.3.1","lang":"ruby","lang_version":"3.4.1 p0 (2024-12-25)","platform":"arm64-darwin24","engine":"ruby","publisher":"stripe","uname":"Darwin
-        fwank-4.local 24.2.0 Darwin Kernel Version 24.2.0: Fri Dec  6 19:02:41 PST
-        2024; root:xnu-11215.61.5~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank-4.local"}'
+      - '{"bindings_version":"20.0.0","lang":"ruby","lang_version":"4.0.7 p0 (2026-09-15)","engine":"ruby","platform":"arm64-darwin27","telemetry_id":"d112f7a55b2309f87186f9f93bb2988b","ai_agent":"claude_code"}'
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -35,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 20 Jan 2025 20:27:54 GMT
+      - Wed, 07 Oct 2026 12:21:10 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '684'
+      - '692'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -57,52 +53,50 @@ http_interactions:
       - no-cache, no-store
       Content-Security-Policy:
       - base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none';
-        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'; upgrade-insecure-requests;
-        report-uri https://q.stripe.com/csp-violation?q=wRZzT4ZhadxvMXAFfxU-evsfbT9QlZCoTUa56sM9XXkP27LtDHYSHWZQyAwQ5i8vs66dz7PU985xsSGM
-      Cross-Origin-Opener-Policy-Report-Only:
-      - same-origin; report-to="coop"
+        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'; worker-src
+        'none'; upgrade-insecure-requests; report-uri https://q.stripe.com/csp-violation?q=mf_mfvO6jQlyixBQwEhF6j6C2oQgM5Ol2RYdjQLPE-Osj7eX7Kad12Yl8YJvntvA30jICIFocQrlmm-a;
+        report-to csp
       Idempotency-Key:
-      - 4237a557-f5b5-48fd-a6c7-2356be439f4c
+      - 14d829f4-088a-4baf-b374-cea8d59035e7
       Original-Request:
-      - req_XtySh0QQsidBrE
+      - req_c2X6NE3TKvl7Hv
       Report-To:
-      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report"}],"include_subdomains":true}'
+      - '{"group":"csp","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/csp-report-v2?q=mf_mfvO6jQlyixBQwEhF6j6C2oQgM5Ol2RYdjQLPE-Osj7eX7Kad12Yl8YJvntvA30jICIFocQrlmm-a&t=1"}],"include_subdomains":true}'
       Reporting-Endpoints:
-      - coop="https://q.stripe.com/coop-report"
+      - csp="https://q.stripe.com/csp-report-v2?q=mf_mfvO6jQlyixBQwEhF6j6C2oQgM5Ol2RYdjQLPE-Osj7eX7Kad12Yl8YJvntvA30jICIFocQrlmm-a&t=1"
       Request-Id:
-      - req_XtySh0QQsidBrE
+      - req_c2X6NE3TKvl7Hv
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
-      - 2024-12-18.acacia
+      - 2026-09-30.endive
       Vary:
       - Origin
-      X-Content-Type-Options:
-      - nosniff
       X-Stripe-Priority-Routing-Enabled:
       - 'true'
       X-Stripe-Routing-Context-Priority-Tier:
       - api-testmode
       X-Wc:
-      - ABC
+      - 3c3
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains; preload
     body:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_Rcgx5PCN5fuzU6",
+          "id": "cus_VOhEvej0LGsLMC",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1737404874,
+          "created": 1791375669,
           "currency": null,
+          "customer_account": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
           "email": "something@static.com",
-          "invoice_prefix": "DB517A48",
+          "invoice_prefix": "HIFW0XWA",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -111,7 +105,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Nolan, Zemlak and Bartoletti 2 | Rev. Vicenta Mayert 2",
+          "name": "Bins Group 1 | Brady Wiegand DDS 1",
           "next_invoice_sequence": 1,
           "phone": null,
           "preferred_locales": [],
@@ -119,28 +113,26 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Mon, 20 Jan 2025 20:27:54 GMT
+  recorded_at: Wed, 07 Oct 2026 12:21:10 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/subscriptions
     body:
       encoding: UTF-8
-      string: customer=cus_Rcgx5PCN5fuzU6&items[0][price]=price_1Oo7tQBLjyMcgacQSNLewS9y&items[0][quantity]=1&trial_period_days=30&trial_settings[end_behavior][missing_payment_method]=cancel&payment_settings[save_default_payment_method]=on_subscription
+      string: customer=cus_VOhEvej0LGsLMC&items[0][price]=price_1Oo7tQBLjyMcgacQSNLewS9y&items[0][quantity]=1&trial_period_days=30&trial_settings[end_behavior][missing_payment_method]=cancel&payment_settings[save_default_payment_method]=on_subscription
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/13.3.1
+      - Stripe/v1 RubyBindings/20.0.0 AIAgent/claude_code
       Authorization:
       - Bearer <BEARER_TOKEN>
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_XtySh0QQsidBrE","request_duration_ms":312}}'
+      - '{"last_request_metrics":{"request_id":"req_c2X6NE3TKvl7Hv","request_duration_ms":311}}'
       Idempotency-Key:
-      - 46bf973c-70de-4071-baca-d46cccbb9207
+      - 463fd3f8-f48c-4407-807a-c7412716e52b
       Stripe-Version:
-      - 2024-12-18.acacia
+      - 2026-09-30.endive
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"13.3.1","lang":"ruby","lang_version":"3.4.1 p0 (2024-12-25)","platform":"arm64-darwin24","engine":"ruby","publisher":"stripe","uname":"Darwin
-        fwank-4.local 24.2.0 Darwin Kernel Version 24.2.0: Fri Dec  6 19:02:41 PST
-        2024; root:xnu-11215.61.5~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank-4.local"}'
+      - '{"bindings_version":"20.0.0","lang":"ruby","lang_version":"4.0.7 p0 (2026-09-15)","engine":"ruby","platform":"arm64-darwin27","telemetry_id":"d112f7a55b2309f87186f9f93bb2988b","ai_agent":"claude_code"}'
       Content-Type:
       - application/x-www-form-urlencoded
       Accept-Encoding:
@@ -155,11 +147,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 20 Jan 2025 20:27:55 GMT
+      - Wed, 07 Oct 2026 12:21:11 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '4366'
+      - '4674'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -177,41 +169,38 @@ http_interactions:
       - no-cache, no-store
       Content-Security-Policy:
       - base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none';
-        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'; upgrade-insecure-requests;
-        report-uri https://q.stripe.com/csp-violation?q=wRZzT4ZhadxvMXAFfxU-evsfbT9QlZCoTUa56sM9XXkP27LtDHYSHWZQyAwQ5i8vs66dz7PU985xsSGM
-      Cross-Origin-Opener-Policy-Report-Only:
-      - same-origin; report-to="coop"
+        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'; worker-src
+        'none'; upgrade-insecure-requests; report-uri https://q.stripe.com/csp-violation?q=DeVQ1t-fc69WD_bNcoBYCB16YeqigQb3AOJ_Dmhgh9A6TvJns04Q8GyqU7S_SjzypSIJyB_1Xb_fh1Bv;
+        report-to csp
       Idempotency-Key:
-      - 46bf973c-70de-4071-baca-d46cccbb9207
+      - 463fd3f8-f48c-4407-807a-c7412716e52b
       Original-Request:
-      - req_09wvQGn6dgdovD
+      - req_BS92tORsRLN4IO
       Report-To:
-      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report"}],"include_subdomains":true}'
+      - '{"group":"csp","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/csp-report-v2?q=DeVQ1t-fc69WD_bNcoBYCB16YeqigQb3AOJ_Dmhgh9A6TvJns04Q8GyqU7S_SjzypSIJyB_1Xb_fh1Bv&t=1"}],"include_subdomains":true}'
       Reporting-Endpoints:
-      - coop="https://q.stripe.com/coop-report"
+      - csp="https://q.stripe.com/csp-report-v2?q=DeVQ1t-fc69WD_bNcoBYCB16YeqigQb3AOJ_Dmhgh9A6TvJns04Q8GyqU7S_SjzypSIJyB_1Xb_fh1Bv&t=1"
       Request-Id:
-      - req_09wvQGn6dgdovD
+      - req_BS92tORsRLN4IO
       Stripe-Should-Retry:
       - 'false'
       Stripe-Version:
-      - 2024-12-18.acacia
+      - 2026-09-30.endive
       Vary:
       - Origin
-      X-Content-Type-Options:
-      - nosniff
       X-Stripe-Priority-Routing-Enabled:
       - 'true'
       X-Stripe-Routing-Context-Priority-Tier:
       - api-testmode
       X-Wc:
-      - ABC
+      - 3c3
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains; preload
     body:
       encoding: UTF-8
       string: |-
         {
-          "id": "sub_1QjRZeBLjyMcgacQiHSCqEvP",
+          "id": "sub_1UNtqMBLjyMcgacQl6Ztzr8K",
           "object": "subscription",
           "application": null,
           "application_fee_percent": null,
@@ -220,8 +209,16 @@ http_interactions:
             "enabled": false,
             "liability": null
           },
-          "billing_cycle_anchor": 1739996874,
+          "billing_cycle_anchor": 1793967670,
           "billing_cycle_anchor_config": null,
+          "billing_mode": {
+            "flexible": {
+              "proration_discounts": "included"
+            },
+            "type": "flexible",
+            "updated_at": 1791375670
+          },
+          "billing_schedules": [],
           "billing_thresholds": null,
           "cancel_at": null,
           "cancel_at_period_end": false,
@@ -229,24 +226,26 @@ http_interactions:
           "cancellation_details": {
             "comment": null,
             "feedback": null,
+            "feedback_option": null,
             "reason": null
           },
           "collection_method": "charge_automatically",
-          "created": 1737404874,
+          "created": 1791375670,
           "currency": "usd",
-          "current_period_end": 1739996874,
-          "current_period_start": 1737404874,
-          "customer": "cus_Rcgx5PCN5fuzU6",
+          "customer": "cus_VOhEvej0LGsLMC",
+          "customer_account": null,
           "days_until_due": null,
           "default_payment_method": null,
           "default_source": null,
           "default_tax_rates": [],
           "description": null,
-          "discount": null,
           "discounts": [],
           "ended_at": null,
           "invoice_settings": {
             "account_tax_ids": null,
+            "custom_fields": null,
+            "description": null,
+            "footer": null,
             "issuer": {
               "type": "self"
             }
@@ -255,17 +254,19 @@ http_interactions:
             "object": "list",
             "data": [
               {
-                "id": "si_Rcgx2qMh0obRXv",
+                "id": "si_VOhEoOcau3uqiK",
                 "object": "subscription_item",
                 "billing_thresholds": null,
-                "created": 1737404874,
+                "created": 1791375670,
+                "current_period_end": 1793967670,
+                "current_period_start": 1791375670,
+                "current_trial": null,
                 "discounts": [],
                 "metadata": {},
                 "plan": {
                   "id": "price_1Oo7tQBLjyMcgacQSNLewS9y",
                   "object": "plan",
                   "active": true,
-                  "aggregate_usage": null,
                   "amount": 300,
                   "amount_decimal": "300",
                   "billing_scheme": "per_unit",
@@ -297,7 +298,6 @@ http_interactions:
                   "nickname": null,
                   "product": "prod_PdOgBPQqj1Ri1R",
                   "recurring": {
-                    "aggregate_usage": null,
                     "interval": "month",
                     "interval_count": 1,
                     "meter": null,
@@ -312,16 +312,19 @@ http_interactions:
                   "unit_amount_decimal": "300"
                 },
                 "quantity": 1,
-                "subscription": "sub_1QjRZeBLjyMcgacQiHSCqEvP",
+                "subscription": "sub_1UNtqMBLjyMcgacQl6Ztzr8K",
                 "tax_rates": []
               }
             ],
             "has_more": false,
             "total_count": 1,
-            "url": "/v1/subscription_items?subscription=sub_1QjRZeBLjyMcgacQiHSCqEvP"
+            "url": "/v1/subscription_items?subscription=sub_1UNtqMBLjyMcgacQl6Ztzr8K"
           },
-          "latest_invoice": "in_1QjRZeBLjyMcgacQeLj0IEc2",
+          "latest_invoice": "in_1UNtqMBLjyMcgacQxlDW5ian",
           "livemode": false,
+          "managed_payments": {
+            "enabled": false
+          },
           "metadata": {},
           "next_pending_invoice_item_invoice": null,
           "on_behalf_of": null,
@@ -332,13 +335,12 @@ http_interactions:
             "save_default_payment_method": "on_subscription"
           },
           "pending_invoice_item_interval": null,
-          "pending_setup_intent": "seti_1QjRZeBLjyMcgacQfxa7pGdZ",
+          "pending_setup_intent": "seti_1UNtqMBLjyMcgacQ6Fr9mt3w",
           "pending_update": null,
           "plan": {
             "id": "price_1Oo7tQBLjyMcgacQSNLewS9y",
             "object": "plan",
             "active": true,
-            "aggregate_usage": null,
             "amount": 300,
             "amount_decimal": "300",
             "billing_scheme": "per_unit",
@@ -358,38 +360,37 @@ http_interactions:
           },
           "quantity": 1,
           "schedule": null,
-          "start_date": 1737404874,
+          "start_date": 1791375670,
           "status": "trialing",
           "test_clock": null,
           "transfer_data": null,
-          "trial_end": 1739996874,
+          "trial_end": 1793967670,
           "trial_settings": {
             "end_behavior": {
+              "billing_cycle_anchor": "now",
               "missing_payment_method": "cancel"
             }
           },
-          "trial_start": 1737404874
+          "trial_start": 1791375670
         }
-  recorded_at: Mon, 20 Jan 2025 20:27:55 GMT
+  recorded_at: Wed, 07 Oct 2026 12:21:11 GMT
 - request:
     method: get
-    uri: https://api.stripe.com/v1/customers/cus_Rcgx5PCN5fuzU6
+    uri: https://api.stripe.com/v1/customers/cus_VOhEvej0LGsLMC
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/13.3.1
+      - Stripe/v1 RubyBindings/20.0.0 AIAgent/claude_code
       Authorization:
       - Bearer <BEARER_TOKEN>
       X-Stripe-Client-Telemetry:
-      - '{"last_request_metrics":{"request_id":"req_09wvQGn6dgdovD","request_duration_ms":942}}'
+      - '{"last_request_metrics":{"request_id":"req_BS92tORsRLN4IO","request_duration_ms":1057}}'
       Stripe-Version:
-      - 2024-12-18.acacia
+      - 2026-09-30.endive
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"13.3.1","lang":"ruby","lang_version":"3.4.1 p0 (2024-12-25)","platform":"arm64-darwin24","engine":"ruby","publisher":"stripe","uname":"Darwin
-        fwank-4.local 24.2.0 Darwin Kernel Version 24.2.0: Fri Dec  6 19:02:41 PST
-        2024; root:xnu-11215.61.5~2/RELEASE_ARM64_T6030 arm64","hostname":"fwank-4.local"}'
+      - '{"bindings_version":"20.0.0","lang":"ruby","lang_version":"4.0.7 p0 (2026-09-15)","engine":"ruby","platform":"arm64-darwin27","telemetry_id":"d112f7a55b2309f87186f9f93bb2988b","ai_agent":"claude_code"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -402,11 +403,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 20 Jan 2025 20:27:55 GMT
+      - Wed, 07 Oct 2026 12:21:11 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '685'
+      - '693'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -424,46 +425,44 @@ http_interactions:
       - no-cache, no-store
       Content-Security-Policy:
       - base-uri 'none'; default-src 'none'; form-action 'none'; frame-ancestors 'none';
-        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'; upgrade-insecure-requests;
-        report-uri https://q.stripe.com/csp-violation?q=wRZzT4ZhadxvMXAFfxU-evsfbT9QlZCoTUa56sM9XXkP27LtDHYSHWZQyAwQ5i8vs66dz7PU985xsSGM
-      Cross-Origin-Opener-Policy-Report-Only:
-      - same-origin; report-to="coop"
+        img-src 'self'; script-src 'self' 'report-sample'; style-src 'self'; worker-src
+        'none'; upgrade-insecure-requests; report-uri https://q.stripe.com/csp-violation?q=DeVQ1t-fc69WD_bNcoBYCB16YeqigQb3AOJ_Dmhgh9A6TvJns04Q8GyqU7S_SjzypSIJyB_1Xb_fh1Bv;
+        report-to csp
       Report-To:
-      - '{"group":"coop","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/coop-report"}],"include_subdomains":true}'
+      - '{"group":"csp","max_age":8640,"endpoints":[{"url":"https://q.stripe.com/csp-report-v2?q=DeVQ1t-fc69WD_bNcoBYCB16YeqigQb3AOJ_Dmhgh9A6TvJns04Q8GyqU7S_SjzypSIJyB_1Xb_fh1Bv&t=1"}],"include_subdomains":true}'
       Reporting-Endpoints:
-      - coop="https://q.stripe.com/coop-report"
+      - csp="https://q.stripe.com/csp-report-v2?q=DeVQ1t-fc69WD_bNcoBYCB16YeqigQb3AOJ_Dmhgh9A6TvJns04Q8GyqU7S_SjzypSIJyB_1Xb_fh1Bv&t=1"
       Request-Id:
-      - req_hAlhmuvPVvvLdo
+      - req_jgWgB8MX6YhQhR
       Stripe-Version:
-      - 2024-12-18.acacia
+      - 2026-09-30.endive
       Vary:
       - Origin
-      X-Content-Type-Options:
-      - nosniff
       X-Stripe-Priority-Routing-Enabled:
       - 'true'
       X-Stripe-Routing-Context-Priority-Tier:
       - api-testmode
       X-Wc:
-      - ABC
+      - 3c3
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains; preload
     body:
       encoding: UTF-8
       string: |-
         {
-          "id": "cus_Rcgx5PCN5fuzU6",
+          "id": "cus_VOhEvej0LGsLMC",
           "object": "customer",
           "address": null,
           "balance": 0,
-          "created": 1737404874,
+          "created": 1791375669,
           "currency": "usd",
+          "customer_account": null,
           "default_source": null,
           "delinquent": false,
           "description": null,
           "discount": null,
           "email": "something@static.com",
-          "invoice_prefix": "DB517A48",
+          "invoice_prefix": "HIFW0XWA",
           "invoice_settings": {
             "custom_fields": null,
             "default_payment_method": null,
@@ -472,7 +471,7 @@ http_interactions:
           },
           "livemode": false,
           "metadata": {},
-          "name": "Nolan, Zemlak and Bartoletti 2 | Rev. Vicenta Mayert 2",
+          "name": "Bins Group 1 | Brady Wiegand DDS 1",
           "next_invoice_sequence": 2,
           "phone": null,
           "preferred_locales": [],
@@ -480,5 +479,5 @@ http_interactions:
           "tax_exempt": "none",
           "test_clock": null
         }
-  recorded_at: Mon, 20 Jan 2025 20:27:55 GMT
-recorded_with: VCR 6.3.1
+  recorded_at: Wed, 07 Oct 2026 12:21:11 GMT
+recorded_with: VCR 6.4.0

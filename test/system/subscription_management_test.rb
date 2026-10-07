@@ -43,8 +43,8 @@ class SubscriptionManagementTest < ApplicationSystemTestCase
     user = registered_user('when_trialing/shows_a_page_with_some_content_and_a_link_to_go_set_up_payment_for_a_subscription')
     company = user.current_company
 
-    assert_equal 'cus_QPKMNRvCZxnZt4', company.stripe_id
-    assert_equal 'sub_1PYVhTBLjyMcgacQZpFGmCtm', company.subscription.stripe_id
+    assert_equal 'cus_VOhFvV0QrjWHKQ', company.stripe_id
+    assert_equal 'sub_1UNtqcBLjyMcgacQhISpdwvp', company.subscription.stripe_id
     assert_predicate company.subscription, :trialing?
 
     passwordless_sign_in(user)
