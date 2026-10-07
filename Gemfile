@@ -13,7 +13,7 @@ gem 'pg', '~> 1.6'
 
 gem 'importmap-rails'
 gem 'mission_control-jobs'
-gem 'money'
+gem 'money', '~> 7.1'
 gem 'puma', '>= 5.0'
 gem 'rack-cors'
 gem 'recaptcha'
@@ -45,7 +45,8 @@ gem 'rollbar'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem 'aws-sdk-s3', require: false
-gem 'image_processing', '~> 1.14'
+gem 'image_processing', '~> 2.2'
+gem 'ruby-vips', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
