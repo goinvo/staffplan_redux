@@ -6,13 +6,9 @@ class SessionsController < Passwordless::SessionsController
 
   private
 
-  def my_staffplan_url(current_user)
-    "#{Rails.configuration.x.react_ui_url}/people/#{current_user.id}"
-  end
-
   def redirect_to_dashboard_if_authenticated
     if current_user.present?
-      redirect_to my_staffplan_url(current_user), allow_other_host: true
+      redirect_to my_staffplan_url, allow_other_host: true
     end
   end
 
@@ -21,5 +17,4 @@ class SessionsController < Passwordless::SessionsController
       redirect_to auth_sign_in_url, alert: 'Sorry, please try that again.' # rubocop:disable Rails/I18nLocaleTexts
     end
   end
-  helper_method :my_staffplan_url
 end

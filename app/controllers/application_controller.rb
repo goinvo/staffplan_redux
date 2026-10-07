@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 
   layout :choose_layout
 
+  helper_method :current_company, :current_user, :my_staffplan_url, :staffplan_ui_url
+
   private
 
   def check_subscription_status
@@ -38,16 +40,20 @@ class ApplicationController < ActionController::Base
   end
 
   def my_staffplan_url
-    "#{Rails.configuration.x.react_ui_url}/people/#{current_user.id}"
+    staffplan_ui_url("/people/#{current_user.id}")
   end
-  helper_method :current_user
 
   def require_company_owner_or_admin!
     return if current_user.owner?(company: current_company) || current_user.admin?(company: current_company)
 
     redirect_to root_url, flash: { error: 'You are not authorized to access this page.' }
   end
-  helper_method :current_company
+
+  def require_rails_ui!
+    return if RailsUi.enabled_for?(current_user)
+
+    redirect_to RailsUi.react_url(request.fullpath), allow_other_host: true
+  end
 
   def require_user!
     return if current_company&.can_access?(user: current_user)
@@ -72,5 +78,8 @@ class ApplicationController < ActionController::Base
 
     PaperTrail.request.whodunnit = current_user.id
   end
-  helper_method :my_staffplan_url
+
+  def staffplan_ui_url(path)
+    RailsUi.url(current_user, path)
+  end
 end

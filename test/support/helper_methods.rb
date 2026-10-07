@@ -17,6 +17,14 @@ module TestHelperMethods
   def tbd_assignment_for_company(company:)
     create(:assignment, :unassigned, project: project_for_company(company), status: Assignment::PROPOSED)
   end
+
+  def with_config(**options)
+    originals = options.keys.index_with { Rails.configuration.x.public_send(it) }
+    options.each { |key, value| Rails.configuration.x.public_send("#{key}=", value) }
+    yield
+  ensure
+    originals&.each { |key, value| Rails.configuration.x.public_send("#{key}=", value) }
+  end
 end
 
 # Include in all test classes
