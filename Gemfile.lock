@@ -215,7 +215,10 @@ GEM
     mini_magick (5.3.1)
       logger
     mini_mime (1.1.5)
-    minitest (5.27.0)
+    minitest (6.0.6)
+      drb (~> 2.0)
+      prism (~> 1.5)
+    minitest-mock (5.27.0)
     minitest-reporters (1.8.0)
       ansi
       builder
@@ -416,8 +419,8 @@ GEM
       logger (~> 1.4)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    shoulda-matchers (6.5.0)
-      activesupport (>= 5.2.0)
+    shoulda-matchers (8.0.1)
+      activesupport (>= 7.2)
     solid_queue (1.7.0)
       activejob (>= 7.1)
       activerecord (>= 7.1)
@@ -507,6 +510,7 @@ DEPENDENCIES
   letter_opener
   letter_opener_web
   minitest
+  minitest-mock
   minitest-reporters
   minitest-spec-rails
   mission_control-jobs
@@ -532,7 +536,7 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rails-omakase
   selenium-webdriver
-  shoulda-matchers (~> 6.5)
+  shoulda-matchers (~> 8.0)
   solid_queue
   stimulus-rails
   stripe
