@@ -115,7 +115,7 @@ class SignupTest < ApplicationSystemTestCase
     confirm_registration(registration, cassette: 'should_confirm_the_registration_and_sign_the_user_in')
 
     assert_equal "/people/#{User.find_by!(email: registration.email).id}", page.current_path
-    assert_stripe_ids(registration, customer: 'cus_QPKMUb8pdM5mIu', subscription: 'sub_1PYVhbBLjyMcgacQhKU9xWAP')
+    assert_stripe_ids(registration, customer: 'cus_VOhFZNZ36afIFD', subscription: 'sub_1UNtqYBLjyMcgacQmdIqVtlV')
   end
 
   test 'confirming a registration marks it as registered' do
@@ -124,7 +124,7 @@ class SignupTest < ApplicationSystemTestCase
     confirm_registration(registration, cassette: 'should_mark_the_registration_as_having_registered_')
 
     assert_predicate registration.reload, :registered?
-    assert_stripe_ids(registration, customer: 'cus_QPKMvwQ9Rl8PfG', subscription: 'sub_1PYVhYBLjyMcgacQJqLtp6zM')
+    assert_stripe_ids(registration, customer: 'cus_VOhENioP2BplKY', subscription: 'sub_1UNtqUBLjyMcgacQOtGIOWJu')
   end
 
   test 'confirming a registration creates a user for it' do
@@ -135,7 +135,7 @@ class SignupTest < ApplicationSystemTestCase
     assert_equal 1, User.count
     assert_equal registration.name, User.last.name
     assert_equal registration.email, User.last.email
-    assert_stripe_ids(registration, customer: 'cus_QPKMxlZG2yIPrP', subscription: 'sub_1PYVhZBLjyMcgacQVlcvYrpl')
+    assert_stripe_ids(registration, customer: 'cus_VOhF9gmrbcwLFw', subscription: 'sub_1UNtqXBLjyMcgacQwJp3X6rH')
   end
 
   test 'an invalid registration token redirects to sign in' do

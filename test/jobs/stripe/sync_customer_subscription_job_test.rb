@@ -19,7 +19,7 @@ module Stripe
 
       company = Company.first
 
-      assert_equal 'sub_1PYVhoBLjyMcgacQcGcNMLMI', company.subscription.stripe_id
+      assert_equal 'sub_1UNtqMBLjyMcgacQ5lGZ7DEX', company.subscription.stripe_id
 
       assert_equal 1, company.memberships.active.count
 
