@@ -172,9 +172,7 @@ GEM
     hashdiff (1.2.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    image_processing (1.14.0)
-      mini_magick (>= 4.9.5, < 6)
-      ruby-vips (>= 2.0.17, < 3)
+    image_processing (2.2.0)
     importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -212,8 +210,6 @@ GEM
     marcel (1.1.0)
     matrix (0.4.3)
     method_source (1.1.0)
-    mini_magick (5.3.1)
-      logger
     mini_mime (1.1.5)
     minitest (6.0.6)
       drb (~> 2.0)
@@ -237,8 +233,9 @@ GEM
       railties (>= 7.1)
       stimulus-rails
       turbo-rails
-    money (6.19.0)
-      i18n (>= 0.6.4, <= 2)
+    money (7.1.1)
+      bigdecimal
+      i18n (~> 1.9)
     msgpack (1.8.5)
     net-imap (0.6.7)
       date
@@ -409,7 +406,7 @@ GEM
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
-    ruby-vips (2.2.5)
+    ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
     rubyzip (3.7.0)
@@ -505,7 +502,7 @@ DEPENDENCIES
   foreman
   graphiql-rails
   graphql (~> 2.5)
-  image_processing (~> 1.14)
+  image_processing (~> 2.2)
   importmap-rails
   letter_opener
   letter_opener_web
@@ -514,7 +511,7 @@ DEPENDENCIES
   minitest-reporters
   minitest-spec-rails
   mission_control-jobs
-  money
+  money (~> 7.1)
   paper_trail
   passwordless (~> 1.8)
   pg (~> 1.6)
@@ -535,6 +532,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rails-omakase
+  ruby-vips
   selenium-webdriver
   shoulda-matchers (~> 8.0)
   solid_queue
