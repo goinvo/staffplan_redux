@@ -100,7 +100,7 @@ bin/rails db:setup
 bin/dev
 ```
 
-`docker compose up` publishes Postgres on a free localhost port picked by Docker, so it won't clash with other projects' databases. `config/database.yml` asks `docker compose port db 5432` for that port in development and test. Set `DB_PORT` to pin the port instead (Compose publishes on it, and Rails connects to it). You'll still need `DB_HOST=localhost`, `DB_USERNAME=postgres`, and `POSTGRES_PASSWORD` in your environment.
+`docker compose up` publishes Postgres on a free localhost port picked by Docker, so it won't clash with other projects' databases. `config/database.yml` asks `docker compose port db 5432` for that port in development and test. Set `DB_PORT` to pin the port instead (Compose publishes on it, and Rails connects to it). You still need `DB_USERNAME=postgres` and `POSTGRES_PASSWORD` in your environment. `DB_HOST` defaults to `localhost`.
 
 Ensure that the test suite runs and is green. `bin/ci` runs the same steps as GitHub CI (`config/ci.rb`): `bin/setup --skip-server`, rubocop, the importmap audit, a Tailwind build, `bin/rails test`, and `bin/rails test:system`.
 

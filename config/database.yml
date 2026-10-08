@@ -21,7 +21,7 @@ default: &default
 
 development_defaults: &development_default
   <<: *default
-  host: <%= ENV["DB_HOST"] %>
+  host: <%= ENV.fetch("DB_HOST", "localhost") %>
   # DB_PORT, else the host port Docker picked for `docker compose up`'s db service, else libpq's default
   port: &local_port <%= ENV.fetch("DB_PORT") { `docker compose -f "#{Rails.root.join("docker-compose.yml")}" port db 5432 2>/dev/null`[/\d+\Z/] rescue nil } %>
   password: <%= ENV["POSTGRES_PASSWORD"] %>
