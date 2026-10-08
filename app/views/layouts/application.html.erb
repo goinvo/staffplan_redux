@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-100 font-open-sans">
+<html lang="en" class="h-full bg-gray-100 font-open-sans">
   <head>
-    <title>staffplan.com</title>
+    <title>StaffPlan</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,23 +16,32 @@
   </head>
 
   <body class="h-full">
-    <div class="min-h-full">
+    <%= tag.div class: "relative z-0 flex flex-col min-h-screen", data: (shortcuts_data if rails_ui?) do %>
       <%= render "shared/nav" %>
 
-      <% if content_for(:header) %>
-        <header class="bg-white shadow">
-          <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold tracking-tight text-gray-900"><%= yield(:header) %></h1>
+      <% if content_for?(:rails_ui) %>
+        <main class="flex-1 timeline-grid-bg text-contrastBlue">
+          <%= render("shared/flash") %>
+          <%= yield :rails_ui %>
+        </main>
+      <% else %>
+        <% if content_for(:header) %>
+          <header class="bg-white shadow">
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+              <h1 class="text-3xl font-bold tracking-tight text-gray-900"><%= yield(:header) %></h1>
+            </div>
+          </header>
+        <% end %>
+
+        <main class="flex-1">
+          <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+            <%= render("shared/flash") %>
+            <%= yield %>
           </div>
-        </header>
+        </main>
       <% end %>
 
-      <main>
-        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          <%= render("shared/flash") %>
-          <%= yield %>
-        </div>
-      </main>
-    </div>
+      <%= render "shared/footer" %>
+    <% end %>
   </body>
 </html>

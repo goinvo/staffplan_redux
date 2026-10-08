@@ -12,3 +12,6 @@ module RetryUnknownSeleniumErrors
 end
 
 Capybara::Selenium::Driver.prepend(RetryUnknownSeleniumErrors)
+
+# let tests find icon-only buttons by their accessible name
+Capybara.enable_aria_label = true

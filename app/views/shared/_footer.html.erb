@@ -1,0 +1,17 @@
+<% item_class = 'relative inline mx-[2px] text-2xs text-contrastGrey' %>
+<% separated_class = "#{item_class} ml-[4px] pr-2" %>
+<% divider_class = "#{separated_class} bg-[linear-gradient(to_right,_transparent_99%,_var(--color-contrastGrey)_1%)]" %>
+<% external = { target: '_blank', rel: 'noopener noreferrer' } %>
+<footer class="w-full navbar flex justify-start align-middle px-4 py-2">
+  <div class="leading-[10px]">
+    <span class="<%= item_class %>">Copyright</span>
+    <span class="<%= item_class %>">&copy;&nbsp;<%= Time.zone.today.year %></span>
+    <%= link_to 'GoInvo.', 'https://goinvo.com/', class: item_class, **external %>
+    <span class="<%= item_class %>">All rights reserved.</span>
+    <%= link_to 'Privacy Policy', "#{ApplicationHelper::OPEN_SOURCE_URL}/blob/master/privacy.md#privacy-policy", class: item_class, **external %>
+    <span class="<%= item_class %>">and</span>
+    <%= link_to 'Terms of Use', "#{ApplicationHelper::OPEN_SOURCE_URL}/blob/master/privacy.md#terms-of-use", class: divider_class, **external %>
+    <%= link_to 'Open Source', ApplicationHelper::OPEN_SOURCE_URL, class: divider_class, **external %>
+    <%= link_to 'Feedback', ApplicationHelper::FEEDBACK_MAILTO, class: separated_class, **external %>
+  </div>
+</footer>
