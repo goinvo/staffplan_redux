@@ -26,6 +26,8 @@ development_defaults: &development_default
   port: &local_port <%= ENV.fetch("DB_PORT") { `docker compose -f "#{Rails.root.join("docker-compose.yml")}" port db 5432 2>/dev/null`[/\d+\Z/] rescue nil } %>
   password: <%= ENV["POSTGRES_PASSWORD"] %>
   username: <%= ENV["DB_USERNAME"] %>
+  # libpq's GSSAPI negotiation isn't fork-safe on macOS and crashes SolidQueue's forked workers
+  gssencmode: disable
 
 development:
   primary:
