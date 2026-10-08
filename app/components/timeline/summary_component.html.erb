@@ -1,0 +1,13 @@
+<div class="hidden sm:flex justify-center flex-col pl-8 pt-1 cursor-pointer" data-controller="toggle" data-action="click->toggle#toggle mouseleave->toggle#hide">
+  <% items.each do |item| %>
+    <div class="flex relative justify-between items-center font-normal <%= border_class(item) %>">
+      <span class="text-sm leading-[18px] whitespace-nowrap text-right shrink-0 w-10"><%= item.label %></span>
+      <span class="font-bold text-sm leading-[18px] ml-2">
+        <%= value(item) %><span class="font-normal text-sm leading-[18px] pl-1">hrs</span>
+      </span>
+      <% if item.tooltip %>
+        <div class="hidden absolute top-full text-left right-0 bg-gray-700 text-white text-xs rounded px-2 py-1 z-10 shadow-lg min-w-40" data-toggle-target="toggleable"><%= item.tooltip %></div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
