@@ -9,7 +9,7 @@ gem 'rails', '8.1.4'
 
 gem 'propshaft'
 
-gem 'pg', '~> 1.6'
+gem 'pg', '~> 1.7'
 
 gem 'importmap-rails'
 gem 'mission_control-jobs'
