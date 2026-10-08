@@ -1,0 +1,42 @@
+<%= tag.div id: "timeline", class: "min-h-full timeline-grid-bg", data: controller_data do %>
+  <style data-timeline-target="style"><%= default_style %></style>
+  <table class="min-w-full timeline-grid-bg text-contrastBlue text-sm border-none">
+    <thead class="relative">
+      <tr class="hidden sm:flex pl-5 bg-contrastBlue min-h-28 text-white">
+        <th class="flex w-1/2 sm:w-2/5 px-0 py-5 lg:mr-1"><%= page_header %></th>
+        <% window.weeks.each do |week| %>
+          <%= tag.th class: ["hidden sm:block relative px-1", week.current? ? "navbar font-bold" : "font-normal"], data: { timeline_week: week.index } do %>
+            <%= render Timeline::BarChartComponent.new(hours: hours.for(week), max: hours.max, past: week.past?) %>
+          <% end %>
+        <% end %>
+        <th class="pr-2 pl-2 py-2 w-1/2 sm:w-1/6"><%= summary %></th>
+      </tr>
+      <tr class="flex sm:justify-normal justify-between border-b border-gray-300 pl-5">
+        <th class="px-0 pt-[10px] pb-2 font-normal align-top text-transparentGrey w-1/2 sm:w-2/5">
+          <div class="hidden sm:flex flex-row justify-between items-start">
+            <%= columns %>
+            <%= link_to previous_path, class: "-m-1 sm:ml-0 text-black flex items-center justify-center hover:text-contrastGrey", aria: { label: "Previous weeks" }, data: { timeline_target: "previous", turbo_action: "replace" } do %>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+            <% end %>
+          </div>
+        </th>
+        <% window.weeks.each do |week| %>
+          <%= render Timeline::WeekHeaderCellComponent.new(week:) %>
+        <% end %>
+        <th class="pl-0 pr-4 pt-1 pb-2 font-normal align-top w-1/2 sm:w-1/6">
+          <div class="flex flex-row items-start">
+            <%= link_to next_path, class: "hidden sm:flex pt-[2px] text-contrastBlue items-center justify-center hover:text-contrastGrey", aria: { label: "Next weeks" }, data: { timeline_target: "next", turbo_action: "replace" } do %>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
+            <% end %>
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <%= link_to "Today", today_path, hidden: window.current_week_index.present?, class: "absolute -top-[12px] left-1/2 -translate-x-1/2 bg-[#AFB3BF] text-[#151F33] font-normal rounded-[3px] px-[10px] py-[2px] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]", data: { timeline_target: "today", turbo_action: "replace" } %>
+        </th>
+      </tr>
+    </thead>
+    <tbody><%= content %></tbody>
+  </table>
+<% end %>

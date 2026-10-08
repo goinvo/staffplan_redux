@@ -1,0 +1,16 @@
+<% bar = "M0 3C0 1.34315 1.34315 0 3 0H31C32.6569 0 34 1.34315 34 3V#{bar_height}H0V3Z" %>
+<div class="sm:w-[34px] w-[68px]">
+  <div class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1">
+    <span class="flex justify-center text-center sm:w-[34px] w-[68px] <%= text_class %>"><%= label %></span>
+    <% if bar? %>
+      <svg height="<%= bar_height %>" viewBox="0 0 34 <%= bar_height %>" xmlns="http://www.w3.org/2000/svg" class="sm:w-[34px] w-[68px]" aria-hidden="true">
+        <path d="<%= bar %>" fill="<%= main_color %>"/>
+        <% if only_proposed? %>
+          <path d="<%= bar %>" fill="<%= proposed_color %>" data-proposed/>
+        <% elsif proposed_segment? %>
+          <path d="M0 <%= bar_height %>L0 <%= (bar_height - proposed_height).round(2) %>L34 <%= (bar_height - proposed_height).round(2) %>L34 <%= bar_height %>H0V3Z" fill="<%= proposed_color %>" data-proposed/>
+        <% end %>
+      </svg>
+    <% end %>
+  </div>
+</div>

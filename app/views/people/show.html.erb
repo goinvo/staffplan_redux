@@ -1,1 +1,9 @@
-<h1 class="px-4 py-6 text-huge font-bold"><%= @user.name %></h1>
+<%= render Timeline::GridComponent.new(window: @window, hours: @hours) do |grid| %>
+  <% grid.with_page_header do %>
+    <%= render Timeline::PageHeaderComponent.new(
+      title: @user.name,
+      avatar_url: AvatarHelper.new(target: @user).image_url,
+      inactive: @user.inactive?(company: current_company),
+    ) %>
+  <% end %>
+<% end %>

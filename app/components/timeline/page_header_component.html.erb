@@ -1,0 +1,16 @@
+<div class="flex text-white items-center pr-3">
+  <% if avatar_url %>
+    <div class="px-2 py-2 relative overflow-hidden w-[92px] h-[67px] aspect-[92/67] mr-4">
+      <%= image_tag avatar_url, alt: "Avatar", class: "absolute inset-0 h-full w-full rounded-lg object-cover" %>
+    </div>
+  <% end %>
+  <div class="flex flex-col items-start">
+    <h1 class="text-huge text-left font-normal break-words leading-snug">
+      <%= title %>
+      <% if inactive %>
+        <span class="block text-sm leading-[14px] font-normal">(Deactivated)</span>
+      <% end %>
+    </h1>
+    <%= content %>
+  </div>
+</div>

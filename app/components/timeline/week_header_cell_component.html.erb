@@ -1,0 +1,12 @@
+<%= tag.th class: ["relative py-2 px-1 font-normal text-contrastBlue", ("bg-selectedColumnBg" if week.current?)], data: { timeline_week: week.index }, aria: { current: ("date" if week.current?) } do %>
+  <div class="relative group flex flex-col items-center sm:text-base text-2xl sm:w-[34px] w-[68px] <%= week.current? ? "font-bold" : "font-normal" %>">
+    <span>
+      <%= week.monday.day %>
+      <span class="absolute w-[70px] top-[27px] left-1/2 -translate-x-1/2 text-[8px] leading-5 text-white font-normal bg-contrastBlue rounded-md opacity-0 z-10 pointer-events-none group-hover:opacity-100 transition-opacity duration-200">
+        <%= date_range %>
+        <span class="block h-[11px] w-[11px] bg-contrastBlue absolute top-[-5px] left-1/2 -translate-x-1/2 rotate-[135deg] clip-triangle rounded-bl-[0.5em]"></span>
+      </span>
+    </span>
+    <span><%= label %></span>
+  </div>
+<% end %>
