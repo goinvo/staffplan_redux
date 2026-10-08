@@ -1,78 +1,36 @@
-<nav class="bg-gray-800">
-  <div class="mx-auto">
-    <div class="flex h-14 items-center justify-between">
-      <div class="flex items-center">
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <%= header_link_to "My StaffPlan", staffplan_ui_url("/people/#{current_user.id}") %>
-            <%= header_link_to "People", staffplan_ui_url("/people") %>
-            <%= header_link_to "Projects", staffplan_ui_url("/projects") %>
-          </div>
+<nav aria-label="Main" class="navbar pl-6 pr-0 sm:px-5 h-14 flex justify-between items-center">
+  <div class="flex items-center pl-1 sm:pl-0 sm:space-x-4 space-x-1 h-full">
+    <% main_nav_links.each do |label, path, active| %>
+      <%= link_to label, staffplan_ui_url(path),
+            class: ['inline-flex items-center text-base sm:px-4 px-1 sm:py-2 py-1 rounded-md whitespace-nowrap',
+                    active ? 'bg-contrastBlue' : 'hover:bg-contrastBlue'],
+            aria: { current: ('page' if active) } %>
+    <% end %>
+    <% if rails_ui? %>
+      <button type="button" class="px-8" aria-label="New project" data-action="shortcuts#newProject">
+        <div class="flex self-start py-0.5">
+          <svg class="sm:block hidden h-8 w-8 rounded-md text-contrastGrey hover:text-white" fill="currentColor" viewBox="0 0 448 512" aria-hidden="true">
+            <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+          </svg>
         </div>
-      </div>
-      <div class="hidden md:block">
-        <div data-controller="desktop-nav" class="ml-4 flex items-center md:ml-6 relative">
-          <%= link_to "Feedback", "mailto:staffplan@goinvo.com", class: 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-md font-medium' %>
-          <!-- desktop three dot menu -->
-          <div data-action="click->desktop-nav#toggle">
-            <button data-mobile-nav-target="button" type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:text-white" aria-controls="mobile-menu" aria-expanded="false">
-              <span class="absolute -inset-0.5"></span>
-              <span class="sr-only">Open main menu</span>
-              <!-- Menu open: "hidden", Menu closed: "block" -->
-              <svg data-desktop-nav-target="open" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="#aaa" viewBox="0 0 256 256">
-                  <path d="M140,128a12,12,0,1,1-12-12A12,12,0,0,1,140,128ZM128,72a12,12,0,1,0-12-12A12,12,0,0,0,128,72Zm0,112a12,12,0,1,0,12,12A12,12,0,0,0,128,184Z"></path>
-                </svg>
-              </svg>
-            </button>
-          </div>
-          <div class="hidden right-10 top-2 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu" id="desktop-menu">
-            <div class="py-1 z-20 relative" role="none">
-              <%= link_to "Open Source", "https://github.com/goinvo/staffplan-next-app", class: "block px-4 py-2 text-sm text-gray-700 hover:text-tiffany" %>
-              <%= link_to 'Settings', settings_profile_path, class: 'block px-4 py-2 text-sm text-gray-700 hover:text-tiffany' %>
-              <%= button_to("Sign out", auth_sign_out_url, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 hover:text-tiffany") %>
-            </div>
-            <div class="fixed inset-0 z-0" data-desktop-nav-target="close" data-action="click->desktop-nav#toggle"></div>
-          </div>
-        </div>
-      </div>
-      <div class="mr-2 flex md:hidden">
-        <!-- Mobile menu button -->
-        <div data-controller="mobile-nav" data-action="click->mobile-nav#toggle">
-          <button data-mobile-nav-target="button" type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
-            <span class="absolute -inset-0.5"></span>
-            <span class="sr-only">Open main menu</span>
-            <!-- Menu open: "hidden", Menu closed: "block" -->
-            <svg data-mobile-nav-target="open" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-            <!-- Menu open: "block", Menu closed: "hidden" -->
-            <svg data-mobile-nav-target="close" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
+      </button>
+    <% end %>
   </div>
-
-  <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="border-b border-gray-700 md:hidden hidden" id="mobile-menu">
-    <div class="space-y-1 px-2 py-3 sm:px-3">
-      <%= mobile_header_link_to "My StaffPlan", staffplan_ui_url("/people/#{current_user.id}") %>
-      <%= mobile_header_link_to "People", staffplan_ui_url("/people") %>
-      <%= mobile_header_link_to "Projects", staffplan_ui_url("/projects") %>
-      <% if current_user.owner?(company: current_company) || current_user.admin?(company: current_company) %>
-        <%= mobile_header_link_to "Settings", settings_path %>
-      <% end %>
-    </div>
-    <div class="border-t border-gray-700 pb-3 pt-4">
-      <div class="mt-3 space-y-1 px-2">
-        <%= link_to "Feedback", "mailto:staffplan@goinvo.com", class: 'block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white' %>
-        <%= link_to "Open Source", "https://github.com/goinvo/staffplan-next-app", class: "block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white" %>
-        <%= link_to 'Settings', settings_profile_path, class: 'block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white' %>
-        <%= button_to("Sign out", auth_sign_out_path, data: {method: :delete}, class: "block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white") %>
+  <div class="flex items-center sm:space-x-4 py-4 sm:ml-2">
+    <%= link_to 'Feedback', ApplicationHelper::FEEDBACK_MAILTO, target: '_blank', rel: 'noopener noreferrer',
+          class: 'sm:inline-flex hidden items-center text-base px-4 py-2 rounded-md hover:bg-contrastBlue' %>
+    <div class="relative inline-block text-left" data-controller="dropdown" data-action="click@window->dropdown#hide">
+      <button type="button" aria-label="Menu" data-dropdown-target="button" data-action="dropdown#toggle"
+              class="cursor-pointer flex items-center text-2xl text-contrastGrey hover:text-white rounded-full ellipsismenu focus:outline-none"></button>
+      <div data-dropdown-target="menu" role="menu"
+           data-transition-enter="transition ease-out duration-100" data-transition-enter-from="transform opacity-0 scale-95" data-transition-enter-to="transform opacity-100 scale-100"
+           data-transition-leave="transition ease-in duration-75" data-transition-leave-from="transform opacity-100 scale-100" data-transition-leave-to="transform opacity-0 scale-95"
+           class="hidden absolute right-0 mt-2 w-48 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] focus:outline-none z-20">
+        <div class="py-1 text-sm text-gray-900">
+          <%= link_to 'Open Source', ApplicationHelper::OPEN_SOURCE_URL, target: '_blank', rel: 'noopener noreferrer', role: 'menuitem', class: 'px-4 py-2 block hover:text-tiffany' %>
+          <%= link_to 'Settings', settings_profile_path, role: 'menuitem', class: 'px-4 py-2 block hover:text-tiffany' %>
+          <%= button_to 'Sign Out', auth_sign_out_path, method: :delete, role: 'menuitem', class: 'px-4 py-2 block w-full text-left hover:text-tiffany cursor-pointer' %>
+        </div>
       </div>
     </div>
   </div>

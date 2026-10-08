@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   layout :choose_layout
 
-  helper_method :current_company, :current_user, :my_staffplan_url, :staffplan_ui_url
+  helper_method :current_company, :current_user, :my_staffplan_url, :rails_ui?, :staffplan_ui_url
 
   private
 
@@ -43,6 +43,10 @@ class ApplicationController < ActionController::Base
     staffplan_ui_url("/people/#{current_user.id}")
   end
 
+  def rails_ui?
+    RailsUi.enabled_for?(current_user)
+  end
+
   def require_company_owner_or_admin!
     return if current_user.owner?(company: current_company) || current_user.admin?(company: current_company)
 
@@ -50,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_rails_ui!
-    return if RailsUi.enabled_for?(current_user)
+    return if rails_ui?
 
     redirect_to RailsUi.react_url(request.fullpath), allow_other_host: true
   end

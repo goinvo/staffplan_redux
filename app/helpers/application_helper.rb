@@ -1,23 +1,26 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def header_link_to(text, path)
-    css_classes = if current_page?(path) || !request.url.match(path).nil?
-                    'bg-gray-900 text-white rounded-md px-3 py-2 text-md font-medium'
-                  else
-                    'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-md font-medium'
-                  end
+  FEEDBACK_MAILTO = 'mailto:staffplan@goinvo.com?subject=StaffPlan%20Feedback'
+  OPEN_SOURCE_URL = 'https://github.com/goinvo/staffplan-next-app'
 
-    link_to text, path, class: css_classes
+  def main_nav_links
+    my_staffplan_path = person_path(current_user)
+
+    [
+      ['My StaffPlan', my_staffplan_path, request.path == my_staffplan_path],
+      ['People', people_path, request.path.start_with?(people_path) && request.path != my_staffplan_path],
+      ['Projects', projects_path, request.path.start_with?(projects_path)],
+    ]
   end
 
-  def mobile_header_link_to(text, path)
-    css_classes = if current_page?(path)
-                    'bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
-                  else
-                    'text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-                  end
-
-    link_to text, path, class: css_classes
+  def shortcuts_data
+    {
+      controller: 'shortcuts',
+      action: 'keydown@window->shortcuts#navigate',
+      shortcuts_my_staffplan_url_value: person_path(current_user),
+      shortcuts_people_url_value: people_path,
+      shortcuts_projects_url_value: projects_path,
+    }
   end
 end
