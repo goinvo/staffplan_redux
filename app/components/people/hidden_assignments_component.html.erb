@@ -1,0 +1,26 @@
+<% totals.each_with_index do |(name, field), row| %>
+  <tr class="flex sm:justify-normal justify-between bg-white-300 hover:bg-hoverGrey pr-3 border-gray-300 <%= "border-t" if row.zero? %>">
+    <td class="pl-3 sm:px-0 py-1 sm:pt-1 sm:pb-2 font-normal align-top w-1/2 sm:w-2/5">
+      <% if row.zero? %>
+        <%= link_to label, toggle_path, class: "pl-5", data: { turbo_action: "replace" } %>
+      <% elsif !show_hidden %>
+        <p class="pl-5">Total includes hours from hidden projects</p>
+      <% end %>
+    </td>
+    <% unless show_hidden %>
+      <td class="text-contrastBlue sm:flex hidden pr-2 sm:pr-1 md:pr-2 flex-col items-end max-w-[50px] w-full">
+        <div class="pt-1"><%= name %></div>
+      </td>
+      <% window.weeks.each do |week| %>
+        <%= tag.td class: ["sm:block hidden relative px-1", week.current? ? "bg-selectedColumnBg font-bold" : "font-normal"], data: { timeline_week: week.index } do %>
+          <div class="sm:w-[34px] w-[68px]">
+            <div class="absolute bottom-0 left-0 right-0 sm:max-w-[34px] max-w-[68px] px-1 sm:pb-2">
+              <span class="flex justify-center text-center text-gray-500 sm:w-[34px] w-[68px]"><%= hours.for(week).public_send(field) %></span>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+    <td class="font-normal py-2 sm:pl-4 pl-0 pr-0 ml-1 sm:ml-0 w-1/2 sm:w-1/6"></td>
+  </tr>
+<% end %>

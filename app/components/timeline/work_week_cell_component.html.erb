@@ -1,0 +1,8 @@
+<%= tag.td class: ["relative px-1 py-1 font-normal", ("bg-selectedColumnBg" if week.current?)], data: { timeline_week: week.index } do %>
+  <div class="flex flex-col sm:justify-normal justify-center h-full sm:space-y-3 <%= week.current? ? "font-bold" : "font-normal" %> <%= "pt-5 sm:pt-0" if padded %>">
+    <div class="relative my-1 sm:block hidden"><%= tag.input(**input_options(:plan, estimated_value)) %></div>
+    <% if actual? %>
+      <div class="relative my-1 pt-2"><%= tag.input(**input_options(:actual, actual_value)) %></div>
+    <% end %>
+  </div>
+<% end %>

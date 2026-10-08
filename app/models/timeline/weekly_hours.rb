@@ -23,6 +23,11 @@ module Timeline
       @max ||= by_week.values.map { [it.actual, it.estimated].max }.max
     end
 
+    def work_week(assignment, week)
+      work_weeks[[assignment.id, week.year, week.cweek]] ||
+        WorkWeek.new(assignment:, year: week.year, cweek: week.cweek, estimated_hours: weekly_estimate(assignment, week))
+    end
+
     private
 
     def by_week
@@ -33,12 +38,11 @@ module Timeline
       actual = estimated = proposed = 0
 
       assignments.each do |assignment|
-        work_week = work_weeks[[assignment.id, week.year, week.cweek]]
-        hours = work_week ? work_week.estimated_hours : weekly_estimate(assignment, week)
+        work_week = work_week(assignment, week)
 
-        actual += work_week&.actual_hours.to_i
-        estimated += hours
-        proposed += hours if assignment.status == Assignment::PROPOSED
+        actual += work_week.actual_hours
+        estimated += work_week.estimated_hours
+        proposed += work_week.estimated_hours if assignment.status == Assignment::PROPOSED
       end
 
       Hours.new(actual:, estimated:, proposed:)
