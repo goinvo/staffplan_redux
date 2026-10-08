@@ -2,7 +2,8 @@ services:
   db:
     image: postgres:15
     ports:
-      - 5432:5432
+      # Docker picks a free host port unless DB_PORT pins one; config/database.yml looks it up
+      - "127.0.0.1:${DB_PORT:-}:5432"
     volumes:
       - data:/var/lib/postgresql/data
     environment:
