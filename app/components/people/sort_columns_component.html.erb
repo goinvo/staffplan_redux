@@ -1,0 +1,11 @@
+<div class="flex flex-1 items-center">
+  <% COLUMNS.each do |column, title, width| %>
+    <div class="flex items-center text-start sm:w-full <%= width %>">
+      <%= link_to sort_path(column), class: "flex items-center justify-start text-start", data: { turbo_action: "replace" } do %>
+        <span><%= title %></span>
+        <% if column == sort.column %><span class="sr-only">(sorted <%= sort.desc? ? "descending" : "ascending" %>)</span><% end %>
+        <svg class="w-4 h-4 transform <%= chevron_class(column) %> [transition:transform_0.3s_ease-in-out,opacity_0.2s_ease-in-out]" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+      <% end %>
+    </div>
+  <% end %>
+</div>

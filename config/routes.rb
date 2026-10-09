@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :people, only: %i[index show]
   resources :projects, only: %i[index show]
+  resources :assignments, only: %i[update]
 
   resources :registrations, only: %i[new create] do
     member do

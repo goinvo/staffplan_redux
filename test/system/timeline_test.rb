@@ -11,6 +11,10 @@ class TimelineTest < ApplicationSystemTestCase
     passwordless_sign_in(@user)
   end
 
+  teardown do
+    resize_to 1400, 1400
+  end
+
   test 'resizing changes the visible weeks without a request' do
     with_rails_ui do
       resize_to 1000
@@ -91,8 +95,8 @@ class TimelineTest < ApplicationSystemTestCase
     find('body').send_keys(key)
   end
 
-  def resize_to(width)
-    page.current_window.resize_to(width, 1000)
+  def resize_to(width, height = 1000)
+    page.current_window.resize_to(width, height)
   end
 
   def with_rails_ui(&)

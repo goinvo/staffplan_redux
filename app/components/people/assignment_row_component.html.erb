@@ -1,0 +1,50 @@
+<%= tag.tr id: dom_id(assignment), class: row_class do %>
+  <td class="pl-3 sm:px-0 py-1 sm:pt-1 sm:pb-2 font-normal align-top <%= first_client ? "pt-5" : "sm:block flex items-center" %> w-1/2 sm:w-2/5">
+    <div class="flex sm:flex-row flex-col w-full justify-between items-start">
+      <div class="sm:max-w-[70px] md:max-w-[110px] lg:max-w-[130px] w-full pl-0 sm:pl-[2px] sm:mr-1 md:mr-0 <%= "mb-1" if first_client %>">
+        <% if client_label? %>
+          <%= link_to assignment.project.client.name, projects_path(client: assignment.project.client_id), class: "text-contrastBlue flex items-center justify-start sm:pt-2 pl-0 text-start -translate-x-0.5" %>
+        <% end %>
+      </div>
+      <div class="flex justify-between sm:max-w-[280px] w-full">
+        <div class="flex items-start pt-2 relative">
+          <% if show_button? %>
+            <%= button_to assignment_path(assignment), method: :patch, params: { assignment: { focused: true } }, class: "group relative pl-4 cursor-pointer", aria: { label: "Show in My StaffPlan" } do %>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
+              <span class="hidden group-hover:block absolute top-1/2 left-1/2 bg-gray-700 text-white text-xs rounded px-2 py-1 z-50 shadow-lg min-w-40" aria-hidden="true">Show in My StaffPlan</span>
+            <% end %>
+          <% else %>
+            <div class="w-8"></div>
+          <% end %>
+        </div>
+        <div class="w-full <%= proposed? ? "sm:max-w-[185px]" : "sm:max-w-[205px]" %> md:pl-1 lg:pl-2 sm:mr-0 mr-2 flex items-start <%= "mb-4 sm:mb-0" if first_client %>">
+          <%= link_to assignment.project.name, project_path(assignment.project), class: "pt-0 sm:pt-2 font-bold flex items-center justify-start text-contrastBlue text-start" %>
+        </div>
+        <div class="text-contrastBlue sm:flex hidden pr-2 sm:pr-1 md:pr-2 flex-col items-end <%= proposed? ? "max-w-[75px]" : "max-w-[55px]" %> w-full">
+          <% if inactive %>
+            <span class="pt-2"><%= proposed? ? "Proposed" : "Plan" %></span>
+          <% else %>
+            <%= button_to (proposed? ? "Proposed" : "Plan"), assignment_path(assignment), method: :patch, params: { assignment: { status: toggled_status } }, class: "pt-2 underline cursor-pointer", form: { class: "contents" } %>
+          <% end %>
+          <div class="pt-5">Actual</div>
+        </div>
+      </div>
+    </div>
+  </td>
+  <% window.weeks.each do |week| %>
+    <%= render Timeline::WorkWeekCellComponent.new(assignment:, work_week: hours.work_week(assignment, week), week:, disabled: inactive, padded: first_client) %>
+  <% end %>
+  <td class="font-normal py-2 sm:pl-4 pl-0 pr-0 ml-1 sm:ml-0 w-1/2 sm:w-1/6">
+    <div class="pl-6 sm:flex hidden flex-col max-w-fit space-y-5 cursor-pointer" data-controller="toggle" data-action="click->toggle#toggle mouseleave->toggle#hide">
+      <div class="sm:flex justify-between space-x-1 relative pt-1">
+        <span class="text-sm leading-[18px] whitespace-nowrap text-right shrink-0 min-w-10">Plan</span>
+        <span class="font-bold text-sm text-right min-w-20"><%= number_with_delimiter(future_plan + actual_total) %><span class="text-sm font-normal pl-1">hrs</span></span>
+        <div class="hidden absolute bottom-full bg-gray-700 text-white text-xs rounded px-2 py-1 z-10 shadow-lg min-w-32" data-toggle-target="toggleable"><%= plan_tooltip %></div>
+      </div>
+      <div class="sm:flex justify-between space-x-1 relative mt-[-7px]">
+        <span class="text-sm leading-[18px] whitespace-nowrap text-right shrink-0 min-w-10">Actual</span>
+        <span class="font-bold text-sm text-right min-w-20"><%= number_with_delimiter(actual_total) %><span class="text-sm font-normal pl-1">hrs</span></span>
+      </div>
+    </div>
+  </td>
+<% end %>

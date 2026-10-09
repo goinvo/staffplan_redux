@@ -82,6 +82,22 @@ module Timeline
       assert_equal 4, hours.for(@window.weeks.last).estimated
     end
 
+    test 'returns the saved work week for a cell, or an unsaved one with the weekly estimate' do
+      assignment = assignment_for_user(user: @user)
+      assignment.update!(starts_on: @next_week.monday, estimated_weekly_hours: 8)
+      saved = work_week(assignment, @this_week, estimated: 0)
+
+      hours = WeeklyHours.new(assignments: [assignment], window: @window)
+
+      assert_equal saved, hours.work_week(assignment, @this_week)
+
+      cell = hours.work_week(assignment, @next_week)
+
+      assert_predicate cell, :new_record?
+      assert_equal [8, 0, @next_week.cweek, @next_week.year], [cell.estimated_hours, cell.actual_hours, cell.cweek, cell.year]
+      assert_equal 0, hours.work_week(assignment, @last_week).estimated_hours
+    end
+
     private
 
     def work_week(assignment, week, estimated:, actual: 0)
