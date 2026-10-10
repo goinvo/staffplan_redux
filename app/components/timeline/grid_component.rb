@@ -8,17 +8,21 @@ module Timeline
     renders_one :columns
     renders_one :summary
 
-    attr_reader :window, :hours
+    attr_reader :window, :hours, :extra_controller
 
-    def initialize(window:, hours:)
+    def initialize(window:, hours:, extra_controller: nil)
       @window = window
       @hours = hours
+      @extra_controller = extra_controller
     end
 
     def controller_data
       {
-        controller: 'timeline',
-        action: 'keydown@window->timeline#page touchstart@window->timeline#touchStart touchend@window->timeline#touchEnd',
+        controller: ['timeline work-weeks', extra_controller].compact.join(' '),
+        action: [
+          'keydown@window->timeline#page touchstart@window->timeline#touchStart touchend@window->timeline#touchEnd turbo:morph@document->timeline#relayout',
+          'submit->work-weeks#submit focusin->work-weeks#focus focusout->work-weeks#blur keydown->work-weeks#keydown input->work-weeks#input',
+        ].join(' '),
         timeline_start_value: window.start.iso8601,
         timeline_current_week_value: window.current_week_index || -1,
       }

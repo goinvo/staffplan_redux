@@ -1,4 +1,4 @@
-<% turbo_refreshes_with scroll: :preserve %>
+<% turbo_refreshes_with method: :morph, scroll: :preserve %>
 <% content_for :rails_ui do %>
   <%= yield %>
 <% end %>

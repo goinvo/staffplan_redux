@@ -66,8 +66,10 @@ class AppShellTest < ApplicationSystemTestCase
       JS
 
       click_button 'New project'
+      within('dialog[open]') { click_button 'Cancel' }
       press 'n'
 
+      assert_selector 'dialog[open]'
       assert_equal 2, evaluate_script('window.newProjectRequests')
     end
   end

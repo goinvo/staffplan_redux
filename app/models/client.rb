@@ -21,6 +21,7 @@ class Client < ApplicationRecord
 
   scope :active, -> { where(status: 'active') }
   scope :archived, -> { where(status: 'archived') }
+  scope :named, ->(name) { where('lower(name) = ?', name.to_s.strip.downcase) }
 
   def active?
     status == ACTIVE

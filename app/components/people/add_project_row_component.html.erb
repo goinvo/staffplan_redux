@@ -1,0 +1,18 @@
+<%= tag.tr id: "add_project", hidden: !open, class: "sm:flex w-full pl-[10px] border-b border-gray-300 h-[100px]", data: { add_project_target: "row" } do %>
+  <td class="sm:block flex items-center pt-1 pb-2 px-0 font-normal align-top w-1/2 sm:w-2/5">
+    <%= form_with url: helpers.person_assignments_path(user), scope: :proposed_assignment, id: "add_project_form", class: "flex justify-between w-full h-10 pt-3", data: { action: "keydown->add-project#keydown combobox:chosen->add-project#chosen" } do %>
+      <div class="w-full sm:max-w-[68px] md:max-w-[103px] lg:max-w-[125px]" data-action="input->add-project#syncClient">
+        <%= render Shared::ComboboxComponent.new(id: "add_project_client", name: "proposed_assignment[client_name]", value: proposal.client_name, placeholder: "Client",
+          options: client_options, error: error(:client_name), input_class: "h-7 w-full", autofocus: open && error(:client_name).present?) %>
+      </div>
+      <div class="w-full sm:max-w-[220px] md:max-w-[266px] lg:max-w-[258px] sm:pl-3 lg:pl-2 pr-10" data-add-project-target="project">
+        <%= render Shared::ComboboxComponent.new(id: "add_project_name", name: "proposed_assignment[project_name]", value: proposal.project_name, placeholder: "Project name",
+          options: project_options, group: proposal.client_name, error: error(:project_name) || proposal.errors[:base].first, input_class: "h-7 w-full",
+          autofocus: open && error(:client_name).blank?) %>
+      </div>
+    <% end %>
+  </td>
+  <td class="sm:block items-center pl-[10px] pt-[17px] pb-2 px-0 font-normal align-top">
+    <button type="submit" form="add_project_form" class="bg-tiffany px-3 py-1 rounded-[3px] text-white font-bold cursor-pointer">Save</button>
+  </td>
+<% end %>

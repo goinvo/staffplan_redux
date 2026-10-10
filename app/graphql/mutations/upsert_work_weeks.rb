@@ -17,32 +17,12 @@ module Mutations
       # try and find the assignment
       assignment = current_company.assignments.find(assignment_id)
 
-      membership = Membership.find_by(user: assignment.user, company: current_company)
       skip_count = 0
 
       WorkWeek.transaction do
         work_weeks.each do |ww|
-          work_week = assignment.work_weeks.find_or_initialize_by(cweek: ww.cweek, year: ww.year)
-
-          if assignment.user && membership.inactive? && work_week.is_future_work_week?(relative_to_date: membership.updated_at.to_date)
-            # edits are allowed to the user's work weeks prior to their deactivation week, inclusive
-            skip_count += 1
-            next
-          end
-
-          if work_week.is_future_work_week? && (
-            ww.estimated_hours.blank? || ww.estimated_hours.zero?
-          )
-            # the front end will send nil or 0 values for work weeks that should be deleted
-            work_week.destroy
-          else
-            values = ww.to_h.slice(:estimated_hours, :actual_hours).tap do |v|
-              v[:estimated_hours] = v[:estimated_hours].to_i
-              v[:actual_hours] = v[:actual_hours].to_i
-            end
-
-            work_week.update(values)
-          end
+          work_week = assignment.upsert_work_week(cweek: ww.cweek, year: ww.year, estimated_hours: ww.estimated_hours.to_i, actual_hours: ww.actual_hours.to_i)
+          skip_count += 1 if work_week.errors.of_kind?(:base, :locked)
         end
       end
 

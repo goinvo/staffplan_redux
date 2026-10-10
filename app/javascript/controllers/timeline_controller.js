@@ -14,12 +14,16 @@ export default class extends Controller {
   static values = { start: String, currentWeek: Number }
 
   connect() {
-    this.observer = new ResizeObserver(([entry]) => this.#layout(entry.contentRect.width))
+    this.observer = new ResizeObserver(([entry]) => this.#layout(this.width = entry.contentRect.width))
     this.observer.observe(document.documentElement)
   }
 
   disconnect() {
     this.observer.disconnect()
+  }
+
+  relayout() {
+    if (this.width !== undefined) this.#layout(this.width)
   }
 
   page(event) {

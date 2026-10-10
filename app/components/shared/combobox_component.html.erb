@@ -1,0 +1,20 @@
+<%= tag.div class: "relative flex flex-col w-full", data: { controller: "combobox", combobox_group_value: group } do %>
+  <% if label %>
+    <label for="<%= id %>" class="py-1 text-tiny"><%= label %></label>
+  <% end %>
+  <%= tag.input type: "text", id:, name:, value:, placeholder:, autocomplete: "off", autofocus:,
+    role: "combobox", aria: { autocomplete: "list", expanded: false, controls: "#{id}_listbox", invalid: error.present?, describedby: ("#{id}_error" if error), label: (placeholder unless label) },
+    class: ["px-2 pr-[38px] text-tiny shadow-top-input-shadow rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none text-contrastBlue appearance-none", input_class],
+    data: { combobox_target: "input", action: "focus->combobox#open blur->combobox#close input->combobox#filter keydown->combobox#keydown" } %>
+  <span class="absolute <%= label ? "top-[33px]" : "top-[5px]" %> right-[3px] px-1 pt-[3px] pb-1 text-white text-xs leading-[12px] bg-[#AFB3BF] rounded-[3px] pointer-events-none" data-combobox-target="badge" hidden></span>
+  <ul id="<%= id %>_listbox" role="listbox" hidden class="absolute bg-white rounded-md border border-gray-300 max-h-40 overflow-y-auto w-full z-10 left-0 top-full mt-1 text-tiny text-contrastBlue" data-combobox-target="listbox">
+    <% options.each_with_index do |option, index| %>
+      <%= tag.li option.value, id: "#{id}_option_#{index}", role: "option", aria: { selected: false },
+        class: "hover:bg-gray-200 aria-selected:bg-gray-200 cursor-pointer text-left px-1 p-2",
+        data: { combobox_target: "option", value: option.value, group: option.group&.downcase, badge: option.badge, action: "mousedown->combobox#select" } %>
+    <% end %>
+  </ul>
+  <% if error %>
+    <p id="<%= id %>_error" class="text-[10px] leading-3 pt-1 px-2 text-red-500"><%= error %></p>
+  <% end %>
+<% end %>

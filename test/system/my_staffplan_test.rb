@@ -128,7 +128,7 @@ class MyStaffplanTest < ApplicationSystemTestCase
       assert_selector 'h1', text: '(Deactivated)'
       assert_selector ROWS, text: 'Website'
       assert_no_button 'Plan'
-      assert_no_selector "#{ROWS} input:not([disabled])", visible: :all
+      assert_no_selector "#{ROWS} input[data-kind]:not([disabled])", visible: :all
     end
   end
 

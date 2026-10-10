@@ -2,9 +2,9 @@
 
 module People
   class AssignmentRowComponent < ViewComponent::Base
-    attr_reader :assignment, :window, :hours, :sort, :index, :first_client, :show_hidden, :inactive
+    attr_reader :assignment, :window, :hours, :sort, :index, :first_client, :show_hidden, :inactive, :highlight
 
-    def initialize(assignment:, window:, hours:, sort:, index:, first_client:, show_hidden: false, inactive: false) # rubocop:disable Metrics/ParameterLists
+    def initialize(assignment:, window:, hours:, sort:, index:, first_client:, show_hidden: false, inactive: false, highlight: false) # rubocop:disable Metrics/ParameterLists
       @assignment = assignment
       @window = window
       @hours = hours
@@ -13,6 +13,7 @@ module People
       @first_client = first_client
       @show_hidden = show_hidden
       @inactive = inactive
+      @highlight = highlight
     end
 
     def actual_total
@@ -41,6 +42,7 @@ module People
       [
         'flex sm:justify-normal justify-between bg-white-300 hover:bg-hoverGrey pl-5',
         ('bg-diagonal-stripes' if proposed?),
+        ('animate-fade-in-scale' if highlight),
         ('border-t border-gray-300' if index.positive? && (!sort.by_client? || first_client)),
       ]
     end

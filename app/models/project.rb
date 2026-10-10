@@ -10,6 +10,7 @@ class Project < ApplicationRecord
   has_paper_trail
 
   scope :active, -> { where(status: 'active') }
+  scope :named, ->(name) { where('lower(name) = ?', name.to_s.strip.downcase) }
 
   UNCONFIRMED = 'unconfirmed'
   CONFIRMED = 'confirmed'

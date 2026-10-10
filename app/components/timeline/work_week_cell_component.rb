@@ -24,12 +24,15 @@ module Timeline
 
     def input_options(kind, value)
       {
+        type: 'text',
+        name: "work_week[#{kind == :plan ? 'estimated_hours' : 'actual_hours'}]",
         value:,
         id: "#{kind == :plan ? 'estHours' : 'actHours'}-#{assignment.id}-#{week.cweek}-#{week.year}",
         disabled:,
-        readonly: true,
         autocomplete: 'off',
         inputmode: 'numeric',
+        maxlength: 3,
+        data: { kind: },
         aria: { label: "#{assignment.project.name} #{kind == :plan ? 'plan' : 'actual'} hours, week of #{week.monday.strftime('%b %-d, %Y')}" },
         class: [
           disabled ? 'timeline-grid-bg' : 'bg-white shadow-top-input-shadow',
