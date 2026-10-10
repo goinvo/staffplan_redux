@@ -1,0 +1,5 @@
+<dialog id="new_project_dialog" data-turbo-permanent aria-label="New project" data-controller="modal" data-modal-url-value="<%= new_project_path %>"
+        data-action="staffplan:new-project@window->modal#open click->modal#closeOnBackdrop turbo:submit-end->modal#submitted turbo:frame-load->modal#focus"
+        class="timeline-grid-bg rounded-2xl p-4 text-contrastBlue max-w-md m-auto backdrop:bg-black/30">
+  <%= turbo_frame_tag "new_project", data: { modal_target: "frame" } %>
+</dialog>

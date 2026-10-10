@@ -25,11 +25,11 @@ class ProposedAssignment
   private
 
   def existing_client
-    company.clients.find_by('lower(name) = ?', client_name.strip.downcase)
+    company.clients.named(client_name).first
   end
 
   def existing_project(client)
-    client&.projects&.find_by('lower(name) = ?', project_name.strip.downcase)
+    client.projects.named(project_name).first if client
   end
 
   def names_present

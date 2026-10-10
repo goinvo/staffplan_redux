@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   resources :people, only: %i[index show] do
     resources :assignments, only: %i[create], module: :people
   end
-  resources :projects, only: %i[index show]
+  resources :projects, only: %i[index show new create]
   resources :assignments, only: %i[update] do
     resource :work_week, only: %i[update], module: :assignments do
       post :fill_forward
