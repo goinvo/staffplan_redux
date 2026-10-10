@@ -10,9 +10,10 @@ module Timeline
 
     attr_reader :assignments, :window
 
-    def initialize(assignments:, window:)
+    def initialize(assignments:, window:, work_weeks: nil)
       @assignments = assignments.to_a
       @window = window
+      @work_weeks = work_weeks
     end
 
     def for(week)
@@ -21,6 +22,10 @@ module Timeline
 
     def max
       @max ||= by_week.values.map { [it.actual, it.estimated].max }.max
+    end
+
+    def subset(assignments)
+      self.class.new(assignments:, window:, work_weeks:)
     end
 
     def work_week(assignment, week)

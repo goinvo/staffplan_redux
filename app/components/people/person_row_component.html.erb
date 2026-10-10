@@ -1,0 +1,21 @@
+<%= tag.tr id: dom_id(user), class: "pl-5 flex sm:justify-normal justify-between border-b border-gray-300 hover:bg-hoverGrey" do %>
+  <td class="pr-2 pl-0 pt-1 pb-2 font-normal flex items-center sm:w-2/5 w-1/2">
+    <%= link_to helpers.person_path(user), class: "sm:w-48 pl-1 font-bold flex items-center justify-start text-contrastBlue" do %>
+      <span class="relative overflow-hidden w-[38px] h-[28px] shrink-0">
+        <%= image_tag avatar_url, alt: "", class: "absolute inset-0 h-full w-full rounded-md object-cover" %>
+      </span>
+      <span class="relative sm:px-2 px-1 sm:whitespace-nowrap">
+        <%= user.name %>
+        <% if deactivated %>
+          <span class="absolute top-[90%] left-2 text-sm font-normal">(Deactivated)</span>
+        <% end %>
+      </span>
+    <% end %>
+  </td>
+  <% hours.window.weeks.each do |week| %>
+    <%= tag.td class: ["relative px-1 py-1 min-h-[100px]", ("bg-selectedColumnBg font-bold" if week.current?)], data: { timeline_week: week.index } do %>
+      <%= render Timeline::BarChartComponent.new(hours: hours.for(week), max: hours.max, past: week.past?, text_class: "text-contrastBlue") %>
+    <% end %>
+  <% end %>
+  <td class="flex items-center justify-center font-normal py-2 pr-5 pl-0 sm:w-1/6 w-1/2"></td>
+<% end %>

@@ -98,6 +98,21 @@ module Timeline
       assert_equal 0, hours.work_week(assignment, @last_week).estimated_hours
     end
 
+    test 'a subset sums only its assignments, reusing the loaded work weeks' do
+      mine = assignment_for_user(user: @user)
+      theirs = assignment_for_user(user: @user)
+      work_week(mine, @next_week, estimated: 8)
+      work_week(theirs, @next_week, estimated: 30)
+      hours = WeeklyHours.new(assignments: [mine, theirs], window: @window)
+
+      assert_equal 38, hours.for(@next_week).estimated
+
+      subset = assert_no_queries { hours.subset([mine]).tap { it.for(@next_week) } }
+
+      assert_equal 8, subset.for(@next_week).estimated
+      assert_equal 8, subset.max
+    end
+
     private
 
     def work_week(assignment, week, estimated:, actual: 0)

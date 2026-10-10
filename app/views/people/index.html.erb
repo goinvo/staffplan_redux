@@ -1,1 +1,16 @@
-<h1 class="px-4 py-6 text-huge font-bold">People</h1>
+<%= render Timeline::GridComponent.new(window: @window, hours: @hours) do |grid| %>
+  <% grid.with_page_header do %>
+    <%= render Timeline::PageHeaderComponent.new(title: "People") %>
+  <% end %>
+  <% grid.with_columns do %>
+    <%= render People::PeopleColumnComponent.new(sort: @sort, add_people: current_user.role(company: current_company).in?([Membership::OWNER, Membership::ADMIN])) %>
+  <% end %>
+  <% @people.each do |user| %>
+    <%= render People::PersonRowComponent.new(
+      user:,
+      hours: @hours.subset(@assignments_by_user.fetch(user.id, [])),
+      deactivated: @deactivated_ids.include?(user.id),
+    ) %>
+  <% end %>
+  <%= render People::DeactivatedToggleComponent.new(count: @deactivated_count, shown: @show_deactivated) %>
+<% end %>
