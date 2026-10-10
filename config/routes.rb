@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :work_weeks, only: %i[update create]
   end
 
-  resources :people, only: %i[index show]
+  resources :people, only: %i[index show] do
+    resources :assignments, only: %i[create], module: :people
+  end
   resources :projects, only: %i[index show]
   resources :assignments, only: %i[update] do
     resource :work_week, only: %i[update], module: :assignments do

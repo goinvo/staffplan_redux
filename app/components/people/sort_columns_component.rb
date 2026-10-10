@@ -7,10 +7,11 @@ module People
       ['project', 'Projects', 'sm:max-w-[230px] md:max-w-[285px] lg:max-w-[280px] md:pl-[8px] ml-8'],
     ].freeze
 
-    attr_reader :sort
+    attr_reader :sort, :add_project
 
-    def initialize(sort:)
+    def initialize(sort:, add_project: false)
       @sort = sort
+      @add_project = add_project
     end
 
     def chevron_class(column)

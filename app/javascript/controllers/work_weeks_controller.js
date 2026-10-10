@@ -27,6 +27,8 @@ export default class extends Controller {
   }
 
   submit(event) {
+    if (!event.target.querySelector(INPUT)) return
+
     event.preventDefault()
     this.#save(event.target)
   }

@@ -1,5 +1,5 @@
 <% inactive = @user.inactive?(company: current_company) %>
-<%= render Timeline::GridComponent.new(window: @window, hours: @hours) do |grid| %>
+<%= render Timeline::GridComponent.new(window: @window, hours: @hours, extra_controller: ("add-project" unless inactive)) do |grid| %>
   <% grid.with_page_header do %>
     <%= render Timeline::PageHeaderComponent.new(
       title: @user.name,
@@ -9,8 +9,9 @@
     ) %>
   <% end %>
   <% grid.with_columns do %>
-    <%= render People::SortColumnsComponent.new(sort: @sort) %>
+    <%= render People::SortColumnsComponent.new(sort: @sort, add_project: !inactive) %>
   <% end %>
+  <%= render People::AddProjectRowComponent.new(user: @user, company: current_company) unless inactive %>
   <% @assignments.each_with_index do |assignment, index| %>
     <%= render People::AssignmentRowComponent.new(
       assignment:,
@@ -21,6 +22,7 @@
       first_client: @assignments.index { it.project.client_id == assignment.project.client_id } == index,
       show_hidden: @show_hidden,
       inactive:,
+      highlight: flash[:highlight] == assignment.id,
     ) %>
   <% end %>
   <%= render People::HiddenAssignmentsComponent.new(count: @hidden_assignments.size, hours: @hidden_hours, window: @window, show_hidden: @show_hidden) %>
