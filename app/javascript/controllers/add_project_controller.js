@@ -9,13 +9,13 @@ export default class extends Controller {
   }
 
   syncClient({ target }) {
-    this.#projectCombobox.dataset.comboboxGroupValue = target.value
+    this.#groupProjectsBy(target.value)
   }
 
   chosen({ target, detail: { value } }) {
     if (this.projectTarget.contains(target)) return
 
-    this.#projectCombobox.dataset.comboboxGroupValue = value
+    this.#groupProjectsBy(value)
     this.#projectInput.focus()
   }
 
@@ -30,11 +30,12 @@ export default class extends Controller {
     }
   }
 
-  get #projectCombobox() {
-    return this.projectTarget.querySelector("[data-controller=combobox]")
+  #groupProjectsBy(client) {
+    const combobox = this.projectTarget.querySelector("[data-controller=combobox]")
+    if (combobox) combobox.dataset.comboboxGroupValue = client
   }
 
   get #projectInput() {
-    return this.projectTarget.querySelector("input[role=combobox]")
+    return this.projectTarget.querySelector("input")
   }
 }

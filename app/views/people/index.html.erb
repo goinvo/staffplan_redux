@@ -12,5 +12,5 @@
       deactivated: @deactivated_ids.include?(user.id),
     ) %>
   <% end %>
-  <%= render People::DeactivatedToggleComponent.new(count: @deactivated_count, shown: @show_deactivated) %>
+  <%= render Timeline::RevealToggleComponent.new(count: @deactivated_count, shown: @show_deactivated, noun: "deactivated person", param: "show_deactivated") %>
 <% end %>

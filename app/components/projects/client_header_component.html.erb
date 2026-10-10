@@ -1,0 +1,30 @@
+<%= tag.div id: "client_header", class: "flex w-full text-white items-center pr-3", data: { controller: "inline-edit", inline_edit_original_value: client.name } do %>
+  <%= tag.div class: "flex flex-col items-start", hidden: error.present?, data: { inline_edit_target: "display" } do %>
+    <%= link_to helpers.projects_path, class: "flex items-center text-base font-normal" do %>
+      <svg class="w-3 h-3 mr-2" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+      Projects
+    <% end %>
+    <div class="flex items-center pl-[19px]">
+      <h1 class="text-huge text-left font-normal break-words leading-snug"><%= client.name %></h1>
+      <button type="button" class="pt-1 pb-[2px] pl-3 cursor-pointer" aria-label="Edit client" data-action="inline-edit#open">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Z"/></svg>
+      </button>
+    </div>
+  <% end %>
+  <%= form_with model: client, url: helpers.client_path(client), html: { hidden: error.blank? }, class: "flex flex-col w-full space-y-2 my-2",
+        data: { inline_edit_target: "form", action: "keydown.esc->inline-edit#cancel" } do |form| %>
+    <div class="flex flex-col">
+      <%= form.text_field :name, value: name, placeholder: "Client", autocomplete: "off", autofocus: error.present?,
+            aria: { label: "Client name", invalid: error.present?, describedby: ("client_name_error" if error) },
+            data: { inline_edit_target: "input" },
+            class: "h-10 w-full pl-1 bg-white shadow-top-input-shadow text-huge leading-[28px] font-bold rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none outline-none text-contrastBlue" %>
+      <% if error %>
+        <p id="client_name_error" class="mt-1 ml-1 text-2xs text-left font-normal text-red-500" data-inline-edit-target="error"><%= error %></p>
+      <% end %>
+    </div>
+    <div class="flex justify-between w-full space-x-4 border-t border-gray-600 py-2">
+      <button type="button" class="py-2 text-tiny text-white font-normal underline cursor-pointer" data-action="inline-edit#cancel">Cancel</button>
+      <%= form.button "Save", class: "py-2 px-8 text-tiny bg-tiffany hover:bg-accentgreen rounded-sm text-white cursor-pointer" %>
+    </div>
+  <% end %>
+<% end %>

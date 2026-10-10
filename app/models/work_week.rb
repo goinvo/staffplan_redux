@@ -15,6 +15,8 @@ class WorkWeek < ApplicationRecord
   validates :actual_hours, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 168 }
   validate :no_future_actual_hours
 
+  scope :from_week_of, ->(date) { where('work_weeks.year > :year OR (work_weeks.year = :year AND work_weeks.cweek >= :cweek)', year: date.cwyear, cweek: date.cweek) }
+
   before_commit :update_assignment_focused_if_future_work_week, on: %i[create update]
 
   def actual_hours=(new_value)

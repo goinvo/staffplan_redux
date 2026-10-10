@@ -1,0 +1,22 @@
+<%= tag.tr id: "add_project", hidden: !open, class: "sm:flex w-full pl-[10px] border-b border-gray-300 h-[100px]", data: { add_project_target: "row" } do %>
+  <td class="sm:block flex items-center pt-1 pb-2 px-0 font-normal align-top w-1/2 sm:w-2/5">
+    <%= form_with url: helpers.projects_path, scope: :new_project, id: "add_project_form", class: "flex justify-between w-full h-10 pt-3", data: { action: "keydown->add-project#keydown combobox:chosen->add-project#chosen" } do |form| %>
+      <%= hidden_field_tag :form, "add_project", id: nil %>
+      <div class="w-full sm:max-w-[99px] md:max-w-[120px] lg:max-w-[155px] mr-2">
+        <%= render Shared::ComboboxComponent.new(id: "add_project_client", name: "new_project[client_name]", value: new_project.client_name, placeholder: "Client",
+          options: client_options, error: error(:client_name), input_class: "h-7 w-full", autofocus: open && error(:client_name).present?) %>
+      </div>
+      <div class="w-full sm:max-w-[170px] md:max-w-[220px] sm:pl-[2px] md:pl-1 lg:pr-4" data-add-project-target="project">
+        <%= form.text_field :project_name, id: "add_project_name", value: new_project.project_name, placeholder: "Project Name", autocomplete: "off", autofocus: open && error(:client_name).blank?,
+              aria: { label: "Project Name", invalid: error(:project_name).present?, describedby: ("add_project_name_error" if error(:project_name)) },
+              class: "h-7 w-full px-2 text-tiny font-bold placeholder:font-normal shadow-top-input-shadow rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none text-contrastBlue appearance-none" %>
+        <% if error(:project_name) || new_project.errors[:base].any? %>
+          <p id="add_project_name_error" class="text-[10px] leading-3 pt-1 px-2 text-red-500"><%= error(:project_name) || new_project.errors[:base].to_sentence %></p>
+        <% end %>
+      </div>
+    <% end %>
+  </td>
+  <td class="sm:block items-center pl-6 pt-[17px] pb-2 px-0 font-normal align-top">
+    <button type="submit" form="add_project_form" class="bg-tiffany px-3 py-1 rounded-[3px] text-white font-bold cursor-pointer">Save</button>
+  </td>
+<% end %>

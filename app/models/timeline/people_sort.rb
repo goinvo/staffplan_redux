@@ -9,7 +9,7 @@ module Timeline
 
     def self.future_hours(assignments, today: Time.zone.today)
       assignments.joins(:work_weeks)
-        .where('work_weeks.year > :year OR (work_weeks.year = :year AND work_weeks.cweek >= :cweek)', year: today.cwyear, cweek: today.cweek)
+        .merge(WorkWeek.from_week_of(today))
         .group(:user_id)
         .sum('work_weeks.estimated_hours')
     end

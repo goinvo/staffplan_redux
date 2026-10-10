@@ -39,12 +39,4 @@ class PeopleController < RailsUiController
       .where(project: current_company.projects.where.not(status: Project::ARCHIVED))
       .includes(:work_weeks, project: :client)
   end
-
-  def remembered_sort(sort_class, cookie)
-    return sort_class.parse(cookies[cookie]) if params[:sort].blank?
-
-    sort = sort_class.parse(params[:sort])
-    cookies.permanent[cookie] = sort.to_param
-    sort
-  end
 end
