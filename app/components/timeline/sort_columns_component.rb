@@ -1,16 +1,22 @@
 # frozen_string_literal: true
 
-module People
+module Timeline
   class SortColumnsComponent < ViewComponent::Base
-    COLUMNS = [
+    MY_STAFFPLAN = [
       ['client', 'Client', 'sm:max-w-[67px] md:max-w-[85px] lg:max-w-[110px]'],
       ['project', 'Projects', 'sm:max-w-[230px] md:max-w-[285px] lg:max-w-[280px] md:pl-[8px] ml-8'],
     ].freeze
+    PROJECTS = [
+      ['client', 'Clients', 'sm:max-w-[88px] md:max-w-[109px] lg:max-w-[125px]'],
+      ['project', 'Projects', 'sm:max-w-[166px] md:max-w-[216px]'],
+    ].freeze
+    CLIENT_PROJECTS = [['project', 'Projects', '']].freeze
 
-    attr_reader :sort, :add_project
+    attr_reader :sort, :columns, :add_project
 
-    def initialize(sort:, add_project: false)
+    def initialize(sort:, columns:, add_project: false)
       @sort = sort
+      @columns = columns
       @add_project = add_project
     end
 

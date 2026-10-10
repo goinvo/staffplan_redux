@@ -1,1 +1,38 @@
-<h1 class="px-4 py-6 text-huge font-bold">Projects</h1>
+<% if @client.nil? && @projects.empty? && @archived_count.zero? %>
+  <div class="w-full h-full flex flex-wrap flex-col justify-center content-center px-4">
+    <div class="w-full max-w-[372px]">
+      <h1 class="w-[280px] pt-10 pb-6 font-bold text-huge leading-9">Let's create your first project</h1>
+      <%= turbo_frame_tag "first_project" do %>
+        <%= render "form", new_project: NewProject.new, frame: "first_project" %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <%= render Timeline::GridComponent.new(window: @window, hours: @hours, extra_controller: "add-project") do |grid| %>
+    <% grid.with_page_header do %>
+      <% if @client %>
+        <%= render Projects::ClientHeaderComponent.new(client: @client) %>
+      <% else %>
+        <%= render Timeline::PageHeaderComponent.new(title: "Projects") %>
+      <% end %>
+    <% end %>
+    <% grid.with_columns do %>
+      <%= render Timeline::SortColumnsComponent.new(sort: @sort, columns: @client ? Timeline::SortColumnsComponent::CLIENT_PROJECTS : Timeline::SortColumnsComponent::PROJECTS, add_project: true) %>
+    <% end %>
+    <%= render Projects::AddProjectRowComponent.new(company: current_company) %>
+    <% @projects.each_with_index do |project, index| %>
+      <%= render Projects::ProjectRowComponent.new(
+        project:,
+        previous: (@projects[index - 1] if index.positive?),
+        last: index == @projects.size - 1,
+        sort: @sort,
+        client_view: @client.present?,
+        hours: @hours.subset(@assignments_by_project.fetch(project.id, [])),
+        summary: @summaries.fetch(project.id),
+        viewer: current_user,
+        highlight: flash[:highlight] == project.id,
+      ) %>
+    <% end %>
+    <%= render Timeline::RevealToggleComponent.new(count: @archived_count, shown: @show_archived, noun: "archived project", param: "show_archived") %>
+  <% end %>
+<% end %>

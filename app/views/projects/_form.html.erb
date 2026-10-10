@@ -1,18 +1,22 @@
+<% frame = local_assigns.fetch(:frame, "new_project") %>
+<% modal = frame == "new_project" %>
+<% prefix = modal ? "new_project" : "#{frame}_new_project" %>
 <% field = "h-8 px-2 text-tiny shadow-top-input-shadow font-normal rounded-sm focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none text-contrastBlue max-w-[370px]" %>
-<% error = ->(attribute) { (message = new_project.errors[attribute].first) && tag.p(message, id: "new_project_#{attribute}_error", class: "text-tiny px-2 text-red-500") } %>
-<%= form_with model: new_project, scope: :new_project, url: projects_path, class: "flex flex-col", data: { turbo_frame: "_top" } do |form| %>
+<% error = ->(attribute) { (message = new_project.errors[attribute].first) && tag.p(message, id: "#{prefix}_#{attribute}_error", class: "text-tiny px-2 text-red-500") } %>
+<%= form_with model: new_project, scope: :new_project, url: projects_path, namespace: (frame unless modal), class: "flex flex-col", data: { turbo_frame: "_top" } do |form| %>
+  <%= hidden_field_tag :form, frame, id: nil %>
   <% if new_project.errors[:base].any? %>
     <p class="text-tiny px-2 text-red-500"><%= new_project.errors[:base].to_sentence %></p>
   <% end %>
   <div class="flex flex-col mt-2 mb-2">
     <%= form.label :project_name, "Project Name", class: "py-1 text-tiny" %>
-    <%= form.text_field :project_name, placeholder: "Project Name", autofocus: true, autocomplete: "off",
-          aria: { invalid: new_project.errors[:project_name].any?, describedby: ("new_project_project_name_error" if new_project.errors[:project_name].any?) },
+    <%= form.text_field :project_name, placeholder: "Project Name", autofocus: modal, autocomplete: "off",
+          aria: { invalid: new_project.errors[:project_name].any?, describedby: ("#{prefix}_project_name_error" if new_project.errors[:project_name].any?) },
           class: "h-10 px-2 rounded-sm shadow-top-input-shadow font-bold focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none text-huge text-contrastBlue sm:min-w-[370px]" %>
     <%= error.(:project_name) %>
   </div>
   <div class="flex flex-col mt-1 mb-1 max-w-[370px]">
-    <%= render Shared::ComboboxComponent.new(id: "new_project_client_name", name: "new_project[client_name]", value: new_project.client_name, label: "Client", placeholder: "Client",
+    <%= render Shared::ComboboxComponent.new(id: "#{prefix}_client_name", name: "new_project[client_name]", value: new_project.client_name, label: "Client", placeholder: "Client",
           options: current_company.clients.order(:name).map { { value: it.name } }, error: new_project.errors[:client_name].first, input_class: "h-8") %>
   </div>
   <div class="flex flex-col mt-1 mb-1">
@@ -32,5 +36,7 @@
     </div>
   </div>
   <%= form.button "Save", class: "w-full h-10 text-tiny font-bold bg-tiffany rounded-sm text-white pt-1 mb-4 mt-2 hover:bg-accentgreen cursor-pointer" %>
-  <button type="button" class="w-full h-10 text-tiny font-bold bg-contrastGrey hover:bg-contrastBlue rounded-sm text-white py-1 mb-1 cursor-pointer" data-action="modal#close">Cancel</button>
+  <% if modal %>
+    <button type="button" class="w-full h-10 text-tiny font-bold bg-contrastGrey hover:bg-contrastBlue rounded-sm text-white py-1 mb-1 cursor-pointer" data-action="modal#close">Cancel</button>
+  <% end %>
 <% end %>

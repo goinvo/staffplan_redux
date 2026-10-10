@@ -24,8 +24,9 @@ class NewProject
     ActiveRecord::Base.transaction do
       client = existing_client || company.clients.create!(name: client_name.strip)
       @project = client.projects.create!(name: project_name.strip, hours: target_hours, starts_on:, ends_on:)
-      @project.assignments.create!(user:, status: Assignment::PROPOSED)
+      @project.assignments.create!(user:, status: Assignment::PROPOSED) if user
     end
+    true
   rescue ActiveRecord::RecordInvalid => e
     errors.add(:base, e.record.errors.full_messages.to_sentence)
     false

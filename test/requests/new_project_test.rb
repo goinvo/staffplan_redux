@@ -56,10 +56,38 @@ class NewProjectTest < ActionDispatch::IntegrationTest
     assert_equal 1, @company.projects.count
   end
 
+  test 'the projects page row adds a project without proposing the creator' do
+    create_project form: 'add_project', headers: { 'HTTP_REFERER' => projects_url(sort: 'client_asc') }, project_name: 'Launch', client_name: 'Initech'
+
+    project = @company.projects.sole
+
+    assert_redirected_to projects_url(sort: 'client_asc')
+    assert_equal project.id, flash[:highlight]
+    assert_equal %w[Launch Initech], [project.name, project.client.name]
+    assert_empty project.assignments
+  end
+
+  test 'errors from the projects page row replace the row' do
+    create_project form: 'add_project', project_name: '', client_name: 'Initech'
+
+    assert_response :unprocessable_content
+    assert_match 'turbo-stream action="replace" target="add_project"', response.body
+    assert_match 'Project name is required', response.body
+    assert_match 'value="Initech"', response.body
+  end
+
+  test 'errors from the first project form stay in that form' do
+    create_project form: 'first_project', project_name: '', client_name: ''
+
+    assert_match 'turbo-stream action="update" target="first_project"', response.body
+    assert_match 'id="first_project_new_project_project_name"', response.body
+    assert_no_match 'Cancel', response.body
+  end
+
   private
 
-  def create_project(**attributes)
-    with_rails_ui { post projects_path, params: { new_project: attributes } }
+  def create_project(form: nil, headers: {}, **attributes)
+    with_rails_ui { post projects_path, params: { form:, new_project: attributes }.compact, headers: }
   end
 
   def with_rails_ui(&)

@@ -1,5 +1,5 @@
-<div class="flex flex-1 items-center">
-  <% COLUMNS.each do |column, title, width| %>
+<div class="flex flex-1 items-center justify-between">
+  <% columns.each do |column, title, width| %>
     <div class="flex items-center text-start sm:w-full <%= width %>">
       <% if add_project && column == "project" %>
         <button type="button" class="mr-1 -translate-x-0.5 cursor-pointer" aria-label="Add project" data-action="add-project#open">

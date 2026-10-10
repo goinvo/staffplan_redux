@@ -1,0 +1,45 @@
+<%= tag.tr id: dom_id(project), class: row_class do %>
+  <td class="sm:block flex items-center pt-1 pb-2 px-0 font-normal align-top w-1/2 sm:w-2/5">
+    <div class="flex items-start sm:flex-row flex-col pt-2 <%= client_view ? "pl-5" : "justify-between" %>">
+      <% unless client_view %>
+        <span class="block w-auto sm:max-w-[100px] md:max-w-[125px] lg:max-w-[140px] sm:w-full sm:mr-0 mr-2">
+          <%= link_to project.client.name, helpers.projects_path(client: project.client_id) if client_label? %>
+        </span>
+      <% end %>
+      <div class="flex w-auto sm:w-full sm:mr-0 mr-2 sm:mt-0 mt-2 <%= client_view ? "sm:max-w-max sm:mr-3" : "sm:max-w-[170px] md:max-w-[220px] sm:ml-2 lg:ml-0" %>">
+        <div class="w-3 mr-2 pt-0.5 relative right-5">
+          <% if (assignment = hidden_assignment) %>
+            <%= button_to helpers.assignment_path(assignment), method: :patch, params: { assignment: { focused: true } }, class: "group relative cursor-pointer", aria: { label: "Show in My StaffPlan" } do %>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
+              <span class="hidden group-hover:block absolute top-1/2 left-1/2 bg-gray-700 text-white text-xs rounded px-2 py-1 z-50 shadow-lg min-w-40" aria-hidden="true">Show in My StaffPlan</span>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="flex flex-col items-start relative right-[18px]">
+          <%= link_to project.name, helpers.project_path(project), class: "max-w-max font-bold text-contrastBlue text-start" %>
+          <% if project.archived? %>
+            <span class="text-contrastBlue text-start">(Archived)</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </td>
+  <% hours.window.weeks.each do |week| %>
+    <%= tag.td class: ["relative px-1 py-1 min-h-[100px]", ("bg-selectedColumnBg font-bold" if week.current?)], data: { timeline_week: week.index } do %>
+      <%= render Timeline::BarChartComponent.new(hours: hours.for(week), max: hours.max, past: week.past?, text_class: "text-contrastBlue") %>
+    <% end %>
+  <% end %>
+  <td class="font-normal ml-auto py-2 pr-4 pl-0 sm:w-1/6 w-1/2 flex justify-center items-center">
+    <div class="hidden sm:flex flex-col relative cursor-pointer" data-controller="toggle" data-action="click->toggle#toggle mouseleave->toggle#hide">
+      <% summary.items.each do |item| %>
+        <div class="flex justify-between space-x-1 relative <%= summary_class(item) %>">
+          <span class="text-sm leading-[18px] whitespace-nowrap text-right shrink-0 min-w-10"><%= item[:label] %></span>
+          <span class="font-bold text-sm text-right min-w-20"><%= summary_value(item) %><span class="text-sm font-normal pl-1">hrs</span></span>
+          <% if item[:tooltip] %>
+            <div class="hidden absolute top-full right-0 bg-gray-700 text-white text-xs rounded px-2 py-1 z-50 shadow-lg min-w-40" data-toggle-target="toggleable"><%= item[:tooltip] %></div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </td>
+<% end %>

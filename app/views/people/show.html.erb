@@ -9,7 +9,7 @@
     ) %>
   <% end %>
   <% grid.with_columns do %>
-    <%= render People::SortColumnsComponent.new(sort: @sort, add_project: !inactive) %>
+    <%= render Timeline::SortColumnsComponent.new(sort: @sort, columns: Timeline::SortColumnsComponent::MY_STAFFPLAN, add_project: !inactive) %>
   <% end %>
   <%= render People::AddProjectRowComponent.new(user: @user, company: current_company) unless inactive %>
   <% @assignments.each_with_index do |assignment, index| %>
