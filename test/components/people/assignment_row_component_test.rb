@@ -69,7 +69,7 @@ module People
 
       assert_no_button 'Plan'
       assert_text 'Plan'
-      assert_no_selector 'input:not([disabled])', visible: :all
+      assert_no_selector 'input[data-kind]:not([disabled])', visible: :all
     end
 
     private

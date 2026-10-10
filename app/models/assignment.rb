@@ -23,6 +23,28 @@ class Assignment < ApplicationRecord
 
   scope :for_user, ->(user) { where(user: user) }
 
+  def fill_forward(from:, through:, estimated_hours:)
+    through = [through, ends_on].compact.min
+
+    transaction do
+      (from..through).step(7).map { upsert_work_week(cweek: it.cweek, year: it.cwyear, estimated_hours:) }
+    end
+  end
+
+  def upsert_work_week(cweek:, year:, estimated_hours: nil, actual_hours: nil)
+    work_week = work_weeks.find_or_initialize_by(cweek:, year:)
+
+    if work_week_locked?(work_week)
+      work_week.errors.add(:base, :locked, message: 'Unable to edit future work weeks for inactive users')
+    elsif work_week.is_future_work_week? && estimated_hours.to_i.zero?
+      work_week.destroy
+    else
+      work_week.update({ estimated_hours:, actual_hours: }.compact)
+    end
+
+    work_week
+  end
+
   private
 
   def cannot_delete_assigned_assignments_with_actual_hours_recorded
@@ -52,5 +74,12 @@ class Assignment < ApplicationRecord
       errors.add(:starts_on, "can't be after the assignment ends")
       errors.add(:ends_on, "can't come before the assignment starts")
     end
+  end
+
+  def work_week_locked?(work_week)
+    return false if user.blank?
+
+    membership = user.memberships.find_by(company: project.company)
+    membership&.inactive? && work_week.is_future_work_week?(relative_to_date: membership.updated_at.to_date)
   end
 end

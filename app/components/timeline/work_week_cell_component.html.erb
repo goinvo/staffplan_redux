@@ -1,8 +1,17 @@
-<%= tag.td class: ["relative px-1 py-1 font-normal", ("bg-selectedColumnBg" if week.current?)], data: { timeline_week: week.index } do %>
-  <div class="flex flex-col sm:justify-normal justify-center h-full sm:space-y-3 <%= week.current? ? "font-bold" : "font-normal" %> <%= "pt-5 sm:pt-0" if padded %>">
-    <div class="relative my-1 sm:block hidden"><%= tag.input(**input_options(:plan, estimated_value)) %></div>
+<%= tag.td class: ["relative px-1 py-1 font-normal", ("bg-selectedColumnBg" if week.current?)], data: { timeline_week: week.index, monday: week.monday.iso8601 } do %>
+  <%= tag.form action: helpers.assignment_work_week_path(assignment), class: "flex flex-col sm:justify-normal justify-center h-full sm:space-y-3 #{week.current? ? "font-bold" : "font-normal"} #{"pt-5 sm:pt-0" if padded}" do %>
+    <input type="hidden" name="work_week[cweek]" value="<%= week.cweek %>">
+    <input type="hidden" name="work_week[year]" value="<%= week.year %>">
+    <div class="group relative my-1 sm:block hidden">
+      <%= tag.input(**input_options(:plan, estimated_value)) %>
+      <% unless disabled %>
+        <button type="button" tabindex="-1" aria-label="Fill forward" class="hidden sm:flex absolute left-0 top-full h-[12px] w-[34px] items-center justify-center rounded-b-sm bg-tiffany opacity-0 pointer-events-none group-focus-within:opacity-100 group-focus-within:pointer-events-auto transition-opacity duration-200" data-url="<%= helpers.fill_forward_assignment_work_week_path(assignment) %>" data-action="mousedown->work-weeks#keepFocus:prevent click->work-weeks#fillForward">
+          <svg class="w-6 text-white" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"/></svg>
+        </button>
+      <% end %>
+    </div>
     <% if actual? %>
       <div class="relative my-1 pt-2"><%= tag.input(**input_options(:actual, actual_value)) %></div>
     <% end %>
-  </div>
+  <% end %>
 <% end %>
