@@ -11,13 +11,15 @@ module Timeline
       ['project', 'Projects', 'sm:max-w-[166px] md:max-w-[216px]'],
     ].freeze
     CLIENT_PROJECTS = [['project', 'Projects', '']].freeze
+    STAFF = [['people', 'People', '']].freeze
+    ADD_PROJECT = { label: 'Add project', action: 'add-project#open' }.freeze
 
-    attr_reader :sort, :columns, :add_project
+    attr_reader :sort, :columns, :add
 
-    def initialize(sort:, columns:, add_project: false)
+    def initialize(sort:, columns:, add: nil)
       @sort = sort
       @columns = columns
-      @add_project = add_project
+      @add = add
     end
 
     def chevron_class(column)

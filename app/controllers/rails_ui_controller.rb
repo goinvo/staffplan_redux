@@ -6,7 +6,13 @@ class RailsUiController < ApplicationController
 
   layout 'rails_ui'
 
+  helper_method :manager?
+
   private
+
+  def manager?
+    current_user.role(company: current_company).in?([Membership::OWNER, Membership::ADMIN])
+  end
 
   def remembered_sort(sort_class, cookie)
     return sort_class.parse(cookies[cookie]) if params[:sort].blank?

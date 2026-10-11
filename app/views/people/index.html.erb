@@ -3,7 +3,7 @@
     <%= render Timeline::PageHeaderComponent.new(title: "People") %>
   <% end %>
   <% grid.with_columns do %>
-    <%= render People::PeopleColumnComponent.new(sort: @sort, add_people: current_user.role(company: current_company).in?([Membership::OWNER, Membership::ADMIN])) %>
+    <%= render People::PeopleColumnComponent.new(sort: @sort, add_people: manager?) %>
   <% end %>
   <% @people.each do |user| %>
     <%= render People::PersonRowComponent.new(

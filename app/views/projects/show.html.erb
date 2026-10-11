@@ -1,1 +1,22 @@
-<h1 class="px-4 py-6 text-huge font-bold"><%= @project.name %></h1>
+<%= render Timeline::GridComponent.new(window: @window, hours: @hours, extra_controller: "project-dates", project: @project) do |grid| %>
+  <% grid.with_page_header do %>
+    <%= render Projects::ProjectHeaderComponent.new(project: @project) %>
+  <% end %>
+  <% grid.with_summary do %>
+    <%= render Timeline::SummaryComponent.new(items: @summary.items) %>
+  <% end %>
+  <% grid.with_columns do %>
+    <%= render Timeline::SortColumnsComponent.new(sort: @sort, columns: Timeline::SortColumnsComponent::STAFF, add: { label: "Add person", url: project_assignments_path(@project) }) %>
+  <% end %>
+  <% @assignments.each do |assignment| %>
+    <%= render Projects::AssignmentRowComponent.new(
+      assignment:,
+      hours: @hours,
+      viewer: current_user,
+      manager: manager?,
+      available_users: @available_users,
+      inactive: @inactive_user_ids.include?(assignment.user_id),
+      highlight: flash[:highlight] == assignment.id,
+    ) %>
+  <% end %>
+<% end %>

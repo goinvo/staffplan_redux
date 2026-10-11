@@ -4,7 +4,7 @@ module Projects
   class AddProjectRowComponent < ViewComponent::Base
     attr_reader :company, :new_project, :open
 
-    def initialize(company:, new_project: NewProject.new, open: false)
+    def initialize(company:, new_project: ProjectForm.new, open: false)
       @company = company
       @new_project = new_project
       @open = open

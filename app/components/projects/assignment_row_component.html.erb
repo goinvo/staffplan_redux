@@ -1,0 +1,77 @@
+<%= tag.tr id: dom_id(assignment), class: row_class, data: { controller: "undo", undo_url_value: helpers.assignment_path(assignment), action: "pagehide@window->undo#flush" } do %>
+  <td class="px-0 pr-0 pt-2 pb-2 font-normal flex sm:w-2/5 w-1/2">
+    <div class="flex flex-row justify-between sm:items-start items-center">
+      <% if unassigned? %>
+        <div class="flex flex-row items-start">
+          <div class="hidden lg:flex h-[28px] w-[38px] rounded-md bg-blueGreyLight items-center justify-center mr-2" aria-hidden="true">
+            <svg class="h-5 w-4 text-white" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd"/></svg>
+          </div>
+          <%= form_with url: helpers.assignment_path(assignment), method: :patch, data: { controller: "auto-submit" } do %>
+            <select name="assignment[user_id]" aria-label="Add person" data-action="change->auto-submit#submit"
+                    class="md:min-w-[185px] h-[28px] pl-2 py-0 text-start rounded-md bg-white focus:ring-tiffany focus:border-tiffany text-tiny font-bold border-none shadow-top-input-shadow text-contrastGrey">
+              <option value="" disabled selected hidden>Add person</option>
+              <% available_users.each do |candidate| %>
+                <option value="<%= candidate.id %>" class="font-bold text-contrastBlue"><%= candidate.name %></option>
+              <% end %>
+            </select>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="font-bold flex flex-col text-contrastBlue">
+        <% unless unassigned? %>
+          <%= link_to helpers.person_path(user), class: "flex items-center" do %>
+            <span class="relative overflow-hidden w-[38px] h-[28px] shrink-0">
+              <%= image_tag avatar_url, alt: "", class: "absolute inset-0 h-full w-full rounded-md object-cover" %>
+            </span>
+            <span class="relative px-2">
+              <%= user.name %>
+              <% if inactive %>
+                <span class="absolute top-[90%] left-2 font-normal">(Deactivated)</span>
+              <% end %>
+            </span>
+          <% end %>
+        <% end %>
+        <% if hidden_from_viewer? %>
+          <%= button_to helpers.assignment_path(assignment), method: :patch, params: { assignment: { focused: true } }, class: "group relative flex items-center pl-1 cursor-pointer font-normal", aria: { label: "Show in My StaffPlan" } do %>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"/></svg>
+            <span class="pl-1" aria-hidden="true">Hidden in My StaffPlan</span>
+            <span class="hidden group-hover:block absolute top-1/2 left-1/2 m-3 bg-gray-700 text-white text-xs rounded px-2 py-1 z-50 shadow-lg min-w-40" aria-hidden="true">Show in My StaffPlan</span>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="w-12 ml-auto sm:flex hidden">
+        <% if removable? %>
+          <div class="relative inline-block text-left" data-controller="dropdown" data-action="click@window->dropdown#hide">
+            <button type="button" aria-label="Menu for <%= user&.name || "unassigned person" %>" data-dropdown-target="button" data-action="dropdown#toggle"
+                    class="cursor-pointer flex items-center text-2xl actionbar-text-accent hover:text-gray-900 rounded-full ellipsismenu focus:outline-none relative -top-2.5 pt-[9px]"></button>
+            <div data-dropdown-target="menu" role="menu" class="hidden absolute left-0 mt-2 w-max bg-white rounded-md shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] z-20">
+              <div class="py-1">
+                <button type="button" role="menuitem" class="text-red-400 w-full block px-3 py-1 text-sm text-left cursor-pointer" data-action="undo#start">Delete <%= first_name %> from project</button>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="text-contrastBlue sm:flex hidden flex-col space-y-3 ml-auto px-2 items-end max-w-[60px]">
+      <% if unassigned? || inactive %>
+        <span class="pt-1"><%= proposed? ? "Proposed" : "Plan" %></span>
+      <% else %>
+        <%= button_to (proposed? ? "Proposed" : "Plan"), helpers.assignment_path(assignment), method: :patch, params: { assignment: { status: toggled_status } }, class: "pt-1 underline cursor-pointer", form: { class: "contents" } %>
+      <% end %>
+      <div class="pt-2">Actual</div>
+    </div>
+  </td>
+  <% hours.window.weeks.each do |week| %>
+    <%= render Timeline::WorkWeekCellComponent.new(assignment:, work_week: hours.work_week(assignment, week), week:, disabled: inactive, actual_disabled: inactive || unassigned?, label: user&.name || "Unassigned") %>
+  <% end %>
+  <%= render Timeline::AssignmentSummaryComponent.new(assignment:) %>
+  <template data-undo-target="template">
+    <td data-undo-row class="text-contrastBlue w-full h-[100px] p-3">
+      <div class="flex flex-col justify-center w-full h-full bg-[#7DE2DF]">
+        <span class="font-bold text-sm text-center">Deleted <%= first_name %> and their proposed/plan hours from this project</span>
+        <button type="button" class="w-20 mx-auto font-normal text-sm underline cursor-pointer" data-action="undo#undo">Undo</button>
+      </div>
+    </td>
+  </template>
+<% end %>

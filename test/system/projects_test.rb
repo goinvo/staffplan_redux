@@ -191,14 +191,6 @@ class ProjectsTest < ApplicationSystemTestCase
     assert_rows(rows) { all(ROWS).map { |row| [row.first('td span').text, row.find("a[href^='/projects/']").text] } }
   end
 
-  def assert_rows(expected, &)
-    page.document.synchronize { raise Capybara::ExpectationNotMet unless yield == expected }
-
-    pass
-  rescue Capybara::ExpectationNotMet
-    assert_equal expected, yield
-  end
-
   def click_sort(title, sort)
     within('#timeline thead') { click_link title }
 
