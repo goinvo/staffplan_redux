@@ -2,7 +2,7 @@
 
 class ProjectsController < RailsUiController
   def create
-    @new_project = NewProject.new(company: current_company, user: (current_user unless add_row?), **params.expect(new_project: %i[project_name client_name hours starts_on ends_on]))
+    @new_project = ProjectForm.new(company: current_company, user: (current_user unless add_row?), **params.expect(new_project: %i[project_name client_name hours starts_on ends_on]))
 
     if !@new_project.save
       render turbo_stream: invalid_form_stream, status: :unprocessable_content
@@ -33,11 +33,32 @@ class ProjectsController < RailsUiController
   end
 
   def new
-    @new_project = NewProject.new
+    @new_project = ProjectForm.new
   end
 
   def show
-    @project = current_company.projects.find(params[:id])
+    @project = current_company.projects.includes(:client).find(params[:id])
+    @window = Timeline::Window.from_param(params[:start])
+    @sort = remembered_sort(Timeline::StaffSort, :project_sort)
+
+    memberships = current_company.memberships.to_a
+    @inactive_user_ids = memberships.select(&:inactive?).map(&:user_id)
+    @assignments = @sort.apply(@project.assignments.includes(:work_weeks, user: { avatar_attachment: :blob }))
+    @available_users = User.where(id: memberships.select(&:active?).map(&:user_id) - @assignments.map(&:user_id)).order(:name)
+    @hours = Timeline::WeeklyHours.new(assignments: @assignments, window: @window)
+    @summary = Timeline::ProjectSummary.for([@project]).fetch(@project.id)
+  end
+
+  def update
+    project = current_company.projects.find(params[:id])
+    form = ProjectForm.for(project)
+    form.assign_attributes(params.expect(project: %i[project_name client_name hours starts_on ends_on archived]))
+
+    if form.save
+      redirect_back_or_to project_path(project), status: :see_other
+    else
+      render turbo_stream: turbo_stream.replace('project_header', Projects::ProjectHeaderComponent.new(project:, form:)), status: :unprocessable_content
+    end
   end
 
   private

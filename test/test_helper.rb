@@ -143,6 +143,16 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     Rails.application.default_url_options.replace(@original_default_url_options)
   end
 
+  # retries the read until it matches, so Turbo swapping rows (a cached
+  # preview, a morph) mid-read doesn't fail the comparison
+  def assert_rows(expected, &)
+    page.document.synchronize { raise Capybara::ExpectationNotMet unless yield == expected }
+
+    pass
+  rescue Capybara::ExpectationNotMet
+    assert_equal expected, yield
+  end
+
   # Passwordless builds an absolute magic link without Capybara's port; a path
   # lets Capybara resolve it against the running test server
   def passwordless_sign_in(resource)

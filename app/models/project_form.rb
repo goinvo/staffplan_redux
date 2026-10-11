@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NewProject
+class ProjectForm
   include ActiveModel::Model
   include ActiveModel::Attributes
 
@@ -9,6 +9,7 @@ class NewProject
   attribute :hours, :string
   attribute :starts_on, :date
   attribute :ends_on, :date
+  attribute :archived, :boolean, default: false
 
   attr_accessor :company, :user
   attr_reader :project
@@ -18,13 +19,36 @@ class NewProject
   validate :hours_numeric
   validate :dates_in_order
 
+  def self.for(project)
+    new(
+      project:,
+      company: project.company,
+      project_name: project.name,
+      client_name: project.client.name,
+      hours: project.hours&.to_s,
+      starts_on: project.starts_on,
+      ends_on: project.ends_on,
+      archived: project.archived?,
+    )
+  end
+
+  def initialize(project: nil, **)
+    @project = project
+    super(**)
+  end
+
   def save
     return false if invalid?
 
     ActiveRecord::Base.transaction do
       client = existing_client || company.clients.create!(name: client_name.strip)
-      @project = client.projects.create!(name: project_name.strip, hours: target_hours, starts_on:, ends_on:)
-      @project.assignments.create!(user:, status: Assignment::PROPOSED) if user
+
+      if project
+        project.update!(client:, name: project_name.strip, hours: target_hours, starts_on:, ends_on:, status:)
+      else
+        @project = client.projects.create!(name: project_name.strip, hours: target_hours, starts_on:, ends_on:)
+        @project.assignments.create!(user:, status: Assignment::PROPOSED) if user
+      end
     end
     true
   rescue ActiveRecord::RecordInvalid => e
@@ -50,12 +74,24 @@ class NewProject
     return if client_name.blank? || project_name.blank?
 
     client = existing_client
-    errors.add(:project_name, 'Project name already in use') if client && client.projects.named(project_name).exists?
+    return if client.nil?
+
+    errors.add(:project_name, 'Project name already in use') if client.projects.named(project_name).where.not(id: project).exists?
   end
 
   def names_present
     errors.add(:client_name, 'Client is required') if client_name.blank?
     errors.add(:project_name, 'Project name is required') if project_name.blank?
+  end
+
+  def status
+    if archived
+      Project::ARCHIVED
+    elsif project.archived?
+      Project::UNCONFIRMED
+    else
+      project.status
+    end
   end
 
   def target_hours

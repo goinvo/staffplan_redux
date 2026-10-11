@@ -1,0 +1,59 @@
+<%= tag.div id: "project_header", class: "flex w-full text-white items-center pr-3", data: { controller: "inline-edit" } do %>
+  <%= tag.div class: "flex flex-col items-start", hidden: editing?, data: { inline_edit_target: "display" } do %>
+    <div class="flex items-center">
+      <h1 class="text-huge text-left font-normal break-words leading-snug"><%= project.name %></h1>
+      <button type="button" class="py-1 pl-4 cursor-pointer" aria-label="Edit project" data-action="inline-edit#open">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Z"/></svg>
+      </button>
+    </div>
+    <% if project.archived? %>
+      <%= button_to helpers.project_path(project), method: :patch, params: { project: { archived: false } }, form: { class: "contents" }, class: "group relative text-sm font-normal underline cursor-pointer" do %>
+        (Archived)
+        <span class="absolute -top-[8px] left-[110%] w-32 py-1 timeline-grid-bg rounded-[3px] text-xs text-contrastBlue leading-[14px] pointer-events-none opacity-0 transition-all duration-200 ease-linear group-hover:opacity-100">Unarchive project for everyone</span>
+      <% end %>
+    <% end %>
+    <p class="text-left break-words py-2 font-normal"><%= subtitle %></p>
+  <% end %>
+  <%= form_with model: form, scope: :project, url: helpers.project_path(project), method: :patch, html: { hidden: !editing? },
+        class: "flex flex-col space-y-2 my-2 text-contrastBlue w-full pr-2", data: { inline_edit_target: "form", action: "keydown.esc->inline-edit#cancel" } do |f| %>
+    <% if form.errors[:base].any? %>
+      <p class="pl-2 text-2xs text-left font-normal text-red-500" data-inline-edit-target="error"><%= form.errors[:base].to_sentence %></p>
+    <% end %>
+    <div class="flex flex-col w-full">
+      <%= f.text_field :project_name, placeholder: "Project Name", autocomplete: "off", autofocus: editing?, aria: { label: "Project name" }, data: { inline_edit_target: "input" },
+            class: "h-10 px-2 bg-white rounded-sm shadow-top-input-shadow focus:border-tiffany focus:ring-2 focus:ring-tiffany border-none outline-none text-huge w-full" %>
+      <% if error(:project_name) %><p class="pl-2 text-2xs text-left font-normal text-red-500" data-inline-edit-target="error"><%= error(:project_name) %></p><% end %>
+    </div>
+    <div class="flex items-start w-full space-x-1">
+      <label for="project_client_name" class="<%= LABEL %> pt-[2px]">Client</label>
+      <%= render Shared::ComboboxComponent.new(id: "project_client_name", name: "project[client_name]", value: form.client_name, placeholder: "Client",
+            options: client_options, error: error(:client_name), input_class: "h-6 bg-white font-normal") %>
+    </div>
+    <div class="flex items-center w-full space-x-1">
+      <label for="project_budget" class="<%= LABEL %>">Budget</label>
+      <input type="text" id="project_budget" disabled placeholder="$USD" class="<%= FIELD %> disabled:shadow-none disabled:bg-white/60 disabled:text-gray-500 disabled:cursor-not-allowed">
+      <%= f.label :hours, "Hours", class: "#{LABEL} pl-1" %>
+      <%= f.text_field :hours, placeholder: "Hours", inputmode: "numeric", autocomplete: "off", class: FIELD %>
+    </div>
+    <% if error(:hours) %><p class="pl-14 text-2xs text-left font-normal text-red-500" data-inline-edit-target="error"><%= error(:hours) %></p><% end %>
+    <div class="flex items-center w-full space-x-1">
+      <%= f.label :starts_on, "Starts", class: LABEL %>
+      <%= f.date_field :starts_on, class: FIELD %>
+      <%= f.label :ends_on, "Ends", class: "#{LABEL} pl-1" %>
+      <%= f.date_field :ends_on, class: FIELD %>
+    </div>
+    <% if error(:ends_on) %><p class="pl-2 text-2xs text-left font-normal text-red-500" data-inline-edit-target="error"><%= error(:ends_on) %></p><% end %>
+    <label class="flex items-center space-x-2 cursor-pointer w-fit">
+      <%= f.check_box :archived, class: "h-[11px] w-[11px] rounded-sm text-tiffany !ring-0 !ring-offset-0" %>
+      <span class="text-sm leading-[18px] text-white font-normal">Archive project for everyone?</span>
+    </label>
+    <div class="flex justify-between w-full space-x-4 border-t border-gray-600 py-2">
+      <button type="button" class="py-2 text-tiny text-white font-normal underline cursor-pointer" data-action="inline-edit#cancel">Cancel</button>
+      <%= f.button "Save", class: "py-2 px-8 text-tiny bg-tiffany hover:bg-accentgreen rounded-sm text-white cursor-pointer" %>
+    </div>
+  <% end %>
+  <%= form_with url: helpers.project_path(project), method: :patch, html: { hidden: true },
+        data: { project_dates_target: "form", starts_on: project.starts_on&.iso8601, ends_on: project.ends_on&.iso8601 } do %>
+    <input type="hidden" data-project-dates-target="field">
+  <% end %>
+<% end %>

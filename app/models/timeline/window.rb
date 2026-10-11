@@ -8,6 +8,8 @@ module Timeline
     Week = Data.define(:index, :monday, :this_monday) do
       delegate :cweek, to: :monday
 
+      def cover?(date) = date.present? && (monday..(monday + 6)).cover?(date)
+
       def current? = monday == this_monday
 
       def past? = monday < this_monday

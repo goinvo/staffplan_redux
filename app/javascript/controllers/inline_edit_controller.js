@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
+import { Turbo } from "@hotwired/turbo-rails"
 
 export default class extends Controller {
   static targets = ["display", "form", "input", "error"]
-  static values = { original: String }
 
   open() {
     this.displayTarget.hidden = true
@@ -11,8 +11,9 @@ export default class extends Controller {
   }
 
   cancel() {
-    this.inputTarget.value = this.originalValue
-    this.errorTargets.forEach((error) => error.remove())
+    if (this.hasErrorTarget) return Turbo.visit(window.location.href, { action: "replace" })
+
+    this.formTarget.reset()
     this.formTarget.hidden = true
     this.displayTarget.hidden = false
   }

@@ -34,17 +34,5 @@
   <% window.weeks.each do |week| %>
     <%= render Timeline::WorkWeekCellComponent.new(assignment:, work_week: hours.work_week(assignment, week), week:, disabled: inactive, padded: first_client) %>
   <% end %>
-  <td class="font-normal py-2 sm:pl-4 pl-0 pr-0 ml-1 sm:ml-0 w-1/2 sm:w-1/6">
-    <div class="pl-6 sm:flex hidden flex-col max-w-fit space-y-5 cursor-pointer" data-controller="toggle" data-action="click->toggle#toggle mouseleave->toggle#hide">
-      <div class="sm:flex justify-between space-x-1 relative pt-1">
-        <span class="text-sm leading-[18px] whitespace-nowrap text-right shrink-0 min-w-10">Plan</span>
-        <span class="font-bold text-sm text-right min-w-20"><%= number_with_delimiter(future_plan + actual_total) %><span class="text-sm font-normal pl-1">hrs</span></span>
-        <div class="hidden absolute bottom-full bg-gray-700 text-white text-xs rounded px-2 py-1 z-10 shadow-lg min-w-32" data-toggle-target="toggleable"><%= plan_tooltip %></div>
-      </div>
-      <div class="sm:flex justify-between space-x-1 relative mt-[-7px]">
-        <span class="text-sm leading-[18px] whitespace-nowrap text-right shrink-0 min-w-10">Actual</span>
-        <span class="font-bold text-sm text-right min-w-20"><%= number_with_delimiter(actual_total) %><span class="text-sm font-normal pl-1">hrs</span></span>
-      </div>
-    </div>
-  </td>
+  <%= render Timeline::AssignmentSummaryComponent.new(assignment:) %>
 <% end %>

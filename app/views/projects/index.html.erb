@@ -3,7 +3,7 @@
     <div class="w-full max-w-[372px]">
       <h1 class="w-[280px] pt-10 pb-6 font-bold text-huge leading-9">Let's create your first project</h1>
       <%= turbo_frame_tag "first_project" do %>
-        <%= render "form", new_project: NewProject.new, frame: "first_project" %>
+        <%= render "form", new_project: ProjectForm.new, frame: "first_project" %>
       <% end %>
     </div>
   </div>
@@ -17,7 +17,7 @@
       <% end %>
     <% end %>
     <% grid.with_columns do %>
-      <%= render Timeline::SortColumnsComponent.new(sort: @sort, columns: @client ? Timeline::SortColumnsComponent::CLIENT_PROJECTS : Timeline::SortColumnsComponent::PROJECTS, add_project: true) %>
+      <%= render Timeline::SortColumnsComponent.new(sort: @sort, columns: @client ? Timeline::SortColumnsComponent::CLIENT_PROJECTS : Timeline::SortColumnsComponent::PROJECTS, add: Timeline::SortColumnsComponent::ADD_PROJECT) %>
     <% end %>
     <%= render Projects::AddProjectRowComponent.new(company: current_company) %>
     <% @projects.each_with_index do |project, index| %>

@@ -8,12 +8,15 @@ module Timeline
     renders_one :columns
     renders_one :summary
 
-    attr_reader :window, :hours, :extra_controller
+    DATE_MARKER_ACTIONS = 'dragstart->project-dates#start dragover->project-dates#over drop->project-dates#drop dragend->project-dates#end'
 
-    def initialize(window:, hours:, extra_controller: nil)
+    attr_reader :window, :hours, :extra_controller, :project
+
+    def initialize(window:, hours:, extra_controller: nil, project: nil)
       @window = window
       @hours = hours
       @extra_controller = extra_controller
+      @project = project
     end
 
     def controller_data
@@ -26,6 +29,14 @@ module Timeline
         timeline_start_value: window.start.iso8601,
         timeline_current_week_value: window.current_week_index || -1,
       }
+    end
+
+    def date_marker(week)
+      if week.cover?(project.starts_on)
+        'starts_on'
+      elsif week.cover?(project.ends_on)
+        'ends_on'
+      end
     end
 
     def default_style
@@ -44,6 +55,18 @@ module Timeline
     def today_path
       query = request.query_parameters.except('start')
       query.empty? ? request.path : "#{request.path}?#{query.to_query}"
+    end
+
+    def week_header_options(week)
+      options = { class: ['hidden sm:block relative px-1', week.current? ? 'navbar font-bold' : 'font-normal'], data: { timeline_week: week.index } }
+      return options unless project
+
+      marker = date_marker(week)
+      options.deep_merge(
+        draggable: marker.present?,
+        class: [*options[:class], ('cursor-pointer' if marker)],
+        data: { date: week.monday.iso8601, marker:, action: DATE_MARKER_ACTIONS },
+      )
     end
 
     private

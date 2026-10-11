@@ -6,7 +6,12 @@
       <tr class="hidden sm:flex pl-5 bg-contrastBlue min-h-28 text-white">
         <th class="flex w-1/2 sm:w-2/5 px-0 py-5 lg:mr-1"><%= page_header %></th>
         <% window.weeks.each do |week| %>
-          <%= tag.th class: ["hidden sm:block relative px-1", week.current? ? "navbar font-bold" : "font-normal"], data: { timeline_week: week.index } do %>
+          <%= tag.th(**week_header_options(week)) do %>
+            <% if (marker = project && date_marker(week)) %>
+              <span class="absolute inset-0 flex flex-col leading-none pointer-events-none navbar <%= "enddate-stripes" if marker == "ends_on" %>">
+                <span class="text-contrastGrey text-2xs px-1 pt-1 font-normal"><%= marker == "starts_on" ? "START" : "END" %></span>
+              </span>
+            <% end %>
             <%= render Timeline::BarChartComponent.new(hours: hours.for(week), max: hours.max, past: week.past?) %>
           <% end %>
         <% end %>
