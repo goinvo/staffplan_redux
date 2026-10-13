@@ -1,0 +1,41 @@
+<% item = "block w-full px-4 py-2 text-sm text-left hover:text-accentgreen cursor-pointer" %>
+<div class="relative inline-block text-left" data-controller="menu" data-action="click@window->menu#closeOutside keydown.esc->menu#close">
+  <button type="button" aria-label="Menu for <%= project.name %>" aria-haspopup="menu" aria-expanded="false" data-menu-target="button" data-action="menu#toggle"
+          class="cursor-pointer flex items-center text-2xl actionbar-text-accent hover:text-gray-900 rounded-full ellipsismenu focus:outline-none"></button>
+  <div hidden data-menu-target="panel" role="menu" data-action="click->menu#close" class="absolute left-0 top-full z-50 mt-2 w-56 rounded-md bg-white shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]">
+    <div class="py-1 border-b border-b-[#E5E7EB] text-gray-900">
+      <button type="button" role="menuitem" class="<%= item %>" data-action="shortcuts#editProject" data-shortcuts-url-param="<%= helpers.edit_project_path(project) %>">Edit project</button>
+      <%= link_to "Export CSV", helpers.project_export_path(project, format: :csv), role: "menuitem", class: item, download: "", data: { turbo: false } %>
+      <% if own? %>
+        <% if assignment.focused && assignment_row? %>
+          <button type="button" role="menuitem" class="<%= item %>" data-action="undo#start" data-undo-url-param="<%= helpers.assignment_path(assignment) %>" data-undo-method-param="patch"
+                  data-undo-body-param="<%= { "assignment[focused]" => "false" }.to_json %>" data-undo-template-param="hidden">Hide in My StaffPlan</button>
+        <% else %>
+          <%= button_to (assignment.focused ? "Hide in My StaffPlan" : "Show in My StaffPlan"), helpers.assignment_path(assignment), method: :patch,
+                params: { assignment: { focused: !assignment.focused } }, role: "menuitem", class: item %>
+        <% end %>
+      <% end %>
+      <% if deletable? %>
+        <% if assignment_row? %>
+          <button type="button" role="menuitem" class="<%= item %> text-[#FF5E5E] border-t border-t-[#E5E7EB]" data-action="undo#start" data-undo-url-param="<%= helpers.assignment_path(assignment) %>"
+                  data-undo-method-param="delete" data-undo-template-param="deleted"><%= delete_label %></button>
+        <% else %>
+          <%= button_to delete_label, helpers.assignment_path(assignment), method: :delete, role: "menuitem", class: "#{item} text-[#FF5E5E] border-t border-t-[#E5E7EB]" %>
+        <% end %>
+      <% end %>
+    </div>
+    <% if project.archived? %>
+      <%= button_to "Unarchive project for everyone", helpers.project_path(project), method: :patch, params: { project: { archived: false } }, role: "menuitem", class: item %>
+    <% else %>
+      <button type="button" role="menuitem" class="<%= item %> text-[#FF5E5E]" data-action="undo#start" data-undo-url-param="<%= helpers.project_path(project) %>" data-undo-method-param="patch"
+              data-undo-body-param="<%= { "project[archived]" => "1" }.to_json %>" data-undo-template-param="archived">Archive project for everyone</button>
+    <% end %>
+  </div>
+</div>
+<%= render Timeline::UndoTemplateComponent.new(name: "archived", title: ARCHIVE_TITLE, subtitle: ARCHIVE_SUBTITLE) %>
+<% if own? && assignment_row? %>
+  <%= render Timeline::UndoTemplateComponent.new(name: "hidden", title: HIDE_TITLE) %>
+<% end %>
+<% if deletable? && assignment_row? %>
+  <%= render Timeline::UndoTemplateComponent.new(name: "deleted", title: delete_title) %>
+<% end %>

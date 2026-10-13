@@ -1,4 +1,4 @@
-<%= tag.tr id: dom_id(assignment), class: row_class, data: { controller: "undo", undo_url_value: helpers.assignment_path(assignment), action: "pagehide@window->undo#flush" } do %>
+<%= tag.tr id: dom_id(assignment), class: row_class, data: { controller: "undo", action: "pagehide@window->undo#flush" } do %>
   <td class="px-0 pr-0 pt-2 pb-2 font-normal flex sm:w-2/5 w-1/2">
     <div class="flex flex-row justify-between sm:items-start items-center">
       <% if unassigned? %>
@@ -41,12 +41,12 @@
       </div>
       <div class="w-12 ml-auto sm:flex hidden">
         <% if removable? %>
-          <div class="relative inline-block text-left" data-controller="dropdown" data-action="click@window->dropdown#hide">
-            <button type="button" aria-label="Menu for <%= user&.name || "unassigned person" %>" data-dropdown-target="button" data-action="dropdown#toggle"
+          <div class="relative inline-block text-left" data-controller="menu" data-action="click@window->menu#closeOutside keydown.esc->menu#close">
+            <button type="button" aria-label="Menu for <%= user&.name || "unassigned person" %>" aria-haspopup="menu" aria-expanded="false" data-menu-target="button" data-action="menu#toggle"
                     class="cursor-pointer flex items-center text-2xl actionbar-text-accent hover:text-gray-900 rounded-full ellipsismenu focus:outline-none relative -top-2.5 pt-[9px]"></button>
-            <div data-dropdown-target="menu" role="menu" class="hidden absolute left-0 mt-2 w-max bg-white rounded-md shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] z-20">
+            <div hidden data-menu-target="panel" role="menu" data-action="click->menu#close" class="absolute left-0 mt-2 w-max bg-white rounded-md shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] z-20">
               <div class="py-1">
-                <button type="button" role="menuitem" class="text-red-400 w-full block px-3 py-1 text-sm text-left cursor-pointer" data-action="undo#start">Delete <%= first_name %> from project</button>
+                <button type="button" role="menuitem" class="text-red-400 w-full block px-3 py-1 text-sm text-left cursor-pointer" data-action="undo#start" data-undo-url-param="<%= helpers.assignment_path(assignment) %>" data-undo-method-param="delete" data-undo-template-param="deleted">Delete <%= first_name %> from project</button>
               </div>
             </div>
           </div>
@@ -66,12 +66,5 @@
     <%= render Timeline::WorkWeekCellComponent.new(assignment:, work_week: hours.work_week(assignment, week), week:, disabled: inactive, actual_disabled: inactive || unassigned?, label: user&.name || "Unassigned") %>
   <% end %>
   <%= render Timeline::AssignmentSummaryComponent.new(assignment:) %>
-  <template data-undo-target="template">
-    <td data-undo-row class="text-contrastBlue w-full h-[100px] p-3">
-      <div class="flex flex-col justify-center w-full h-full bg-[#7DE2DF]">
-        <span class="font-bold text-sm text-center">Deleted <%= first_name %> and their proposed/plan hours from this project</span>
-        <button type="button" class="w-20 mx-auto font-normal text-sm underline cursor-pointer" data-action="undo#undo">Undo</button>
-      </div>
-    </td>
-  </template>
+  <%= render Timeline::UndoTemplateComponent.new(name: "deleted", title: "Deleted #{first_name} and their proposed/plan hours from this project") %>
 <% end %>

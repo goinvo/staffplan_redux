@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   resources :people, only: %i[index show] do
     resources :assignments, only: %i[create], module: :people
   end
-  resources :projects, only: %i[index show new create update] do
+  resources :projects, only: %i[index show new create edit update] do
     resources :assignments, only: %i[create], module: :projects
+    resource :export, only: %i[show], module: :projects
   end
   resources :clients, only: %i[update]
   resources :assignments, only: %i[update destroy] do

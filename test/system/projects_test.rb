@@ -184,11 +184,11 @@ class ProjectsTest < ApplicationSystemTestCase
   private
 
   def assert_project_names(names)
-    assert_rows(names) { all("#{ROWS} a[href^='/projects/']").map(&:text) }
+    assert_rows(names) { all("#{ROWS} a[href^='/projects/']:not([download])").map(&:text) }
   end
 
   def assert_projects(rows)
-    assert_rows(rows) { all(ROWS).map { |row| [row.first('td span').text, row.find("a[href^='/projects/']").text] } }
+    assert_rows(rows) { all(ROWS).map { |row| [row.first('td span').text, row.find("a[href^='/projects/']:not([download])").text] } }
   end
 
   def click_sort(title, sort)

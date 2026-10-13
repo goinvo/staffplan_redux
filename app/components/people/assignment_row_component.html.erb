@@ -1,4 +1,4 @@
-<%= tag.tr id: dom_id(assignment), class: row_class do %>
+<%= tag.tr id: dom_id(assignment), class: row_class, data: { controller: "undo", action: "pagehide@window->undo#flush" } do %>
   <td class="pl-3 sm:px-0 py-1 sm:pt-1 sm:pb-2 font-normal align-top <%= first_client ? "pt-5" : "sm:block flex items-center" %> w-1/2 sm:w-2/5">
     <div class="flex sm:flex-row flex-col w-full justify-between items-start">
       <div class="sm:max-w-[70px] md:max-w-[110px] lg:max-w-[130px] w-full pl-0 sm:pl-[2px] sm:mr-1 md:mr-0 <%= "mb-1" if first_client %>">
@@ -19,6 +19,9 @@
         </div>
         <div class="w-full <%= proposed? ? "sm:max-w-[185px]" : "sm:max-w-[205px]" %> md:pl-1 lg:pl-2 sm:mr-0 mr-2 flex items-start <%= "mb-4 sm:mb-0" if first_client %>">
           <%= link_to assignment.project.name, project_path(assignment.project), class: "pt-0 sm:pt-2 font-bold flex items-center justify-start text-contrastBlue text-start" %>
+          <div class="ml-2 -mt-[5px] sm:mt-[3px]">
+            <%= render Timeline::ProjectMenuComponent.new(project: assignment.project, assignment:, viewer:, manager:, assignment_row: true) %>
+          </div>
         </div>
         <div class="text-contrastBlue sm:flex hidden pr-2 sm:pr-1 md:pr-2 flex-col items-end <%= proposed? ? "max-w-[75px]" : "max-w-[55px]" %> w-full">
           <% if inactive %>

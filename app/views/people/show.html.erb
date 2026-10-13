@@ -20,6 +20,8 @@
       sort: @sort,
       index:,
       first_client: @assignments.index { it.project.client_id == assignment.project.client_id } == index,
+      viewer: current_user,
+      manager: manager?,
       show_hidden: @show_hidden,
       inactive:,
       highlight: flash[:highlight] == assignment.id,

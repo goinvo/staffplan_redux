@@ -5,12 +5,9 @@ class AssignmentsController < RailsUiController
     assignment = current_company.assignments.find(params[:id])
     return head(:forbidden) unless assignment.removable_by?(current_user, manager: manager?)
 
-    if assignment.destroy
-      head :no_content
-    else
-      flash[:error] = assignment.errors.full_messages.to_sentence
-      head :unprocessable_content
-    end
+    flash[:error] = assignment.errors.full_messages.to_sentence unless assignment.destroy
+
+    redirect_back_or_to project_path(assignment.project), status: :see_other
   end
 
   def update

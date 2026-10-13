@@ -4,7 +4,7 @@ module Projects
   class ProjectRowComponent < ViewComponent::Base
     attr_reader :project, :sort, :client_view, :hours, :summary
 
-    def initialize(project:, previous:, last:, sort:, client_view:, hours:, summary:, viewer:, highlight: false) # rubocop:disable Metrics/ParameterLists
+    def initialize(project:, previous:, last:, sort:, client_view:, hours:, summary:, viewer:, manager:, highlight: false) # rubocop:disable Metrics/ParameterLists
       @project = project
       @previous = previous
       @last = last
@@ -13,6 +13,7 @@ module Projects
       @hours = hours
       @summary = summary
       @viewer = viewer
+      @manager = manager
       @highlight = highlight
     end
 
@@ -21,7 +22,11 @@ module Projects
     end
 
     def hidden_assignment
-      hours.assignments.find { it.user_id == @viewer.id && !it.focused }
+      viewer_assignment unless viewer_assignment&.focused
+    end
+
+    def menu
+      Timeline::ProjectMenuComponent.new(project:, assignment: viewer_assignment, viewer: @viewer, manager: @manager, assignment_row: false)
     end
 
     def row_class
@@ -48,6 +53,10 @@ module Projects
 
     def new_client?
       @previous.nil? || @previous.client_id != project.client_id
+    end
+
+    def viewer_assignment
+      @viewer_assignment ||= hours.assignments.find { it.user_id == @viewer.id }
     end
   end
 end

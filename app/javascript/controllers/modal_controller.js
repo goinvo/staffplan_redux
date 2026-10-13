@@ -4,12 +4,17 @@ export default class extends Controller {
   static targets = ["frame"]
   static values = { url: String }
 
-  open() {
+  connect() {
+    this.label = this.element.getAttribute("aria-label")
+  }
+
+  open({ detail: { url, label } = {} } = {}) {
     if (this.element.open) return
 
+    this.element.setAttribute("aria-label", label || this.label)
     this.frameTarget.innerHTML = ""
     this.frameTarget.src = null
-    this.frameTarget.src = this.urlValue
+    this.frameTarget.src = url || this.urlValue
     this.element.showModal()
   }
 

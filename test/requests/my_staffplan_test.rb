@@ -94,7 +94,7 @@ class MyStaffplanTest < ActionDispatch::IntegrationTest
   end
 
   def project_names
-    css_select('tbody tr[id^=assignment_] a[href^="/projects/"]').map { it.text.strip }
+    css_select('tbody tr[id^=assignment_] a[href^="/projects/"]:not([download])').map { it.text.strip }
   end
 
   def show_person(person = @user, **params)

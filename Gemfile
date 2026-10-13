@@ -30,6 +30,7 @@ gem 'turbo-rails'
 # gem "kredis"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'csv'
 gem 'graphiql-rails'
 gem 'graphql', '~> 2.5'
 gem 'paper_trail'

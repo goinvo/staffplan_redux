@@ -30,6 +30,7 @@
         hours: @hours.subset(@assignments_by_project.fetch(project.id, [])),
         summary: @summaries.fetch(project.id),
         viewer: current_user,
+        manager: manager?,
         highlight: flash[:highlight] == project.id,
       ) %>
     <% end %>

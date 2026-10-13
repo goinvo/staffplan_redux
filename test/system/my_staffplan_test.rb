@@ -136,7 +136,7 @@ class MyStaffplanTest < ApplicationSystemTestCase
 
   def assert_rows(names)
     assert_selector ROWS, count: names.size
-    assert_equal names, all("#{ROWS} a[href^='/projects/']").map(&:text)
+    assert_equal names, all("#{ROWS} a[href^='/projects/']:not([download])").map(&:text)
   end
 
   def assign(client, name, **)

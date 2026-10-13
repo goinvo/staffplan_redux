@@ -36,6 +36,20 @@ class ProjectsTest < ActionDispatch::IntegrationTest
     assert_equal 'Website', @project.reload.name
   end
 
+  test 'the edit dialog starts from the project and shows its errors in place' do
+    with_rails_ui { get edit_project_path(@project) }
+
+    assert_dom 'turbo-frame#new_project form[action=?]', project_path(@project)
+    assert_dom 'input[name="project[project_name]"][value=Website]'
+    assert_dom 'input[type=checkbox][name="project[archived]"]'
+
+    with_rails_ui { patch project_path(@project), params: { form: 'new_project', project: { project_name: '' } } }
+
+    assert_response :unprocessable_content
+    assert_match 'turbo-stream action="update" target="new_project"', response.body
+    assert_match 'Project name is required', response.body
+  end
+
   test 'adds an unassigned row' do
     with_rails_ui { post project_assignments_path(@project) }
 

@@ -109,13 +109,13 @@ class AssignmentsTest < ActionDispatch::IntegrationTest
     mine = create(:assignment, user: @user, project:)
 
     with_rails_ui do
-      delete assignment_path(row)
+      delete assignment_path(row), headers: { 'HTTP_REFERER' => project_url(project) }
 
-      assert_response :no_content
+      assert_redirected_to project_url(project)
 
       delete assignment_path(mine)
 
-      assert_response :no_content
+      assert_redirected_to project_path(project)
     end
 
     assert_empty project.assignments.reload
@@ -147,7 +147,7 @@ class AssignmentsTest < ActionDispatch::IntegrationTest
 
     with_rails_ui { delete assignment_path(theirs) }
 
-    assert_response :no_content
+    assert_response :see_other
     assert_empty project.assignments
   end
 

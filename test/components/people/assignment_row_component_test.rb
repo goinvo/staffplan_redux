@@ -17,7 +17,7 @@ module People
       assert_link @assignment.project.client.name, href: "/projects?client=#{@assignment.project.client_id}"
       assert_link @assignment.project.name, href: "/projects/#{@assignment.project_id}"
       assert_selector "form[action='/assignments/#{@assignment.id}'] input[name='assignment[status]'][value=proposed]", visible: :all
-      assert_button 'Plan'
+      assert_button 'Plan', exact: true
       assert_no_selector 'tr.bg-diagonal-stripes'
     end
 
@@ -56,7 +56,7 @@ module People
       @assignment.update!(focused: false)
       render_row
 
-      assert_no_button 'Show in My StaffPlan'
+      assert_no_selector "button[aria-label='Show in My StaffPlan']"
 
       render_row(show_hidden: true)
 
@@ -67,7 +67,7 @@ module People
     test 'is read-only for deactivated people' do
       render_row(inactive: true)
 
-      assert_no_button 'Plan'
+      assert_no_button 'Plan', exact: true
       assert_text 'Plan'
       assert_no_selector 'input[data-kind]:not([disabled])', visible: :all
     end
@@ -76,7 +76,7 @@ module People
 
     def render_row(first_client: true, sort: Timeline::AssignmentSort.new, show_hidden: false, inactive: false)
       hours = Timeline::WeeklyHours.new(assignments: [@assignment], window: @window)
-      row = AssignmentRowComponent.new(assignment: @assignment.reload, window: @window, hours:, sort:, index: 0, first_client:, show_hidden:, inactive:)
+      row = AssignmentRowComponent.new(assignment: @assignment.reload, window: @window, hours:, sort:, index: 0, first_client:, viewer: @user, manager: false, show_hidden:, inactive:)
       render_inline(row)
     end
 
