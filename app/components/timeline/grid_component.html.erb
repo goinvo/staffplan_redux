@@ -19,6 +19,9 @@
       </tr>
       <tr class="flex sm:justify-normal justify-between border-b border-gray-300 pl-5">
         <th class="px-0 pt-[10px] pb-2 font-normal align-top text-transparentGrey w-1/2 sm:w-2/5">
+          <% if mobile_header? %>
+            <div class="flex sm:hidden pl-3 items-center text-contrastBlue"><%= mobile_header %></div>
+          <% end %>
           <div class="hidden sm:flex flex-row justify-between items-start">
             <%= columns %>
             <%= link_to previous_path, class: "-m-1 sm:ml-0 text-black flex items-center justify-center hover:text-contrastGrey", aria: { label: "Previous weeks" }, data: { timeline_target: "previous", turbo_action: "replace" } do %>

@@ -1,0 +1,22 @@
+<tr class="px-5 sm:hidden flex border-b border-gray-300 hover:bg-hoverGrey min-h-[100px]">
+  <td class="my-5 px-2 font-normal w-full">
+    <% if approvable? %>
+      <%= button_to approve_path, params: { week: week.monday.iso8601 }, class: "w-full h-10 text-tiny bg-tiffany rounded-sm text-white pt-1 mb-4 mt-2 cursor-pointer" do %>
+        Yes, I worked <b><%= helpers.number_with_delimiter(planned) %></b> hrs
+      <% end %>
+    <% end %>
+    <div class="px-2 py-2 flex flex-col items-center">
+      <span>I need to see the full plan.</span>
+      <%= image_tag "turn_the_phone.jpg", alt: "Turn your phone sideways", width: 104, height: 88, class: "my-2 rounded-md object-cover" %>
+    </div>
+  </td>
+</tr>
+<tr class="sm:hidden flex border-b border-gray-300 hover:bg-hoverGrey min-h-[100px]" aria-hidden="true">
+  <td class="flex flex-row overflow-hidden w-screen">
+    <% chart_weeks.each do |week| %>
+      <div class="relative py-1 mx-1 w-[68px] shrink-0 min-h-[100px]">
+        <%= render Timeline::BarChartComponent.new(hours: hours.for(week), max: hours.max, past: week.past?, text_class: "text-contrastBlue") %>
+      </div>
+    <% end %>
+  </td>
+</tr>

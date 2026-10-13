@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :people, only: %i[index show] do
     resources :assignments, only: %i[create], module: :people
+    resource :approval, only: %i[create], module: :people
   end
   resources :projects, only: %i[index show new create edit update] do
     resources :assignments, only: %i[create], module: :projects
