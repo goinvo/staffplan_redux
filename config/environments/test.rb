@@ -60,6 +60,10 @@ Rails.application.configure do
   # Keep post-sign-in redirects to the React UI on the test server
   config.x.react_ui_url = ''
 
+  # Start every test with the Rails UI rollout switched off, whatever the shell exports
+  config.x.rails_ui_enabled = ''
+  config.x.rails_ui_emails = ''
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
