@@ -5,6 +5,7 @@ module Timeline
     DEFAULT_VISIBLE_WEEKS = 6
 
     renders_one :page_header
+    renders_one :mobile_header
     renders_one :columns
     renders_one :summary
 
