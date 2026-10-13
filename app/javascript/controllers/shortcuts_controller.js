@@ -15,6 +15,10 @@ export default class extends Controller {
     }
   }
 
+  editProject({ params: { url } }) {
+    this.dispatch("edit-project", { prefix: "staffplan", target: window, detail: { url, label: "Edit project" } })
+  }
+
   newProject() {
     this.dispatch("new-project", { prefix: "staffplan", target: window })
   }

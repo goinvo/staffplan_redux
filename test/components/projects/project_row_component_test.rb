@@ -79,6 +79,7 @@ module Projects
                       hours:,
                       summary: Timeline::ProjectSummary.for([project]).fetch(project.id),
                       viewer: @user,
+                      manager: false,
                     ))
     end
 

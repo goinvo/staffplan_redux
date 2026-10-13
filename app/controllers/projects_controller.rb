@@ -14,6 +14,10 @@ class ProjectsController < RailsUiController
     end
   end
 
+  def edit
+    @form = ProjectForm.for(current_company.projects.find(params[:id]))
+  end
+
   def index
     @client = current_company.clients.find_by(id: params[:client]) if params[:client].present?
     return redirect_to(projects_path) if params[:client].present? && @client.nil?
@@ -56,6 +60,8 @@ class ProjectsController < RailsUiController
 
     if form.save
       redirect_back_or_to project_path(project), status: :see_other
+    elsif params[:form] == 'new_project'
+      render turbo_stream: turbo_stream.update('new_project', partial: 'projects/form', locals: { new_project: form }), status: :unprocessable_content
     else
       render turbo_stream: turbo_stream.replace('project_header', Projects::ProjectHeaderComponent.new(project:, form:)), status: :unprocessable_content
     end

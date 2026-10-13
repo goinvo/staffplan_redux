@@ -1,0 +1,9 @@
+<template data-undo-target="template" data-name="<%= name %>">
+  <td data-undo-row class="text-contrastBlue w-full h-[100px] p-3">
+    <div class="flex flex-col justify-center w-full h-full bg-[#7DE2DF]">
+      <span class="font-bold text-sm text-center"><%= title %></span>
+      <% if subtitle %><span class="font-normal text-sm text-center"><%= subtitle %></span><% end %>
+      <button type="button" class="w-20 mx-auto font-normal text-sm underline cursor-pointer" data-action="undo#undo">Undo</button>
+    </div>
+  </td>
+</template>

@@ -2,10 +2,12 @@
 
 module People
   class AssignmentRowComponent < ViewComponent::Base
-    attr_reader :assignment, :window, :hours, :sort, :index, :first_client, :show_hidden, :inactive, :highlight
+    attr_reader :assignment, :window, :hours, :sort, :index, :first_client, :show_hidden, :inactive, :highlight, :viewer, :manager
 
-    def initialize(assignment:, window:, hours:, sort:, index:, first_client:, show_hidden: false, inactive: false, highlight: false) # rubocop:disable Metrics/ParameterLists
+    def initialize(assignment:, window:, hours:, sort:, index:, first_client:, viewer:, manager:, show_hidden: false, inactive: false, highlight: false) # rubocop:disable Metrics/ParameterLists
       @assignment = assignment
+      @viewer = viewer
+      @manager = manager
       @window = window
       @hours = hours
       @sort = sort
