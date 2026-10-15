@@ -37,13 +37,13 @@ class ProjectsTest < ActionDispatch::IntegrationTest
   end
 
   test 'the edit dialog starts from the project and shows its errors in place' do
-    with_rails_ui { get edit_project_path(@project) }
+    get edit_project_path(@project)
 
     assert_dom 'turbo-frame#new_project form[action=?]', project_path(@project)
     assert_dom 'input[name="project[project_name]"][value=Website]'
     assert_dom 'input[type=checkbox][name="project[archived]"]'
 
-    with_rails_ui { patch project_path(@project), params: { form: 'new_project', project: { project_name: '' } } }
+    patch project_path(@project), params: { form: 'new_project', project: { project_name: '' } }
 
     assert_response :unprocessable_content
     assert_match 'turbo-stream action="update" target="new_project"', response.body
@@ -51,7 +51,7 @@ class ProjectsTest < ActionDispatch::IntegrationTest
   end
 
   test 'adds an unassigned row' do
-    with_rails_ui { post project_assignments_path(@project) }
+    post project_assignments_path(@project)
 
     row = @project.assignments.sole
 
@@ -63,15 +63,13 @@ class ProjectsTest < ActionDispatch::IntegrationTest
   test 'projects from other companies are not found' do
     other = create(:project, name: 'Theirs')
 
-    with_rails_ui do
-      patch project_path(other), params: { project: { project_name: 'Mine' } }
+    patch project_path(other), params: { project: { project_name: 'Mine' } }
 
-      assert_response :not_found
+    assert_response :not_found
 
-      post project_assignments_path(other)
+    post project_assignments_path(other)
 
-      assert_response :not_found
-    end
+    assert_response :not_found
 
     assert_equal 'Theirs', other.reload.name
     assert_empty other.assignments
@@ -80,10 +78,6 @@ class ProjectsTest < ActionDispatch::IntegrationTest
   private
 
   def update(headers: {}, **attributes)
-    with_rails_ui { patch project_path(@project), params: { project: attributes }, headers: }
-  end
-
-  def with_rails_ui(&)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email, &)
+    patch project_path(@project), params: { project: attributes }, headers:
   end
 end

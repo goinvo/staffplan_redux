@@ -13,122 +13,110 @@ class WorkWeekEditingTest < ApplicationSystemTestCase
   end
 
   test 'typing and tabbing saves and updates the totals without a reload' do
-    with_rails_ui do
-      visit_page
+    visit_page
 
-      plan(@website, 1).click
-      plan(@website, 1).send_keys('20', :tab)
+    plan(@website, 1).click
+    plan(@website, 1).send_keys('20', :tab)
 
-      assert_focused plan(@website, 2)
-      assert_selector chart_label(1), text: '20'
-      within("##{dom_id(@website)} td:last-child") { assert_text '20hrs' }
-      assert evaluate_script("document.getElementById('timeline').samePage"), 'the grid was morphed in place'
-      assert_equal [20], @website.work_weeks.pluck(:estimated_hours)
-    end
+    assert_focused plan(@website, 2)
+    assert_selector chart_label(1), text: '20'
+    within("##{dom_id(@website)} td:last-child") { assert_text '20hrs' }
+    assert evaluate_script("document.getElementById('timeline').samePage"), 'the grid was morphed in place'
+    assert_equal [20], @website.work_weeks.pluck(:estimated_hours)
   end
 
   test 'enter saves and escape reverts' do
     create(:work_week, assignment: @website, cweek: week(1).cweek, year: week(1).cwyear, estimated_hours: 10, actual_hours: 0)
 
-    with_rails_ui do
-      visit_page
+    visit_page
 
-      plan(@website, 1).click
-      plan(@website, 1).send_keys('30', :escape)
+    plan(@website, 1).click
+    plan(@website, 1).send_keys('30', :escape)
 
-      assert_equal '10', plan(@website, 1).value
+    assert_equal '10', plan(@website, 1).value
 
-      plan(@website, 1).send_keys('12', :enter)
+    plan(@website, 1).send_keys('12', :enter)
 
-      assert_selector chart_label(1), text: '12'
-      assert_focused plan(@website, 1)
-      assert_equal [12], @website.work_weeks.reload.pluck(:estimated_hours)
-    end
+    assert_selector chart_label(1), text: '12'
+    assert_focused plan(@website, 1)
+    assert_equal [12], @website.work_weeks.reload.pluck(:estimated_hours)
   end
 
   test 'actual hours save for the current week' do
-    with_rails_ui do
-      visit_page
+    visit_page
 
-      actual(@website, 0).click
-      actual(@website, 0).send_keys('7', :tab)
+    actual(@website, 0).click
+    actual(@website, 0).send_keys('7', :tab)
 
-      assert_focused actual(@website, 1)
-      assert_selector chart_label(0), text: '7'
-      assert_equal [[week(0).cweek, 7]], @website.work_weeks.pluck(:cweek, :actual_hours)
-    end
+    assert_focused actual(@website, 1)
+    assert_selector chart_label(0), text: '7'
+    assert_equal [[week(0).cweek, 7]], @website.work_weeks.pluck(:cweek, :actual_hours)
   end
 
   test 'arrow keys and tab move around the grid' do
-    with_rails_ui do
-      visit_page
+    visit_page
 
-      plan(@mobile, 0).click
-      plan(@mobile, 0).send_keys(:right)
+    plan(@mobile, 0).click
+    plan(@mobile, 0).send_keys(:right)
 
-      assert_focused plan(@mobile, 1)
+    assert_focused plan(@mobile, 1)
 
-      plan(@mobile, 1).send_keys(:down)
+    plan(@mobile, 1).send_keys(:down)
 
-      assert_focused actual(@mobile, 1)
+    assert_focused actual(@mobile, 1)
 
-      actual(@mobile, 1).send_keys(:down)
+    actual(@mobile, 1).send_keys(:down)
 
-      assert_focused plan(@website, 1)
+    assert_focused plan(@website, 1)
 
-      plan(@website, 1).send_keys(:up)
+    plan(@website, 1).send_keys(:up)
 
-      assert_focused actual(@mobile, 1)
+    assert_focused actual(@mobile, 1)
 
-      actual(@mobile, 1).send_keys(:up)
+    actual(@mobile, 1).send_keys(:up)
 
-      assert_focused plan(@mobile, 1)
+    assert_focused plan(@mobile, 1)
 
-      plan(@mobile, 1).send_keys(:left)
+    plan(@mobile, 1).send_keys(:left)
 
-      assert_focused plan(@mobile, 0)
+    assert_focused plan(@mobile, 0)
 
-      last_plan = all("##{dom_id(@mobile)} input[data-kind=plan]").to_a.rfind(&:visible?)
-      last_plan.click
-      last_plan.send_keys(:tab)
+    last_plan = all("##{dom_id(@mobile)} input[data-kind=plan]").to_a.rfind(&:visible?)
+    last_plan.click
+    last_plan.send_keys(:tab)
 
-      assert_focused actual(@mobile, 0)
+    assert_focused actual(@mobile, 0)
 
-      actual(@mobile, 0).send_keys(%i[shift tab])
+    actual(@mobile, 0).send_keys(%i[shift tab])
 
-      assert_focused last_plan
-    end
+    assert_focused last_plan
   end
 
   test 'fill forward copies the plan to the following visible weeks' do
-    with_rails_ui do
-      visit_page
+    visit_page
 
-      plan(@website, 2).click
-      plan(@website, 2).send_keys('8')
-      find("##{dom_id(@website)} td[data-timeline-week='2'] button[aria-label='Fill forward']").click
+    plan(@website, 2).click
+    plan(@website, 2).send_keys('8')
+    find("##{dom_id(@website)} td[data-timeline-week='2'] button[aria-label='Fill forward']").click
 
-      last_week = all("##{dom_id(@website)} td[data-monday]").to_a.rfind(&:visible?)['data-monday']
+    last_week = all("##{dom_id(@website)} td[data-monday]").to_a.rfind(&:visible?)['data-monday']
 
-      assert_selector chart_label(3), text: '8'
-      assert_equal ((Date.iso8601(last_week) - week(2)).to_i / 7) + 1, @website.work_weeks.where(estimated_hours: 8).count
-    end
+    assert_selector chart_label(3), text: '8'
+    assert_equal ((Date.iso8601(last_week) - week(2)).to_i / 7) + 1, @website.work_weeks.where(estimated_hours: 8).count
   end
 
   test 'explains why more than 168 hours is refused' do
-    with_rails_ui do
-      visit_page
+    visit_page
 
-      plan(@website, 1).click
-      plan(@website, 1).send_keys('169')
+    plan(@website, 1).click
+    plan(@website, 1).send_keys('169')
 
-      assert_equal '16', plan(@website, 1).value
-      assert_selector '[role=alert]', text: 'There are only 168 hours in a week'
+    assert_equal '16', plan(@website, 1).value
+    assert_selector '[role=alert]', text: 'There are only 168 hours in a week'
 
-      plan(@website, 1).send_keys(:backspace)
+    plan(@website, 1).send_keys(:backspace)
 
-      assert_no_selector '[role=alert]'
-    end
+    assert_no_selector '[role=alert]'
   end
 
   private
@@ -154,8 +142,4 @@ class WorkWeekEditingTest < ApplicationSystemTestCase
   end
 
   def week(offset) = @this_monday + (offset - 1).weeks
-
-  def with_rails_ui(&)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email, &)
-  end
 end

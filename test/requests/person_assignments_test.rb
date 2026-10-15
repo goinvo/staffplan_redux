@@ -90,8 +90,6 @@ class PersonAssignmentsTest < ActionDispatch::IntegrationTest
   private
 
   def propose(user: @user, **names)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email) do
-      post person_assignments_path(user), params: { proposed_assignment: names }, headers: { 'HTTP_REFERER' => person_url(user) }
-    end
+    post person_assignments_path(user), params: { proposed_assignment: names }, headers: { 'HTTP_REFERER' => person_url(user) }
   end
 end

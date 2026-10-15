@@ -51,6 +51,6 @@ class ClientsTest < ActionDispatch::IntegrationTest
   private
 
   def rename(client, name)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email) { patch client_path(client), params: { client: { name: } } }
+    patch client_path(client), params: { client: { name: } }
   end
 end

@@ -1,20 +1,18 @@
 <nav aria-label="Main" class="navbar pl-6 pr-0 sm:px-5 h-14 flex justify-between items-center">
   <div class="flex items-center pl-1 sm:pl-0 sm:space-x-4 space-x-1 h-full">
     <% main_nav_links.each do |label, path, active| %>
-      <%= link_to label, staffplan_ui_url(path),
+      <%= link_to label, path,
             class: ['inline-flex items-center text-base sm:px-4 px-1 sm:py-2 py-1 rounded-md whitespace-nowrap',
                     active ? 'bg-contrastBlue' : 'hover:bg-contrastBlue'],
             aria: { current: ('page' if active) } %>
     <% end %>
-    <% if rails_ui? %>
-      <button type="button" class="px-8" aria-label="New project" data-action="shortcuts#newProject">
-        <div class="flex self-start py-0.5">
-          <svg class="sm:block hidden h-8 w-8 rounded-md text-contrastGrey hover:text-white" fill="currentColor" viewBox="0 0 448 512" aria-hidden="true">
-            <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
-          </svg>
-        </div>
-      </button>
-    <% end %>
+    <button type="button" class="px-8" aria-label="New project" data-action="shortcuts#newProject">
+      <div class="flex self-start py-0.5">
+        <svg class="sm:block hidden h-8 w-8 rounded-md text-contrastGrey hover:text-white" fill="currentColor" viewBox="0 0 448 512" aria-hidden="true">
+          <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+        </svg>
+      </div>
+    </button>
   </div>
   <div class="flex items-center sm:space-x-4 py-4 sm:ml-2">
     <%= link_to 'Feedback', ApplicationHelper::FEEDBACK_MAILTO, target: '_blank', rel: 'noopener noreferrer',

@@ -14,29 +14,25 @@ class MyStaffplanTest < ApplicationSystemTestCase
   test 'shows your own assignments with a link to edit your profile' do
     assignment = assign('Acme', 'Website')
 
-    with_rails_ui do
-      visit person_path(@user)
+    visit person_path(@user)
 
-      assert_selector 'h1', text: @user.name
-      assert_link 'Edit profile', href: settings_profile_path
-      assert_link 'Acme', href: projects_path(client: assignment.project.client_id)
-      click_link 'Website'
+    assert_selector 'h1', text: @user.name
+    assert_link 'Edit profile', href: settings_profile_path
+    assert_link 'Acme', href: projects_path(client: assignment.project.client_id)
+    click_link 'Website'
 
-      assert_current_path project_path(assignment.project)
-    end
+    assert_current_path project_path(assignment.project)
   end
 
   test "shows someone else's assignments without the profile link" do
     teammate = create(:membership, company: @company).user
     create(:assignment, user: teammate, project: project('Acme', 'Website'))
 
-    with_rails_ui do
-      visit person_path(teammate)
+    visit person_path(teammate)
 
-      assert_selector 'h1', text: teammate.name
-      assert_selector ROWS, text: 'Website'
-      assert_no_link 'Edit profile'
-    end
+    assert_selector 'h1', text: teammate.name
+    assert_selector ROWS, text: 'Website'
+    assert_no_link 'Edit profile'
   end
 
   test 'sorts by client or project and remembers the choice' do
@@ -44,27 +40,25 @@ class MyStaffplanTest < ApplicationSystemTestCase
     assign('Beta', 'Omega')
     assign('Beta', 'Gamma')
 
-    with_rails_ui do
-      visit person_path(@user)
+    visit person_path(@user)
 
-      assert_rows %w[Gamma Omega Alpha]
+    assert_rows %w[Gamma Omega Alpha]
 
-      sort_by 'Client', 'client_desc'
+    sort_by 'Client', 'client_desc'
 
-      assert_rows %w[Alpha Gamma Omega]
+    assert_rows %w[Alpha Gamma Omega]
 
-      sort_by 'Projects', 'project_asc'
+    sort_by 'Projects', 'project_asc'
 
-      assert_rows %w[Alpha Gamma Omega]
+    assert_rows %w[Alpha Gamma Omega]
 
-      sort_by 'Projects', 'project_desc'
+    sort_by 'Projects', 'project_desc'
 
-      assert_rows %w[Omega Gamma Alpha]
+    assert_rows %w[Omega Gamma Alpha]
 
-      visit person_path(@user)
+    visit person_path(@user)
 
-      assert_rows %w[Omega Gamma Alpha]
-    end
+    assert_rows %w[Omega Gamma Alpha]
   end
 
   test 'toggles between Plan and Proposed, updating the stripes and chart' do
@@ -72,49 +66,45 @@ class MyStaffplanTest < ApplicationSystemTestCase
     next_week = Time.zone.today.next_week(:monday)
     create(:work_week, assignment:, cweek: next_week.cweek, year: next_week.cwyear, estimated_hours: 10, actual_hours: 0)
 
-    with_rails_ui do
-      visit person_path(@user)
+    visit person_path(@user)
 
-      assert_no_selector 'thead path[data-proposed]', visible: :all
+    assert_no_selector 'thead path[data-proposed]', visible: :all
 
-      click_button 'Plan'
+    click_button 'Plan'
 
-      assert_button 'Proposed'
-      assert_selector "#{ROWS}.bg-diagonal-stripes"
-      assert_selector 'thead path[data-proposed]', visible: :all
+    assert_button 'Proposed'
+    assert_selector "#{ROWS}.bg-diagonal-stripes"
+    assert_selector 'thead path[data-proposed]', visible: :all
 
-      click_button 'Proposed'
+    click_button 'Proposed'
 
-      assert_button 'Plan'
-      assert_no_selector "#{ROWS}.bg-diagonal-stripes"
-      assert_equal Assignment::ACTIVE, assignment.reload.status
-    end
+    assert_button 'Plan'
+    assert_no_selector "#{ROWS}.bg-diagonal-stripes"
+    assert_equal Assignment::ACTIVE, assignment.reload.status
   end
 
   test 'shows and hides hidden assignments' do
     assign('Acme', 'Website')
     hidden = assign('Acme', 'Side project', focused: false)
 
-    with_rails_ui do
-      visit person_path(@user)
+    visit person_path(@user)
 
-      assert_rows %w[Website]
-      assert_text 'Total includes hours from hidden projects'
+    assert_rows %w[Website]
+    assert_text 'Total includes hours from hidden projects'
 
-      click_link 'Show 1 hidden project'
+    click_link 'Show 1 hidden project'
 
-      assert_rows ['Side project', 'Website']
+    assert_rows ['Side project', 'Website']
 
-      click_button 'Show in My StaffPlan'
+    click_button 'Show in My StaffPlan'
 
-      assert_no_button 'Show in My StaffPlan'
-      assert_no_link "Ok, only show projects I'm interested in"
-      assert hidden.reload.focused
+    assert_no_button 'Show in My StaffPlan'
+    assert_no_link "Ok, only show projects I'm interested in"
+    assert hidden.reload.focused
 
-      visit person_path(@user)
+    visit person_path(@user)
 
-      assert_rows ['Side project', 'Website']
-    end
+    assert_rows ['Side project', 'Website']
   end
 
   test 'a deactivated person is read-only' do
@@ -122,14 +112,12 @@ class MyStaffplanTest < ApplicationSystemTestCase
     create(:assignment, user: teammate.user, project: project('Acme', 'Website'))
     teammate.update!(status: Membership::INACTIVE)
 
-    with_rails_ui do
-      visit person_path(teammate.user)
+    visit person_path(teammate.user)
 
-      assert_selector 'h1', text: '(Deactivated)'
-      assert_selector ROWS, text: 'Website'
-      assert_no_button 'Plan'
-      assert_no_selector "#{ROWS} input[data-kind]:not([disabled])", visible: :all
-    end
+    assert_selector 'h1', text: '(Deactivated)'
+    assert_selector ROWS, text: 'Website'
+    assert_no_button 'Plan'
+    assert_no_selector "#{ROWS} input[data-kind]:not([disabled])", visible: :all
   end
 
   private
@@ -152,9 +140,5 @@ class MyStaffplanTest < ApplicationSystemTestCase
     within('#timeline thead') { click_link column }
 
     assert_current_path person_path(@user, sort:)
-  end
-
-  def with_rails_ui(&)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email, &)
   end
 end

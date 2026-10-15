@@ -35,7 +35,7 @@ module Timeline
     end
 
     def own?
-      assignment.present? && assignment.user == @viewer
+      assignment.present? && assignment.user_id == @viewer.id
     end
   end
 end

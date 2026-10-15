@@ -57,7 +57,7 @@
       <% if unassigned? || inactive %>
         <span class="pt-1"><%= proposed? ? "Proposed" : "Plan" %></span>
       <% else %>
-        <%= button_to (proposed? ? "Proposed" : "Plan"), helpers.assignment_path(assignment), method: :patch, params: { assignment: { status: toggled_status } }, class: "pt-1 underline cursor-pointer", form: { class: "contents" } %>
+        <%= button_to (proposed? ? "Proposed" : "Plan"), helpers.assignment_path(assignment), method: :patch, params: { assignment: { status: toggled_status } }, class: "pt-1 underline cursor-pointer", form: { class: "flex" } %>
       <% end %>
       <div class="pt-2">Actual</div>
     </div>

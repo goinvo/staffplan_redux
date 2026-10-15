@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
   before_action :require_user!
 
   def show
-    redirect_to my_staffplan_url, allow_other_host: true
+    redirect_to person_path(current_user)
   end
 
   def switch_account

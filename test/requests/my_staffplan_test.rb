@@ -98,9 +98,7 @@ class MyStaffplanTest < ActionDispatch::IntegrationTest
   end
 
   def show_person(person = @user, **params)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email) do
-      get person_path(person, **params)
-    end
+    get person_path(person, **params)
 
     assert_response :ok
   end

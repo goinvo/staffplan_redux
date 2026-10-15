@@ -150,18 +150,10 @@ class AssignmentWorkWeeksTest < ActionDispatch::IntegrationTest
   end
 
   def fill_forward(cweek:, through:, assignment: @assignment, **hours)
-    with_rails_ui do
-      post fill_forward_assignment_work_week_path(assignment), params: { work_week: { cweek:, year: 2026, **hours }, through: }
-    end
+    post fill_forward_assignment_work_week_path(assignment), params: { work_week: { cweek:, year: 2026, **hours }, through: }
   end
 
   def save_week(cweek:, assignment: @assignment, **hours)
-    with_rails_ui do
-      patch assignment_work_week_path(assignment), params: { work_week: { cweek:, year: 2026, **hours } }
-    end
-  end
-
-  def with_rails_ui(&)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email, &)
+    patch assignment_work_week_path(assignment), params: { work_week: { cweek:, year: 2026, **hours } }
   end
 end
