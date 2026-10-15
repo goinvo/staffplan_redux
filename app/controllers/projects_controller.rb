@@ -26,13 +26,14 @@ class ProjectsController < RailsUiController
     @sort = remembered_sort(Timeline::ProjectSort, :projects_sort)
     @show_archived = params[:show_archived].present?
 
-    projects = (@client || current_company).projects.includes(:client).to_a
+    projects = (@client ? @client.projects : current_company.projects.includes(:client)).to_a
     @archived_count = projects.count(&:archived?)
     projects.reject!(&:archived?) unless @show_archived
 
     @projects = @sort.apply(projects)
     @hours = Timeline::WeeklyHours.new(assignments: Assignment.where(project: @projects), window: @window)
     @assignments_by_project = @hours.assignments.group_by(&:project_id)
+    ActiveRecord::Associations::Preloader.new(records: @hours.assignments.select { it.user_id == current_user.id }, associations: :work_weeks).call
     @summaries = Timeline::ProjectSummary.for(@projects)
   end
 

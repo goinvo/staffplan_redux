@@ -34,7 +34,7 @@ class Assignment < ApplicationRecord
   def removable_by?(viewer, manager:)
     return false if work_weeks.any? { it.actual_hours.positive? }
 
-    user.nil? || user == viewer || manager
+    user_id.nil? || user_id == viewer.id || manager
   end
 
   def upsert_work_week(cweek:, year:, estimated_hours: nil, actual_hours: nil)
