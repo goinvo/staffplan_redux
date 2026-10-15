@@ -16,67 +16,61 @@ class TimelineTest < ApplicationSystemTestCase
   end
 
   test 'resizing changes the visible weeks without a request' do
-    with_rails_ui do
-      resize_to 1000
-      visit person_path(@user)
-      execute_script("document.getElementById('timeline').dataset.marker = 'same page'")
+    resize_to 1000
+    visit person_path(@user)
+    execute_script("document.getElementById('timeline').dataset.marker = 'same page'")
 
-      narrow = assert_visible_weeks
+    narrow = assert_visible_weeks
 
-      resize_to 1600
+    resize_to 1600
 
-      assert_operator assert_visible_weeks, :>, narrow
+    assert_operator assert_visible_weeks, :>, narrow
 
-      resize_to 500
+    resize_to 500
 
-      assert_selector WEEK_HEADERS, count: 1
-      assert_selector "#{WEEK_HEADERS}[aria-current=date]"
-      assert_selector "#timeline[data-marker='same page']"
-    end
+    assert_selector WEEK_HEADERS, count: 1
+    assert_selector "#{WEEK_HEADERS}[aria-current=date]"
+    assert_selector "#timeline[data-marker='same page']"
   end
 
   test 'arrows and arrow keys page by the visible week count' do
-    with_rails_ui do
-      resize_to 1000
-      visit person_path(@user)
+    resize_to 1000
+    visit person_path(@user)
 
-      weeks = assert_visible_weeks
+    weeks = assert_visible_weeks
 
-      click_link 'Next weeks'
+    click_link 'Next weeks'
 
-      assert_current_path person_path(@user, start: (@start + weeks.weeks).iso8601)
-      assert_link 'Today'
+    assert_current_path person_path(@user, start: (@start + weeks.weeks).iso8601)
+    assert_link 'Today'
 
-      press :right
+    press :right
 
-      assert_current_path person_path(@user, start: (@start + (2 * weeks).weeks).iso8601)
+    assert_current_path person_path(@user, start: (@start + (2 * weeks).weeks).iso8601)
 
-      press :left
+    press :left
 
-      assert_current_path person_path(@user, start: (@start + weeks.weeks).iso8601)
+    assert_current_path person_path(@user, start: (@start + weeks.weeks).iso8601)
 
-      press :left
+    press :left
 
-      assert_current_path person_path(@user, start: @start.iso8601)
+    assert_current_path person_path(@user, start: @start.iso8601)
 
-      click_link 'Previous weeks'
+    click_link 'Previous weeks'
 
-      assert_current_path person_path(@user, start: (@start - weeks.weeks).iso8601)
+    assert_current_path person_path(@user, start: (@start - weeks.weeks).iso8601)
 
-      click_link 'Today'
+    click_link 'Today'
 
-      assert_current_path person_path(@user)
-      assert_no_link 'Today'
-    end
+    assert_current_path person_path(@user)
+    assert_no_link 'Today'
   end
 
   test 'arrow keys with modifiers do not page' do
-    with_rails_ui do
-      visit person_path(@user)
-      find('body').send_keys(%i[alt right])
+    visit person_path(@user)
+    find('body').send_keys(%i[alt right])
 
-      assert_current_path person_path(@user)
-    end
+    assert_current_path person_path(@user)
   end
 
   private
@@ -97,9 +91,5 @@ class TimelineTest < ApplicationSystemTestCase
 
   def resize_to(width, height = 1000)
     page.current_window.resize_to(width, height)
-  end
-
-  def with_rails_ui(&)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email, &)
   end
 end

@@ -17,7 +17,7 @@
   </head>
 
   <body class="h-full">
-    <%= tag.div class: "relative z-0 flex flex-col min-h-screen", data: (shortcuts_data if rails_ui?) do %>
+    <%= tag.div class: "relative z-0 flex flex-col min-h-screen", data: shortcuts_data do %>
       <%= render "shared/nav" %>
 
       <% if content_for?(:rails_ui) %>
@@ -43,7 +43,7 @@
       <% end %>
 
       <%= render "shared/footer" %>
-      <%= render "shared/new_project_dialog" if rails_ui? %>
+      <%= render "shared/new_project_dialog" %>
     <% end %>
   </body>
 </html>

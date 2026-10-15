@@ -19,32 +19,30 @@ class PeopleTest < ApplicationSystemTestCase
     plan(@user, 10)
     plan(bo, 40)
 
-    with_rails_ui do
-      visit people_path
+    visit people_path
 
-      assert_sorted 'least covered', %w[Cy Ann Bo]
-      within("tr#user_#{bo.id}") { assert_text '40' }
+    assert_sorted 'least covered', %w[Cy Ann Bo]
+    within("tr#user_#{bo.id}") { assert_text '40' }
 
-      click_sort 'most_covered'
+    click_sort 'most_covered'
 
-      assert_sorted 'most covered', %w[Bo Ann Cy]
+    assert_sorted 'most covered', %w[Bo Ann Cy]
 
-      click_sort 'alpha_asc'
+    click_sort 'alpha_asc'
 
-      assert_sorted 'alpha', %w[Ann Bo Cy]
+    assert_sorted 'alpha', %w[Ann Bo Cy]
 
-      click_sort 'alpha_desc'
+    click_sort 'alpha_desc'
 
-      assert_sorted 'alpha', %w[Cy Bo Ann]
+    assert_sorted 'alpha', %w[Cy Bo Ann]
 
-      visit people_path
+    visit people_path
 
-      assert_sorted 'alpha', %w[Cy Bo Ann]
+    assert_sorted 'alpha', %w[Cy Bo Ann]
 
-      click_link cy.name
+    click_link cy.name
 
-      assert_current_path person_path(cy)
-    end
+    assert_current_path person_path(cy)
   end
 
   test 'shows and hides deactivated people' do
@@ -52,39 +50,35 @@ class PeopleTest < ApplicationSystemTestCase
     plan(dee, 12)
     @company.memberships.find_by!(user: dee).update!(status: Membership::INACTIVE)
 
-    with_rails_ui do
-      visit people_path
+    visit people_path
 
-      assert_people %w[Ann]
+    assert_people %w[Ann]
 
-      click_link 'Show 1 deactivated person'
+    click_link 'Show 1 deactivated person'
 
-      assert_people ['Ann', 'Dee (Deactivated)']
+    assert_people ['Ann', 'Dee (Deactivated)']
 
-      click_link 'Hide 1 deactivated person'
+    click_link 'Hide 1 deactivated person'
 
-      assert_people %w[Ann]
-    end
+    assert_people %w[Ann]
   end
 
   test 'only owners and admins get the add people link' do
-    with_rails_ui do
-      visit people_path
-      click_link 'Add people'
+    visit people_path
+    click_link 'Add people'
 
-      assert_current_path settings_users_path
+    assert_current_path settings_users_path
 
-      @membership.update!(role: Membership::MEMBER)
-      visit people_path
+    @membership.update!(role: Membership::MEMBER)
+    visit people_path
 
-      assert_people %w[Ann]
-      assert_no_link 'Add people'
+    assert_people %w[Ann]
+    assert_no_link 'Add people'
 
-      @membership.update!(role: Membership::ADMIN)
-      visit people_path
+    @membership.update!(role: Membership::ADMIN)
+    visit people_path
 
-      assert_link 'Add people', href: settings_users_path
-    end
+    assert_link 'Add people', href: settings_users_path
   end
 
   private
@@ -113,9 +107,5 @@ class PeopleTest < ApplicationSystemTestCase
 
   def teammate(name)
     create(:membership, company: @company, role: Membership::MEMBER).user.tap { it.update!(name:) }
-  end
-
-  def with_rails_ui(&)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email, &)
   end
 end

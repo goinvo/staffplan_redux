@@ -6,8 +6,4 @@ class StaffPlanComponent < ViewComponent::Base
     @target_date = target_date
   end
   attr_reader :user, :target_date
-
-  def react_staffplan_url
-    RailsUi.react_url("/people/#{helpers.current_user.id}")
-  end
 end

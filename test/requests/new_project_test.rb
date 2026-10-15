@@ -13,7 +13,7 @@ class NewProjectTest < ActionDispatch::IntegrationTest
     create(:client, company: @company, name: 'Acme')
     create(:client, name: 'Elsewhere')
 
-    with_rails_ui { get new_project_path }
+    get new_project_path
 
     assert_response :ok
     assert_dom 'turbo-frame#new_project [role=option]', text: 'Acme'
@@ -87,10 +87,6 @@ class NewProjectTest < ActionDispatch::IntegrationTest
   private
 
   def create_project(form: nil, headers: {}, **attributes)
-    with_rails_ui { post projects_path, params: { form:, new_project: attributes }.compact, headers: }
-  end
-
-  def with_rails_ui(&)
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email, &)
+    post projects_path, params: { form:, new_project: attributes }.compact, headers:
   end
 end

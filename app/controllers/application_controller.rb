@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   layout :choose_layout
 
-  helper_method :current_company, :current_user, :my_staffplan_url, :rails_ui?, :staffplan_ui_url
+  helper_method :current_company, :current_user
 
   private
 
@@ -39,24 +39,10 @@ class ApplicationController < ActionController::Base
     @current_user = authenticate_by_session(User)
   end
 
-  def my_staffplan_url
-    staffplan_ui_url("/people/#{current_user.id}")
-  end
-
-  def rails_ui?
-    RailsUi.enabled_for?(current_user)
-  end
-
   def require_company_owner_or_admin!
     return if current_user.owner?(company: current_company) || current_user.admin?(company: current_company)
 
     redirect_to root_url, flash: { error: 'You are not authorized to access this page.' }
-  end
-
-  def require_rails_ui!
-    return if rails_ui?
-
-    redirect_to RailsUi.react_url(request.fullpath), allow_other_host: true
   end
 
   def require_user!
@@ -81,9 +67,5 @@ class ApplicationController < ActionController::Base
     return unless current_user
 
     PaperTrail.request.whodunnit = current_user.id
-  end
-
-  def staffplan_ui_url(path)
-    RailsUi.url(current_user, path)
   end
 end

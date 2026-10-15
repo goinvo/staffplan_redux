@@ -54,6 +54,6 @@ class ApprovalsTest < ActionDispatch::IntegrationTest
   private
 
   def approve(user, week:, headers: {})
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email) { post person_approval_path(user), params: { week: }, headers: }
+    post person_approval_path(user), params: { week: }, headers:
   end
 end

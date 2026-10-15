@@ -30,7 +30,7 @@ class ProjectExportsTest < ActionDispatch::IntegrationTest
     plan(bo, [2027, 2] => [9, 0])
     plan(placeholder, [2026, 52] => [4, 0])
 
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email) { get project_export_path(project, format: :csv) }
+    get project_export_path(project, format: :csv)
 
     assert_response :ok
     assert_equal 'text/csv', response.media_type
@@ -55,7 +55,7 @@ class ProjectExportsTest < ActionDispatch::IntegrationTest
   end
 
   test 'projects from other companies are not found' do
-    with_config(rails_ui_enabled: '', rails_ui_emails: @user.email) { get project_export_path(create(:project), format: :csv) }
+    get project_export_path(create(:project), format: :csv)
 
     assert_response :not_found
   end
