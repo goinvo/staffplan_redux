@@ -32,7 +32,7 @@ gem 'turbo-rails'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'csv'
 gem 'graphiql-rails'
-gem 'graphql', '~> 2.5'
+gem 'graphql', '~> 2.6'
 gem 'paper_trail'
 gem 'passwordless', '~> 1.8'
 gem 'tzinfo-data', platforms: %i[windows jruby]
