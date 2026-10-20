@@ -14,7 +14,6 @@ inherit_from: .rubocop_todo.yml
 plugins:
   - rubocop-ordered_methods
   - rubocop-factory_bot
-  - rubocop-graphql
   - rubocop-minitest
   - rubocop-performance
   - rubocop-rails
@@ -30,26 +29,6 @@ AllCops:
     - 'app/services/tracking_client.rb'
     - 'test/services/tracking_client_test.rb'
   NewCops: enable
-
-GraphQL/ExtractInputType:
-  Enabled: false
-
-GraphQL/ExtractType:
-  Enabled: false
-
-GraphQL/MaxComplexitySchema:
-  Enabled: false
-
-GraphQL/MaxDepthSchema:
-  Enabled: false
-
-GraphQL/ObjectDescription:
-  Enabled: true
-  Exclude:
-    - 'app/graphql/sources/*.rb'
-    - 'app/graphql/types/mutation_type.rb'
-    - 'app/graphql/types/node_type.rb'
-    - 'app/graphql/types/query_type.rb'
 
 Layout/LineLength:
   Enabled: false
@@ -98,10 +77,6 @@ Metrics/CyclomaticComplexity:
 
 Metrics/MethodLength:
   Enabled: false
-
-Metrics/ParameterLists:
-  Exclude:
-    - 'app/graphql/mutations/*.rb'
 
 Metrics/PerceivedComplexity:
   Enabled: false

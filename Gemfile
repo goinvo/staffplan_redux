@@ -15,7 +15,6 @@ gem 'importmap-rails'
 gem 'mission_control-jobs'
 gem 'money', '~> 7.1'
 gem 'puma', '>= 5.0'
-gem 'rack-cors'
 gem 'recaptcha'
 gem 'solid_queue'
 gem 'stimulus-rails'
@@ -31,8 +30,6 @@ gem 'turbo-rails'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'csv'
-gem 'graphiql-rails'
-gem 'graphql', '~> 2.6'
 gem 'paper_trail'
 gem 'passwordless', '~> 1.8'
 gem 'tzinfo-data', platforms: %i[windows jruby]
@@ -72,7 +69,6 @@ group :development do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem 'rubocop-capybara'
   gem 'rubocop-factory_bot'
-  gem 'rubocop-graphql'
   gem 'rubocop-minitest'
   gem 'rubocop-ordered_methods'
   gem 'rubocop-performance'

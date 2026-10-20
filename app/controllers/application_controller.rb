@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   include Passwordless::ControllerHelpers
 
   before_action :check_subscription_status
-  before_action :set_access_control_headers
-  after_action :set_csrf_header
 
   layout :choose_layout
 
@@ -53,14 +51,6 @@ class ApplicationController < ActionController::Base
     flash[:error] = 'Please sign in to continue using StaffPlan.' # rubocop:disable Rails/I18nLocaleTexts
     save_passwordless_redirect_location!(User) if request.get?
     redirect_to auth_sign_in_url
-  end
-
-  def set_access_control_headers
-    response.set_header('Access-Control-Expose-Headers', 'x-csrf-token')
-  end
-
-  def set_csrf_header
-    response.headers['X-CSRF-Token'] = form_authenticity_token
   end
 
   def set_paper_trail_whodunnit

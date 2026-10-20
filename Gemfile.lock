@@ -156,7 +156,6 @@ GEM
     ffi (1.17.4-x86_64-darwin)
     ffi (1.17.4-x86_64-linux-gnu)
     ffi (1.17.4-x86_64-linux-musl)
-    fiber-storage (1.0.1)
     foreman (0.90.0)
       thor (~> 1.4)
     fugit (1.11.2)
@@ -164,12 +163,6 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    graphiql-rails (1.10.5)
-      railties
-    graphql (2.6.12)
-      base64
-      fiber-storage
-      logger
     hashdiff (1.2.1)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
@@ -302,9 +295,6 @@ GEM
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.2.7)
-    rack-cors (3.0.0)
-      logger
-      rack (>= 3.0.14)
     rack-session (2.1.2)
       base64 (>= 0.1.0)
       rack (>= 3.0.0)
@@ -383,9 +373,6 @@ GEM
     rubocop-factory_bot (2.28.0)
       lint_roller (~> 1.1)
       rubocop (~> 1.72, >= 1.72.1)
-    rubocop-graphql (1.8.0)
-      lint_roller (~> 1.1)
-      rubocop (>= 1.89, < 2)
     rubocop-minitest (0.41.0)
       lint_roller (~> 1.1)
       rubocop (>= 1.89.0, < 2.0)
@@ -503,8 +490,6 @@ DEPENDENCIES
   factory_bot_rails
   faker
   foreman
-  graphiql-rails
-  graphql (~> 2.6)
   image_processing (~> 2.2)
   importmap-rails
   letter_opener
@@ -521,7 +506,6 @@ DEPENDENCIES
   propshaft
   pry
   puma (>= 5.0)
-  rack-cors
   rails (= 8.1.4)
   rails-controller-testing
   rbs
@@ -529,7 +513,6 @@ DEPENDENCIES
   rollbar
   rubocop-capybara
   rubocop-factory_bot
-  rubocop-graphql
   rubocop-minitest
   rubocop-ordered_methods
   rubocop-performance
