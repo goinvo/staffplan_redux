@@ -142,7 +142,7 @@ class ProjectMenuTest < ApplicationSystemTestCase
 
   def choose_from_menu(item)
     open_menu
-    find('[role=menu]', visible: true).click_button(item)
+    find('[role=menu]', visible: :visible).click_button(item)
   end
 
   def open_menu
