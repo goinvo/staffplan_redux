@@ -75,8 +75,8 @@ class TimelineTest < ApplicationSystemTestCase
 
   private
 
-  # React's formula: 600px base + 60px gutter, 42px per extra week, at least 5,
-  # plus the leading week before the current one
+  # Same formula as timeline_controller.js: 600px base + 60px gutter, 42px per
+  # extra week, at least 5, plus the leading week before the current one
   def assert_visible_weeks
     width = evaluate_script('document.documentElement.clientWidth')
     expected = [5, 1 + ((width - 660) / 42)].max + 1

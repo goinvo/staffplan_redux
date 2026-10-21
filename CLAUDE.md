@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-StaffPlan Redux is a Rails 8.0.2 application for staff planning and project management. It's a rewrite of the original StaffPlan service, focusing on collaborative work planning where team members can propose projects and track their time.
+StaffPlan Redux is a Rails 8.1 application for staff planning and project management. It's a rewrite of the original StaffPlan service, focusing on collaborative work planning where team members can propose projects and track their time.
 
 ## Key Commands
 
@@ -94,7 +94,7 @@ WorkWeek objects are created but not persisted when displaying empty weeks in th
 - Don't include `ViewComponent::SystemTestHelpers` in system tests: it overrides Capybara's `page`
 
 ### Rails-specific Considerations
-- Using Rails 8.0.2 with Ruby 3.4.7
+- Using Rails 8.1 with Ruby 4.0 (exact versions in `Gemfile.lock` and `.ruby-version`)
 - PostgreSQL database
 - Tailwind CSS for styling
 - ImportMaps for JavaScript (no Webpack/Node build step)

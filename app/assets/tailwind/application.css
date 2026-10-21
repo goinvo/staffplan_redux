@@ -227,7 +227,7 @@
     background-color: var(--actionbar-search);
 }
 
-/* a font-drawn braille ⠇ (as in the React app) renders hollow dots on macOS */
+/* draws the ⋮ as an SVG mask: a font-drawn braille ⠇ renders hollow dots on macOS */
 .ellipsismenu:after {
     content: "";
     width: 1em;
