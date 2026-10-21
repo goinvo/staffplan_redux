@@ -11,7 +11,7 @@ class ProjectExportsTest < ActionDispatch::IntegrationTest
     passwordless_sign_in @user
   end
 
-  test 'exports weekly hours, the summary and monthly hours per person, like React' do
+  test 'exports weekly hours, the summary and monthly hours per person' do
     project = create(:project,
                      client: create(:client, company: @company, name: 'Acme'),
                      name: 'Website',

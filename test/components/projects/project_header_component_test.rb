@@ -8,7 +8,7 @@ module Projects
       @project = create(:project, client: create(:client, name: 'Acme'), name: 'Website')
     end
 
-    test 'subtitles the client and date range like React' do
+    test 'subtitles the client and date range' do
       {
         [nil, nil] => 'Acme',
         [Date.new(2026, 10, 1), nil] => 'Acme, Starts 1.Oct.2026',
