@@ -11,38 +11,6 @@ FactoryBot/FactoryAssociationWithStrategy:
   Exclude:
     - 'test/factories.rb'
 
-# Offense count: 3
-GraphQL/ArgumentDescription:
-  Exclude:
-    - 'app/graphql/mutations/upsert_project_with_input.rb'
-    - 'app/graphql/types/staff_plan/assignment_type.rb'
-
-# Offense count: 65
-GraphQL/FieldDescription:
-  Exclude:
-    - 'app/graphql/types/mutation_type.rb'
-    - 'app/graphql/types/staff_plan/assignment_type.rb'
-    - 'app/graphql/types/staff_plan/client_type.rb'
-    - 'app/graphql/types/staff_plan/company_type.rb'
-    - 'app/graphql/types/staff_plan/project_type.rb'
-    - 'app/graphql/types/staff_plan/user_type.rb'
-    - 'app/graphql/types/staff_plan/work_week_type.rb'
-
-# Offense count: 11
-GraphQL/ObjectDescription:
-  Exclude:
-    - 'app/graphql/enums/assignment_status.rb'
-    - 'app/graphql/enums/client_status.rb'
-    - 'app/graphql/enums/project_payment_frequency.rb'
-    - 'app/graphql/enums/project_status.rb'
-    - 'app/graphql/mutations/set_current_company.rb'
-    - 'app/graphql/types/staff_plan/assignment_type.rb'
-    - 'app/graphql/types/staff_plan/client_type.rb'
-    - 'app/graphql/types/staff_plan/company_type.rb'
-    - 'app/graphql/types/staff_plan/project_type.rb'
-    - 'app/graphql/types/staff_plan/user_type.rb'
-    - 'app/graphql/types/staff_plan/work_week_type.rb'
-
 # Offense count: 1
 # Configuration parameters: AllowedMethods.
 # AllowedMethods: enums
@@ -64,15 +32,6 @@ Lint/Void:
   Exclude:
     - 'app/controllers/registrations_controller.rb'
 
-# Offense count: 2
-# Configuration parameters: Mode, AllowedMethods, AllowedPatterns, AllowBangMethods, WaywardPredicates.
-# AllowedMethods: call
-# WaywardPredicates: nonzero?
-Naming/PredicateMethod:
-  Exclude:
-    - 'app/graphql/types/staff_plan/user_type.rb'
-    - 'app/graphql/types/staff_plan/work_week_type.rb'
-
 # Offense count: 7
 # Configuration parameters: NamePrefix, ForbiddenPrefixes, AllowedMethods, MethodDefinitionMacros, UseSorbetSigs.
 # NamePrefix: is_, has_, have_, does_
@@ -83,8 +42,6 @@ Naming/PredicatePrefix:
   Exclude:
     - 'app/components/staff_plan/chart_svg_component.rb'
     - 'app/components/staff_plan/week_header_cell_component.rb'
-    - 'app/graphql/types/staff_plan/user_type.rb'
-    - 'app/graphql/types/staff_plan/work_week_type.rb'
     - 'app/models/work_week.rb'
 
 # Offense count: 5

@@ -59,12 +59,6 @@ Located in `app/components/`, using ViewComponent gem:
 - `StaffPlan::AssignmentComponent`: Displays user assignments with 26-week timeline
 - Components use unpersisted WorkWeek objects for empty weeks in the timeline
 
-### GraphQL API
-- Endpoint: POST /graphql
-- Located in `app/graphql/`
-- Uses DataLoader pattern for N+1 query prevention
-- GraphiQL available at /graphiql in development
-
 ### Background Jobs
 - Uses **SolidQueue** for job processing
 - Stripe webhook processing handled asynchronously

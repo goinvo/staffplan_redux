@@ -117,7 +117,7 @@ Or run the steps individually:
 
 ```bash
 bin/rails tailwindcss:build   # system tests render the real layouts
-bin/rails test                # unit, model, request, and GraphQL tests
+bin/rails test                # unit, model, component, and request tests
 bin/rails test:system         # browser tests in headless Chrome (HEADFUL=1 to watch them)
 bundle exec rubocop
 ```

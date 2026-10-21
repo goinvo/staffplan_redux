@@ -5,10 +5,6 @@ Rails.application.routes.draw do
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
-  mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql' if Rails.env.development?
-
-  post '/graphql', to: 'graphql#execute'
-
   resources :staffplans, only: %i[index show] do
     resources :work_weeks, only: %i[update create]
   end
