@@ -126,7 +126,7 @@ GEM
     crack (1.0.1)
       bigdecimal
       rexml
-    crass (1.0.7)
+    crass (1.0.8)
     csv (3.3.6)
     date (3.4.1)
     debug (1.11.1)
@@ -446,10 +446,9 @@ GEM
     uri (1.1.2)
     useragent (0.16.11)
     vcr (6.4.0)
-    view_component (4.16.0)
+    view_component (4.19.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
-      concurrent-ruby (~> 1)
     web-console (4.3.0)
       actionview (>= 8.0.0)
       bindex (>= 0.4.0)
