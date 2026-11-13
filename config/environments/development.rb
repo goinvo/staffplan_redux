@@ -14,7 +14,6 @@ Rails.application.configure do
   config.solid_queue.connects_to = { database: { writing: :queue } }
 
   # Settings specified here will take precedence over those in config/application.rb.
-  config.view_component.capture_compatibility_patch_enabled = true
 
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
