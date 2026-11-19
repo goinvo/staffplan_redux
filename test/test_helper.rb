@@ -10,6 +10,7 @@ require 'minitest/reporters'
 require 'passwordless/test_helpers'
 require 'view_component/test_helpers'
 require 'capybara/rails'
+require 'capybara/cuprite'
 require 'vcr'
 require 'pry'
 
@@ -130,7 +131,7 @@ end
 
 # Setup for system tests
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driven_by :selenium, using: ENV['HEADFUL'] ? :chrome : :headless_chrome, screen_size: [1400, 1400]
+  driven_by :cuprite, screen_size: [1400, 1400], options: { headless: !ENV['HEADFUL'] }
 
   # point *_url helpers at the running test server, including its random port
   setup do

@@ -128,6 +128,9 @@ GEM
       rexml
     crass (1.0.8)
     csv (3.3.7)
+    cuprite (0.20.1)
+      capybara (~> 3.0)
+      ferrum (~> 0.20.1)
     date (3.4.1)
     debug (1.11.1)
       irb (~> 1.10)
@@ -148,6 +151,11 @@ GEM
       railties (>= 6.1.0)
     faker (3.8.0)
       i18n (>= 1.8.11, < 2)
+    ferrum (0.20.2)
+      addressable (~> 2.5)
+      base64 (~> 0.2)
+      concurrent-ruby (~> 1.1)
+      websocket-driver (~> 0.7)
     ffi (1.17.4-aarch64-linux-gnu)
     ffi (1.17.4-aarch64-linux-musl)
     ffi (1.17.4-arm-linux-gnu)
@@ -398,13 +406,7 @@ GEM
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
-    rubyzip (3.7.0)
     securerandom (0.4.1)
-    selenium-webdriver (4.51.0)
-      base64 (~> 0.2)
-      logger (~> 1.4)
-      rubyzip (>= 1.2.2, < 4.0)
-      websocket (~> 1.0)
     shoulda-matchers (8.0.1)
       activesupport (>= 7.2)
     solid_queue (1.7.2)
@@ -458,7 +460,6 @@ GEM
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
       hashdiff (>= 0.4.0, < 2.0.0)
-    websocket (1.2.11)
     websocket-driver (0.8.2)
       base64
       websocket-extensions (>= 0.1.0)
@@ -485,6 +486,7 @@ DEPENDENCIES
   bullet
   capybara
   csv
+  cuprite
   debug
   dotenv-rails
   factory_bot_rails
@@ -519,7 +521,6 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rails-omakase
   ruby-vips
-  selenium-webdriver
   shoulda-matchers (~> 8.0)
   solid_queue
   stimulus-rails

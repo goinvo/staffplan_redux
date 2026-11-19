@@ -15,11 +15,11 @@ class MobileTest < ApplicationSystemTestCase
       (40..42).each { create(:work_week, assignment:, cweek: it, year: 2026, estimated_hours: hours, actual_hours: 0) }
     end
     passwordless_sign_in(@user)
-    page.driver.browser.manage.window.resize_to(400, 800)
+    page.current_window.resize_to(400, 800)
   end
 
   teardown do
-    page.driver.browser.manage.window.resize_to(1400, 1400)
+    page.current_window.resize_to(1400, 1400)
   end
 
   test 'shows one week at a time and swipes between weeks' do
